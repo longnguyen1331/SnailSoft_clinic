@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\download\DocTemplateFiles\" />
+    <Folder Include="wwwroot\download\Posts\Images\" />
+    <Folder Include="wwwroot\download\Products\Images\" />
+    <Folder Include="wwwroot\download\Testimonial\Images\" />
+    <Folder Include="wwwroot\download\Users\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
+    <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Snail.Application\Snail.Application.csproj" />
+    <ProjectReference Include="..\Snail.Utilities\Snail.Utilities.csproj" />
+    <ProjectReference Include="..\Snail.ViewModels\Snail.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

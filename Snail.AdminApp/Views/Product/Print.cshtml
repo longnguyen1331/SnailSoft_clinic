@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Phiếu nhập";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/Autocomplete/Autocomplete.css")" type="text/css">
+     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+
+}
+
+@section Custom_CSS{
+}
+
+@section Vendors_Scripts{
+    <script src="~/plugins/print/jQuery.print.min.js"></script>
+    <script src="@Url.Content("~/plugins/Autocomplete/Autocomplete.js")"></script>
+     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+    
+}
+
+@section Custom_Scripts{
+<script src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/Product/Print.js")"></script>
+}
+
+<script>
+    $(document).ready(function () {
+        Product.init();
+    });
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            <div class="card">
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="row gy-5 g-xl-8">
+
+                        <!--begin::Col-->
+                        <div class="col-xl-8">
+                            <!--begin::Tables Widget 9-->
+                            <div class="card card-xl-stretch mb-5 mb-xl-8">
+                                <!--begin::Header-->
+                                <div class="row card-header border-0 pt-5">
+                                    <div class="col-xl-8">
+                                        <!--begin::Search-->
+                                        <div class="d-flex align-items-center  my-1">
+                                            <!--begin::Svg Icon | path: icons/duotone/General/Search.svg-->
+                                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                        <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <input type="text" id="kt_modal_edit_form_products" class="form-control form-control-solid ps-15" placeholder="Nhập tên hoặc mã hàng hóa (F4)">
+                                        </div>
+                                        <!--end::Search-->
+                                    </div>
+                                    <div class="col-xl-2">
+                                        <button type="button" class="btn btn-primary d-md-block w-100" name="kt_modal_edit_submit" id="kt_modal_edit_submit">
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"></rect>
+                                                    <rect fill="#000000" opacity="0.5" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000)" x="4" y="11" width="16" height="2" rx="1"></rect>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->@Html.Raw("In")
+                                        </button>
+                                    </div>
+
+                                   
+                                    <div class="col-xl-2">
+                                        <button type="button" class="btn btn-primary d-md-block w-100" name="kt_modal_import_excel" id="kt_modal_import_excel">
+                                            <!--end::Svg Icon-->@Html.Raw("Excel")
+                                        </button>
+                                         <div hidden>
+                                            <input type="file"  class="btn btn-primary d-md-block w-100"
+                                            id="fileImportDataPrint" name="fileImportDataPrint" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body py-3">
+                                    <!--begin::Table container-->
+                                    <div class="table-responsive">
+                                        <!--begin::Table-->
+                                        <table id="kt_create_new_product_details" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                            <!--begin::Table head-->
+                                            <thead>
+                                                <tr class="fw-bolder text-muted">
+                                                    <th class="min-w-150px w-175px">Hàng hóa</th>
+                                                    <th class="min-w-100px w-100px">Số lượng in</th>
+                                                    <th class="min-w-100px w-100px text-center"></th>
+                                                </tr>
+                                            </thead>
+                                            <!--end::Table head-->
+                                            <!--begin::Table body-->
+                                            <tbody>
+                                            </tbody>
+                                            <!--end::Table body-->
+                                        </table>
+                                        <!--end::Table-->
+                                    </div>
+                                    <!--end::Table container-->
+                                </div>
+                                <!--begin::Body-->
+                            </div>
+                            <!--end::Tables Widget 9-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-xl-4">
+                            <!--begin::List Widget 3-->
+                            <div class="card card-xl-stretch mb-5 mb-xl-8">
+                                <!--begin::Header-->
+                                <div class="card-header border-0">
+                                    <h3 class="card-title fw-bolder text-dark">@Html.Raw("Khổ in")</h3>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body pt-2">
+                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                                      <div class="form-group row w-100">
+                                         <div class="col-12 col-form-label">
+                                            <div class="radio">
+                                               <label class="radio radio-outline radio-outline-2x radio-primary">
+                                               <input type="radio" name="sizeName" checked="checked" value="35x22">
+                                               <span></span>In nhiệt 2 tem</label>
+                                               <br />
+                                               <label class="radio radio-outline radio-outline-2x radio-primary">
+                                               <input type="radio" name="sizeName" value="A4">
+                                               <span></span>A4</label>
+                                               <br />
+                                               <label class="radio radio-outline radio-outline-2x radio-primary">
+                                               <input type="radio" name="sizeName"  value="A5">
+                                               <span></span>A5</label>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <!--end:List Widget 3-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+
+
+
+
+<div class="col-xs-12" style="overflow: auto; height: 500px;" id="previewPDF">
+                                </div>

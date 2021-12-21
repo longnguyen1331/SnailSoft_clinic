@@ -1,0 +1,259 @@
+﻿@model PostViewModel
+
+@{
+    ViewBag.Title = "Bài viết";
+}
+
+@section Vendors_CSS{
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/Post/Edit.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/Post/Edit.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+    @if (Model.Post != null)
+    {
+        <text>
+            var editingData = {
+                id: @Model.Post.Id
+            };
+        </text>
+        if(Model.Post.PostType != null)
+        {
+            <text>
+                editingData.postType = {
+                    id: @Model.Post.PostType.Id,
+                    name: '@Html.Raw(Model.Post.PostType.Name)'
+                };
+            </text>
+        }
+
+        if(Model.Post.PostStatus != null)
+        {
+            <text>
+                editingData.postStatus = {
+                    id: @Model.Post.PostStatus.Id,
+                    name: '@Html.Raw(Model.Post.PostStatus.Name)'
+                };
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        Post.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <h3>@Html.Raw("Cập nhật bài viết")</h3>
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Form-->
+                    <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#" id="edit_form">
+                        <!--begin::Scroll-->
+                        <div class="scroll-y me-n7 pe-7" id="edit_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#edit_header"
+                             data-kt-scroll-wrappers="#edit_scroll" data-kt-scroll-offset="300px" style="max-height: 122px;">
+
+                            <!--begin::Input group-->
+                            <div class="row g-9">
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Chuyên mục")</label>
+                                    <!--end::Label-->
+                                    <select id="edit_form_postTypeId" name="edit_form_postTypeId" data-field="PostTypeId" aria-label="Chọn chuyên mục" data-control="select2"
+                                            data-placeholder="Chọn chuyên mục..." class="form-select form-select-solid fw-bolder">
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Trạng thái")</label>
+                                    <!--end::Label-->
+                                    <select id="edit_form_postStatusId" name="edit_form_postStatusId" data-field="PostStatusId" aria-label="Chọn trạng thái" data-control="select2"
+                                            data-placeholder="Chọn trạng thái..." class="form-select form-select-solid fw-bolder">
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row g-9">
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tiêu đề")</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Tiêu đề")" data-field="Name" name="edit_form_name" value="@if (Model.Post != null) { <text>@Model.Post.Name</text>}" />
+                                    <!--end::Input-->
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tác giả")</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Tác giả")" data-field="Author" name="edit_form_author" value="@if (Model.Post != null) { <text>@Model.Post.Author</text>}" />
+                                    <!--end::Input-->
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tóm tắt")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <textarea class="form-control form-control-solid" rows="3" placeholder="@Html.Raw("Tóm tắt")" data-field="Abstract" id="edit_form_abstract" name="edit_form_abstract">@if (Model.Post != null) { <text>@Model.Post.Abstract</text>}</textarea>
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Nội dung")</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <textarea class="form-control form-control-solid" rows="3" placeholder="@Html.Raw("Nội dung")" data-field="Content" id="edit_form_content" name="edit_form_content">@if (Model.Post != null) { <text>@Model.Post.Content</text>}</textarea>
+                                <!--end::Input group-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">Seo description</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Seo description" data-field="SeoDescription" name="edit_form_seoDescription" value="@if (Model.Post != null) { <text>@Model.Post.SeoDescription</text>}" />
+                                <!--end::Input group-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row g-9">
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-bold mb-2">Seo alias</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="Seo alias" data-field="SeoAlias" name="edit_form_seoAlias" value="@if (Model.Post != null) { <text>@Model.Post.SeoAlias</text>}" />
+                                    <!--end::Input group-->
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-bold mb-2">Seo title</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="Seo title" data-field="SeoTitle" name="edit_form_seoTitle" value="@if (Model.Post != null) { <text>@Model.Post.SeoTitle</text>}" />
+                                    <!--end::Input group-->
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">@Html.Raw("Hình đại diện")</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <input type="file" accept="image/png, image/jpeg" onchange="Post.previewImage(event)" class="form-control form-control-solid" placeholder="@Html.Raw("Hình đại diện")" data-field="ThumbnailImage" id="edit_form_thumbnailImage" name="edit_form_thumbnailImage" />
+                                <a href="#" class="btn btn-sm btn-danger" id="btnDeleteThumnailImage">@Html.Raw("Xóa hình đại diện")</a>
+                                <!--end::Input group-->
+                                <img @if (Model.Post != null) { <text> src="@Model.Post.ThumbnailImage" </text> } id="edit_form_ShowThumbnailImage" class="img-thumbnail" alt="@Html.Raw("Hình đại diện")" />
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Scroll-->
+                    </form>
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card footer-->
+                <div class="card-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="button" class="btn btn-primary me-3" name="btnBackToList">@Html.Raw("Trở về danh sách")</button>
+                    <!--end::Button-->
+                    <button type="button" id="edit_form_submit" class="btn btn-success me-3">
+                        <span id="kt_modal_edit_submit_text" class="indicator-label">@(Model.Post != null ? Html.Raw("Cập nhật") : Html.Raw("Thêm mới"))</span>
+                        <span class="indicator-progress">
+                            @Html.Raw("Đang cập nhật...")
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <!--end::Button-->
+
+                    @if (Model.Post != null)
+                    {
+                        <button type="button" class="btn btn-danger" name="btnDelete">@Html.Raw("Xóa")</button>
+                    }
+                </div>
+                <!--end::Card footer-->
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+
+@await Html.PartialAsync("_PartialNotificationAndAskAddNewModal")

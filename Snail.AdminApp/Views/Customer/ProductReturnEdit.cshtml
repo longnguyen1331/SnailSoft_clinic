@@ -1,0 +1,107 @@
+﻿@model CustomerViewModel
+
+@{
+    ViewBag.Title = "Khách hàng";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+}
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+}
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
+
+}
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/Customer/ProductReturnEdit.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+    @if (Model.Customer != null)
+    {
+        <text>
+            var editingData = {
+                id: '@Model.Customer.Id'
+            };
+        </text>
+        if (Model.Customer.AppUserTypes != null)
+        {
+            <text>editingData.appUserTypes = [];</text>
+            foreach (var item in Model.Customer.AppUserTypes)
+            {
+                <text>editingData.appUserTypes.push({ id: @item.Id, name: '@item.Name' });</text>
+            }
+        }
+    }
+    else
+    {
+        <text>
+            editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        Customer.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            @await Html.PartialAsync("_PartialEditHeader")
+
+            <!--begin::Basic info-->
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="true" aria-controls="edit">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">@Html.Raw("Trả hàng")</h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="edit" class="collapse show">
+                    <!--begin::Card body-->
+                    <div class="card-body border-top p-9">
+                        <!--begin::Table-->
+                        <div id="kt_customer_view_table_return_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="table-responsive">
+                                <table id="kt_customer_view_table_return" class="table align-middle table-row-dashed fs-6 text-gray-600 fw-bold gy-4 dataTable no-footer" role="grid">
+                                </table>
+                            </div>
+                        </div>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Basic info-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->

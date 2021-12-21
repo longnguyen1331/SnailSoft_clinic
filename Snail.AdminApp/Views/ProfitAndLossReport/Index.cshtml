@@ -1,0 +1,405 @@
+﻿@model BaseViewModel
+
+@{
+    ViewBag.Title = "Lợi nhuận";
+}
+
+@section Vendors_CSS{
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="~/plugins/autoNumeric/autoNumeric.js"></script>
+    <script src="~/js/customiseAutoNumeric.js"></script>
+    <script src="~/js/customiseFlatpickr.js"></script>
+
+}
+
+@section Custom_Scripts{
+
+    <script src="@Url.Content("~/js/app.js")"></script>
+    <script src="@Url.Content("~/js/util.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/ProfitAndLossReport/Index.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    }
+    ,
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    }
+        }
+    };
+
+    $(document).ready(function () {
+        ProfitAndLoss.init();
+    });
+
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1">
+                        </div>
+                        <!--end::Search-->
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar" style="flex-wrap: nowrap;">
+                        <div class="justify-content-end align-items-center showSelected" data-kt-user-table-toolbar="selected" style="display:none !important;">
+                            <button type="button" class="btn"> <span class="me-2" id="selected_count">10</span>Selected</button>
+                            <button type="button" class="btn btn-danger" id="btnDelete" data-kt-user-table-select="delete_selected">Delete Selected</button>
+                        </div>
+
+                        <select id="fromToDate" class="form-select form-select-solid w-250px ps-5" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true">
+                            <option value="1" selected>7 ngày gần đây</option>
+                            <option value="2">30 ngày gần đây</option>
+                            <option value="3">Tuần này</option>
+                            <option value="4">Tuần trước</option>
+                            <option value="5">Tháng này</option>
+                            <option value="6">Tháng trước</option>
+                        </select>
+
+                        <!--begin::Menu-->
+                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary showNotSelected" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+                            <!--begin::Svg Icon | path: icons/duotone/Layout/Layout-4-blocks-2.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+                                        <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                        <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                        <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--begin::Menu 2-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px" data-kt-menu="true">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Quick Actions</div>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu separator-->
+                            <div class="separator mb-3 opacity-75"></div>
+                            <!--end::Menu separator-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" id="btnRefreshData">Refresh</a>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="@Url.Action("ExportToExcel", "CashBook")" class="menu-link px-3">Export to Excel</a>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu separator-->
+                            <div class="separator mt-3 opacity-75"></div>
+                            <!--end::Menu separator-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" id="btnReorderData">Reorder</a>
+                            </div>
+                            <!--end::Menu item-->
+                        </div>
+                        <!--end::Menu 2-->
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+
+                    <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table_users" role="grid">
+                                <!--begin::Table head-->
+                                <thead>
+                                    <!--begin::Table row-->
+                                    <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0" role="row">
+                                        <th class="w-50px">#</th>
+                                        <th class="min-w-125px">Hạng mục</th>
+                                        <th class="min-w-125px">Kỳ trước</th>
+                                        <th class="min-w-125px">Kỳ này</th>
+                                        <th class="min-w-125px">Thay đổi (%)</th>
+                                    </tr>
+                                    <!--end::Table row-->
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody class="text-gray-600 fw-bold">
+                                    <tr class="odd">
+                                        <td>1</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Doanh số")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="doanhSoKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="doanhSoKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-success fw-bolder" id="doanhSoThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>2</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền giảm giá")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>3</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền quy đổi")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>4</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền trả hàng")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>5</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Doanh thu thuần = [1] - [4]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge fw-bolder" id="doanhThuThuanKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge fw-bolder" id="doanhThuThuanKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge fw-bolder" id="doanhThuThuanThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>6</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền vốn mua hàng hóa")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="tienVonKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="tienVonKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="tienVonThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>7</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Lãi gộp = [5] - [6]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiGopKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiGopKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiGopThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>8</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Chi phí")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>9</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder text-dark">@Html.Raw("Lãi ròng = [7] - [8]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>10</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền giảm giá/Doanh thu (%) = [2] / [1]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>11</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Tiền trả hàng/Doanh thu (%) = [4] / [1]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>12</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Lãi gộp/Doanh thu (%) = [7] / [1]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiGopPhanTramKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiGopPhanTramKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-success fw-bolder" id="laiGopPhanTramThayDoi"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="odd">
+                                        <td>13</td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder">@Html.Raw("Lãi ròng/Doanh thu (%) = [9] / [1]")</div>
+                                        </td>
+
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongPhanTramKyTruoc"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongPhanTramKyNay"></div>
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-light fw-bolder" id="laiRongPhanTramThayDoi"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+
+
+

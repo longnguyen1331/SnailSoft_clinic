@@ -1,0 +1,323 @@
+﻿@model ProductViewModel
+@{
+    ViewBag.Title = "Thêm mới ";
+}
+
+
+@section Vendors_CSS{
+    <link href="~/plugins/tagify-master/dist/tagify.css" rel="stylesheet" />
+
+}
+
+@section Vendors_Scripts{
+    <script src="~/plugins/autoNumeric/autoNumeric.js"></script>
+    <script src="~/plugins/tagify-master/dist/jQuery.tagify.min.js"></script>
+    <script src="~/js/customiseAutoNumeric.js"></script>
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/Product/Edit.js")"></script>
+}
+
+<script>
+    var role = {
+        personalDelete: false,
+        systemDelete: true,
+    };
+
+    var user = {
+        userName: '@User.Identity.Name'
+    };
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            <!--begin::Basic info-->
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_product_details" aria-expanded="true" aria-controls="kt_product_details">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">Thông tin chi tiết</h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="kt_product_details" class="collapse show">
+                    <!--begin::Form-->
+                    <form id="kt_product_details_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Col-->
+                                <label hidden class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="" @(Model.IsProduct ? "checked" : "")
+                                           id="kt_form_edit_IsProduct" name="kt_form_edit_IsProduct" data-field="IsProduct">
+                                </label>
+
+                                <input type="number" hidden data-field="Id" name="ProductId" value="@(Model.Product != null ? Model.Product.Id : 0)">
+                                <input type="text" hidden data-field="Image" id="txt_Image" value="">
+
+                                <div class="col-lg-12 fv-row text-center">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" s
+                                         tyle="background-image: url(/images/header-bg.jpg) ">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(/images/header-bg.jpg)"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change"
+                                               data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="imageProduct" accept=".png, .jpg, .jpeg">
+                                            <input type="hidden" name="avatar_remove">
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                              data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove"
+                                              data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <div class="col-lg-6 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Tên @(Model.IsProduct ? "hàng hóa" : "dịch vụ")</label>
+                                    <div class="mb-5">
+                                        <input type="text" class="form-control form-control-solid" placeholder="Tên @(Model.IsProduct ? "hàng hóa" : "dịch vụ")" value=""
+                                               name="kt_form_edit_name" data-field="Name">
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Mã @(Model.IsProduct ? "hàng hóa" : "dịch vụ")</label>
+                                    <!--begin::Input group-->
+                                    <div class="mb-5">
+                                        <input type="text" class="form-control form-control-solid" placeholder="Mã @(Model.IsProduct ? "hàng hóa" : "dịch vụ")" value=""
+                                               name="kt_form_edit_code" data-field="Code">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Nhóm hàng hóa / dịch vụ</label>
+                                    <!--begin::Input group-->
+                                    <div class="mb-5">
+                                        <select multiple name="kt_form_edit_productType" aria-label="Chọn nhóm hàng" data-control="select2"
+                                                data-placeholder="Chọn nhóm hàng..." data-field="ProductInType" class="form-select form-select-solid fw-bolder">
+                                        </select>
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+
+                                    </div>
+                                </div>
+
+                                @if (Model.IsProduct)
+                                {
+                                    <div class="col-lg-6 fv-row">
+                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Nhà sản xuất</label>
+                                        <!--begin::Input group-->
+                                        <div class="mb-5">
+                                            <select name="kt_form_edit_manufactuer" aria-label="Chọn nhà sản xuất" data-field="ManufactuerId" data-control="select2"
+                                                    data-placeholder="Chọn nhà sản xuất.." class="form-select form-select-solid fw-bolder">
+                                            </select>
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="col-lg-6 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Giá nhập</label>
+                                    <div class="mb-5">
+                                        <input type="text" class="form-control form-control-solid tien-VND" placeholder="Giá nhập" value="0"
+                                               name="kt_form_edit_originalPrice" data-field="OriginalPrice">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Giá bán</label>
+                                    <div class="mb-5">
+                                        <input type="text" class="form-control form-control-solid tien-VND" placeholder="Giá bán" value="0"
+                                               name="kt_form_edit_price" data-field="Price">
+                                    </div>
+                                </div>
+
+
+                                @if (Model.IsProduct)
+                                {
+
+                                    <div class="col-lg-3 fv-row">
+                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Tồn kho hiện tại</label>
+                                        <div class="mb-5">
+                                            <input type="number" class="form-control form-control-solid" placeholder="Tồn kho hiện tại" value="0"
+                                                   name="kt_form_edit_stock" data-field="Stock">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 fv-row">
+                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Cảnh báo tồn kho nhỏ hơn</label>
+                                        <div class="mb-5">
+                                            <input type="number" class="form-control form-control-solid" placeholder="Cảnh báo tồn kho nhỏ hơn" value="0"
+                                                   name="kt_form_edit_inventoryWarning" data-field="InventoryWarning">
+                                        </div>
+                                    </div>
+                                }
+
+
+
+
+                                <div class="col-lg-6 fv-row">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Hiển thị POS</label>
+                                    <div class="mb-5">
+
+                                        <label class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="kt_form_edit_isPos" name="kt_form_edit_isPos" data-field="IsPOS">
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-lg-6">
+                                    <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Cho phép bán khi không đủ tồn kho</label>
+                                    <!--begin::Input group-->
+                                    <div class="mb-5">
+                                        <label class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="kt_form_edit_allowSellWhenNotEnough" name="kt_form_edit_allowSellWhenNotEnough" data-field="AllowSellWhenNotEnough">
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Actions-->
+                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                            <a class="btn btn-light btn-active-light-primary me-2" href="@Url.Action("Index","Product")">@Html.Raw("Hủy")</a>
+                            <button type="button" id="kt_product_details_form_submit" class="btn btn-primary">
+                                <span class="indicator-label" id="kt_modal_edit_submit_text">@Html.Raw("Lưu")</span>
+                                <span class="indicator-progress">
+                                    @Html.Raw("Đang cập nhật...")
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Basic info-->
+            <!--begin::Sign-in Method-->
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer collapsed" id="closeAttribute" role="button" data-bs-toggle="collapse" data-bs-target="#kt_attribute_method">
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">Thuộc tính mở rộng</h3>
+                    </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Content-->
+                <div id="kt_attribute_method" class="collapse">
+                    <!--begin::Card body-->
+                    <div class="card-body border-top p-9">
+                        <div class="table-responsive mb-10">
+                            <!--begin::Table-->
+                            <table class="table g-5 gs-0 mb-0 fw-bolder text-gray-700" id="table_attribute" data-kt-element="items">
+                                <!--begin::Table head-->
+                                <thead>
+                                    <tr class="border-bottom fs-7 fw-bolder text-gray-700 text-uppercase">
+                                        <th class="min-w-150px w-150px">Thuộc tính</th>
+                                        <th class="min-w-300px w-475px">Giá trị (nhập và enter)</th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody>
+                                    <tr class="border-bottom border-bottom-dashed" data-kt-element="item">
+                                        <td class="pe-7">
+                                            <select name="kt_form_edit_attribute" aria-label="Chọn thuộc tính" data-field="AttributeId" data-control="select2"
+                                                    data-placeholder="Chọn thuộc tính..." class="form-select form-select-solid fw-bolder">
+                                            </select>
+                                        </td>
+                                        <td class="ps-0">
+                                            <input class="form-control form-control-solid" type="text" min="1" name="tags" placeholder="" value="">
+                                        </td>
+                                    </tr>
+
+
+
+
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+
+
+
+
+                            <table id="kt_create_new_attribute_fields"
+                                   class="table align-middle table-row-dashed fw-bold fs-6 gy-5 dataTable no-footer"
+                                   role="grid">
+                                <thead>
+                                    <tr class="border-bottom fs-7 fw-bolder text-gray-700 text-uppercase">
+                                        <th class="min-w-150px w-225px">Tên hàng hóa</th>
+                                        <th class="min-w-300px w-225px">Mã hàng hóa</th>
+                                        <th class="min-w-150px w-150px text-center">Giá vốn</th>
+                                        <th class="min-w-150px w-150px text-center">Giá bán</th>
+                                        <th class="min-w-150px w-150px text-center">Tồn kho</th>
+                                    </tr>
+                                </thead>
+                                <!--begin::Table body-->
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--end::Card body-->
+                    <!--begin::Actions-->
+                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                        <button class="btn btn-light btn-active-light-primary me-2" name="btnCancelAttribute">Trở về</button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Sign-in Method-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+
+

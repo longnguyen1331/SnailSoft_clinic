@@ -1,0 +1,201 @@
+﻿@model DocTemplateViewModel
+
+@{
+    ViewBag.Title = "Mẫu in";
+}
+
+@section Vendors_CSS{
+
+}
+
+@section Custom_CSS{
+    <link href="@Url.Content("~/css/DocTemplate/Edit.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+    <script src="https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/DocTemplate/Edit.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+    @if (Model.DocTemplate != null)
+    {
+        <text>
+            var editingData = {
+                id: @Model.DocTemplate.Id
+            };
+        </text>
+        if(Model.DocTemplate.DocTemplateType != null)
+        {
+            <text>
+                editingData.docTemplateType = {
+                    id: @Model.DocTemplate.DocTemplateType.Id,
+                    name: '@Html.Raw(Model.DocTemplate.DocTemplateType.Name)'
+                };
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            editingData = null;
+        </text>
+    }
+
+    $(document).ready(function () {
+        DocTemplate.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container">
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <h3>@Html.Raw("Cập nhật mẫu in")</h3>
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Form-->
+                    <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#" id="edit_form">
+                        <!--begin::Scroll-->
+                        <div class="scroll-y me-n7 pe-7" id="edit_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#edit_header"
+                             data-kt-scroll-wrappers="#edit_scroll" data-kt-scroll-offset="300px" style="max-height: 122px;">
+
+                            <!--begin::Input group-->
+                            <div class="row g-9">
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Loại mẫu in")</label>
+                                    <!--end::Label-->
+                                    <select id="edit_form_docTemplateTypeId" name="edit_form_docTemplateTypeId" data-field="DocTemplateTypeId" aria-label="Chọn loại mẫu in" data-control="select2"
+                                            data-placeholder="Chọn loại mẫu in..." class="form-select form-select-solid fw-bolder">
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 fv-row mb-7 fv-plugins-icon-container">
+                                    <!--begin::Label-->
+                                    <label class="required fs-6 fw-bold mb-2">@Html.Raw("Khổ giấy")</label>
+                                    <!--end::Label-->
+                                    <select id="edit_form_paperSize" name="edit_form_paperSize" data-field="PaperSizeId" aria-label="Chọn khổ giấy" data-control="select2"
+                                            data-placeholder="Chọn khổ giấy..." class="form-select form-select-solid fw-bolder">
+                                        @foreach (var item in Model.PaperSizes)
+                                        {
+                                            if (Model.DocTemplate != null && item.Id == Model.DocTemplate.PaperSize.Id)
+                                            {
+                                                <text>
+                                                    <option value='@item.Id' data-value='@item.Value' selected>@item.Name</option>
+                                                </text>
+                                            }
+                                            else
+                                            {
+                                                <text>
+                                                    <option value='@item.Id' data-value='@item.Value'>@item.Name</option>
+                                                </text>
+                                            }
+                                        }
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Tên mẫu in")</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" class="form-control form-control-solid" placeholder="@Html.Raw("Tên mẫu in")" data-field="Name" name="edit_form_name" value="@if (Model.DocTemplate != null) { <text>@Model.DocTemplate.Name</text>}" />
+                                <!--end::Input-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="required fs-6 fw-bold mb-2">@Html.Raw("Nội dung")</label>
+                                <!--end::Label-->
+                                <!--begin::Input group-->
+                                <textarea class="form-control form-control-solid" rows="3" placeholder="@Html.Raw("Nội dung")" data-field="Content" id="edit_form_content" name="edit_form_content">@if (Model.DocTemplate != null) { <text>@Model.DocTemplate.Content</text>}</textarea>
+                                <!--end::Input group-->
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                <!--begin::Checkbox-->
+                                <label class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="" data-field="IsDefault" @if (Model.DocTemplate != null) { if (Model.DocTemplate.IsDefault == true) { <text> checked</text>} } />
+                                    <span class="form-check-label text-gray-600">@Html.Raw("Chọn mặc định")</span>
+                                </label>
+                                <!--end::Checkbox-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Scroll-->
+                    </form>
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card footer-->
+                <div class="card-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="button" class="btn btn-primary me-3" name="btnBackToList">@Html.Raw("Trở về danh sách")</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="button" class="btn btn-primary me-3" name="btnCreate">@Html.Raw("Thêm mới (F2)")</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="button" id="edit_form_submit" class="btn btn-success me-3">
+                        <span id="kt_modal_edit_submit_text" class="indicator-label">@Html.Raw("Cập nhật")</span>
+                        <span class="indicator-progress">
+                            @Html.Raw("Đang cập nhật...")
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="button" class="btn btn-danger" name="btnDelete">@Html.Raw("Xóa")</button>
+                    <!--end::Button-->
+                </div>
+                <!--end::Card footer-->
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+
+@await Html.PartialAsync("_PartialNotificationAndAskAddNewModal")
