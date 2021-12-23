@@ -40,8 +40,9 @@ namespace Snail.AdminApp.Controllers.Components
 
             if(leftSideBarApiClient.IsSuccessed)
             {
-                leftSideBarViewModel.HtmlMenus = GenerateHtmlMenu(leftSideBarApiClient.ResultObj.Menus);
+                //leftSideBarViewModel.HtmlMenus = GenerateHtmlMenu(leftSideBarApiClient.ResultObj.Menus);
                 leftSideBarViewModel.Logo = _configuration[SystemConstants.AppConstants.BaseAddress] + leftSideBarApiClient.ResultObj.Logo;
+                leftSideBarViewModel.Menus = leftSideBarApiClient.ResultObj.Menus;
             }            
 
             return View("Default", leftSideBarViewModel);
@@ -67,9 +68,6 @@ namespace Snail.AdminApp.Controllers.Components
 
                 str += $@"<div data-kt-menu-trigger='click' class='menu-item menu-accordion'>";
                 str += $@"<span class='menu-link'>";
-                //str += $@"<span class='menu-bullet'>";
-                //str += $@"<span class='bullet bullet-dot'></span>";
-                //str += $@"</span>";
 
                 str += currentMenu.Icon;
                 str += $@"<span class='menu-title'>" + currentMenu.Name + "</span>";
