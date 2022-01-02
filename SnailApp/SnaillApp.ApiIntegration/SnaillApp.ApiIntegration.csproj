@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NPOI" Version="2.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SnaillApp.Utilities\SnaillApp.Utilities.csproj" />
+    <ProjectReference Include="..\SnaillApp.ViewModels\SnaillApp.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
