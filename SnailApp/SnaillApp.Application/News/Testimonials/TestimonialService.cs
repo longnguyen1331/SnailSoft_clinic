@@ -29,11 +29,11 @@ namespace SnailApp.Application.News.Testimonials
     }
     public class TestimonialService : ITestimonialService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public TestimonialService(EShopDbContext context, IFileStorageService storageService,
+        public TestimonialService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;

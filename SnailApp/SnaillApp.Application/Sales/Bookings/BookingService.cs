@@ -25,10 +25,10 @@ namespace SnailApp.Application.Sales.Bookings
     }
     public class BookingService : IBookingService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public BookingService(EShopDbContext context, IConfiguration configuration)
+        public BookingService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

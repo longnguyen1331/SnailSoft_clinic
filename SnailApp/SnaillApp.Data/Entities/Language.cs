@@ -23,14 +23,11 @@ namespace SnailApp.Data.Entities
         public ICollection<PostStatusTranslation> PostStatusTranslations { get; set; }
         public ICollection<PostTypeStatusTranslation> PostTypeStatusTranslations { get; set; }
         public ICollection<StoreStatusTranslation> StoreStatusTranslations { get; set; }
-        public ICollection<PhieuKeToanStatusTranslation> PhieuKeToanStatusTranslations { get; set; }
-        public ICollection<AppUserStatusTranslation> AppUserStatusTranslations { get; set; }
         public ICollection<SlideStatusTranslation> SlideStatusTranslations { get; set; }
         public ICollection<SlideTranslation> SlideTranslations { get; set; }
         public ICollection<GenderTranslation> GenderTranslations { get; set; }
         public ICollection<DocTemplateTypeTranslation> DocTemplateTypeTranslations { get; set; }        
         public ICollection<AttributeValueTranslation> AttributeValueTranslations { get; set; }
-        public ICollection<AppUserTypeTranslation> AppUserTypeTranslations { get; set; }
         public ICollection<PromotionTranslation> PromotionTranslations { set; get; }
         public ICollection<CommissionDiscountTranslation> CommissionDiscountTranslations { set; get; }
         public ICollection<BasicSalaryTranslation> BasicSalaryTranslations { set; get; }

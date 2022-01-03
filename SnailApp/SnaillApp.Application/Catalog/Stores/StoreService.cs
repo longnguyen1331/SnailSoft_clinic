@@ -27,9 +27,9 @@ namespace SnailApp.Application.Catalog.Stores
     }
     public class StoreService : IStoreService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         
-        public StoreService(EShopDbContext context)
+        public StoreService(ClinicDbContext context)
         {
             _context = context;
         }

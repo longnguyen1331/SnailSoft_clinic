@@ -31,10 +31,10 @@ namespace SnailApp.Application.Sales.Promotion_ProductSKUs
     }
     public class Promotion_ProductSKUService : IPromotion_ProductSKUService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public Promotion_ProductSKUService(EShopDbContext context, IConfiguration configuration)
+        public Promotion_ProductSKUService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

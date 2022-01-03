@@ -33,11 +33,11 @@ namespace SnailApp.BackendApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EShopDbContext>(options =>
+            services.AddDbContext<ClinicDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.ConnectionStringConstants.MainConnectionString)));
 
             services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<EShopDbContext>()
+                .AddEntityFrameworkStores<ClinicDbContext>()
                 .AddDefaultTokenProviders();
 
             // Truy cập IdentityOptions

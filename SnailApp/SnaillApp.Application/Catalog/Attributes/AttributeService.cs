@@ -24,9 +24,9 @@ namespace SnailApp.Application.Catalog.Attributes
     }
     public class AttributeService : IAttributeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public AttributeService(EShopDbContext context)
+        public AttributeService(ClinicDbContext context)
         {
             _context = context;
         }

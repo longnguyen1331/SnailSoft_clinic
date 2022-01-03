@@ -19,9 +19,9 @@ namespace SnailApp.Application.Accountants
     }
     public class ReportWarehouseService : IReportWarehouseService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ReportWarehouseService(EShopDbContext context)
+        public ReportWarehouseService(ClinicDbContext context)
         {
             _context = context;
         }

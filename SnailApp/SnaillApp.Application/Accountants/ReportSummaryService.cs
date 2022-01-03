@@ -18,10 +18,10 @@ namespace SnailApp.Application.Accountants
     }
     public class ReportSummaryService : IReportSummaryService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public ReportSummaryService(EShopDbContext context, IConfiguration configuration)
+        public ReportSummaryService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

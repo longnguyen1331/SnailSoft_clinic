@@ -29,9 +29,9 @@ namespace SnailApp.Application.SystemApplication.Menus
     }
     public class MenuService : IMenuService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public MenuService(EShopDbContext context)
+        public MenuService(ClinicDbContext context)
         {
             _context = context;
         }

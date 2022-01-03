@@ -20,9 +20,9 @@ namespace SnailApp.Application.Sales.Contacts
     }
     public class ContactService : IContactService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         
-        public ContactService(EShopDbContext context)
+        public ContactService(ClinicDbContext context)
         {
             _context = context;
         }

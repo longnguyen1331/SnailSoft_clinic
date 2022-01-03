@@ -30,9 +30,9 @@ namespace SnailApp.Application.SystemApplication.Statuses
     }
     public class PostTypeStatusService : IPostTypeStatusService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public PostTypeStatusService(EShopDbContext context)
+        public PostTypeStatusService(ClinicDbContext context)
         {
             _context = context;
         }

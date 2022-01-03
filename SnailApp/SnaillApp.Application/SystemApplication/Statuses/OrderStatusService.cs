@@ -30,9 +30,9 @@ namespace SnailApp.Application.SystemApplication.Statuses
     }
     public class OrderStatusService : IOrderStatusService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public OrderStatusService(EShopDbContext context)
+        public OrderStatusService(ClinicDbContext context)
         {
             _context = context;
         }

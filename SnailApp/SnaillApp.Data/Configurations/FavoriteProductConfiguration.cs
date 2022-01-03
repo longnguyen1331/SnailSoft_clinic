@@ -14,8 +14,6 @@ namespace SnailApp.Data.Configurations
         {
             builder.ToTable("FavoriteProducts");
 
-            builder.HasOne(x => x.AppUser).WithMany(x => x.FavoriteProducts).HasForeignKey(x => x.AppUserId);
-
             builder.HasOne(x => x.Product).WithMany(x => x.FavoriteProducts).HasForeignKey(x => x.ProductId);
         }
     }

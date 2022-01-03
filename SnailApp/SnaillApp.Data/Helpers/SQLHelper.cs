@@ -9,7 +9,7 @@ namespace SnailApp.Data.SqlHelper
 {
     public static class SQLHelper
     {
-        public static async Task<int> ExecuteNonQueryAsync(EShopDbContext context, string rawSql,
+        public static async Task<int> ExecuteNonQueryAsync(ClinicDbContext context, string rawSql,
             params object[] parameters)
         {
             var conn = context.Database.GetDbConnection();
@@ -37,7 +37,7 @@ namespace SnailApp.Data.SqlHelper
             }
         }
 
-        public static async Task<List<T>> ExecuteScalarAsync<T>(EShopDbContext context, string rawSql,
+        public static async Task<List<T>> ExecuteScalarAsync<T>(ClinicDbContext context, string rawSql,
             Func<DbDataReader, T> map, params object[] parameters)
         {
 

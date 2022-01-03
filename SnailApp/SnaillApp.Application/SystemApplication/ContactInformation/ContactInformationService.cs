@@ -21,9 +21,9 @@ namespace SnailApp.Application.SystemApplication.ContactInformation
     }
     public class ContactInformationService : IContactInformationService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ContactInformationService(EShopDbContext context)
+        public ContactInformationService(ClinicDbContext context)
         {
             _context = context;
         }

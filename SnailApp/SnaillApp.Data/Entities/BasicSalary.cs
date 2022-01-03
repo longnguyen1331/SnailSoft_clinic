@@ -13,6 +13,5 @@ namespace SnailApp.Data.Entities
         public DateTime? ToDate { set; get; }
         public bool IsApply { set; get; }
         public ICollection<BasicSalaryTranslation> BasicSalaryTranslations { set; get; }
-        public ICollection<AppUser_BasicSalary> AppUser_BasicSalarys { set; get; }
     }
 }

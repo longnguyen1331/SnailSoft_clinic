@@ -32,10 +32,10 @@ namespace SnailApp.Application.Sales.Transactions
     }
     public class TransactionService : ITransactionService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public TransactionService(EShopDbContext context, IConfiguration configuration)
+        public TransactionService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

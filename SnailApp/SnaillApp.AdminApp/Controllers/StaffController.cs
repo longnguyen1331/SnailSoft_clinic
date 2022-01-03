@@ -95,37 +95,7 @@ namespace SnailApp.AdminApp.Controllers
                 data = userApiClient.Items
             });
         }
-        [HttpPost]
-        public async Task<IActionResult> DataTableGetListSalary(int? draw, int? start, int? length, string textSearch, string filterByAppUserId)
-        {
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            var sortColumnDir = Request.Form["order[0][dir]"].FirstOrDefault();
-            int skip = start != null ? Convert.ToInt32((start / length) + 1) : 1;
-            int pageSize = length != null ? Convert.ToInt32(length) : 10;
-            int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-
-            var request = new ManageUserPagingRequest()
-            {
-                TextSearch = textSearch,
-                PageIndex = skip,
-                PageSize = pageSize,
-                LanguageId = languageId,
-                OrderCol = !string.IsNullOrEmpty(sortColumn) ? sortColumn : "Id",
-                OrderDir = !string.IsNullOrEmpty(sortColumnDir) ? sortColumnDir : "desc",
-                AppUserId = filterByAppUserId
-            };
-
-            var userApiClient = await _userApiClient.GetStaffSalaryManageListPaging(request);
-
-            return Json(new
-            {
-                draw = draw,
-                recordsFiltered = userApiClient.TotalRecords,
-                recordsTotal = userApiClient.TotalRecords,
-                data = userApiClient.Items
-            });
-        }
-
+       
         [HttpDelete]
         public async Task<IActionResult> DeleteByIds([FromBody] UserDeleteRequest request)
         {
@@ -279,73 +249,7 @@ namespace SnailApp.AdminApp.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> CommissionDiscountEdit(string id)
-        {
-            var model = new StaffViewModel();
-            var languageId = Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-            model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
-                                                                                                            (ControllerContext.ActionDescriptor).ControllerName,
-                                                                                                            (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Nhân viên" };
-            model.FileNoImagePerson = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.AppConstants.FileNoImagePerson];
-
-            if (id != null)
-            {
-                var userApiClient = await _userApiClient.GetStaffProfileDetailByUserId(new UserRequest
-                {
-                    LanguageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId)),
-                    Id = id
-                });
-
-                if (userApiClient.IsSuccessed)
-                {
-                    model.Staff = userApiClient.ResultObj;
-                    model.Staff.FullName = (languageId.ToString().Equals(_configuration[SystemConstants.AppConstants.DefaultLanguageId]) ? (model.Staff.LastName + " " + model.Staff.FirstName) : (model.Staff.FirstName + " " + model.Staff.LastName));
-                    if (!string.IsNullOrEmpty(model.Staff.Avatar))
-                    {
-                        model.Staff.Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + model.Staff.Avatar;
-                    }
-                }
-            }
-
-            return View(model);
-        }
-        public async Task<IActionResult> PayrollEdit(string id)
-        {
-            var model = new StaffViewModel();
-            var languageId = Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-            model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
-                                                                                                            (ControllerContext.ActionDescriptor).ControllerName,
-                                                                                                            (ControllerContext.ActionDescriptor).ActionName);
-
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Nhân viên" };
-            model.FileNoImagePerson = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.AppConstants.FileNoImagePerson];
-
-            if (id != null)
-            {
-                var userApiClient = await _userApiClient.GetStaffProfileDetailByUserId(new UserRequest
-                {
-                    LanguageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId)),
-                    Id = id
-                });
-
-                if (userApiClient.IsSuccessed)
-                {
-                    model.Staff = userApiClient.ResultObj;
-                    model.Staff.FullName = (languageId.ToString().Equals(_configuration[SystemConstants.AppConstants.DefaultLanguageId]) ? (model.Staff.LastName + " " + model.Staff.FirstName) : (model.Staff.FirstName + " " + model.Staff.LastName));
-                    if (!string.IsNullOrEmpty(model.Staff.Avatar))
-                    {
-                        model.Staff.Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + model.Staff.Avatar;
-                    }
-                }
-            }
-
-            return View(model);
-        }
-        
         [HttpGet]
         public async Task<IActionResult> DeleteAvatarByUserId(int userId)
         {

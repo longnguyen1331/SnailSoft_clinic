@@ -34,9 +34,9 @@ namespace SnailApp.Application.Catalog.ProductSKUs
     }
     public class ProductSKUService : IProductSKUService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ProductSKUService(EShopDbContext context)
+        public ProductSKUService(ClinicDbContext context)
         {
             _context = context;
         }

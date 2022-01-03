@@ -24,10 +24,10 @@ namespace SnailApp.Application.Website.WebsiteUIs
     public class WebsiteUIService : IWebsiteUIService
     {
         private readonly IConfiguration _configuration;
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public WebsiteUIService(EShopDbContext context, IConfiguration configuration,
+        public WebsiteUIService(ClinicDbContext context, IConfiguration configuration,
                                 UserManager<AppUser> userManager)
         {
             _configuration = configuration;

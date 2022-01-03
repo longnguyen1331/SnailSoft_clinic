@@ -18,10 +18,10 @@ namespace SnailApp.Application.Accountants
     }
     public class ReportCashBookService : IReportCashBookService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public ReportCashBookService(EShopDbContext context, IConfiguration configuration)
+        public ReportCashBookService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

@@ -30,10 +30,10 @@ namespace SnailApp.Application.Sales.CommissionDiscounts
     }
     public class CommissionDiscountService : ICommissionDiscountService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public CommissionDiscountService(EShopDbContext context, IConfiguration configuration)
+        public CommissionDiscountService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

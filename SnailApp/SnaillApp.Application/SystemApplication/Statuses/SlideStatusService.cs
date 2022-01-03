@@ -30,9 +30,9 @@ namespace SnailApp.Application.SystemApplication.Statuses
     }
     public class SlideStatusService : ISlideStatusService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public SlideStatusService(EShopDbContext context)
+        public SlideStatusService(ClinicDbContext context)
         {
             _context = context;
         }

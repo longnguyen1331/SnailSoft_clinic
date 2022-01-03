@@ -25,9 +25,9 @@ namespace SnailApp.Application.Catalog.Manufacturers
     }
     public class ManufacturerService : IManufacturerService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ManufacturerService(EShopDbContext context)
+        public ManufacturerService(ClinicDbContext context)
         {
             _context = context;
         }

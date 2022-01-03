@@ -9,9 +9,9 @@ using SnailApp.Utilities.Constants;
 
 namespace SnailApp.Data.EF
 {
-    public class EShopDbContextFactory : IDesignTimeDbContextFactory<EShopDbContext>
+    public class EShopDbContextFactory : IDesignTimeDbContextFactory<ClinicDbContext>
     {
-        public EShopDbContext CreateDbContext(string[] args)
+        public ClinicDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -20,10 +20,10 @@ namespace SnailApp.Data.EF
 
             var connectionString = configuration.GetConnectionString(SystemConstants.ConnectionStringConstants.MainConnectionString);
 
-            var optionsBuilder = new DbContextOptionsBuilder<EShopDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<ClinicDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new EShopDbContext(optionsBuilder.Options);
+            return new ClinicDbContext(optionsBuilder.Options);
         }
     }
 }

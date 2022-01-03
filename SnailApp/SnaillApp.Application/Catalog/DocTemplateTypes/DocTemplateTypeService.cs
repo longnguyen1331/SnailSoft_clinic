@@ -24,9 +24,9 @@ namespace SnailApp.Application.Catalog.DocTemplateTypes
     }
     public class DocTemplateTypeService : IDocTemplateTypeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public DocTemplateTypeService(EShopDbContext context)
+        public DocTemplateTypeService(ClinicDbContext context)
         {
             _context = context;
         }

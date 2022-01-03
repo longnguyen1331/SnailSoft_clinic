@@ -33,11 +33,11 @@ namespace SnailApp.Application.SystemApplication.Languages
     }
     public class LanguageService : ILanguageService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public LanguageService(EShopDbContext context, IFileStorageService storageService,
+        public LanguageService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;

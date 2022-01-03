@@ -77,7 +77,7 @@ var Customer = function () {
                                         (edit_form_buttonSubmit.disabled = !1);
                                     }
                                 }
-                                )
+                            )
                         )
                         : Swal.fire(App.swalFireErrorDefaultOption());
                 });

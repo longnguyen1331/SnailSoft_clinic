@@ -96,30 +96,7 @@ namespace SnailApp.Data.Extensions
                 new StoreStatusTranslation() { Id = 8, StoreStatusId = 4, Name = "Closed", LanguageId = 2 }
             );
 
-            //PhieuKeToanStatus
-            modelBuilder.Entity<PhieuKeToanStatus>().HasData(
-               new PhieuKeToanStatus() { Id = 1, Code = "InActive" },
-               new PhieuKeToanStatus() { Id = 2, Code = "Active" }
-            );
-            modelBuilder.Entity<PhieuKeToanStatusTranslation>().HasData(
-                new PhieuKeToanStatusTranslation() { Id = 1, PhieuKeToanStatusId = 1, Name = "Chưa kích hoạt", LanguageId = 1 },
-                new PhieuKeToanStatusTranslation() { Id = 2, PhieuKeToanStatusId = 1, Name = "InActive", LanguageId = 2 },
-                new PhieuKeToanStatusTranslation() { Id = 3, PhieuKeToanStatusId = 2, Name = "Đang hoạt động", LanguageId = 1 },
-                new PhieuKeToanStatusTranslation() { Id = 4, PhieuKeToanStatusId = 2, Name = "Active", LanguageId = 2 }
-            );
-
-            //AppUserStatus
-            modelBuilder.Entity<AppUserStatus>().HasData(
-               new AppUserStatus() { Id = 1, Code = "InActive" },
-               new AppUserStatus() { Id = 2, Code = "Active" }
-            );
-            modelBuilder.Entity<AppUserStatusTranslation>().HasData(
-                new AppUserStatusTranslation() { Id = 1, AppUserStatusId = 1, Name = "Chưa kích hoạt", LanguageId = 1 },
-                new AppUserStatusTranslation() { Id = 2, AppUserStatusId = 1, Name = "InActive", LanguageId = 2 },
-                new AppUserStatusTranslation() { Id = 3, AppUserStatusId = 2, Name = "Đang hoạt động", LanguageId = 1 },
-                new AppUserStatusTranslation() { Id = 4, AppUserStatusId = 2, Name = "Active", LanguageId = 2 }
-            );
-
+     
             //SlideStatus
             modelBuilder.Entity<SlideStatus>().HasData(
                new SlideStatus() { Id = 1, Code = "InActive" },
@@ -182,79 +159,29 @@ namespace SnailApp.Data.Extensions
             );
 
             var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
-            var customerId = new Guid("0227BC9A-ED2F-4617-E96B-08D9704A3494");
-            var supplierId = new Guid("0227BC9A-ED2F-4617-E96B-08D9704A3422");
             //AppUsers
             var hasher = new PasswordHasher<AppUser>();
             modelBuilder.Entity<AppUser>().HasData(new AppUser
             {
                 Id = adminId,
                 Code = "001",
-                UserName = "admin",
-                NormalizedUserName = "admin",
-                Email = "nguyenkhachuy2709@gmail.com",
-                NormalizedEmail = "nguyenkhachuy2709@gmail.com",
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "admin@gmail.com",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "admin@gmail.com",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "123"),
                 SecurityStamp = string.Empty,
-                FirstName = "Huy",
-                LastName = "Nguyen Khac",
-                IsDelete = false,
+                FirstName = "Nguyễn",
+                LastName = "Hồ Phi Long",
                 Dob = new DateTime(2020, 01, 31),
                 PhoneNumber = "0915780794",
                 Address = "09 Lê Hồng Phong",
-                AppUserStatusId = 1,
                 IsActive = true,
-                IsStillInUse = true,
-                StartingDate = DateTime.Now
-            },
-
-
-            new AppUser
-            {
-                Id = customerId,
-                Code = "002",
-                UserName = "long",
-                NormalizedUserName = "long",
-                Email = "long@gmail.com",
-                NormalizedEmail = "long@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "123"),
-                SecurityStamp = string.Empty,
-                FirstName = "Long",
-                LastName = "Nguyen Ho Phi",
-                IsDelete = false,
-                Dob = new DateTime(2020, 01, 31),
-                PhoneNumber = "0915780224",
-                Address = "09 Lê Hồng Phong",
-                AppUserStatusId = 1,
-                IsActive = true,
-                IsStillInUse = true,
-                StartingDate = DateTime.Now
-            },
-            new AppUser
-            {
-                Id = supplierId,
-                Code = "003",
-                UserName = "tin",
-                NormalizedUserName = "tin",
-                Email = "tin@gmail.com",
-                NormalizedEmail = "tin@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "123"),
-                SecurityStamp = string.Empty,
-                FirstName = "Tin",
-                LastName = "Ngo Trung",
-                IsDelete = false,
-                Dob = new DateTime(2020, 01, 31),
-                PhoneNumber = "0922780224",
-                Address = "09 Lê Hồng Phong",
-                AppUserStatusId = 1,
-                IsActive = true,
-                IsStillInUse = true,
-                StartingDate = DateTime.Now
             }
             );
+
+
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
                 new IdentityUserRole<Guid>{ RoleId = administratorRoleId, UserId = adminId},
@@ -792,28 +719,7 @@ namespace SnailApp.Data.Extensions
               new SoDuDauKySoQuy() { Id = 1, StoreId = 1 , Total = 2000000}
             );
 
-            //AppUserType
-            modelBuilder.Entity<AppUserType>().HasData(
-               new AppUserType() { Id = 1, Code = "C" },
-               new AppUserType() { Id = 2, Code = "Su" },
-               new AppUserType() { Id = 3, Code = "St" }
-            );
-            modelBuilder.Entity<AppUserTypeTranslation>().HasData(
-                new AppUserTypeTranslation() { Id = 1, AppUserTypeId = 1, Name = "Khách hàng", LanguageId = 1 },
-                new AppUserTypeTranslation() { Id = 2, AppUserTypeId = 1, Name = "Customer", LanguageId = 2 },
-                new AppUserTypeTranslation() { Id = 3, AppUserTypeId = 2, Name = "Nhà cung cấp", LanguageId = 1 },
-                new AppUserTypeTranslation() { Id = 4, AppUserTypeId = 2, Name = "Supplier", LanguageId = 2 },
-                new AppUserTypeTranslation() { Id = 5, AppUserTypeId = 3, Name = "Nhân viên", LanguageId = 1 },
-                new AppUserTypeTranslation() { Id = 6, AppUserTypeId = 3, Name = "Staff", LanguageId = 2 }
-            );
-
-            //AppUser_AppUserType
-            modelBuilder.Entity<AppUser_AppUserType>().HasData(
-               new AppUser_AppUserType() { Id = 1, AppUserId = adminId, AppUserTypeId = 3  },
-               new AppUser_AppUserType() { Id = 2, AppUserId = customerId, AppUserTypeId = 1  },
-               new AppUser_AppUserType() { Id = 3, AppUserId = supplierId, AppUserTypeId = 2 }
-            );
-
+         
             //WebsiteMenus
             modelBuilder.Entity<WebsiteMenu>().HasData(
                 new WebsiteMenu() { Id = 1, SortOrder = 1, Code = "AboutUs", ParentId = new Nullable<int>(), Link = "/about-us", WebsiteMenuType = 1 },
@@ -894,9 +800,7 @@ namespace SnailApp.Data.Extensions
                 new BasicSalaryTranslation() { Id = 6, BasicSalaryId = 3, Name = "N/A", LanguageId = 2 }
              );
 
-            modelBuilder.Entity<AppUser_BasicSalary>().HasData(
-               new AppUser_BasicSalary() { Id = 2, AppUserId = adminId, BasicSalaryId = 2, FromDate = new DateTime(2021, 9, 1), IsApply = true }
-            );
+       
 
             modelBuilder.Entity<CommissionDiscount>().HasData(
                new CommissionDiscount() { Id = 1, Commission = 0, CommissionPercent = 2, Discount = 0, DiscountPercent = 10, FromDate = new DateTime(2021, 9, 1), IsApply = true },
@@ -909,9 +813,7 @@ namespace SnailApp.Data.Extensions
                 new CommissionDiscountTranslation() { Id = 4, CommissionDiscountId = 2, Name = "N/A", LanguageId = 2 }
             );
 
-            modelBuilder.Entity<AppUser_CommissionDiscount>().HasData(
-               new AppUser_CommissionDiscount() { Id = 2, AppUserId = adminId, CommissionDiscountId = 2, FromDate = new DateTime(2021, 9, 1), IsApply = true }
-            );
+          
 
             modelBuilder.Entity<Promotion>().HasData(
                 new Promotion() { Id = 1, Code = "001", FromDate = DateTime.Now, IsApply = true },
@@ -1004,74 +906,6 @@ namespace SnailApp.Data.Extensions
                new ProductSKU_AttributeValue() { Id = 2, ProductSKUId = 3, AttributeValueId = 2 }
            );
             
-
-            //order
-            modelBuilder.Entity<PhieuKeToan>().HasData(
-                new PhieuKeToan()
-                {
-                    Id = 1,
-                    LoaiPhieuKeToan = LoaiPhieuKeToan.PX,
-                    SaleStaffId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                    CustomerId = customerId,
-                    Date = DateTime.Now,
-                    MoneyBeforeTax = 0,
-                    MoneyAffterTax = 0,
-                    TotalMoney = 1050000,
-                    TotalPaid = 1050000,
-                    PaymentMethod = 0,
-                    StoreId = 1,
-                    Code = "PX2021/1",
-                    CreatedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                    ModifiedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE")
-                },
-                new PhieuKeToan()
-                {
-                    Id = 2,
-                    LoaiPhieuKeToan = LoaiPhieuKeToan.PX,
-                    SaleStaffId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                    CustomerId = customerId,
-                    Date = DateTime.Now,
-                    MoneyBeforeTax = 0,
-                    MoneyAffterTax = 0,
-                    TotalMoney = 6500000,
-                    TotalPaid = 6500000,
-                    PaymentMethod = 0,
-                    StoreId = 1,
-                    Code = "PX2021/2",
-                    CreatedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                    ModifiedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE")
-                }
-            );
-
-            //orderDetail
-            modelBuilder.Entity<PhieuKeToanChiTiet>().HasData(
-                new PhieuKeToanChiTiet()
-                {
-                    Id = 1,
-                    PhieuKeToanId = 1,
-                    Qty = -1,
-                    ProductSKUId = 1,
-                    Price = 1050000,
-                    ImportPrice = 0,
-                    TotalPrice = 1050000,
-                    BuyingPrice = 1050000,
-                    CreatedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                    ModifiedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE")
-                },
-                 new PhieuKeToanChiTiet()
-                 {
-                     Id = 2,
-                     PhieuKeToanId = 2,
-                     Qty = -1,
-                     ProductSKUId = 2,
-                     Price = 6500000,
-                     ImportPrice = 0,
-                     TotalPrice = 6500000,
-                     BuyingPrice = 6500000,
-                     CreatedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE"),
-                     ModifiedUserId = Guid.Parse("69BD714F-9576-45BA-B5B7-F00649BE00DE")
-                 }
-            );
         }
     }
 }

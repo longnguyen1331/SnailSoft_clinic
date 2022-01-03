@@ -21,9 +21,9 @@ namespace SnailApp.Application.Catalog.Countries
     }
     public class CountryService : ICountryService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public CountryService(EShopDbContext context)
+        public CountryService(ClinicDbContext context)
         {
             _context = context;
         }

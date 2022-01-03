@@ -26,10 +26,10 @@ namespace SnailApp.Application.Utilities.UI
     public class AdminAppUIService: IAdminAppUIService
     {
         private readonly IConfiguration _configuration;
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public AdminAppUIService(EShopDbContext context, IConfiguration configuration,
+        public AdminAppUIService(ClinicDbContext context, IConfiguration configuration,
                                 UserManager<AppUser> userManager)
         {
             _configuration = configuration;

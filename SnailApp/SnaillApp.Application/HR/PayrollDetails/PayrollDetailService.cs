@@ -25,10 +25,10 @@ namespace SnailApp.Application.HR.PayrollDetails
     }
     public class PayrollDetailService : IPayrollDetailService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public PayrollDetailService(EShopDbContext context, IConfiguration configuration)
+        public PayrollDetailService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

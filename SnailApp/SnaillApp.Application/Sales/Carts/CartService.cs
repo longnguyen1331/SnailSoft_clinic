@@ -32,11 +32,11 @@ namespace SnailApp.Application.Sales.Carts
     }
     public class CartService : ICartService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public CartService(EShopDbContext context, IFileStorageService storageService,
+        public CartService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;

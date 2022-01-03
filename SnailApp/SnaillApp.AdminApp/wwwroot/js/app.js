@@ -1,31 +1,58 @@
 ﻿var App = function () {
     let run_waitMe = (selector, option) => {
-        var optionObj = {
-            effect: 'rotation',
-            text: 'Đang xử lý...',
-            bg: 'rgba(255,255,255,0.7)',
-            color: '#3333cc',
-            sizeW: '32px',
-            sizeH: '32px',
-            source: 'img.svg',
-            onClose: function () { }
-        };
-
-        if (option) {
-            for (var key in option) {
-                optionObj[key] = option[key];
-            }
+        if (!selector) {
+            selector = 'body';
         }
-
-        $(selector).waitMe(optionObj);
+        $(selector).block({
+            message: '<h2><i class="fa fa-spinner fa-spin vd_green"></i></h2>',
+            css: {
+                border: 'none',
+                padding: '15px',
+                background: 'none',
+            },
+            overlayCSS: { backgroundColor: '#FFF' }
+        });
     }
 
     let stop_waitMe = (selector) => {
-        $(selector).waitMe('hide');
+        if (!selector) {
+            selector = 'body';
+        }
+        $(selector).find('.blockUI')
+            .fadeOut(300, function () { $(this).remove(); });
     }
 
     var body = document.getElementsByTagName("BODY")[0];
 
+    let  notification = (position, type, icon, title, message) => {
+        if (typeof icon == 'undefined' || icon == '') {
+            icon = 'bx bx-x-circle';
+        }
+        if (typeof position == 'undefined' || position == '') {
+            position = 'top right';
+        }
+        if (typeof type == 'undefined' || type == '') {
+            type = 'success';
+        }
+
+        var notiOptions = {
+            pauseDelayOnHover: true,
+            rounded: true,
+            size: 'mini',
+            icon: icon,
+            continueDelayOnInactiveTab: false,
+            position: position,
+            msg: message,
+            title: title
+        };
+
+        if (typeof title == 'undefined' || title == '') {
+            notiOptions.size = 'mini';
+        }
+
+        Lobibox.notify(type, notiOptions);
+
+    }
 
     let sendDataToURL = (url, data, method, isShowLoading, waitingElementOption) => {
         var defered = $.Deferred();

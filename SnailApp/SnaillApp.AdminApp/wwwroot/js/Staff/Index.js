@@ -3,6 +3,11 @@
 var Staff = function () {
     let dtTable = null;
     let roles = [];
+
+    let edit_form = $("#edit_form"),
+        edit_form_buttonSubmit = $('[name="btnUpdate"]');
+
+
     let initialComponents = () => {
 
         $('#date-picker').bootstrapMaterialDatePicker({
@@ -10,21 +15,79 @@ var Staff = function () {
             time: false
         });
 
-        $('#dtTableSearch').on('keyup', function (e) {
+        $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
                 dtTable.draw();
             }
         });
 
-        $('[name="btnCreate"]').click(function (e) {
+        $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
-            $('.switcher-btn').trigger('click')
+            $('.switcher-btn').trigger('click');
         });
 
         $('#btnRefreshData').click(function (e) {
             e.preventDefault();
             dtTable.draw();
+        });
+
+        edit_form_buttonSubmit.click(function (e) {
+            e.preventDefault();
+
+            let formData = new FormData();
+
+            if (editingData != null) {
+                formData.append("id", (editingData != null ? editingData.id : null));
+            }
+
+            edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                let fieldName = $(el).data("field");
+                if (fieldName) {
+                    switch (fieldName) {
+                        case "Avatar":
+                            let files = $(el).prop('files');
+                            console.log(files);
+                            if (files.length > 0) {
+                                formData.append("Avatar", files[0]);
+                            }
+
+                        case "IsActive":
+                            formData.append("IsActive", $(el).val() == "on" ? true : false);
+
+                        default:
+                            if ($(el).data("field")) {
+                                formData.append($(el).data("field"), $(el).val());
+                            }
+                    }
+                }
+            });
+
+            var radios = document.getElementsByName('Gender');
+            var sexValue = true;
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    sexValue = radios[i].value
+                    break;
+                }
+            }
+
+            formData.append("GenderId", sexValue);
+            formData.append("AppRoleCodes", roles);
+            console.log(roles);
+            //App.sendDataFileToURL("/Staff/SaveProfileDetail", formData, "POST")
+            //.then(function (res) {
+            //        if (!res.isSuccessed) {
+            //            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+            //        }
+            //        else {
+            //            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+            //            editingData = {
+            //                id: res.resultObj
+            //            };
+            //        }
+            //    }
+            //)
         });
 
         $('#btnDelete').click(function (e) {
@@ -40,7 +103,30 @@ var Staff = function () {
                 deleteDataRows(arr);
             }
         });
+
+
+        $('#btnUpload').click(function (e) {
+            e.preventDefault();
+            $('#image-upload').trigger('click');
+        });
+
+        $('#image-upload').change(function (e) {
+            e.preventDefault();
+            readURL(this);
+            var filename = $(this).val().replace(/.*(\/|\\)/, '');
+            $('#image-upload-src').val(filename);
+        });
     };
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#avatarImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();

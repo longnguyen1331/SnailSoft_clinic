@@ -56,13 +56,13 @@ namespace SnailApp.Application.Catalog.Products
     
     public class ProductService : IProductService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IDocTemplateService _docTemplateService;
         
-        public ProductService(EShopDbContext context,
+        public ProductService(ClinicDbContext context,
                             IFileStorageService storageService,
                             IWebHostEnvironment hostEnvironment,
                                 IConfiguration configuration,

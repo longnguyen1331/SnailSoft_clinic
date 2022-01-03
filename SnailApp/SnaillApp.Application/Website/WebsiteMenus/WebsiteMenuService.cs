@@ -24,9 +24,9 @@ namespace SnailApp.Application.Website.WebsiteMenus
     }
     public class WebsiteMenuService : IWebsiteMenuService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public WebsiteMenuService(EShopDbContext context)
+        public WebsiteMenuService(ClinicDbContext context)
         {
             _context = context;
         }

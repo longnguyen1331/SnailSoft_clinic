@@ -12,8 +12,6 @@ namespace SnailApp.Data.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("AppUsers");
-            builder.HasOne(x => x.AppUserStatus).WithMany(x => x.AppUsers).HasForeignKey(x => x.AppUserStatusId);
-            builder.HasOne(x => x.Country).WithMany(x => x.AppUsers).HasForeignKey(x => x.CountryId);
         }
     }
 }

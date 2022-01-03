@@ -13,6 +13,5 @@ namespace SnailApp.Data.Entities
         public bool IsApply { set; get; }
         public ICollection<Promotion_CommissionDiscount> Promotion_CommissionDiscounts { set; get; }
         public ICollection<Promotion_ProductSKU> Promotion_ProductSKUs { set; get; }
-        public ICollection<AppUser_Promotion> AppUser_Promotions { set; get; }
     }
 }

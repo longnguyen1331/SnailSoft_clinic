@@ -16,7 +16,6 @@ namespace SnailApp.Data.Entities
         public DateTime? ToDate { set; get; }
         public bool IsApply { set; get; }
         public ICollection<CommissionDiscountTranslation> CommissionDiscountTranslations { set; get; }
-        public ICollection<AppUser_CommissionDiscount> AppUser_CommissionDiscounts { set; get; }
         public ICollection<Promotion_CommissionDiscount> Promotion_CommissionDiscounts { set; get; }
     }
 }

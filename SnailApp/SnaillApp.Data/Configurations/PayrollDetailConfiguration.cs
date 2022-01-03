@@ -15,7 +15,6 @@ namespace SnailApp.Data.Configurations
             builder.ToTable("PayrollDetails");
 
             builder.HasOne(x => x.Payroll).WithMany(x => x.PayrollDetails).HasForeignKey(x => x.PayrollId);
-            builder.HasOne(x => x.AppUser).WithMany(x => x.PayrollDetails).HasForeignKey(x => x.AppUserId);
         }
     }
 }

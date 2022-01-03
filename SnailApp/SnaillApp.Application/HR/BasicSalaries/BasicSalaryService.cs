@@ -31,10 +31,10 @@ namespace SnailApp.Application.HR.BasicSalaries
     }
     public class BasicSalaryService : IBasicSalaryService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public BasicSalaryService(EShopDbContext context, IConfiguration configuration)
+        public BasicSalaryService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

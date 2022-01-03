@@ -26,10 +26,10 @@ namespace SnailApp.Application.SystemApplication.AppRoles
     }
     public class AppRoleService : IAppRoleService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly RoleManager<AppRole> _roleManager;
 
-        public AppRoleService(EShopDbContext context, RoleManager<AppRole> roleManager)
+        public AppRoleService(ClinicDbContext context, RoleManager<AppRole> roleManager)
         {
             _context = context;
             _roleManager = roleManager;

@@ -34,11 +34,11 @@ namespace SnailApp.Application.SystemApplication.DocTemplates
     }
     public class DocTemplateService : IDocTemplateService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public DocTemplateService(EShopDbContext context, IFileStorageService storageService,
+        public DocTemplateService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;

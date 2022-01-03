@@ -25,9 +25,9 @@ namespace SnailApp.Application.Catalog.Genders
     }
     public class GenderService : IGenderService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public GenderService(EShopDbContext context)
+        public GenderService(ClinicDbContext context)
         {
             _context = context;
         }

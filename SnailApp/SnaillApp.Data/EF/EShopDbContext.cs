@@ -1,7 +1,6 @@
 ﻿using SnailApp.Data.Configurations;
 using SnailApp.Data.Entities;
 using SnailApp.Data.Extensions;
-using SnailApp.ViewModels.Catalog.Products;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +8,9 @@ using System;
 
 namespace SnailApp.Data.EF
 {
-    public class EShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
+    public class ClinicDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
-        public EShopDbContext(DbContextOptions options) : base(options)
+        public ClinicDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -30,16 +29,6 @@ namespace SnailApp.Data.EF
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUser_AppUserTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUser_BasicSalaryConfiguration());            
-            modelBuilder.ApplyConfiguration(new AppUser_CommissionDiscountConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUser_PromotionConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserFeedbackConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserHelpConfiguration());            
-            modelBuilder.ApplyConfiguration(new AppUserStatusConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserStatusTranslationConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserTypeTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeValueConfiguration());
@@ -75,11 +64,7 @@ namespace SnailApp.Data.EF
             modelBuilder.ApplyConfiguration(new PayrollDetailConfiguration());
             modelBuilder.ApplyConfiguration(new PayrollTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PetServiceSelectionConfiguration());
-            modelBuilder.ApplyConfiguration(new PetServiceSelectionTranslationConfiguration());            
-            modelBuilder.ApplyConfiguration(new PhieuKeToanConfiguration());
-            modelBuilder.ApplyConfiguration(new PhieuKeToanChiTietConfiguration());
-            modelBuilder.ApplyConfiguration(new PhieuKeToanStatusConfiguration());
-            modelBuilder.ApplyConfiguration(new PhieuKeToanStatusTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new PetServiceSelectionTranslationConfiguration());      
             modelBuilder.ApplyConfiguration(new PostConfiguration());
             modelBuilder.ApplyConfiguration(new PostImageConfiguration());
             modelBuilder.ApplyConfiguration(new PostStatusConfiguration());
@@ -117,7 +102,6 @@ namespace SnailApp.Data.EF
             modelBuilder.ApplyConfiguration(new UnitTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new SoDuDauKySoQuyConfiguration());
             modelBuilder.ApplyConfiguration(new SoDuDauKyHangHoaConfiguration());
-            modelBuilder.ApplyConfiguration(new PhieuKeToanChiTiet_AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new WebsiteMenuConfiguration());
             modelBuilder.ApplyConfiguration(new WebsiteMenuTranslationConfiguration());
 
@@ -131,16 +115,6 @@ namespace SnailApp.Data.EF
         public DbSet<AppConfig> AppConfigs { get; set; }
         public DbSet<AppRoleTranslation> AppRoleTranslations { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }        
-        public DbSet<AppUser_AppUserType> AppUser_AppUserTypes { get; set; }
-        public DbSet<AppUser_BasicSalary> AppUser_BasicSalarys { get; set; }
-        public DbSet<AppUser_CommissionDiscount> AppUser_CommissionDiscounts { get; set; }
-        public DbSet<AppUser_Promotion> AppUser_Promotions { get; set; }
-        public DbSet<AppUserFeedback> AppUserFeedbacks { get; set; }
-        public DbSet<AppUserHelp> AppUserHelps { get; set; }        
-        public DbSet<AppUserStatus> AppUserStatuses { get; set; }
-        public DbSet<AppUserStatusTranslation> AppUserStatusTranslations { get; set; }
-        public DbSet<AppUserType> AppUserTypes { get; set; }
-        public DbSet<AppUserTypeTranslation> AppUserTypeTranslations { get; set; }
         public DbSet<Data.Entities.Attribute> Attributes { get; set; }
         public DbSet<AttributeTranslation> AttributeTranslations { get; set; }
         public DbSet<Data.Entities.AttributeValue> AttributeValues { get; set; }
@@ -177,10 +151,7 @@ namespace SnailApp.Data.EF
         public DbSet<PayrollTranslation> PayrollTranslations { get; set; }
         public DbSet<PetServiceSelection> PetServiceSelections { get; set; }
         public DbSet<PetServiceSelectionTranslation> PetServiceSelectionTranslations { get; set; }        
-        public DbSet<PhieuKeToanStatus> PhieuKeToanStatuses { get; set; }
-        public DbSet<PhieuKeToanStatusTranslation> PhieuKeToanStatusTranslations { get; set; }        
-        public DbSet<PhieuKeToan> PhieuKeToans { get; set; }
-        public DbSet<PhieuKeToanChiTiet> PhieuKeToanChiTiets { get; set; }
+      
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostImage> PostImages { get; set; }
         public DbSet<PostStatus> PostStatuses { get; set; }
@@ -218,7 +189,6 @@ namespace SnailApp.Data.EF
         public DbSet<UnitTranslation> UnitTranslations { get; set; }
         public DbSet<SoDuDauKySoQuy> SoDuDauKySoQuys { get; set; }
         public DbSet<SoDuDauKyHangHoa> SoDuDauKyHangHoas { get; set; }
-        public DbSet<PhieuKeToanChiTiet_AppUser> PhieuKeToanChiTiet_AppUsers { get; set; }
         public DbSet<WebsiteMenu> WebsiteMenus { get; set; }
         public DbSet<WebsiteMenuTranslation> WebsiteMenuTranslations { get; set; }
 

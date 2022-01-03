@@ -30,9 +30,9 @@ namespace SnailApp.Application.SystemApplication.Statuses
     }
     public class ProductTypeStatusService : IProductTypeStatusService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ProductTypeStatusService(EShopDbContext context)
+        public ProductTypeStatusService(ClinicDbContext context)
         {
             _context = context;
         }

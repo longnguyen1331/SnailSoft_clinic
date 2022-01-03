@@ -25,9 +25,9 @@ namespace SnailApp.Application.Catalog.ProductTypes
     }
     public class ProductTypeService : IProductTypeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ProductTypeService(EShopDbContext context)
+        public ProductTypeService(ClinicDbContext context)
         {
             _context = context;
         }

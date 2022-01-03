@@ -26,9 +26,9 @@ namespace SnailApp.Application.Catalog.PostTypes
     }
     public class PostTypeService : IPostTypeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public PostTypeService(EShopDbContext context)
+        public PostTypeService(ClinicDbContext context)
         {
             _context = context;
         }

@@ -26,9 +26,9 @@ namespace SnailApp.Application.SystemApplication.MenuAppRoles
     }
     public class MenuAppRoleService : IMenuAppRoleService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public MenuAppRoleService(EShopDbContext context)
+        public MenuAppRoleService(ClinicDbContext context)
         {
             _context = context;
         }

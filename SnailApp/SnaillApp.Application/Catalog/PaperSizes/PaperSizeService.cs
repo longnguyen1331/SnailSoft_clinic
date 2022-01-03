@@ -32,9 +32,9 @@ namespace SnailApp.Application.Catalog.PaperSizes
     }
     public class PaperSizeService : IPaperSizeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public PaperSizeService(EShopDbContext context)
+        public PaperSizeService(ClinicDbContext context)
         {
             _context = context;
         }

@@ -32,11 +32,11 @@ namespace SnailApp.Application.SystemApplication.AppConfigs
     }
     public class AppConfigService : IAppConfigService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public AppConfigService(EShopDbContext context, IFileStorageService storageService,
+        public AppConfigService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;

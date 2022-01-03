@@ -24,9 +24,9 @@ namespace SnailApp.Application.Catalog.CustomerTypes
     }
     public class CustomerTypeService : ICustomerTypeService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public CustomerTypeService(EShopDbContext context)
+        public CustomerTypeService(ClinicDbContext context)
         {
             _context = context;
         }

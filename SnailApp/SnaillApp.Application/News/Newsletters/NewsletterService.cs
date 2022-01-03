@@ -20,9 +20,9 @@ namespace SnailApp.Application.News.Newsletters
     }
     public class NewsletterService : INewsletterService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public NewsletterService(EShopDbContext context)
+        public NewsletterService(ClinicDbContext context)
         {
             _context = context;
         }

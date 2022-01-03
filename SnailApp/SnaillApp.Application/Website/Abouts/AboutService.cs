@@ -31,9 +31,9 @@ namespace SnailApp.Application.Website.Abouts
     }
     public class AboutService : IAboutService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         
-        public AboutService(EShopDbContext context)
+        public AboutService(ClinicDbContext context)
         {
             _context = context;
         }

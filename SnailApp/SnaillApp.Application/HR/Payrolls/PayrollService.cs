@@ -30,10 +30,10 @@ namespace SnailApp.Application.HR.Payrolls
     }
     public class PayrollService : IPayrollService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public PayrollService(EShopDbContext context, IConfiguration configuration)
+        public PayrollService(ClinicDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -232,48 +232,6 @@ namespace SnailApp.Application.HR.Payrolls
                 }
 
                 _context.PayrollDetails.RemoveRange(await _context.PayrollDetails.Where(m => m.PayrollId == payroll.Id).AsNoTracking().ToListAsync());
-
-                var payrollDetails = await (from au in _context.AppUsers
-                                            join au_bs in _context.AppUser_BasicSalarys on au.Id equals au_bs.AppUserId
-                                            join bs in _context.BasicSalarys on au_bs.BasicSalaryId equals bs.Id
-                                            where (au.LeaveDate == null || (au.LeaveDate != null && au.LeaveDate.Value >= payroll.FromDate && au.LeaveDate.Value <= payroll.ToDate))
-                                                && au_bs.IsApply == true && au_bs.FromDate.Value <= payroll.FromDate && (au_bs.ToDate == null || (au_bs.ToDate != null && au_bs.ToDate.Value >= payroll.FromDate))
-                                            select new PayrollDetail()
-                                            {
-                                                AppUserId = au.Id,
-                                                PayrollId = request.Id.Value,
-                                                BasicSalary = bs.Value,
-                                                Total = bs.Value
-                                            }).AsNoTracking().ToListAsync();
-
-                if (payrollDetails != null)
-                {
-                    if(payrollDetails.Count > 0)
-                    {
-                        var appUserIds = payrollDetails.Select(m => m.AppUserId).ToList();
-                        var orders = await (from p in _context.PhieuKeToans
-                                            where p.LoaiPhieuKeToan == ViewModels.Enums.LoaiPhieuKeToan.PX
-                                                    && (appUserIds.Contains(p.SaleStaffId.Value) || appUserIds.Contains(p.CustomerId.Value))
-                                                    && p.Date >= payroll.FromDate && p.Date <= payroll.ToDate
-                                            select new PhieuKeToanDto()
-                                            {
-                                                SaleStaffId = p.SaleStaffId.Value,
-                                                CustomerId = p.CustomerId.Value,
-                                                TotalDiscount = p.TotalDiscount,
-                                                TotalCommission = p.TotalCommission
-                                            }).AsNoTracking().ToListAsync();
-
-                        foreach(var payrollDetail in payrollDetails)
-                        {
-                            payrollDetail.Discount = orders.Where(m => m.CustomerId == payrollDetail.AppUserId).Sum(m => m.TotalDiscount);
-                            payrollDetail.Commission = orders.Where(m => m.SaleStaffId == payrollDetail.AppUserId).Sum(m => m.TotalCommission);
-                            payrollDetail.Total = payrollDetail.BasicSalary + payrollDetail.Discount + payrollDetail.Commission;
-                        }
-                    }
-                }
-
-                _context.PayrollDetails.AddRange(payrollDetails);
-                await _context.SaveChangesAsync();
 
                 return new ApiSuccessResult<int>(request.Id.Value);
             }

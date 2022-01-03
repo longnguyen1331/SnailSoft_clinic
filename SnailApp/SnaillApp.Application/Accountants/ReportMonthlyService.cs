@@ -19,9 +19,9 @@ namespace SnailApp.Application.Accountants
     }
     public class ReportMonthlyService : IReportMonthlyService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public ReportMonthlyService(EShopDbContext context)
+        public ReportMonthlyService(ClinicDbContext context)
         {
             _context = context;
         }

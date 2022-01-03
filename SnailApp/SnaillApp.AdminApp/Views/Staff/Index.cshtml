@@ -67,7 +67,7 @@ ViewBag.Title = "Nhân viên";
 	<div class="card-body">
 		<div class="d-lg-flex align-items-center mb-4 gap-3">
 			<div class="position-relative">
-				<input type="text" class="form-control ps-5 radius-30" placeholder="Search"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" name="inputSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
 			</div>
 			<div class="ms-auto"></div><button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
 		</div>
@@ -86,12 +86,13 @@ ViewBag.Title = "Nhân viên";
 				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
 			</div>
 
-			<div class="mb-3">
+			<form id="edit_form">
+				<div class="mb-3">
 				<div class="row g-0">
 					<div class="col-md-4 text-center">
-						<img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" class="rounded-circle shadow mb-2" alt="">
+						<img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" id="avatarImage" class="rounded-circle shadow mb-2" alt="">
 						<a href="#" class="btn btn-outline-primary radius-15" id="btnUpload">Upload</a>
-						<input id="image-upload" type="file" accept="image/*" hidden>
+						<input  id="image-upload" data-field="Avatar" type="file" accept=".png, .jpg, .jpeg" hidden>
 					</div>
 					<div class="col-md-8 px-1" >
 						<div class="mb-3">
@@ -140,12 +141,12 @@ ViewBag.Title = "Nhân viên";
 						<br />
 						<div class="d-flex align-items-center justify-content-between mb-3 px-1">
 							<div class="form-check">
-								<input class="form-check-input" type="radio" name="Gender" id="Male" checked>
-								<label class="form-check-label" for="male">Male</label>
+								<input class="form-check-input" type="radio" value="1" name="Gender" id="Male" checked>
+								<label class="form-check-label" for="Gender">Male</label>
 							</div>
 							<div class="form-check">
-								<input class="form-check-input" type="radio" name="Gender" id="Female">
-								<label class="form-check-label" for="female">Female</label>
+								<input class="form-check-input" type="radio" value="2" name="Gender" id="Female">
+								<label class="form-check-label" for="Female">Female</label>
 							</div>
 						</div>
 					</div>
@@ -199,16 +200,20 @@ ViewBag.Title = "Nhân viên";
 				<div class="row row-cols-auto g-3 px-1">
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
-							<button type="button" class="btn btn-danger px-5 radius-15">Cancel</button>
+							<button type="button" class="btn btn-danger px-5 radius-15" name="btnCancel">Cancel</button>
 
 						</div>
 					</div>
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
-							<button type="button" class="btn btn-primary px-5 radius-15">Update</button>
+							<button type="button" class="btn btn-primary px-5 radius-15" name="btnUpdate">Update</button>
+
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
+
+	<div class="spinner-grow text-primary" role="status"> <span class="visually-hidden">Loading...</span></div>

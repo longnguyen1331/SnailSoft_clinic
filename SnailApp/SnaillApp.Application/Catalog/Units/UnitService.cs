@@ -25,9 +25,9 @@ namespace SnailApp.Application.Catalog.Units
     }
     public class UnitService : IUnitService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public UnitService(EShopDbContext context)
+        public UnitService(ClinicDbContext context)
         {
             _context = context;
         }

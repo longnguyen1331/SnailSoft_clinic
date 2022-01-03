@@ -23,9 +23,9 @@ namespace SnailApp.Application.Catalog.PetServiceSelections
     }
     public class PetServiceSelectionService : IPetServiceSelectionService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
 
-        public PetServiceSelectionService(EShopDbContext context)
+        public PetServiceSelectionService(ClinicDbContext context)
         {
             _context = context;
         }

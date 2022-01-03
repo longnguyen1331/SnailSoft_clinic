@@ -30,11 +30,11 @@ namespace SnailApp.Application.Utilities.Slides
     }
     public class SlideService : ISlideService
     {
-        private readonly EShopDbContext _context;
+        private readonly ClinicDbContext _context;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public SlideService(EShopDbContext context, IFileStorageService storageService,
+        public SlideService(ClinicDbContext context, IFileStorageService storageService,
                                 IConfiguration configuration)
         {
             _context = context;
