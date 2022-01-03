@@ -5,7 +5,7 @@ var Customer = function () {
 
 
     let initialComponents = () => {
-        form__date_range_register();
+        
 
         $('#filterByCreatedDateRange').change(function (e) {
             e.preventDefault();

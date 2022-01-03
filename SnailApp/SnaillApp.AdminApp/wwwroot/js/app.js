@@ -3,8 +3,9 @@
         if (!selector) {
             selector = 'body';
         }
+
         $(selector).block({
-            message: '<h2><i class="fa fa-spinner fa-spin vd_green"></i></h2>',
+            message: '<div class="spinner-grow text-primary" role="status"> <span class="visually-hidden">Loading...</span></div>',
             css: {
                 border: 'none',
                 padding: '15px',
@@ -24,7 +25,7 @@
 
     var body = document.getElementsByTagName("BODY")[0];
 
-    let  notification = (position, type, icon, title, message) => {
+    let notification = (position, type, icon, title, message) => {
         if (typeof icon == 'undefined' || icon == '') {
             icon = 'bx bx-x-circle';
         }
@@ -325,6 +326,7 @@
     return {
         //run_waitMe: run_waitMe,
         //stop_waitMe: stop_waitMe,
+        notification: notification,
         sendDataToURL: sendDataToURL,
         sendDataFileToURL: sendDataFileToURL,
         deleteDataConfirm: deleteDataConfirm,

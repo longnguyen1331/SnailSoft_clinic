@@ -19,7 +19,7 @@ namespace SnailApp.ViewModels.System.Users
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public DateTime? Dob { get; set; }
+        public string Dob { get; set; }
         public string StrDob { set; get; }
         public IList<AppRoleDto> AppRoles { get; set; }
         public string Avatar { set; get; }

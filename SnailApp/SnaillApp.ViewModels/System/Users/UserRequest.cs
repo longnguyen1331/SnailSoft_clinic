@@ -18,8 +18,9 @@ namespace SnailApp.ViewModels.System.Users
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string Token { get; set; }
         public int? GenderId { get; set; }
-        public List<string> AppRoleCodes { set; get; }
+        public string AppRoleCodes { set; get; }
         public bool IsActive { set; get; }
         public IFormFile Avatar { set; get; }
         public int LanguageId { set; get; }

@@ -11,6 +11,8 @@ using SnailApp.Utilities.Constants;
 using Microsoft.AspNetCore.Http;
 using SnailApp.ApiIntegration;
 using SnailApp.ViewModels.Accountants.PhieuKeToans;
+using SnailApp.ViewModels.System.Users;
+using SnailApp.ViewModels.Common;
 
 namespace SnailApp.AdminApp.Controllers
 {
@@ -18,11 +20,14 @@ namespace SnailApp.AdminApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IReportSummaryApiClient _reportSummaryApiClient;
+        private readonly IUserApiClient _userApiClient;
 
         public HomeController(ILogger<HomeController> logger,
+            IUserApiClient userApiClient,
             IReportSummaryApiClient reportSummaryApiClient
             )
         {
+            _userApiClient = userApiClient;
             _logger = logger;
             _reportSummaryApiClient = reportSummaryApiClient;
 
@@ -48,6 +53,28 @@ namespace SnailApp.AdminApp.Controllers
             return Redirect(viewModel.ReturnUrl);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest rq)
+        {
+            ApiResult<int> result = null;
+
+            if (rq != null)
+            {
+                rq.Id = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
+                result = await _userApiClient.ChangePassword(rq);
+            }
+            else
+            {
+                result = new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = result.Message
+                };
+            }
+
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<IActionResult> GetReport([FromBody] ManageReportSummaryPagingRequest rq)

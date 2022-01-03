@@ -220,7 +220,7 @@ var CashBook = function () {
         init: function () {
             initialDatatable();
             initialComponents();
-            form__date_range_register();
+            
         }
     };
 }();

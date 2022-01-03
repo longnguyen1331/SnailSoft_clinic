@@ -84,7 +84,7 @@ namespace SnailApp.AdminApp.Controllers
 
             foreach (var item in userApiClient.Items)
             {
-                item.Id_Image_FullName_Email = item.Id + "|" + _configuration[SystemConstants.AppConstants.BaseAddress] + (!string.IsNullOrEmpty(item.Avatar) ? item.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]) + "|" + (languageId.ToString().Equals(_configuration[SystemConstants.AppConstants.DefaultLanguageId]) ? (item.LastName + " " + item.FirstName) : (item.FirstName + " " + item.LastName)) + "|" + item.Email;
+                item.Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + item.Avatar;
             }
 
             return Json(new

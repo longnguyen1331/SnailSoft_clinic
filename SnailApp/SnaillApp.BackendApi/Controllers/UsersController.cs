@@ -44,16 +44,10 @@ namespace SnailApp.BackendApi.Controllers
             }
             return Ok(result);
         }
-        [HttpPost("addorupdatestaffsecurity")]
-        public async Task<IActionResult> AddOrUpdateStaffSecurity([FromBody] UserRequest request)
+        [HttpPost("addorupdatestaff")]
+        public async Task<IActionResult> AddOrUpdateStaff([FromForm] UserRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-
-            ApiResult<string> res = await _userService.AddOrUpdateSecurityAsync(request);
+            ApiResult<string> res = await _userService.AddOrUpdateAsync(request);
 
             if (res.IsSuccessed)
             {
@@ -65,26 +59,7 @@ namespace SnailApp.BackendApi.Controllers
 
             return Ok(res);
         }
-        [HttpPost("addorupdatecustomersecurity")]
-        public async Task<IActionResult> AddOrUpdateCustomerSecurity([FromBody] UserRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            ApiResult<string> res = await _userService.AddOrUpdateSecurityAsync(request);
-
-            if (res.IsSuccessed)
-            {
-                if (string.IsNullOrEmpty(res.ResultObj))
-                {
-                    return BadRequest();
-                }
-            }
-
-            return Ok(res);
-        }
+        
 
         [HttpGet("GetStaffManageListPaging")]
         public async Task<IActionResult> GetStaffManageListPaging([FromQuery] ManageUserPagingRequest request)
@@ -168,6 +143,14 @@ namespace SnailApp.BackendApi.Controllers
             }
 
             return Ok(result);
+        }
+
+
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            ApiResult<int> res = await _userService.ChangePasswordAsync(request);
+            return Ok(res);
         }
     }
 }

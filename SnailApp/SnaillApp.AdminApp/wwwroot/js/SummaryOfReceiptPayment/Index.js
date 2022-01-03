@@ -38,7 +38,7 @@ var SummaryOfReceiptPayment = function () {
     return {
         // public functions
         init: function () {
-            form__date_range_register();
+            
             initialComponents();
         }
     };

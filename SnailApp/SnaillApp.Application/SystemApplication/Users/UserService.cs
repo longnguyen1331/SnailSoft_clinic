@@ -2,12 +2,10 @@
 using SnailApp.Data.Entities;
 using SnailApp.Utilities.Constants;
 using SnailApp.ViewModels.Common;
-using SnailApp.ViewModels.Catalog.AppUserTypes;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.ViewModels.System.AppRoles;
 using SnailApp.ViewModels.System.MenuAppRoles;
 using SnailApp.Application.Common;
-using SnailApp.ViewModels.HR.Payrolls;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +37,7 @@ namespace SnailApp.Application.SystemApplication.Users
         Task<ApiResult<UserDto>> GetStaffProfileDetailByUserId(UserRequest request);
         Task<ApiResult<UserDto>> GetStaffSecurityByUserId(UserRequest request);
         Task<ApiResult<UserDto>> GetCustomerSecurityByUserId(UserRequest request);
-        Task<ApiResult<string>> AddOrUpdateSecurityAsync(UserRequest request);
+        Task<ApiResult<string>> AddOrUpdateAsync(UserRequest request);
         Task<ApiResult<string>> DeleteAvatarByUserId(string userId);
     }
     public class UserService : IUserService
@@ -124,7 +122,7 @@ namespace SnailApp.Application.SystemApplication.Users
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
-                Dob = user.Dob,
+                Dob = user.Dob != null ? user.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                 Id = user.Id.ToString(),
                 LastName = user.LastName,
                 UserName = user.UserName,
@@ -146,7 +144,7 @@ namespace SnailApp.Application.SystemApplication.Users
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
-                Dob = user.Dob,
+                Dob = user.Dob != null ? user.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                 Id = user.Id.ToString(),
                 LastName = user.LastName,
                 UserName = user.UserName,
@@ -163,21 +161,26 @@ namespace SnailApp.Application.SystemApplication.Users
                             select new UserDto()
                             {
                                 Id = u.Id.ToString(),
-                                Avatar = (!string.IsNullOrEmpty(u.Avatar) ? (_configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar) : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
+                                Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + (!string.IsNullOrEmpty(u.Avatar) ? (_configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar) : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
                                 LastName = u.LastName,
                                 FirstName = u.FirstName,
                                 Address = u.Address,
                                 Email = u.Email,
                                 PhoneNumber = u.PhoneNumber,
                                 UserName = u.UserName,
+                                GenderId = u.GenderId,
+                                IsActive = u.IsActive,
+                                Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                                 StrCreatedDate = u.CreatedDate.ToString("dd/MM/yyyy")
                             };
 
                 if (!string.IsNullOrEmpty(request.TextSearch))
                 {
                     query = query.Where(x => x.UserName.Contains(request.TextSearch)
-                     || (x.LastName + " " + x.FirstName).Contains(request.TextSearch)
+                     || (x.FirstName + " " + x.LastName).Contains(request.TextSearch)
                      || (x.Email).Contains(request.TextSearch)
+                     || (x.PhoneNumber).Contains(request.TextSearch)
+                     || (x.Address).Contains(request.TextSearch)
                      );
                 }
 
@@ -231,7 +234,7 @@ namespace SnailApp.Application.SystemApplication.Users
             }
 
         }
-        public async Task<ApiResult<string>> AddOrUpdateSecurityAsync(UserRequest request)
+        public async Task<ApiResult<string>> AddOrUpdateAsync(UserRequest request)
         {
             try
             {
@@ -254,6 +257,7 @@ namespace SnailApp.Application.SystemApplication.Users
                         CreatedDate = DateTime.Now,
                         CreatedUserId =Guid.Parse(request.CreatedUserId),
                         ModifiedUserId = Guid.Parse(request.ModifiedUserId),
+                        PhoneNumber = request.PhoneNumber,
                         FirstName = request.FirstName,
                         LastName = request.LastName,
                         GenderId = request.GenderId,
@@ -280,6 +284,18 @@ namespace SnailApp.Application.SystemApplication.Users
                     {
                         return new ApiErrorResult<string>("Emai account is exits.");
                     }
+                    else
+                    {
+                        user.ModifiedUserId = Guid.Parse(request.ModifiedUserId);
+                        user.PhoneNumber = request.PhoneNumber;
+                        user.FirstName = request.FirstName;
+                        user.LastName = request.LastName;
+                        user.GenderId = request.GenderId;
+                        user.Dob = (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>());
+                        user.IsActive = request.IsActive;
+                        user.Address = request.Address;
+                        user.ModifiedDate = DateTime.Now;
+                    }
                 }
 
                 if (isNew == true)
@@ -292,6 +308,12 @@ namespace SnailApp.Application.SystemApplication.Users
                 }
                 else
                 {
+                    if(request.Email != user.Email)
+                    {
+                        user.Email = request.Email;
+                        user.UserName = request.Email;
+                    }
+
                     if (!string.IsNullOrEmpty(request.Password))
                     {
                         if (user.PasswordHash != null)
@@ -316,9 +338,9 @@ namespace SnailApp.Application.SystemApplication.Users
                 }
 
                 await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
-                if (request.AppRoleCodes != null)
+                if (!string.IsNullOrEmpty(request.AppRoleCodes))
                 {
-                    foreach (string roleCode in request.AppRoleCodes)
+                    foreach (string roleCode in request.AppRoleCodes.Split("|"))
                     {
                         await _userManager.AddToRoleAsync(user, roleCode);
                     }
@@ -336,18 +358,20 @@ namespace SnailApp.Application.SystemApplication.Users
             var user = await _userManager.FindByIdAsync(request.Id.ToString());
             if (user == null)
             {
-                return new ApiErrorResult<int>("Not found.");
+                return new ApiErrorResult<int>();
             }
 
-            var newPassword = _userManager.PasswordHasher.HashPassword(user, request.NewPassword) ;
-            user.PasswordHash = newPassword;            
 
-            var result = await _userManager.UpdateAsync(user);
+            var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+
             if (result.Succeeded)
             {
                 return new ApiSuccessResult<int>();
             }
-            return new ApiErrorResult<int>("Update is failed.");
+            else
+            {
+                return new ApiErrorResult<int>(result.Errors.FirstOrDefault().Description.ToString());
+            }
         }
         private async Task<ApiResult<int>> DeleteById(Guid id)
         {
@@ -482,7 +506,7 @@ namespace SnailApp.Application.SystemApplication.Users
                                       Code = u.Code,
                                       FirstName = u.FirstName,
                                       LastName = u.LastName,
-                                      Dob = u.Dob,
+                                      Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                                       PhoneNumber = u.PhoneNumber,
                                       Address = u.Address,
                                       Avatar = (!string.IsNullOrEmpty(u.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson])
@@ -514,7 +538,7 @@ namespace SnailApp.Application.SystemApplication.Users
                                       Code = u.Code,
                                       FirstName = u.FirstName,
                                       LastName = u.LastName,
-                                      Dob = u.Dob,
+                                      Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                                       PhoneNumber = u.PhoneNumber,
                                       Address = u.Address,
                                       Avatar = (u.Avatar != null ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
@@ -561,7 +585,7 @@ namespace SnailApp.Application.SystemApplication.Users
                                       Code = u.Code,
                                       FirstName = u.FirstName,
                                       LastName = u.LastName,
-                                      Dob = u.Dob,
+                                      Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                                       PhoneNumber = u.PhoneNumber,
                                       Address = u.Address,
                                       Avatar = (u.Avatar != null ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),

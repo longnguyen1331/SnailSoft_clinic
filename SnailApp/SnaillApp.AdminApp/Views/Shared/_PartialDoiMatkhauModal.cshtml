@@ -1,36 +1,41 @@
-﻿<div class="modal fade" id="modalFormDoiMatKhau" title="Đổi mật khẩu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="animated lightSpeeedIn">@Html.Raw("Đổi mật khẩu")</h3>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            <div class="modal-body">
-                <form id="formDoiMatKhau" role="form">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="modalFormDoiMatKhau_MatKhauCu">@Html.Raw("Mật khẩu cũ")</label>
-                            <input type="password" class="form-control" id="modalFormDoiMatKhau_MatKhauCu" name="modalFormDoiMatKhau_MatKhauCu" placeholder="nhập mật khẩu cũ">
-                        </div>
-                        <div class="form-group">
-                            <label for="modalFormDoiMatKhau_MatKhauMoi">@Html.Raw("Mật khẩu mới")</label>
-                            <input type="password" class="form-control" id="modalFormDoiMatKhau_MatKhauMoi" name="modalFormDoiMatKhau_MatKhauMoi" placeholder="nhập mật khẩ mới">
-                        </div>
-                        <div class="form-group">
-                            <label for="modalFormDoiMatKhau_XacNhanLaiMatKhau">@Html.Raw("Xác nhận lại mật khẩu")</label>
-                            <input type="password" class="form-control" id="modalFormDoiMatKhau_XacNhanLaiMatKhau" name="modalFormDoiMatKhau_XacNhanLaiMatKhau" placeholder="xác nhận lại mật khẩu mới">
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn m-btn--square btn-sm btn-success" id="btnThucHienDoiMatKhau"><i class="la la-check ml-1"></i> @Html.Raw("Đồng ý")</a>
-                <a href="#" class="btn m-btn--square btn-sm btn-primary" data-dismiss="modal"><i class="la la-ban ml-1"></i> @Html.Raw("Hủy bỏ")</a>
-            </div>
-        </div>
-    </div>
-</div>
+﻿
+<div class="modal fade" id="modalFormChangePassword" tabindex="-1" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Change password</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                <form id="edit_form_password">
+				    <div class="row g-0">
+					    <div class="col-md-12" >
+							<label class="form-label">Old Password</label>
+							<input type="Password" class="form-control radius-15" id="oldPassword" name="oldPassword"  
+                            placeholder="Enter first name">
+					    </div>
 
+                            <div class="col-md-12" >
+							<label class="form-label">New Password</label>
+							<input type="Password" class="form-control radius-15" id="newPassword" name="newPassword"  
+                            placeholder="Enter new password">
+					    </div>
+
+                            <div class="col-md-12" >
+							<label class="form-label">Confirm New Password</label>
+							<input type="Password" class="form-control radius-15" id="reNewPassword" name="reNewPassword"  
+                            placeholder="Re enter new password">
+					    </div>
+				    </div>
+			    </form>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" name="btnExecuteChangePassword">Change password!</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 

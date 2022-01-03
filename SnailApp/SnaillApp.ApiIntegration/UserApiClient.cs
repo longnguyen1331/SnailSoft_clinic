@@ -28,6 +28,7 @@ namespace SnailApp.ApiIntegration
         Task<ApiResult<UserDto>> GetStaffProfileDetailByUserId(UserRequest request);
         Task<ApiResult<UserDto>> GetStaffSecurityByUserId(UserRequest request);
         Task<ApiResult<string>> DeleteAvatarByUserIdAsync(int userId);
+        Task<ApiResult<int>> ChangePassword(ChangePasswordRequest rq);
     }
     public class UserApiClient : BaseApiClient, IUserApiClient
     {
@@ -93,7 +94,6 @@ namespace SnailApp.ApiIntegration
                 client.BaseAddress = new Uri(_configuration[SystemConstants.AppConstants.BaseAddress]);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-
                 string strPayload = JsonConvert.SerializeObject(request);
                 HttpContent content = new StringContent(strPayload, Encoding.UTF8, "application/json");
 
@@ -138,6 +138,8 @@ namespace SnailApp.ApiIntegration
                     requestContent.Add(bytes, "Avatar", request.Avatar.FileName);
                 }
 
+                requestContent.Add(new StringContent(sessions), "Token");
+
                 if (!string.IsNullOrEmpty(request.FirstName))
                 {
                     requestContent.Add(new StringContent(request.FirstName), "FirstName");
@@ -165,7 +167,7 @@ namespace SnailApp.ApiIntegration
 
                 requestContent.Add(new StringContent(request.GenderId != null ? request.GenderId.Value.ToString() : "-1"), "GenderId");
                 requestContent.Add(new StringContent(request.IsActive.ToString()), "IsActive");
-                requestContent.Add(new StringContent(string.Join(",", request.AppRoleCodes)), "AppRoleCodes");
+                requestContent.Add(new StringContent(request.AppRoleCodes), "AppRoleCodes");
 
                 if (!string.IsNullOrEmpty(request.Address))
                 {
@@ -187,7 +189,7 @@ namespace SnailApp.ApiIntegration
                     requestContent.Add(new StringContent(request.ModifiedUserId), "ModifiedUserId");
                 }
 
-                var response = await client.PostAsync($"api/users/addorupdatestaffprofiledetail", requestContent);
+                var response = await client.PostAsync($"api/users/addorupdatestaff", requestContent);
                 return JsonConvert.DeserializeObject<ApiResult<string>>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
@@ -211,6 +213,26 @@ namespace SnailApp.ApiIntegration
         {
             return await GetAsync<ApiResult<UserDto>>($"/api/users/getstaffsecuritybyuserid?Id={request.Id}&LanguageId={ request.LanguageId}");
         }
+
+        public async Task<ApiResult<int>> ChangePassword(ChangePasswordRequest request)
+        {
+            var sessions = _httpContextAccessor
+               .HttpContext
+               .Session
+               .GetString(SystemConstants.AppConstants.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppConstants.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            string strPayload = JsonConvert.SerializeObject(request);
+            HttpContent content = new StringContent(strPayload, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"api/users/changepassword", content);
+            return JsonConvert.DeserializeObject<ApiResult<int>>(await response.Content.ReadAsStringAsync());
+
+        }
+
         public async Task<ApiResult<string>> DeleteAvatarByUserIdAsync(int userId)
         {
             try

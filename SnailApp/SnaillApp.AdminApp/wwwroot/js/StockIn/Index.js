@@ -528,7 +528,7 @@ var StockIn = function () {
     return {
         // public functions
         init: function () {
-            form__date_range_register();
+            
             initialDatatable();
             initialComponents();
             initSelect2()

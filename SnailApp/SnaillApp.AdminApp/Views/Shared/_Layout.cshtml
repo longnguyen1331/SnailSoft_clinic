@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="~/snailsoft/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="~/snailsoft/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="~/snailsoft/assets/css/header-colors.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.css" integrity="sha512-jtQXcnq6H9BVx+dOsdudNCZmNe2hBMqcPpnVgeZcV9L3615F4+QMQebbWW9TV2otOSk/kQgum0MpWefB3uL3pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @RenderSection("Vendors_CSS", false)
 
 
@@ -70,6 +70,9 @@
         <footer class="page-footer">
             @await Html.PartialAsync("_PartialFooter")
         </footer>
+
+            @await Html.PartialAsync("_PartialDoiMatKhauModal")
+
     </div>
 
     <div class="modal fade" id="viewUrlModal" aria-labelledby="viewUrlModalLabel" aria-modal="true" role="dialog">
@@ -105,7 +108,7 @@
     <script src="~/snailsoft/assets/plugins/notifications/js/lobibox.min.js"></script>
     <script src="~/snailsoft/assets/plugins/notifications/js/notifications.min.js"></script>
     <script src="~/snailsoft/assets/plugins/notifications/js/notification-custom-script.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.js" integrity="sha512-F3F53+tMh/CBxMQ60GN5R4EiFW7PcuND+9IDC3Qpkwc7SfxgzHigRdUO3+2+mNal2ot3Wp6KR0zx8r8BbsW+Bg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- tag input -->
 
     <!--app JS-->

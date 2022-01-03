@@ -175,7 +175,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="edit_form_dob" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Ngày sinh")" data-field="Dob" @if (Model.Customer != null) { if (Model.Customer.Dob != null) { <text> value="@Model.Customer.Dob.Value.ToString("dd/MM/yyyy")" </text> } } />
+                                    <input type="text" name="edit_form_dob" class="form-control form-control-lg form-control-solid" placeholder="@Html.Raw("Ngày sinh")" data-field="Dob" @if (Model.Customer != null) { if (Model.Customer.Dob != null) { <text> value="@Model.Customer.Dob" </text> } } />
                                 </div>
                                 <!--end::Col-->
                             </div>

@@ -67,9 +67,12 @@ ViewBag.Title = "Nhân viên";
 	<div class="card-body">
 		<div class="d-lg-flex align-items-center mb-4 gap-3">
 			<div class="position-relative">
-				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" name="inputSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
 			</div>
-			<div class="ms-auto"></div><button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+			<div class="ms-auto">
+				<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+				<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+			</div>
 		</div>
 		<div class="table-responsive">
             <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
@@ -86,7 +89,7 @@ ViewBag.Title = "Nhân viên";
 				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
 			</div>
 
-			<form id="edit_form">
+			<form id="edit_form" style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
 				<div class="mb-3">
 				<div class="row g-0">
 					<div class="col-md-4 text-center">
@@ -177,7 +180,7 @@ ViewBag.Title = "Nhân viên";
 				<div class="row row-cols-auto g-3 px-1 mb-3">
 					<div class="col-md-12" >
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked="">
+							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked>
 							<label class="form-check-label" for="IsActive">Active</label>
 						</div>
 					</div>
@@ -216,4 +219,21 @@ ViewBag.Title = "Nhân viên";
 		</div>
 	</div>
 
-	<div class="spinner-grow text-primary" role="status"> <span class="visually-hidden">Loading...</span></div>
+
+
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Confirm Delete</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="notificationDelete">Are you sure to delete data.</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" name="btnConfirmDelete">Yes, Do it!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
