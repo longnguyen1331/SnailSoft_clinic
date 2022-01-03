@@ -24,7 +24,6 @@
     <Content Remove="wwwroot\js\Payroll\Edit.js" />
     <Content Remove="wwwroot\js\PetServiceSelection\Index.js" />
     <Content Remove="wwwroot\js\Promotion\Index.js" />
-    <Content Remove="wwwroot\js\Staff\ProfileDetailEdit.js" />
     <Content Remove="wwwroot\js\Supplier\ProfileDetailEdit.js" />
     <Content Remove="wwwroot\js\Testimonial\Edit.js" />
   </ItemGroup>
@@ -49,7 +48,6 @@
     <None Include="wwwroot\js\Post\Index.js" />
     <None Include="wwwroot\js\Slide\Edit.js" />
     <None Include="wwwroot\js\Slide\Index.js" />
-    <None Include="wwwroot\js\Staff\ProfileDetailEdit.js" />
     <None Include="wwwroot\js\Supplier\ProfileDetailEdit.js" />
     <None Include="wwwroot\js\Testimonial\Edit.js" />
     <None Include="wwwroot\plugins\waitMe\img.svg" />

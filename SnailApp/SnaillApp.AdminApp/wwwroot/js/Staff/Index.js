@@ -7,7 +7,6 @@ var Staff = function () {
     let edit_form = $("#edit_form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
-
     let initialComponents = () => {
 
         $('#date-picker').bootstrapMaterialDatePicker({
@@ -236,7 +235,7 @@ var Staff = function () {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
                         html += '<a href="#" class="edit">\
-					               					                <i class="bx bxs-edit"></i>\
+					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
