@@ -16,40 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\PetServiceSelection\Index.cshtml" />
-    <Content Remove="Views\PetServiceSelection\_PartialEditModal.cshtml" />
-    <Content Remove="Views\Promotion\Index.cshtml" />
-    <Content Remove="Views\Testimonial\Edit.cshtml" />
-    <Content Remove="wwwroot\js\Customer\ProfileDetailEdit.js" />
-    <Content Remove="wwwroot\js\Payroll\Edit.js" />
-    <Content Remove="wwwroot\js\PetServiceSelection\Index.js" />
-    <Content Remove="wwwroot\js\Promotion\Index.js" />
-    <Content Remove="wwwroot\js\Supplier\ProfileDetailEdit.js" />
-    <Content Remove="wwwroot\js\Testimonial\Edit.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\PetServiceSelection\Index.cshtml" />
-    <None Include="Views\PetServiceSelection\_PartialEditModal.cshtml" />
-    <None Include="Views\PostType\Index.cshtml" />
-    <None Include="Views\PostType\_PartialEditModal.cshtml" />
-    <None Include="Views\Post\Edit.cshtml" />
-    <None Include="Views\Post\Index.cshtml" />
-    <None Include="Views\Promotion\Index.cshtml" />
-    <None Include="Views\Slide\Edit.cshtml" />
-    <None Include="Views\Slide\Index.cshtml" />
-    <None Include="Views\Testimonial\Edit.cshtml" />
-    <None Include="wwwroot\js\Customer\ProfileDetailEdit.js" />
-    <None Include="wwwroot\js\Payroll\Edit.js" />
-    <None Include="wwwroot\js\PetServiceSelection\Index.js" />
-    <None Include="wwwroot\js\Promotion\Index.js" />
-    <None Include="wwwroot\js\PostType\Index.js" />
-    <None Include="wwwroot\js\Post\Edit.js" />
-    <None Include="wwwroot\js\Post\Index.js" />
-    <None Include="wwwroot\js\Slide\Edit.js" />
-    <None Include="wwwroot\js\Slide\Index.js" />
-    <None Include="wwwroot\js\Supplier\ProfileDetailEdit.js" />
-    <None Include="wwwroot\js\Testimonial\Edit.js" />
     <None Include="wwwroot\plugins\waitMe\img.svg" />
     <None Include="wwwroot\plugins\waitMe\LICENSE.md" />
     <None Include="wwwroot\plugins\waitMe\README.md" />
@@ -77,91 +43,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\AppUserStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\AppUserType\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\BasicSalary\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\CommissionDiscount\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\DocTemplateType\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\DocTemplate\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Update="Views\Gender\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Menu\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\OrderStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\PaperSize\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\Payroll\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\PetServiceSelection\_PartialToolbar.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\PhieuKeToanStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\PostStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\PostTypeStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\ProductSKU\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\ProductTypeStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\Promotion\_PartialToolbar.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\SlideStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\StoreStatus\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\Supplier\_PartialToolbar.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\WebsiteMenu\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

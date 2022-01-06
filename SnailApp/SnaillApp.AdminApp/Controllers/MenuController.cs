@@ -35,8 +35,9 @@ namespace SnailApp.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Loại người sử dụng";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Danh mục hệ thống", "Loại người sử dụng" };
+            model.PageTitle = "Menu";
+            ViewBag.Title = "Menu";
+            model.Breadcrumbs = new List<string>() { "Setting", "System category", "Menu" };
 
             return View(model);
         }
@@ -121,6 +122,27 @@ namespace SnailApp.AdminApp.Controllers
             }
 
             return Ok(result);
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Filter(string textSearch)
+        {
+            int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
+
+            var request = new ManageMenuPagingRequest()
+            {
+                TextSearch = textSearch,
+                PageIndex = 1,
+                PageSize = 20,
+                LanguageId = languageId,
+                OrderCol = "Id",
+                OrderDir = "desc"
+            };
+
+            var data = await _menuApiClient.GetManageListPaging(request);
+            return Ok(data);
         }
     }
 }

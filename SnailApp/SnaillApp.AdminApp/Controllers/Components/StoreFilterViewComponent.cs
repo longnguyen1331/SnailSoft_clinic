@@ -15,13 +15,10 @@ namespace SnailApp.AdminApp.Controllers.Components
     public class StoreFilterViewComponent : ViewComponent
     {
         private readonly IConfiguration _configuration;
-        private readonly IStoreApiClient _storeApiClient;
 
-        public StoreFilterViewComponent(IConfiguration configuration,
-            IStoreApiClient storeApiClient)
+        public StoreFilterViewComponent(IConfiguration configuration)
         {
             _configuration = configuration;
-            _storeApiClient = storeApiClient;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {

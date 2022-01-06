@@ -88,24 +88,17 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromForm] AddEditRequest<ClinicRequest> rq)
+        public async Task<IActionResult> Save([FromForm] ClinicRequest rq)
         {
             ApiResult<int> result = null;
             Guid userGuid = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
 
             if (rq != null)
             {
-                if (rq.Id == null)
-                {
-                    rq.Data.CreatedUserId = userGuid;
-                    rq.Data.ModifiedUserId = userGuid;
-                }
-                else
-                {
-                    rq.Data.ModifiedUserId = userGuid;
-                    rq.Data.Id = rq.Id.Value;
-                }
-                result = await _clinicApiClient.AddOrUpdateAsync(rq.Data);
+                rq.CreatedUserId = userGuid;
+                rq.ModifiedUserId = userGuid;
+
+                result = await _clinicApiClient.AddOrUpdateAsync(rq);
             }
             else
             {

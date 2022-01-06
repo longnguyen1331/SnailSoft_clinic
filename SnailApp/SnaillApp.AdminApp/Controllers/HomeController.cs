@@ -19,17 +19,14 @@ namespace SnailApp.AdminApp.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IReportSummaryApiClient _reportSummaryApiClient;
         private readonly IUserApiClient _userApiClient;
 
         public HomeController(ILogger<HomeController> logger,
-            IUserApiClient userApiClient,
-            IReportSummaryApiClient reportSummaryApiClient
+            IUserApiClient userApiClient
             )
         {
             _userApiClient = userApiClient;
             _logger = logger;
-            _reportSummaryApiClient = reportSummaryApiClient;
 
         }
 
@@ -90,14 +87,10 @@ namespace SnailApp.AdminApp.Controllers
                 ToDate = rq.ToDate,
             };
 
-            var data = await _reportSummaryApiClient.GetReport(request);
-
             return Json(new
             {
-                data = data
+                data = "abc"
             });
         }
-
-
     }
 }

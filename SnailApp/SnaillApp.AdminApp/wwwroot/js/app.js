@@ -227,7 +227,7 @@
     }
 
     let initSelect2Base = (el, url, options) => {
-
+        console.log(el);
         el.select2(
             {
                 ajax: {
@@ -257,7 +257,7 @@
                         if (options && options.append0 != null && options.append0 == true) {
                             data.unshift({
                                 id: 0,
-                                text: "Không chọn"
+                                text: "Not selected"
                             })
                         }
 

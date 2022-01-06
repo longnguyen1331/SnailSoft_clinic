@@ -132,13 +132,12 @@ var Clinic = function () {
     };
 
     function checkDataUpdate() {
-
-        if (App.isNullOrEmpty($('input[data-field="StartDate"]').val())) {
+        if ($('input[data-field="StartDate"]').val() == '') {
             App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter Start date");
             return false;
         }
 
-        if (App.isNullOrEmpty($('input[data-field="ExpirationDate"]').val())) {
+        if ($('input[data-field="ExpirationDate"]').val() == '') {
             App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter Expiration date");
             return false;
         }

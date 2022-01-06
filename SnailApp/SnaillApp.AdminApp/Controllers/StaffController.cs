@@ -22,15 +22,13 @@ namespace SnailApp.AdminApp.Controllers
         private readonly IUserApiClient _userApiClient;
         private readonly IAppRoleApiClient _appRoleApiClient;
         private readonly IConfiguration _configuration;
-        private readonly IAppUser_CommissionDiscountApiClient _appUser_CommissionDiscountApiClient;
         
         public StaffController(IUserApiClient userApiClient, IAppRoleApiClient appRoleApiClient,
-                                    IConfiguration configuration, IAppUser_CommissionDiscountApiClient appUser_CommissionDiscountApiClient)
+                                    IConfiguration configuration)
         {
             _userApiClient = userApiClient;
             _appRoleApiClient = appRoleApiClient;
             _configuration = configuration;
-            _appUser_CommissionDiscountApiClient = appUser_CommissionDiscountApiClient;
         }
 
         public async Task<IActionResult> Index()

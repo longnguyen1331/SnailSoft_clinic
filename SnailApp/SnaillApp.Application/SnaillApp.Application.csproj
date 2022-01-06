@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Sales\Bookings\BookingService.cs~RFbf55309.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
