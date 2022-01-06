@@ -34,7 +34,7 @@ var Menu = function () {
                 let fieldName = $(el).data("field");
                 if (fieldName) {
                     switch (fieldName) {
-                        case "IsVisible":
+                        case "IsVisibled":
                             result[$(el).data("field")] = $(el).val() === "on" ? true : false;
                             break;
 
@@ -206,7 +206,7 @@ var Menu = function () {
                 $('input[data-field="ActionName"]').val(editingDataRow.actionName);
                 $('input[data-field="SortOrder"]').val(editingDataRow.sortOrder);
                 $('input[data-field="IsVisibled"]').prop('checked', editingDataRow.isVisibled);
-                $('#ParentId').append('<option value="' + editingDataRow.parentId + '" selected>' + editingDataRow.parentName +'</option>');
+                $('#ParentId').append('<option value="' + (editingDataRow.parentId != null ? editingDataRow.parentId : -1) + '" selected>' + (editingDataRow.parentName != null ? editingDataRow.parentName : "Not selected") +'</option>');
                 
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }

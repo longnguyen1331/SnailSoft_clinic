@@ -240,7 +240,7 @@ namespace SnailApp.Application.SystemApplication.Menus
                             where mt.LanguageId == request.LanguageId && m.Id == item.ParentId.Value
                             select new { m, mt }).FirstOrDefaultAsync();
 
-                item.ParentName = parent.mt.Name;
+                item.ParentName = parent != null ? parent.mt.Name : string.Empty;
             }
 
             //4. Select and projection
