@@ -1,11 +1,11 @@
 # SnailApp project 
 ## Technologies
-- ASP.NET Core MVC 5.0
-- Entity Framework core 5.0
+- ASP.NET Core MVC 6.0
+- Entity Framework core 6.0
 ## Install Tools
-- .NET Core SDK 3.1
+- .NET Core SDK 6.0
 - Git client
-- Visual Studio 2019
+- Visual Studio 2022
 - SQL Server 2019
 ## Youtube tutorial
 - Video list: https://www.youtube.com/playlist?list=PLRhlTlpDUWsyN_FiVQrDWMtHix_E2A_UD
