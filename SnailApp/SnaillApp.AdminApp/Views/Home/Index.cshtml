@@ -31,20 +31,20 @@
         // chart 3
         var options = {
             series: [{
-                name: 'Tổng lượt khám',
-                data: [231, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600, 231, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600]
+                name: 'Total visits',
+                data: [223, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600, 231, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600]
             }
                 , {
-                name: 'Nhập nội trú',
-                data: [1, 2, 5, 8, 4, 2, 1, 5, 0, 34, 52, 41, 11, 82, 5, 80, 34, 52, 41, 45, 80, 34, 52, 41]
+                name: 'New patient',
+                data: [200, 2, 5, 8, 4, 2, 1, 5, 0, 34, 52, 41, 11, 82, 5, 80, 34, 52, 41, 45, 80, 34, 52, 41]
             }
                 , {
-                name: 'Ra viện',
-                data: [11, 82, 45, 80, 34, 52, 41, 45, 80, 34, 52, 41, 11, 82, 45, 80, 34, 52, 41, 45, 80, 34, 52, 41]
+                name: 'Old patient',
+                data: [23, 182, 245, 380, 434, 552, 341, 345, 380, 334, 352, 341, 311, 382, 245, 280, 234, 252, 241, 245, 280, 234, 252, 241]
             }
             ],
             chart: {
-                foreColor: '#9ba7b2',
+                foreColor: '#3A4C70',
                 height: 360,
                 type: 'area',
                 zoom: {
@@ -54,9 +54,9 @@
                     show: true
                 },
             },
-            colors: ["#0d6efd", "#20c997", '#f41127'],
+            colors: ["#4C6FFF", "#E36828", '#19A9A8'],
             title: {
-                text: 'TQ KCB',
+                text: 'Total visits',
                 align: 'left',
                 style: {
                     fontSize: "12px",
@@ -82,7 +82,7 @@
 
             yaxis: {
                 title: {
-                    text: "KCB NGOẠI TRÚ"
+                    text: "Total visits"
                 }
             }
         };
@@ -107,7 +107,7 @@
                 data: [114, 223, 110, 219, 229, 319, 422, 519, 412, 227, 419, 435]
             }],
             chart: {
-                foreColor: "#9ba7b2",
+                foreColor: "#3A4C70",
                 height: 310,
                 type: "area",
                 zoom: {
@@ -174,20 +174,20 @@
         // chart_noitru
         var options = {
             series: [{
-                name: 'BN',
+                name: 'Total patients',
                 type: 'column',
                 data: [123, 211, 322, 427, 313, 122, 237, 221, 244, 222, 230]
             }, {
-                name: 'CLS',
+                name: 'Total Service',
                 type: 'area',
                 data: [44, 44, 41, 67, 22, 43, 21, 41, 56, 27, 43]
             }, {
-                name: 'CHI PHÍ (ĐVT: Triệu)',
+                name: 'Total Revenue',
                 type: 'line',
                 data: [130, 125, 136, 130, 145, 135, 164, 152, 159, 136, 139]
             }],
             chart: {
-                foreColor: '#9ba7b2',
+                foreColor: '#3A4C70',
                 height: 350,
                 type: 'line',
                 stacked: false,
@@ -201,7 +201,7 @@
             dataLabels: {
                 enabled: true
             },
-            colors: ["#0d6efd", "#17a00e", "#f41127"],
+           colors: ["#E36828", "#4C6FFF", '#19A9A8'],
             stroke: {
                 width: [0, 2, 5],
                 curve: 'smooth'
@@ -222,7 +222,7 @@
                     stops: [0, 100, 100, 100]
                 }
             },
-            labels: ['KHOA 1', 'KHOA 2', 'KHOA 3', 'KHOA 4', 'KHOA 5', 'KHOA 6', 'KHOA 7', 'KHOA 8', 'KHOA 9', 'KHOA 10', 'KHOA 11'],
+            labels: ["1/11/2021", "2/11/2021", "3/11/2021", "4/11/2021", "5/11/2021", "6/11/2021", "7/11/2021", "8/11/2021", "9/11/2021", "10/11/2021", "11/11/2021", "12/11/2021"],
             markers: {
                 size: 0
             },
@@ -233,10 +233,10 @@
                 title: {
                     text: 'KCB NỘI TRÚ',
                 },
-
+               
                 min: 0
             },
-
+           
             tooltip: {
                 shared: true,
                 intersect: false,
@@ -254,87 +254,7 @@
         chart.render();
 
 
-        // chart_pkngoaitru
-        var options = {
-            series: [{
-                name: 'BN',
-                type: 'column',
-                data: [123, 211, 322, 427, 313, 122, 237, 221, 244, 222, 230]
-            }, {
-                name: 'CLS',
-                type: 'area',
-                data: [44, 44, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-            }, {
-                name: 'CHI PHÍ (ĐVT: Triệu)',
-                type: 'line',
-                data: [130, 125, 136, 130, 145, 135, 164, 152, 159, 136, 139]
-            }],
-            chart: {
-                foreColor: '#9ba7b2',
-                height: 350,
-                type: 'line',
-                stacked: false,
-                zoom: {
-                    enabled: false
-                },
-                toolbar: {
-                    show: true
-                },
-            },
-            dataLabels: {
-                enabled: true
-            },
-            colors: ["#0d6efd", "#17a00e", "#f41127"],
-            stroke: {
-                width: [0, 2, 5],
-                curve: 'smooth'
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '50%'
-                }
-            },
-            fill: {
-                opacity: [0.85, 0.25, 1],
-                gradient: {
-                    inverseColors: false,
-                    shade: 'light',
-                    type: "vertical",
-                    opacityFrom: 0.85,
-                    opacityTo: 0.55,
-                    stops: [0, 100, 100, 100]
-                }
-            },
-            labels: ['PK 1', 'PK 2', 'PK 3', 'PK 4', 'PK 5', 'PK 6', 'PK 7', 'PK 8', 'PK 9', 'PK 10', 'PK 11'],
-            markers: {
-                size: 0
-            },
-            xaxis: {
-                type: 'text'
-            },
-            yaxis: {
-                title: {
-                    text: 'KCB NỘI TRÚ',
-                },
-
-                min: 0
-            },
-
-            tooltip: {
-                shared: true,
-                intersect: false,
-                y: {
-                    formatter: function (y) {
-                        if (typeof y !== "undefined") {
-                            return y.toFixed(0) + "";
-                        }
-                        return y;
-                    }
-                }
-            }
-        };
-        var chart = new ApexCharts(document.querySelector("#chart_pkngoaitru"), options);
-        chart.render();
+       
 
 
 
@@ -372,27 +292,10 @@
                     <div>
                         <p class="mb-0 text-secondary">Total Revenue</p>
                         <h4 class="my-1">$4805</h4>
-                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>$34 Since last week</p>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>$34 Previous Period</p>
                     </div>
-                    <div class="widgets-icons bg-light-success text-success ms-auto">
-                        <i class='bx bxs-envelope'></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card radius-10">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-secondary">Blood donation request</p>
-                        <h4 class="my-1">8.4K</h4>
-                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Since last week</p>
-                    </div>
-                    <div class="widgets-icons bg-light-warning text-warning ms-auto">
-                        <i class='bx bxs-group'></i>
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='bx bx-dollar-circle'></i>
                     </div>
                 </div>
 
@@ -404,11 +307,28 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <p class="mb-0 text-secondary">News</p>
-                        <h4 class="my-1">8.4K</h4>
-                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Since last week</p>
+                        <p class="mb-0 text-secondary">Total Appointments</p>
+                        <h4 class="my-1">640</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
                     </div>
-                    <div class="widgets-icons bg-light-warning text-warning ms-auto">
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='bx bx-calendar-check'></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Total New Patients</p>
+                        <h4 class="my-1">980</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
+                    </div>
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
                         <i class='bx bxs-group'></i>
                     </div>
                 </div>
@@ -421,12 +341,12 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <p class="mb-0 text-secondary">Members</p>
-                        <h4 class="my-1">8.4K</h4>
-                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Since last week</p>
+                        <p class="mb-0 text-secondary">Use service</p>
+                        <h4 class="my-1">759 service</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
                     </div>
-                    <div class="widgets-icons bg-light-warning text-warning ms-auto">
-                        <i class='bx bxs-group'></i>
+                   <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='lni lni-sthethoscope'></i>
                     </div>
                 </div>
 
@@ -435,3 +355,14 @@
     </div>
 
 </div>
+ <div class="card">
+        <div class="card-body">
+            <div id="chartTQ"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div id="chart_noitru"></div>
+        </div>
+    </div>
+    
