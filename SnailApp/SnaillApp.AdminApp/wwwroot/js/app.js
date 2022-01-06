@@ -147,13 +147,13 @@
         var defered = $.Deferred();
         
         Swal.fire({
-            title: 'Bạn có chắc chắn muốn xóa không?',
-            text: "Bạn không thể khôi phục dữ liêu sau khi xóa!",
+            title: 'Are you sure to delete?',
+            text: "Data not recover when to delete!",
             icon: "warning",
             customClass: { cancelButton: "btn btn-light", confirmButton: "btn btn-primary" },
             showCancelButton: true,
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy bỏ',
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
             reverseButtons: true
         }).then(function (result) {
             if (result.value) {
@@ -161,19 +161,19 @@
                     .then(function (res) {
                         if (!res.isSuccessed) {
                             Swal.fire({
-                                title: 'Thông báo',
+                                title: 'Notification',
                                 text: res.message,
                                 type: 'warning',
-                                confirmButtonText: 'Đóng!',
+                                confirmButtonText: 'Close!',
                                 customClass: { confirmButton: "btn btn-primary" }
                             })
                         }
                         else {
                             Swal.fire({
-                                title: 'Thông báo',
-                                text: 'Xóa thành công.',
+                                title: 'Notification',
+                                text: 'Delete Success.',
                                 type: 'success',
-                                confirmButtonText: 'Đóng!',
+                                confirmButtonText: 'Close!',
                                 customClass: { confirmButton: "btn btn-primary" }
                             })
 
@@ -227,7 +227,6 @@
     }
 
     let initSelect2Base = (el, url, options) => {
-        console.log(el);
         el.select2(
             {
                 ajax: {
@@ -303,10 +302,10 @@
 
     let swalFireSuccessDefaultOption = (message) => {
         return {
-            title: message || 'Thông báo',
-            text: 'Cập nhật thành công.',
+            title: message || 'Notification',
+            text: 'Update success.',
             type: 'success',
-            confirmButtonText: 'Đóng!',
+            confirmButtonText: 'Close!',
             customClass: { confirmButton: "btn btn-primary" },
             icon: 'success',
             timer: 3000
@@ -315,10 +314,10 @@
 
     let swalFireErrorDefaultOption = (message) => {
         return {
-            text: message || "Có lỗi xảy ra vui lòng kiểm tra lại." ,
+            text: message || "Error." ,
             icon: "error",
             buttonsStyling: !1,
-            confirmButtonText: "Đóng !",
+            confirmButtonText: "Close !",
             customClass: { confirmButton: "btn btn-primary" }
         }
     };

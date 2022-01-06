@@ -100,7 +100,7 @@ namespace SnailApp.AdminApp.Controllers
             if (rq != null)
             {
                 rq.Data.LanguageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-                if (rq.Id == null)
+                if (rq.Id == null || rq.Id.Value < 0)
                 {
                     rq.Data.CreatedUserId = userGuid;
                     rq.Data.ModifiedUserId = userGuid;

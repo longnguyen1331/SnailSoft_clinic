@@ -95,6 +95,8 @@ namespace SnailApp.Application.SystemApplication.Menus
                 ParentId = request.ParentId,
                 Icon = request.Icon,
                 MenuType = request.MenuType,
+                ControllerName = request.ControllerName,
+                ActionName = request.ActionName,
                 Link = request.Link
             };
 
@@ -148,9 +150,63 @@ namespace SnailApp.Application.SystemApplication.Menus
                         select new { m, mt };
             //2. filter
             if (!string.IsNullOrEmpty(request.TextSearch))
-                query = query.Where(x => x.mt.Name.Contains(request.TextSearch));
+                query = query.Where(x => x.mt.Name.Contains(request.TextSearch)
+                || x.m.Code.Contains(request.TextSearch)
+                || x.m.ActionName.Contains(request.TextSearch)
+                || x.m.ControllerName.Contains(request.TextSearch)
+                || x.m.Link.Contains(request.TextSearch)
+                || x.m.Icon.Contains(request.TextSearch)
+                );
 
-            //3. Paging
+            //3.Sort
+
+            if (!string.IsNullOrEmpty(request.OrderCol))
+            {
+                switch (request.OrderCol)
+                {
+                    case "id":
+                        query = (request.OrderDir == "asc") ?
+                            query.OrderBy(x => x.m.Id) :
+                            query.OrderByDescending(x => x.m.Id);
+
+                        break;
+
+                    case "code":
+                        query = (request.OrderDir == "asc") ?
+                            query.OrderBy(x => x.m.Code) :
+                            query.OrderByDescending(x => x.m.Code);
+
+                        break;
+
+                    case "name":
+                        query = (request.OrderDir == "asc") ? query.OrderBy(x => x.m.Name) :
+                            query.OrderByDescending(x => x.mt.Name);
+
+                        break;
+
+                    case "controllerName":
+                        query = (request.OrderDir == "asc") ? query.OrderBy(x => x.m.ControllerName) :
+                            query.OrderByDescending(x => x.m.ControllerName);
+
+                        break;
+                    case "link":
+                        query = (request.OrderDir == "asc") ? query.OrderBy(x => x.m.Link) :
+                            query.OrderByDescending(x => x.m.Link);
+
+                        break;
+
+                    case "actionName":
+                        query = (request.OrderDir == "asc") ? query.OrderBy(x => x.m.ActionName) :
+                            query.OrderByDescending(x => x.m.ActionName);
+
+                        break;
+
+                    default: break;
+                }
+            }
+
+
+            //4. Paging
             int totalRow = await query.CountAsync();
 
             if (request.PageIndex != null)
@@ -158,6 +214,7 @@ namespace SnailApp.Application.SystemApplication.Menus
                 query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
                             .Take(request.PageSize);
             }
+
             var data = await query.Select(x => new MenuDto()
             {
                 Id = x.m.Id,
@@ -165,10 +222,26 @@ namespace SnailApp.Application.SystemApplication.Menus
                 Code = x.m.Code,
                 Name = x.mt.Name,
                 ParentId = x.m.ParentId,
+                Link = x.m.Link,
+                Icon = x.m.Icon,
                 CreatedDate = x.m.CreatedDate,
-                Description = x.mt.Description,
+                IsVisibled = x.m.IsVisibled,
+                ActionName = x.m.ActionName,
+                ControllerName = x.m.ControllerName,    
                 LanguageId = x.mt.LanguageId
             }).AsNoTracking().ToListAsync();
+
+
+            foreach(var item in data.Where(x=>x.ParentId != null && x.ParentId.Value > 0))
+            {
+               var parent = await (from m in _context.Menus
+                            join mt in _context.MenuTranslations on m.Id equals mt.MenuId into mmt
+                            from mt in mmt.DefaultIfEmpty()
+                            where mt.LanguageId == request.LanguageId && m.Id == item.ParentId.Value
+                            select new { m, mt }).FirstOrDefaultAsync();
+
+                item.ParentName = parent.mt.Name;
+            }
 
             //4. Select and projection
             var pagedResult = new PagedResult<MenuDto>()
@@ -221,7 +294,10 @@ namespace SnailApp.Application.SystemApplication.Menus
             menu.Icon = request.Icon;
             menu.MenuType = request.MenuType;
             menu.ModifiedDate = DateTime.Now;
+            menu.ControllerName = request.ControllerName;
+            menu.ActionName= request.ActionName;
             menu.Link = request.Link;
+            menu.IsVisibled = request.IsVisibled;
 
             return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
         }

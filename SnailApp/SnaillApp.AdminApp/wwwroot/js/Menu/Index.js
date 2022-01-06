@@ -29,7 +29,7 @@ var Menu = function () {
         edit_form_buttonSubmit.click(function (e) {
             e.preventDefault();
             let result = {};
-
+            console.log(editingDataRow);
             edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
                 let fieldName = $(el).data("field");
                 if (fieldName) {
@@ -48,9 +48,10 @@ var Menu = function () {
             });
 
             data = {
-                Id: (editingDataRow != null ? editingDataRow.id : null),
+                Id: (editingDataRow != null ? editingDataRow.id : -1),
                 Data: result
             },
+                console.log(data),
             App.sendDataToURL("/Menu/Save", data, "POST", true, 'body')
                 .then(function (res) {
                     if (!res.isSuccessed) {
@@ -91,6 +92,8 @@ var Menu = function () {
         editingDataRow = null;
         edit_form[0].reset();
         dtTable.draw();
+        $('#ParentId').append('<option value="0" selected>Not selected</option>');
+
     }
     
     let initialDatatable = function () {
@@ -108,11 +111,11 @@ var Menu = function () {
                 "visible": false
             },
             {
-                "targets": [0, 3],
+                "targets": [0,2,3],
                 "orderable": false
             },
             {
-                "targets": [3, 4, 5],
+                "targets": [10,3],
                 "className": 'dt-center'
             }
         ];
@@ -159,9 +162,14 @@ var Menu = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            { "data": "icon", "name": "icon", "autoWidth": true, "title": "Icon" },
+            { "data": "parentName", "name": "parentName", "autoWidth": true, "title": "Parent" },
+            { "data": "sortOrder", "name": "sortOrder", "autoWidth": true, "title": "Sort" },
             { "data": "code", "name": "code", "autoWidth": true, "title": "Code" },
-            { "data": "name", "name": "name", "autoWidth": true, "title": "name" },
+            { "data": "name", "name": "name", "autoWidth": true, "title": "Name" },
+            { "data": "link", "name": "link", "autoWidth": true, "title": "Link" },
+            { "data": "controllerName", "name": "controllerName", "autoWidth": true, "title": "Controller" },
+            { "data": "actionName", "name": "actionName", "autoWidth": true, "title": "Action" },
+            { "data": "icon", "name": "icon", "autoWidth": true, "title": "Icon" },
             {
                 width: "120px", "title": "Active", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
@@ -197,8 +205,9 @@ var Menu = function () {
                 $('input[data-field="ControllerName"]').val(editingDataRow.controllerName);
                 $('input[data-field="ActionName"]').val(editingDataRow.actionName);
                 $('input[data-field="SortOrder"]').val(editingDataRow.sortOrder);
-                $('input[data-field="IsVisible"]').prop('checked', editingDataRow.isVisible);
-               
+                $('input[data-field="IsVisibled"]').prop('checked', editingDataRow.isVisibled);
+                $('#ParentId').append('<option value="' + editingDataRow.parentId + '" selected>' + editingDataRow.parentName +'</option>');
+                
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
@@ -210,7 +219,7 @@ var Menu = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
-        App.initSelect2Base($('#ParentId'), '/Menu/Filter', { selectedFields: ["code", "name"] });
+        App.initSelect2Base($('#ParentId'), '/Menu/Filter', { selectedFields: ["id", "name", "code"], append0 : true } );
     };
 
     function deleteDataRows(dataRows) {
