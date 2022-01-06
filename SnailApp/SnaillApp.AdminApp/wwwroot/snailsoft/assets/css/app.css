@@ -1644,10 +1644,10 @@ input::placeholder {
 	cursor: pointer
 }
 .switcher-wrapper {
-	width: 400px;
+	width: 450px;
 	height: 100%;
 	position: fixed;
-	right: -400px;
+	right: -450px;
 	top: 0;
 	bottom: 0;
 	z-index: 16;
@@ -1919,4 +1919,14 @@ input::placeholder {
 ::-webkit-scrollbar-thumb {
 	background-color: #0ae !important;
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent)) !important;
+}
+
+
+
+.colpick {
+	z-index: 999999999 !important;
+}
+
+w-100{
+	width:100% !important;
 }

@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace SnailApp.BackendApi
 {
@@ -60,6 +61,15 @@ namespace SnailApp.BackendApi
                  .AllowAnyMethod()
                  .AllowAnyHeader());
             });
+
+
+            //Automapper 
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapping());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             //Declare DI
             services.AddDIService();

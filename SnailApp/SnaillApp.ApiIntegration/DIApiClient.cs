@@ -69,6 +69,12 @@ namespace SnailApp.ApiIntegration
             services.AddTransient<IWebsiteMenuApiClient, WebsiteMenuApiClient>();
             services.AddTransient<IWebsiteUIApiClient, WebsiteUIApiClient>();
 
+
+
+            //new Clinic
+            services.AddTransient<IClinicApiClient, ClinicApiClient>();
+
+
             return services;
         }
     }

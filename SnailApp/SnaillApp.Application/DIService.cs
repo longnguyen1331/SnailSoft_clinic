@@ -44,6 +44,7 @@ using SnailApp.Application.Utilities.UI;
 using SnailApp.Application.Catalog.Genders;
 using SnailApp.Application.Website.WebsiteUIs;
 using SnailApp.Application.Website.WebsiteMenus;
+using SnailApp.Application.Catalog.Clinics;
 
 namespace SnailApp.Application
 {
@@ -53,8 +54,7 @@ namespace SnailApp.Application
         {
             services.AddTransient<IAdminAppUIService, AdminAppUIService>();
             services.AddTransient<IAttributeService, AttributeService>();            
-            services.AddTransient<IAppConfigService, AppConfigService>();
-            services.AddTransient<IAppRoleService, AppRoleService>();
+           
             services.AddTransient<IBasicSalaryService, BasicSalaryService>();
             services.AddTransient<IBookingService, BookingService>();
             services.AddTransient<ICartService, CartService>();
@@ -65,10 +65,7 @@ namespace SnailApp.Application
             services.AddTransient<IDocTemplateService, DocTemplateService>();
             services.AddTransient<IDocTemplateTypeService, DocTemplateTypeService>();
             services.AddTransient<IFileStorageService, FileStorageService>();
-            services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<IManufacturerService, ManufacturerService>();
-            services.AddTransient<IMenuService, MenuService>();
-            services.AddTransient<IMenuAppRoleService, MenuAppRoleService>();
             services.AddTransient<INewsletterService, NewsletterService>();
             services.AddTransient<IPaperSizeService, PaperSizeService>();
             services.AddTransient<IPayrollService, PayrollService>();
@@ -93,10 +90,6 @@ namespace SnailApp.Application
             services.AddTransient<ITransactionService, TransactionService>();
             services.AddTransient<ITestimonialService, TestimonialService>();
             services.AddTransient<IUnitService, UnitService>();
-            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
-            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<IAttributeService, AttributeService>();
             services.AddTransient<IAttributeValueService, AttributeValueService>();
             services.AddTransient<IReportCashBookService, ReportCashBookService>();
@@ -109,6 +102,22 @@ namespace SnailApp.Application
             services.AddTransient<IReportProductService, ReportProductService>();
             services.AddTransient<IWebsiteMenuService, WebsiteMenuService>();
             services.AddTransient<IWebsiteUIService, WebsiteUIService>();
+
+
+
+
+            //New Clinic
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<IAppConfigService, AppConfigService>();
+            services.AddTransient<IAppRoleService, AppRoleService>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<IMenuAppRoleService, MenuAppRoleService>();
+
+            services.AddTransient<IClinicService, ClinicService>();
 
             return services;
         }

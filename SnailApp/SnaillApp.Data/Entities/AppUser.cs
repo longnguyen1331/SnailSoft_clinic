@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SnailApp.ViewModels.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace SnailApp.Data.Entities
 {
@@ -22,5 +23,13 @@ namespace SnailApp.Data.Entities
         public DateTime ModifiedDate { get; set; }
         public bool IsActive { set; get; }
         public string Address { set; get; }
+
+        [DataType("ntext")]
+        public string Biography { set; get; }
+        [DataType("ntext")]
+        public string Skills { set; get; }
+        public string Phone { set; get; }
+        public bool Status { set; get; }
+        public int ClinicID { set; get; }
     }
 }

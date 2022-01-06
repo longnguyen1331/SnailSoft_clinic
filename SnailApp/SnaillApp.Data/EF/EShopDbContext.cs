@@ -21,7 +21,7 @@ namespace SnailApp.Data.EF
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
-            modelBuilder.ApplyConfiguration(new ClinicConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new ClinicConfiguration());
 
             modelBuilder.ApplyConfiguration(new AboutConfiguration());
             modelBuilder.ApplyConfiguration(new AboutTranslationConfiguration());
@@ -110,6 +110,7 @@ namespace SnailApp.Data.EF
             //base.OnModelCreating(modelBuilder);
         }
         
+        public DbSet<Clinic> Clinics{ get; set; }
         public DbSet<About> Abouts{ get; set; }
         public DbSet<AboutTranslation> AboutTranslations { get; set; }
         public DbSet<AppConfig> AppConfigs { get; set; }

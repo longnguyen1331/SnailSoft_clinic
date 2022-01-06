@@ -7,11 +7,11 @@ using System.Text;
 
 namespace SnailApp.Data.Configurations
 {
-    public class ClinicConfigConfiguration : IEntityTypeConfiguration<ClinicConfig>
+    public class ClinicConfiguration : IEntityTypeConfiguration<Clinic>
     {
-        public void Configure(EntityTypeBuilder<ClinicConfig> builder)
+        public void Configure(EntityTypeBuilder<Clinic> builder)
         {
-            builder.ToTable("ClinicConfigs");
+            builder.ToTable("Clinics");
         }
     }
 }

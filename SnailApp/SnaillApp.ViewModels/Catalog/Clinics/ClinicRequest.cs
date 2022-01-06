@@ -1,9 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using SnailApp.ViewModels.Enums;
 
-namespace SnailApp.Data.Entities
+namespace SnailApp.ViewModels.Catalog.Clinics
 {
-    public class ClinicConfig : BaseEntity
+    public class ClinicRequest
     {
+        public int Id { set; get; }
+        public int SortOrder { set; get; }
+        public virtual string Code { set; get; }
+        public virtual string Name { set; get; }
+        public virtual string Description { set; get; }
+        public string StartDate { set; get; }
+        public string CreatedDate { set; get; }
+        public string ExpirationDate { set; get; }
+        public string ModifiedDate { set; get; }
+        public Guid CreatedUserId { set; get; }
+        public Guid ModifiedUserId { set; get; }
+        public bool IsDeleted { set; get; }
+        public bool IsDefault { set; get; }
+        public bool IsVisibled { set; get; }
+
         public string Logo { set; get; }
         public string Favicon { set; get; }
         public string PrimaryColor { set; get; }
@@ -32,8 +50,7 @@ namespace SnailApp.Data.Entities
         public string GoogleApikey { set; get; }
         public string GoogleClientid { set; get; }
         public string GoogleClientsecret { set; get; }
-        public DateTime StartDate { set; get; }
-        public DateTime ExpirationDate { set; get; }
         public bool Status { set; get; }
     }
+
 }
