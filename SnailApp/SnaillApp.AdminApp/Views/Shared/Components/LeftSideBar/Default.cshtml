@@ -15,14 +15,14 @@
 </div>
 <!--navigation-->
 <ul class="metismenu" id="menu">
-    @foreach (var menuCap1 in Model.Menus.Where(m => m.ParentId == null).OrderBy(m => m.SortOrder))
+    @foreach (var menuCap1 in Model.Menus.Where(m => m.ParentId == null || m.ParentId.Value == 0).OrderBy(m => m.SortOrder))
     {
         if (Model.Menus.Count(m => m.ParentId != null && m.ParentId == menuCap1.Id) > 0)
         {
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon">
-                        <i class='bx bx-@menuCap1.Icon'></i>
+                        <i class='@menuCap1.Icon'></i>
                     </div>
                     <div class="menu-title">@menuCap1.Name</div>
                 </a>
@@ -66,7 +66,7 @@
                                 <a href="@(!string.IsNullOrEmpty(menuCap2.Link) ? menuCap2.Link : "javascript:void(0);")">
                                     @if (!string.IsNullOrEmpty(menuCap2.Icon))
                                     {
-                                        <i class="bx bx-@menuCap2.Icon"></i>
+                                        <i class="@menuCap2.Icon"></i>
                                     }
                                     else
                                     {
@@ -91,7 +91,7 @@
             <li>
                 <a href="@(!string.IsNullOrEmpty(menuCap1.Link) ? menuCap1.Link : "javascript:void(0);")">
                     <div class="parent-icon">
-                        <i class="bx bx-@menuCap1.Icon"></i>
+                        <i class="@menuCap1.Icon"></i>
                     </div>
                     <div class="menu-title">@menuCap1.Name</div>
                 </a>
