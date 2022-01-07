@@ -34,12 +34,12 @@ var Menu = function () {
                 let fieldName = $(el).data("field");
                 if (fieldName) {
                     switch (fieldName) {
-                        case "IsVisible":
+                        case "IsVisibled":
                             result[$(el).data("field")] = $(el).val() === "on" ? true : false;
                             break;
 
                         default:
-                            
+
                             result[$(el).data("field")] = $(el).val();
 
                             break;
@@ -52,20 +52,20 @@ var Menu = function () {
                 Data: result
             },
                 console.log(data),
-            App.sendDataToURL("/Menu/Save", data, "POST", true, 'body')
-                .then(function (res) {
-                    if (!res.isSuccessed) {
-                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                App.sendDataToURL("/Menu/Save", data, "POST", true, 'body')
+                    .then(function (res) {
+                        if (!res.isSuccessed) {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                        }
+                        else {
+                            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+                            reset();
+                            editingData = {
+                                id: res.resultObj
+                            };
+                        }
                     }
-                    else {
-                        App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
-                        reset();
-                        editingData = {
-                            id: res.resultObj
-                        };
-                    }
-                }
-                )
+                    )
         });
 
         $('[name="btnDelete"]').click(function (e) {
@@ -82,7 +82,7 @@ var Menu = function () {
             }
         });
 
-       
+
         $('#dtTableSearch').keyup(function (e) {
             e.preventDefault();
             dtTable.draw();
@@ -95,7 +95,7 @@ var Menu = function () {
         $('#ParentId').append('<option value="0" selected>Not selected</option>');
 
     }
-    
+
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
         datatableOption.ajax.url = "/Menu/DataTableGetList";
@@ -111,11 +111,11 @@ var Menu = function () {
                 "visible": false
             },
             {
-                "targets": [0,2,3],
+                "targets": [0, 2, 3],
                 "orderable": false
             },
             {
-                "targets": [10,3],
+                "targets": [10, 3],
                 "className": 'dt-center'
             }
         ];
@@ -206,8 +206,8 @@ var Menu = function () {
                 $('input[data-field="ActionName"]').val(editingDataRow.actionName);
                 $('input[data-field="SortOrder"]').val(editingDataRow.sortOrder);
                 $('input[data-field="IsVisibled"]').prop('checked', editingDataRow.isVisibled);
-                $('#ParentId').append('<option value="' + editingDataRow.parentId + '" selected>' + editingDataRow.parentName +'</option>');
-                
+                $('#ParentId').append('<option value="' + (editingDataRow.parentId != null ? editingDataRow.parentId : -1) + '" selected>' + (editingDataRow.parentName != null ? editingDataRow.parentName : "Not selected") + '</option>');
+
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
@@ -219,7 +219,7 @@ var Menu = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
-        App.initSelect2Base($('#ParentId'), '/Menu/Filter', { selectedFields: ["id", "name", "code"], append0 : true } );
+        App.initSelect2Base($('#ParentId'), '/Menu/Filter', { selectedFields: ["id", "name", "code"], append0: true });
     };
 
     function deleteDataRows(dataRows) {

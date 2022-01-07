@@ -40,7 +40,7 @@ namespace SnailApp.Application.SystemApplication.Menus
             //1. Select join
             var query = from m in _context.Menus
                         join mt in _context.MenuTranslations on m.Id equals mt.MenuId
-                        where mt.LanguageId == request.LanguageId 
+                        where mt.LanguageId == request.LanguageId
                         select new { m, mt };
 
             //2. filter
@@ -227,20 +227,20 @@ namespace SnailApp.Application.SystemApplication.Menus
                 CreatedDate = x.m.CreatedDate,
                 IsVisibled = x.m.IsVisibled,
                 ActionName = x.m.ActionName,
-                ControllerName = x.m.ControllerName,    
+                ControllerName = x.m.ControllerName,
                 LanguageId = x.mt.LanguageId
             }).AsNoTracking().ToListAsync();
 
 
-            foreach(var item in data.Where(x=>x.ParentId != null && x.ParentId.Value > 0))
+            foreach (var item in data.Where(x => x.ParentId != null && x.ParentId.Value > 0))
             {
-               var parent = await (from m in _context.Menus
-                            join mt in _context.MenuTranslations on m.Id equals mt.MenuId into mmt
-                            from mt in mmt.DefaultIfEmpty()
-                            where mt.LanguageId == request.LanguageId && m.Id == item.ParentId.Value
-                            select new { m, mt }).FirstOrDefaultAsync();
+                var parent = await (from m in _context.Menus
+                                    join mt in _context.MenuTranslations on m.Id equals mt.MenuId into mmt
+                                    from mt in mmt.DefaultIfEmpty()
+                                    where mt.LanguageId == request.LanguageId && m.Id == item.ParentId.Value
+                                    select new { m, mt }).FirstOrDefaultAsync();
 
-                item.ParentName = parent.mt.Name;
+                item.ParentName = parent != null ? parent.mt.Name : string.Empty;
             }
 
             //4. Select and projection
@@ -295,7 +295,7 @@ namespace SnailApp.Application.SystemApplication.Menus
             menu.MenuType = request.MenuType;
             menu.ModifiedDate = DateTime.Now;
             menu.ControllerName = request.ControllerName;
-            menu.ActionName= request.ActionName;
+            menu.ActionName = request.ActionName;
             menu.Link = request.Link;
             menu.IsVisibled = request.IsVisibled;
 
