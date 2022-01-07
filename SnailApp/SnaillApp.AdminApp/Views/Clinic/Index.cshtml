@@ -54,23 +54,20 @@
                 <input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
             </div>
             <div class="ms-auto">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">ACTION</button>
-                <ul class="dropdown-menu">
-                    @if (Model.CurrentUserRole.IsAllowEdit)
-                    {
-                              <li>
-								<a class="dropdown-item" href="#" name="btnCreate">Create</a>
-							</li>
-                    }
-                    @if (Model.CurrentUserRole.IsAllowDelete)
+				@if (Model.CurrentUserRole.IsAllowEdit)
                 {
-                            <li>
-							<a class="dropdown-item" href="#" name="btnDelete">Delete</a>
-						</li>
-                    }
-                </ul>
-
-            </div>
+                    <text>
+						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+                                  
+                    </text>
+                }
+                @if (Model.CurrentUserRole.IsAllowDelete)
+                {
+                    <text>
+						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+                    </text>
+                }
+			</div>
         </div>
         <div class="table-responsive">
             <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
