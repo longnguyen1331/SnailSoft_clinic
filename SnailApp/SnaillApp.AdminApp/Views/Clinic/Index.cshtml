@@ -8,74 +8,74 @@
 	<link href="~/snailsoft/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 	<link href="~/snailsoft/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	
 	 <link href="~/plugins/colpick-master/css/colpick.css" rel="stylesheet" />
 }
 
 @section Custom_CSS{
-	<link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
-	<link href="@Url.Content("~/css/customiseSelect2.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/customiseSelect2.css")" rel="stylesheet" />
 }
 
 @section Vendors_Scripts{
 	<script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
 	<script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
 	<script src="~/snailsoft/assets/plugins/select2/js/select2.min.js"></script>
-	 
     <script src="~/plugins/colpick-master/js/colpick.js"></script>
-
 }
 
 @section Custom_Scripts{
-	<script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
-	<script type="text/javascript" src="@Url.Content("~/js/Clinic/Index.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/Clinic/Index.js")"></script>
 }
 <script>
-	var user = {
-		userId: '@Model.CurrentUserRole.Id',
-		userName: '@User.Identity.Name',
-		roles: {
-			isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+          	isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
 			isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
-		}
-	};
-	 var editingData = null;
-	$(document).ready(function () {
-		Clinic.init();
-	});
+        }
+    };
+     var editingData = null;
+    $(document).ready(function () {
+        Clinic.init();
+    });
 </script>
 
 
 <!--breadcrumb-->
 @await Html.PartialAsync("_PartialToolbar")
 <!--end breadcrumb-->
-			  
+
 <div class="card">
-	<div class="card-body">
-		<div class="d-lg-flex align-items-center mb-4 gap-3">
-			<div class="position-relative">
-				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-			</div>
-			<div class="ms-auto">
-				@if (Model.CurrentUserRole.IsAllowEdit)
+    <div class="card-body">
+        <div class="d-lg-flex align-items-center mb-4 gap-3">
+            <div class="position-relative">
+                <input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+            </div>
+            <div class="ms-auto">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">ACTION</button>
+                <ul class="dropdown-menu">
+                    @if (Model.CurrentUserRole.IsAllowEdit)
+                    {
+                              <li>
+								<a class="dropdown-item" href="#" name="btnCreate">Create</a>
+							</li>
+                    }
+                    @if (Model.CurrentUserRole.IsAllowDelete)
                 {
-                    <text>
-						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
-                                  
-                    </text>
-                }
-                @if (Model.CurrentUserRole.IsAllowDelete)
-                {
-                    <text>
-						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
-                    </text>
-                }
-			</div>
-		</div>
-		<div class="table-responsive">
+                            <li>
+							<a class="dropdown-item" href="#" name="btnDelete">Delete</a>
+						</li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+        <div class="table-responsive">
             <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <div class="switcher-wrapper ">
@@ -422,18 +422,17 @@
 
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Confirm Delete</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body" id="notificationDelete">Are you sure to delete data.</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" name="btnConfirmDelete">Yes, Do it!</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="notificationDelete">Are you sure to delete data.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" name="btnConfirmDelete">Yes, Do it!</button>
+            </div>
+        </div>
+    </div>
 </div>
-	

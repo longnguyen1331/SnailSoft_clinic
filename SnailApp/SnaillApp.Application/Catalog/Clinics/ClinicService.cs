@@ -103,11 +103,11 @@ namespace SnailApp.Application.Catalog.Clinics
         {
             try
             {
-                var clinic = await _context.Clinics.Where(x=>x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
+                var check = await _context.Clinics.Where(x=>x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
 
-                if (clinic == null ) throw new EShopException($"Cannot find a product with id: {request.Id}");
+                if (check == null ) throw new EShopException($"Cannot find a product with id: {request.Id}");
 
-                clinic = _mapper.Map<Clinic>(request);
+                var clinic = _mapper.Map<Clinic>(request);
 
                 DateTime datetim1, datetime2;
                 if (DateTime.TryParseExact(request.StartDate, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
@@ -139,6 +139,10 @@ namespace SnailApp.Application.Catalog.Clinics
                     }
 
                     clinic.Logo = await this.SaveFile(request.Logo);
+                }
+                else
+                {
+                    clinic.Logo = check.Logo;
                 }
 
                 _context.Clinics.Update(clinic);

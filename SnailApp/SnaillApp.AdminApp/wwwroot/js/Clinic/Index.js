@@ -4,6 +4,9 @@ var Clinic = function () {
     let dtTable = null, dtTableClinic = null ;
     let clinicId = -1;
     let edit_form = $("#edit_form"),
+        edit_google_form = $("#edit_google_form"),
+        edit_facebook_form = $("#edit_facebook_form"),
+        edit_firebase_form = $("#edit_firebase_form"),
         create_user_clinic_form_buttonSubmit = $('[name="btnCreateUserToClinic"]'),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
     
@@ -56,17 +59,9 @@ var Clinic = function () {
                                 break;
 
                             case "Status":
-                                formData.append("Status", $(el).val() === "on" ? true : false);
+                                formData.append("Status", $(el).is(':checked'));
                                 break;
-
-                            case "FacebookLogin":
-                                formData.append("FacebookLogin", $(el).val() === "on" ? true : false);
-                                break;
-
-                            case "GoogleLogin":
-                                formData.append("GoogleLogin", $(el).val() === "on" ? true : false);
-                                break;
-                            
+                           
                             default:
                                 if ($(el).data("field")) {
                                     formData.append($(el).data("field"), $(el).val());
@@ -76,10 +71,59 @@ var Clinic = function () {
                     }
                 });
 
+                edit_facebook_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    if (fieldName) {
+                        switch (fieldName) {
+
+                            case "FacebookLogin":
+                                formData.append("FacebookLogin", $(el).is(':checked'));
+                                break;
+
+                            default:
+                                if ($(el).data("field")) {
+                                    formData.append($(el).data("field"), $(el).val());
+                                }
+                                break;
+                        }
+                    }
+                });
+
+                edit_google_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    if (fieldName) {
+                        switch (fieldName) {
+                            case "GoogleLogin":
+                                formData.append("GoogleLogin", $(el).is(':checked'));
+                                break;
+
+                            default:
+                                if ($(el).data("field")) {
+                                    formData.append($(el).data("field"), $(el).val());
+                                }
+                                break;
+                        }
+                    }
+                });
+
+                edit_firebase_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    if (fieldName) {
+                        switch (fieldName) {
+                          
+                            default:
+                                if ($(el).data("field")) {
+                                    formData.append($(el).data("field"), $(el).val());
+                                }
+                                break;
+                        }
+                    }
+                });
+
+
                 if (editingData != null) {
                     formData.set("Id", editingData.id);
                 };
-                console.log(formData);
                 App.sendDataFileToURL("/Clinic/Save", formData, "POST", true, 'body')
                     .then(function (res) {
                         if (!res.isSuccessed) {
@@ -93,7 +137,7 @@ var Clinic = function () {
                             };
                         }
                     }
-                    )
+                )
             }
           
         });
