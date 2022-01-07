@@ -8,10 +8,6 @@
 	<link href="~/snailsoft/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 	<link href="~/snailsoft/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.css" rel="stylesheet" />
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css" rel="stylesheet" />
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.date.css" rel="stylesheet" />
-	<link rel="stylesheet" href="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css">
 	
 	 <link href="~/plugins/colpick-master/css/colpick.css" rel="stylesheet" />
 }
@@ -24,13 +20,6 @@
 @section Vendors_Scripts{
 	<script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
 	<script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/legacy.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.date.js"></script>
-	<script src="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
-	<script src="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
-	<script src="~/snailsoft/assets/js/form-date-time-pickes.js"></script>
 	<script src="~/snailsoft/assets/plugins/select2/js/select2.min.js"></script>
 	 
     <script src="~/plugins/colpick-master/js/colpick.js"></script>
@@ -90,16 +79,14 @@
 </div>
 
 <div class="switcher-wrapper ">
-		<div class="switcher-btn" hidden> <i class="bx bx-cog bx-spin"></i>
+	<div class="switcher-btn" hidden> <i class="bx bx-cog bx-spin"></i>
+	</div>
+	<div class="switcher-body"  style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
+		<div class="d-flex align-items-center mb-5">
+			<h5 class="mb-0 text-uppercase" id="titleCreateOrUpdate">Create</h5>
+			<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
 		</div>
-		<div class="switcher-body"  style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
-			<div class="d-flex align-items-center mb-5">
-				<h5 class="mb-0 text-uppercase" id="titleCreateOrUpdate">Create</h5>
-				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
-			</div>
-
-
-			
+		<div id="CreateInfomation">
 			<ul class="nav nav-pills mb-3" role="tablist">
 				<li class="nav-item" role="presentation">
 					<a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-infomation" role="tab" aria-selected="true">
@@ -145,12 +132,12 @@
 								<div class="col-md-8 px-1" >
 									<div class="mb-3">
 										<label class="form-label">Code(*)</label>
-										<input type="text" class="form-control radius-15" data-field="Code" placeholder="Enter first name">
+										<input type="text" class="form-control radius-15" data-field="Code" placeholder="Enter Code">
 									</div>
 
 									<div class="mb-3 px-1">
 										<label class="form-label">Name(*)</label>
-										<input type="text" class="form-control radius-15" data-field="Name" placeholder="Enter last name">
+										<input type="text" class="form-control radius-15" data-field="Name" placeholder="Enter name">
 									</div>
 								</div>
 
@@ -164,7 +151,7 @@
 								<div class="col-md-6" >
 									<div class="mb-3 px-1">
 										<label class="form-label">Phone</label>
-										<input type="text" class="form-control radius-15" data-field="PhoneNumber" placeholder="Enter phone number">
+										<input type="text" class="form-control radius-15" data-field="Phone" placeholder="Enter phone number">
 									</div>
 								</div>
 
@@ -193,7 +180,7 @@
 								<div class="col-md-6" >
 									<div class="mb-3 px-1">
 										<label class="form-label">Start Date</label>
-										<input class="result form-control radius-15 date" type="text" data-field="StartDate" placeholder="Enter StartDate">
+										<input class="result form-control radius-15" type="date" data-field="StartDate" placeholder="Enter StartDate">
 									</div>
 								</div>
 
@@ -201,7 +188,7 @@
 								<div class="col-md-6" >
 									<div class="mb-3 px-1">
 										<label class="form-label">Expiration Date</label>
-										<input class="result form-control radius-15 date" type="text"  data-field="ExpirationDate" placeholder="Enter ExpirationDate">
+										<input class="result form-control radius-15" type="date"  data-field="ExpirationDate" placeholder="Enter ExpirationDate">
 									</div>
 								</div>
 
@@ -221,7 +208,7 @@
 
 								<div class="col-md-12" >
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" data-field="Status"  checked>
+										<input class="form-check-input" type="checkbox" data-field="Status"  >
 										<label class="form-check-label" for="Status">Active</label>
 									</div>
 								</div>
@@ -273,7 +260,7 @@
 
 								<div class="col-md-12" >
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" data-field="GoogleLogin"  checked>
+										<input class="form-check-input" type="checkbox" data-field="GoogleLogin"  >
 										<label class="form-check-label" for="GoogleLogin">Google Login</label>
 									</div>
 								</div>
@@ -325,7 +312,7 @@
 				
 								<div class="col-md-12" >
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" data-field="FacebookLogin"  checked>
+										<input class="form-check-input" type="checkbox" data-field="FacebookLogin"  >
 										<label class="form-check-label" for="FacebookLogin">Facebook Login</label>
 									</div>
 								</div>
@@ -404,10 +391,33 @@
 					</div>
 				</div>
 			</div>
-
-			
-
 		</div>
+
+		<div id="CreateRoleToUser">
+			<div class="header-colors-indigators">
+				<div class="row g-0">
+					<div class="col-md-8" >
+						<div class="mb-3 px-1 select2-sm">
+							 <select id="edit_form_appUserIds" aria-label="Select a Roles" data-control="select2" data-placeholder="@Html.Raw("Select user...")"
+							 class="form-select form-select-solid form-select-md radius-15 single-select">
+                             </select>
+						</div>
+					</div>
+					<div class="col-md-4" >
+						<div class="mb-3 px-1 select2-sm">
+							<button type="button" class="btn btn-primary w-100" name="btnCreateUserToClinic">Create</button>
+						</div>
+					</div>
+
+					<div class="col-md-12" >
+						<div class="table-responsive">
+							<table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTableUserClinic" role="grid"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 

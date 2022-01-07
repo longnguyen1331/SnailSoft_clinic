@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using SnailApp.ViewModels.Enums;
 
 namespace SnailApp.ViewModels.Catalog.Clinics
@@ -22,7 +23,7 @@ namespace SnailApp.ViewModels.Catalog.Clinics
         public bool IsDefault { set; get; }
         public bool IsVisibled { set; get; }
 
-        public string Logo { set; get; }
+        public  IFormFile Logo { set; get; }
         public string Favicon { set; get; }
         public string PrimaryColor { set; get; }
         public string SecondaryColor { set; get; }

@@ -1,11 +1,12 @@
 ﻿//== Class definition
 
 var Clinic = function () {
-    let dtTable = null;
-
+    let dtTable = null, dtTableClinic = null ;
+    let clinicId = -1;
     let edit_form = $("#edit_form"),
+        create_user_clinic_form_buttonSubmit = $('[name="btnCreateUserToClinic"]'),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
-
+    
     let initialComponents = () => {
 
         $('.color').colpick({
@@ -16,11 +17,7 @@ var Clinic = function () {
             }
         });
 
-        $('.date').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY',
-            time: false
-        });
-
+     
         $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -31,6 +28,8 @@ var Clinic = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             reset();
+            $('#CreateInfomation').show();
+            $('#CreateRoleToUser').hide();
             $('.switcher-btn').trigger('click');
         });
 
@@ -67,7 +66,7 @@ var Clinic = function () {
                             case "GoogleLogin":
                                 formData.append("GoogleLogin", $(el).val() === "on" ? true : false);
                                 break;
-
+                            
                             default:
                                 if ($(el).data("field")) {
                                     formData.append($(el).data("field"), $(el).val());
@@ -77,10 +76,10 @@ var Clinic = function () {
                     }
                 });
 
-                if (editingDataRow != null) {
-                    formData.set("Id", editingDataRow.id);
-                }
-                console.log(formData)
+                if (editingData != null) {
+                    formData.set("Id", editingData.id);
+                };
+                console.log(formData);
                 App.sendDataFileToURL("/Clinic/Save", formData, "POST", true, 'body')
                     .then(function (res) {
                         if (!res.isSuccessed) {
@@ -129,9 +128,69 @@ var Clinic = function () {
             e.preventDefault();
             dtTable.draw();
         });
+
+        $('#edit_form_appUserIds').select2(
+            {
+                ajax: {
+                    url: '/Staff/Filter',
+                    data: function (params) {
+                        var query = {
+                            textSearch: params.term
+                        };
+
+                        return query;
+                    },
+                    processResults: function (res) {
+
+                        var data = $.map(res.items, function (item, i) {
+                            return {
+                                id: item.id,
+                                text: item.firstName + " " + item.lastName
+                            }
+                        });
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                allowClear: true,
+            }).trigger('change');
+
+        create_user_clinic_form_buttonSubmit.click(function (e) {
+            e.preventDefault();
+            if ($('#edit_form_appUserIds').val() != null && $('#edit_form_appUserIds').val() != '') {
+                let data =  {
+                    UserId: $('#edit_form_appUserIds').val(),
+                    ClinicId: clinicId
+                }
+                App.sendDataToURL("/Clinic/AddUserToClinic", data, "POST", true, 'body')
+                    .then(function (res) {
+                        if (!res.isSuccessed) {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                        }
+                        else {
+                            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+                            $('#edit_form_appUserIds').val(null).trigger('change');
+                            dtTableClinic.draw();
+                        }
+                    }
+                )
+            }
+        });
+
     };
 
     function checkDataUpdate() {
+        if ($('input[data-field="Code"]').val() == '') {
+            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter Code");
+            return false;
+        }
+
+        if ($('input[data-field="Code"]').val() == '') {
+            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter name");
+            return false;
+        }
+
         if ($('input[data-field="StartDate"]').val() == '') {
             App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter Start date");
             return false;
@@ -145,9 +204,8 @@ var Clinic = function () {
         return true;
     }
 
-
     function reset() {
-        editingDataRow = null;
+        editingData = null;
         edit_form[0].reset();
         dtTable.draw();
     }
@@ -227,7 +285,17 @@ var Clinic = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            { "data": "name", "name": "name", "autoWidth": true, "title": "Name" },
+            {
+                "data": "name", "name": "name", "autoWidth": true, "title": "Name",
+                "render": function (data, type, full, meta) {
+                    return '<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\
+							<img src="' + full.logo + '" class="user-img" alt="user avatar">\
+							<div class="user-info ps-3">\
+								<p class="user-name mb-0">' + full.name+ '</p>\
+							</div>\
+						</a>';
+                }
+            },
             {
                 "data": "status", "name": "status", "autoWidth": true, "title": "Active",
                 "render": function (data, type, full, meta) {
@@ -249,6 +317,11 @@ var Clinic = function () {
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }
+                    if (user.roles.isAllowDelete == true) {
+                        html += '<a href="#" class="ms-3 role">\
+					                <i class="bx bxs-user-check"></i>\
+				                </a>';
+                    }
                     html += '</div> ';
 
                     return html;
@@ -260,41 +333,39 @@ var Clinic = function () {
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
-            editingDataRow = dtTable.row($(this).parents('tr')).data();
-            console.log(editingDataRow);
+            editingData = dtTable.row($(this).parents('tr')).data();
 
-            if (editingDataRow != null) {
-                $('#avatarImage').attr('src', editingDataRow.logo);
-                $('input[data-field="Status"]').prop('checked', editingDataRow.status);
-                $('input[data-field="PrimaryColor"]').val(editingDataRow.primaryColor);
-                $('input[data-field="SecondaryColor"]').val(editingDataRow.secondaryColor);
-                $('input[data-field="Introduction"]').val(editingDataRow.introduction);
-                $('input[data-field="Address"]').val(editingDataRow.address);
-                $('input[data-field="Email"]').val(editingDataRow.email);
-                $('input[data-field="Phone"]').val(editingDataRow.phone);
-                $('input[data-field="GoogleScript"]').val(editingDataRow.googleScript);
-                $('input[data-field="FacebookPixel"]').val(editingDataRow.facebookPixel);
-                $('input[data-field="FacebookChat"]').val(editingDataRow.facebookChat);
-                $('input[data-field="Firebase_apiKey"]').val(editingDataRow.firebase_apiKey);
-                $('input[data-field="Firebase_authDomain"]').val(editingDataRow.firebase_authDomain);
-                $('input[data-field="Firebase_projectId"]').val(editingDataRow.firebase_projectId);
-                $('input[data-field="Firebase_storageBucket"]').val(editingDataRow.firebase_storageBucket);
-                $('input[data-field="Firebase_messagingSenderId"]').val(editingDataRow.firebase_messagingSenderId);
-                $('input[data-field="Firebase_appId"]').val(editingDataRow.firebase_appId);
-                $('input[data-field="Firebase_measurementId"]').val(editingDataRow.firebase_measurementId);
-                $('input[data-field="ClinicDomain"]').val(editingDataRow.clinicDomain);
-                $('input[data-field="FacebookAppname"]').val(editingDataRow.facebookAppname);
-                $('input[data-field="FacebookAppid"]').val(editingDataRow.facebookAppid);
-                $('input[data-field="FacebookAppsecret"]').val(editingDataRow.facebookAppsecret);
-                $('input[data-field="FacebookLogin"]').prop('checked', editingDataRow.facebookLogin);
-                $('input[data-field="GoogleLogin"]').prop('checked', editingDataRow.googleLogin);
-                $('input[data-field="GoogleAppname"]').val(editingDataRow.googleAppname);
-                $('input[data-field="GoogleApikey"]').val(editingDataRow.googleApikey);
-                $('input[data-field="GoogleClientid"]').val(editingDataRow.googleClientid);
-                $('input[data-field="GoogleClientsecret"]').val(editingDataRow.googleClientsecret);
-                $('input[data-field="StartDate"]').val(editingDataRow.startDate);
-                $('input[data-field="ExpirationDate"]').val(editingDataRow.expirationDate);
-                
+            if (editingData != null) {
+                $('#avatarImage').attr('src', editingData.logo);
+
+
+                edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    let type = $(el).attr("type");
+
+                    if (fieldName) {
+                        switch (fieldName) {
+                            default:
+                                if ($(el).is("textarea")) {
+                                    $('textarea[data-field="' + fieldName + '"]').text(editingData[App.lowerFirstLetter(fieldName)]);
+                                } else if ($(el).is("input")) {
+                                    if (type === "checkbox") {
+                                        $('input[data-field="' + fieldName + '"]').prop('checked', editingData[App.lowerFirstLetter(fieldName)]);
+                                    } else if(type==="date") {
+                                        $('input[data-field="' + fieldName + '"]').val(editingData[App.lowerFirstLetter(fieldName)].substring(0, 10));
+                                    } else if (type === "file") {
+                                        $('#avatarImage').attr('src', editingData[App.lowerFirstLetter(fieldName)]);
+                                    }else {
+                                        $('input[data-field="' + fieldName + '"]').val(editingData[App.lowerFirstLetter(fieldName)]);
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                });
+
+                $('#CreateInfomation').show();
+                $('#CreateRoleToUser').hide();
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
@@ -306,9 +377,88 @@ var Clinic = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
+
+        $('#dtTable tbody').on('click', 'a.role', function (e) {
+            e.preventDefault();
+            editingData = dtTable.row($(this).parents('tr')).data();
+
+            if (editingData) {
+                clinicId = editingData.id;
+                dtTableClinic.draw();
+                $('#CreateInfomation').hide();
+                $('#CreateRoleToUser').show();
+                $('.switcher-btn').trigger('click');
+            }
+        });
     };
 
-    
+
+
+    let initialDatatableClinic = function () {
+        var datatableOption = initialDatatableOption();
+        datatableOption.ajax.url = "/Clinic/DataTableUserClinicGetList";
+        datatableOption.ajax.data = {
+            clinicId: function () {
+                return editingData != null ? editingData.id : -1;
+            }
+        };
+        datatableOption.order = [[0, "desc"]];
+        datatableOption.columnDefs = [
+            {
+                "targets": [0],
+                "visible": false,
+                "orderable": false
+            },
+            {
+                "targets": [3],
+                "className": 'dt-center'
+            }
+        ];
+
+        datatableOption.columns = [
+            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            {
+                "data": "firstName", "name": "firstName", "autoWidth": true, "title": "Full name", "render": function (data, type, full, meta) {
+                    return full.firstName + " " + full.lastName;
+                }
+            },
+            { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": true, "title": "Phone" },
+            {
+                width: "120px", "title": "Active", "render": function (data, type, full, meta) {
+                    let html = '<div class="d-flex order-actions">';
+                    if (user.roles.isAllowEdit == true) {
+                        html += '<a href="#" class="editUser">\
+					                <i class="bx bxs-edit"></i>\
+				                </a>';
+                    }
+                    if (user.roles.isAllowDelete == true) {
+                        html += '<a href="#" class="ms-3 deleteUser">\
+					                <i class="bx bxs-trash"></i>\
+				                </a>';
+                    }
+                    html += '</div> ';
+
+                    return html;
+
+                }
+            },
+        ]
+        dtTableClinic = $('#dtTableUserClinic').DataTable(datatableOption);
+
+        $('#dtTableUserClinic tbody').on('click', 'a.edit', function (e) {
+            e.preventDefault();
+            var sel = dtTableClinic.row($(this).parents('tr')).data();
+        });
+
+        $('#dtTableUserClinic tbody').on('click', 'a.deleteUser', function (e) {
+            e.preventDefault();
+            let sel = dtTableClinic.row($(this).parents('tr')).data();
+            if (sel) {
+                deleteDataUsereClinics([sel]);
+            }
+        });
+    };
+
     function deleteDataRows(dataRows) {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteByIds", dtTable, null)
             .then(function () {
@@ -317,10 +467,19 @@ var Clinic = function () {
             });
     }
 
+    function deleteDataUsereClinics(dataRows) {
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteUserByIds", dtTable, null)
+            .then(function () {
+                dtTableClinic.draw();
+                App.showHideButtonDelete(false);
+            });
+    }
+
     return {
         // public functions
         init: function () {
             initialDatatable();
+            initialDatatableClinic();
             initialComponents();
         }
     };

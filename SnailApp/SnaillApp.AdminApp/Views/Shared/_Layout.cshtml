@@ -59,7 +59,7 @@
         <!--end header -->
         <!--start page wrapper -->
         <div class="page-wrapper">
-            <div class="page-content" id="vdContentContainer">
+            <div class="page-content">
                 @RenderBody()
             </div>
         </div>
@@ -71,7 +71,7 @@
             @await Html.PartialAsync("_PartialFooter")
         </footer>
 
-            @await Html.PartialAsync("_PartialDoiMatKhauModal")
+        @await Html.PartialAsync("_PartialDoiMatKhauModal")
 
     </div>
 
@@ -110,7 +110,6 @@
     <script src="~/snailsoft/assets/plugins/notifications/js/notification-custom-script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.js" integrity="sha512-F3F53+tMh/CBxMQ60GN5R4EiFW7PcuND+9IDC3Qpkwc7SfxgzHigRdUO3+2+mNal2ot3Wp6KR0zx8r8BbsW+Bg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- tag input -->
-
     <!--app JS-->
     <script src="~/js/app.js"></script>
     <script src="~/snailsoft/assets/js/app.js"></script>

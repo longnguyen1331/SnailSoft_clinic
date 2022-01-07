@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SnailApp.Data.Entities
 {
@@ -35,5 +36,8 @@ namespace SnailApp.Data.Entities
         public DateTime StartDate { set; get; }
         public DateTime ExpirationDate { set; get; }
         public bool Status { set; get; }
+
+        public ICollection<AppUser_Clinic> AppUser_Clinics { get; set; }
+
     }
 }

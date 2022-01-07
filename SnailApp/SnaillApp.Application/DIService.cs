@@ -39,6 +39,7 @@ namespace SnailApp.Application
             services.AddTransient<IAdminAppUIService, AdminAppUIService>();
             
             services.AddTransient<IClinicService, ClinicService>();
+            services.AddTransient<IUser_ClinicService, User_ClinicService>();
 
             return services;
         }

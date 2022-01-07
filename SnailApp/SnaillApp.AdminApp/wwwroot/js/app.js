@@ -322,9 +322,15 @@
         }
     };
 
+
+    let lowerFirstLetter = (string) => {
+        return string.charAt(0).toLowerCase() + string.slice(1);
+    }
+
     return {
         //run_waitMe: run_waitMe,
         //stop_waitMe: stop_waitMe,
+        lowerFirstLetter: lowerFirstLetter,
         notification: notification,
         sendDataToURL: sendDataToURL,
         sendDataFileToURL: sendDataFileToURL,

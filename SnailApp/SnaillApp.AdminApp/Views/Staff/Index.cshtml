@@ -12,10 +12,6 @@ ViewBag.Title = "Nhân viên";
 	<link href="~/snailsoft/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 	<link href="~/snailsoft/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.css" rel="stylesheet" />
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css" rel="stylesheet" />
-	<link href="~/snailsoft/assets/plugins/datetimepicker/css/classic.date.css" rel="stylesheet" />
-	<link rel="stylesheet" href="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css">
 }
 
 @section Custom_CSS{
@@ -27,13 +23,6 @@ ViewBag.Title = "Nhân viên";
 @section Vendors_Scripts{
 	<script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
 	<script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/legacy.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js"></script>
-	<script src="~/snailsoft/assets/plugins/datetimepicker/js/picker.date.js"></script>
-	<script src="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
-	<script src="~/snailsoft/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
-	<script src="~/snailsoft/assets/js/form-date-time-pickes.js"></script>
 	<script src="~/snailsoft/assets/plugins/select2/js/select2.min.js"></script>
 }
 
@@ -144,7 +133,7 @@ ViewBag.Title = "Nhân viên";
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">DOB</label>
-							<input class="result form-control radius-15" type="text" id="date-picker" data-field="Dob" placeholder="Enter DOB">
+							<input class="result form-control radius-15" type="date"  data-field="Dob" placeholder="Enter DOB">
 						</div>
 					</div>
 

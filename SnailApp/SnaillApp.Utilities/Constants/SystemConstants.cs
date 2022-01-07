@@ -84,6 +84,7 @@ namespace SnailApp.Utilities.Constants
         }
         public class UserConstants
         {
+            public const string ImageImagePath = "ImageImagePath";
             public const string UserImagePath = "UserImagePath";
             public const string AppUserType_Customer = "AppUserType_Customer";
             public const string AppUserType_Supplier = "AppUserType_Supplier";

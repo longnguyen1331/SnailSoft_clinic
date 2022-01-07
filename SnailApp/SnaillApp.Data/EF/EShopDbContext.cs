@@ -21,8 +21,8 @@ namespace SnailApp.Data.EF
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+            modelBuilder.ApplyConfiguration(new AppUser_ClinicConfiguration());
             modelBuilder.ApplyConfiguration(new ClinicConfiguration());
-
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleTranslationConfiguration());
@@ -38,9 +38,9 @@ namespace SnailApp.Data.EF
 
             //Data seeding
             modelBuilder.Seed();
-            //base.OnModelCreating(modelBuilder);
         }
         
+        public DbSet<AppUser_Clinic> User_Clinics { get; set; }
         public DbSet<Clinic> Clinics{ get; set; }
         public DbSet<AppConfig> AppConfigs { get; set; }
         public DbSet<AppRoleTranslation> AppRoleTranslations { get; set; }

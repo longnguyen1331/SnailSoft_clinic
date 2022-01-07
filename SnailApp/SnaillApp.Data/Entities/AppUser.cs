@@ -30,6 +30,6 @@ namespace SnailApp.Data.Entities
         public string Skills { set; get; }
         public string Phone { set; get; }
         public bool Status { set; get; }
-        public int ClinicID { set; get; }
+        public ICollection<AppUser_Clinic> AppUser_Clinics { get; set; }
     }
 }

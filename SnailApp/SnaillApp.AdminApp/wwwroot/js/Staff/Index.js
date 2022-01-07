@@ -9,11 +9,7 @@ var Staff = function () {
 
     let initialComponents = () => {
 
-        $('#date-picker').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY',
-            time: false
-        });
-
+      
         $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -243,6 +239,9 @@ var Staff = function () {
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }
+
+
+                 
                     html += '</div> ';
 
                     return html;

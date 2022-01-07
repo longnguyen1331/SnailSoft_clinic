@@ -1156,8 +1156,8 @@ a {
 	border-color: #f41127 #f41127 #fff
 }
 .nav-success.nav-tabs .nav-link.active {
-	color: #17a00e;
-	border-color: #17a00e #17a00e #fff
+	color: #19A9A8;
+	border-color: #19A9A8 #19A9A8 #fff
 }
 .nav-warning.nav-tabs .nav-link.active {
 	color: #ffc107;
@@ -1169,7 +1169,7 @@ a {
 }
 .nav-pills-success.nav-pills .nav-link.active {
 	color: #fff;
-	background-color: #17a00e
+	background-color: #19A9A8
 }
 .nav-pills-warning.nav-pills .nav-link.active {
 	color: #000;
@@ -1202,6 +1202,9 @@ a {
 }
 .bg-light-primary {
 	background-color: rgb(13 110 253 / .11)!important
+}
+.bg-snail-orange {
+	background-color: rgb(227 104 40 / .15) !important
 }
 .bg-light-success {
 	background-color: rgb(23 160 14 / .11)!important

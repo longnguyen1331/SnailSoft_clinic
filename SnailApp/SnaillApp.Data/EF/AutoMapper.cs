@@ -1,6 +1,7 @@
 ﻿using SnailApp.Data.Entities;
 
 using AutoMapper;
+using SnailApp.ViewModels.System.User_Clinics;
 
 namespace SnailApp.Data.EF
 {
@@ -18,6 +19,9 @@ namespace SnailApp.Data.EF
                 .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
                 .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("dd/MM/yyyy")))
                 .ReverseMap();
+
+
+            CreateMap<AppUser_Clinic, User_ClinicDto>().ReverseMap();
 
         }
     }

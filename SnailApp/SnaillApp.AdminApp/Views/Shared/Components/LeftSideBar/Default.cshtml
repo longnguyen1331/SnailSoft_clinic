@@ -1,12 +1,13 @@
 ﻿@model LeftSideBarViewModel
 
+
+
 <div class="sidebar-header">
     <div>
         <a href="/"><img class="logo-icon" alt="Snail Soft" src="~/snailsoft/assets/images/logo.png"></a>
-
     </div>
     <div>
-        <h4 class="logo-text">My Hospital</h4>
+        <h4 class="logo-text">My Clinic</h4>
     </div>
     <div class="toggle-icon ms-auto">
         <i class='bx bx-arrow-to-left'></i>
@@ -97,22 +98,27 @@
             </li>
         }
     }
+    <li class="menu-label">Others</li>
+				<li>
+					<a href="faq.html">
+						<div class="parent-icon"><i class="bx bx-help-circle"></i>
+						</div>
+						<div class="menu-title">FAQ</div>
+					</a>
+				</li>
+				<li>
+					<a href="https://codervent.com/syndron/documentation/index.html" target="_blank">
+						<div class="parent-icon"><i class="bx bx-folder"></i>
+						</div>
+						<div class="menu-title">Documentation</div>
+					</a>
+				</li>
+				<li>
+					<a href="../../../../themeforest.net/user/codervent.html" target="_blank">
+						<div class="parent-icon"><i class="bx bx-support"></i>
+						</div>
+						<div class="menu-title">Support</div>
+					</a>
+				</li>
 </ul>
-<!--end navigation-->
 
-    <!--end::Brand-->
-    <!--begin::Aside menu-->
-    <div class="aside-menu flex-column-fluid">
-        <!--begin::Aside Menu-->
-        <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
-            <!--begin::Menu-->
-            <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
-                @Html.Raw(Model.HtmlMenus)
-            </div>
-            <!--end::Menu-->
-        </div>
-        <!--end::Aside Menu-->
-    </div>
-    <!--end::Aside menu-->
-</div>
-<!--end::Aside-->

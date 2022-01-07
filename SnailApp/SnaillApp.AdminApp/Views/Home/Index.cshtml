@@ -1,19 +1,22 @@
-﻿
-@{ ViewData["Title"] = "Trang chủ"; }
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
 
 
 @section Vendors_Scripts{
-    <script src="~/js/customiseFlatpickr.js"></script>
-    <script src="~/plugins/autoNumeric/autoNumeric.js"></script>
-    <script src="~/js/customiseAutoNumeric.js"></script>
+<script src="~/js/customiseFlatpickr.js"></script>
+<script src="~/plugins/autoNumeric/autoNumeric.js"></script>
+<script src="~/js/customiseAutoNumeric.js"></script>
+<script src="~/snailsoft/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 }
+
 
 <!--begin::Toolbar-->
 @section Custom_Scripts{
 
 
-    <script src="@Url.Content("~/js/util.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/Home/Index.js")"></script>
+<script src="@Url.Content("~/js/util.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/Home/Index.js")"></script>
 }
 
 <script>
@@ -22,297 +25,346 @@
     });
 
 </script>
+<script>
+    $(function () {
+        "use strict";
+        // chart 3
+        var options = {
+            series: [{
+                name: 'Total visits',
+                data: [223, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600, 231, 340, 468, 331, 492, 255, 600, 468, 331, 492, 255, 600]
+            }
+                , {
+                name: 'New patient',
+                data: [200, 2, 5, 8, 4, 2, 1, 5, 0, 34, 52, 41, 11, 82, 5, 80, 34, 52, 41, 45, 80, 34, 52, 41]
+            }
+                , {
+                name: 'Old patient',
+                data: [23, 182, 245, 380, 434, 552, 341, 345, 380, 334, 352, 341, 311, 382, 245, 280, 234, 252, 241, 245, 280, 234, 252, 241]
+            }
+            ],
+            chart: {
+                foreColor: '#3A4C70',
+                height: 360,
+                type: 'area',
+                zoom: {
+                    enabled: true
+                },
+                toolbar: {
+                    show: true
+                },
+            },
+            colors: ["#4C6FFF", "#E36828", '#19A9A8'],
+            title: {
+                text: 'Total visits',
+                align: 'left',
+                style: {
+                    fontSize: "12px",
+                    color: '#666'
+                }
+            },
 
-@await Html.PartialAsync("_PartialToolbar")
+            dataLabels: {
+                enabled: true
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'Text',
+                categories: ["1/11/2021", "2/11/2021", "3/11/2021", "4/11/2021", "5/11/2021", "6/11/2021", "7/11/2021", "8/11/2021", "9/11/2021", "10/11/2021", "11/11/2021", "12/11/2021", "1/11/2021", "2/11/2021", "3/11/2021", "4/11/2021", "5/11/2021", "6/11/2021", "7/11/2021", "8/11/2021", "9/11/2021", "10/11/2021", "11/11/2021", "12/11/2021"]
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy'
+                },
+            },
 
-<!--begin::Post-->
-<div class="post d-flex flex-column-fluid" id="kt_post">
-    <!--begin::Container-->
-    <div id="kt_content_container" class="container">
+            yaxis: {
+                title: {
+                    text: "Total visits"
+                }
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#chartTQ"), options);
+        chart.render();
 
-        <div class="card">
-            <!--begin::Card header-->
-            <div class="card-header border-0 pt-6">
-                <!--begin::Card title-->
-                <div class="card-title">
-                    <!--begin::Search-->
-                    <div class="d-flex align-items-center position-relative my-1">
-                    </div>
-                    <!--end::Search-->
-                </div>
-                <!--begin::Card title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar">
 
-                    <div class="justify-content-end align-items-center showSelected" data-kt-user-table-toolbar="selected" style="display:none !important;">
-                        <button type="button" class="btn"> <span class="me-2" id="selected_count">10</span>Selected</button>
-                        <button type="button" class="btn btn-danger" id="btnDelete" data-kt-user-table-select="delete_selected">Delete Selected</button>
-                    </div>
+    }
+    );
 
-                    <input type="text" id="fromToDate" autocomplete="off" class="flatpickr form-control form-control-solid w-250px ps-5" placeholder="@Html.Raw("Từ - đến ngày")">
-                </div>
-                <!--end::Card toolbar-->
+
+</script>
+
+
+<script>
+    $(function () {
+        "use strict";
+
+        var e = {
+            series: [{
+                name: "KCB Trong ngày",
+                data: [114, 223, 110, 219, 229, 319, 422, 519, 412, 227, 419, 435]
+            }],
+            chart: {
+                foreColor: "#3A4C70",
+                height: 310,
+                type: "area",
+                zoom: {
+                    enabled: !1
+                },
+                toolbar: {
+                    show: !0
+                },
+                dropShadow: {
+                    enabled: !0,
+                    top: 3,
+                    left: 14,
+                    blur: 4,
+                    opacity: .1
+                }
+            },
+            stroke: {
+                width: 5,
+                curve: "smooth"
+            },
+            xaxis: {
+                type: "text",
+                categories: ["1/11/2021", "2/11/2021", "3/11/2021", "4/11/2021", "5/11/2021", "6/11/2021", "7/11/2021", "8/11/2021", "9/11/2021", "10/11/2021", "11/11/2021", "12/11/2021"]
+            },
+            title: {
+                text: "KCB",
+                align: "left",
+                style: {
+                    fontSize: "16px",
+                    color: "#666"
+                }
+            },
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shade: "light",
+                    gradientToColors: ["#0d6efd"],
+                    shadeIntensity: 1,
+                    type: "vertical",
+                    opacityFrom: .7,
+                    opacityTo: .2,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            markers: {
+                size: 5,
+                colors: ["#0d6efd"],
+                strokeColors: "#fff",
+                strokeWidth: 2,
+                hover: {
+                    size: 7
+                }
+            },
+            dataLabels: {
+                enabled: !1
+            },
+            colors: ["#0d6efd"],
+            yaxis: {
+                title: {
+                    text: "KCB NGOẠI TRÚ"
+                }
+            }
+        };
+        // chart_noitru
+        var options = {
+            series: [{
+                name: 'Total patients',
+                type: 'column',
+                data: [123, 211, 322, 427, 313, 122, 237, 221, 244, 222, 230]
+            }, {
+                name: 'Total Service',
+                type: 'area',
+                data: [44, 44, 41, 67, 22, 43, 21, 41, 56, 27, 43]
+            }, {
+                name: 'Total Revenue',
+                type: 'line',
+                data: [130, 125, 136, 130, 145, 135, 164, 152, 159, 136, 139]
+            }],
+            chart: {
+                foreColor: '#3A4C70',
+                height: 350,
+                type: 'line',
+                stacked: false,
+                zoom: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: true
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+           colors: ["#E36828", "#4C6FFF", '#19A9A8'],
+            stroke: {
+                width: [0, 2, 5],
+                curve: 'smooth'
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '50%'
+                }
+            },
+            fill: {
+                opacity: [0.85, 0.25, 1],
+                gradient: {
+                    inverseColors: false,
+                    shade: 'light',
+                    type: "vertical",
+                    opacityFrom: 0.85,
+                    opacityTo: 0.55,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            labels: ["1/11/2021", "2/11/2021", "3/11/2021", "4/11/2021", "5/11/2021", "6/11/2021", "7/11/2021", "8/11/2021", "9/11/2021", "10/11/2021", "11/11/2021", "12/11/2021"],
+            markers: {
+                size: 0
+            },
+            xaxis: {
+                type: 'text'
+            },
+            yaxis: {
+                title: {
+                    text: 'KCB NỘI TRÚ',
+                },
+               
+                min: 0
+            },
+           
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) + "";
+                        }
+                        return y;
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#chart_noitru"), options);
+        chart.render();
+
+
+       
+
+
+
+    });
+</script>
+<!-- highcharts js -->
+<div class="card shadow-none bg-transparent border-bottom border-2">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <h4 class="mb-3 mb-md-0">Audience Overview</h4>
             </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body pt-0">
-
-                <div class="row g-5 g-xl-8">
-                    <div class="col-xl-3">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-success  hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <!--begin::Svg Icon | path: icons/duotone/Media/Equalizer.svg-->
-                                <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"></rect>
-                                            <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"></rect>
-                                            <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"></rect>
-                                            <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"></rect>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <div class="text-inverse-dark fw-bolder fs-2 mb-2 mt-5 revenue"></div>
-                                <div class="fw-bold text-inverse-dark fs-7">Doanh số</div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <div class="col-xl-3">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <!--begin::Svg Icon | path: icons/duotone/Home/Building.svg-->
-                                <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <path d="M13.5,21 L13.5,18 C13.5,17.4477153 13.0522847,17 12.5,17 L11.5,17 C10.9477153,17 10.5,17.4477153 10.5,18 L10.5,21 L5,21 L5,4 C5,2.8954305 5.8954305,2 7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,21 L13.5,21 Z M9,4 C8.44771525,4 8,4.44771525 8,5 L8,6 C8,6.55228475 8.44771525,7 9,7 L10,7 C10.5522847,7 11,6.55228475 11,6 L11,5 C11,4.44771525 10.5522847,4 10,4 L9,4 Z M14,4 C13.4477153,4 13,4.44771525 13,5 L13,6 C13,6.55228475 13.4477153,7 14,7 L15,7 C15.5522847,7 16,6.55228475 16,6 L16,5 C16,4.44771525 15.5522847,4 15,4 L14,4 Z M9,8 C8.44771525,8 8,8.44771525 8,9 L8,10 C8,10.5522847 8.44771525,11 9,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,9 C11,8.44771525 10.5522847,8 10,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 L8,14 C8,14.5522847 8.44771525,15 9,15 L10,15 C10.5522847,15 11,14.5522847 11,14 L11,13 C11,12.4477153 10.5522847,12 10,12 L9,12 Z M14,12 C13.4477153,12 13,12.4477153 13,13 L13,14 C13,14.5522847 13.4477153,15 14,15 L15,15 C15.5522847,15 16,14.5522847 16,14 L16,13 C16,12.4477153 15.5522847,12 15,12 L14,12 Z" fill="#000000"></path>
-                                            <rect fill="#FFFFFF" x="13" y="8" width="3" height="3" rx="1"></rect>
-                                            <path d="M4,21 L20,21 C20.5522847,21 21,21.4477153 21,22 L21,22.4 C21,22.7313708 20.7313708,23 20.4,23 L3.6,23 C3.26862915,23 3,22.7313708 3,22.4 L3,22 C3,21.4477153 3.44771525,21 4,21 Z" fill="#000000" opacity="0.3"></path>
-                                        </g>
-                                    </svg>
-                                </span>
-
-                                <!--end::Svg Icon-->
-                                <div class="text-inverse-dark fw-bolder fs-2 mb-2 mt-5 totalOrders"></div>
-                                <div class="fw-bold text-inverse-dark fs-7">Tổng đơn hàng</div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <div class="col-xl-3">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-warning hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <!--begin::Svg Icon | path: icons/duotone/Communication/Group.svg-->
-                                <span class="svg-icon svg-icon-white svg-icon-3x ms-n1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">	<rect x="0" y="0" width="24" height="24"></rect>	<rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2"></rect>	<rect fill="#000000" x="2" y="8" width="20" height="3"></rect>	<rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"></rect></g></svg></span>
-
-                                <!--end::Svg Icon-->
-                                <div class="text-inverse-warning fw-bolder fs-2 mb-2 mt-5 ordeRaverageValue"></div>
-                                <div class="fw-bold text-inverse-warning fs-7">Giá trị trung bình đơn hàng</div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <div class="col-xl-3">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <!--begin::Svg Icon | path: icons/duotone/Shopping/Chart-pie.svg-->
-                                <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <path d="M4.00246329,12.2004927 L13,14 L13,4.06189375 C16.9463116,4.55399184 20,7.92038235 20,12 C20,16.418278 16.418278,20 12,20 C7.64874861,20 4.10886412,16.5261253 4.00246329,12.2004927 Z" fill="#000000" opacity="0.3"></path>
-                                            <path d="M3.0603968,10.0120794 C3.54712466,6.05992157 6.91622084,3 11,3 L11,11.6 L3.0603968,10.0120794 Z" fill="#000000"></path>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <div class="text-inverse-info fw-bolder fs-2 mb-2 mt-5 grossProfit"></div>
-                                <div class="fw-bold text-inverse-info fs-7">Lãi gộp</div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                </div>
-
-                <!--begin::Row-->
-                <div class="row gy-5 g-xl-8">
-                    <!--begin::Col-->
-                    <div class="col-xxl-12">
-                        <!--begin::Mixed Widget 10-->
-                        <div class="card card-xxl-stretch-50 mb-5 mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body p-0 d-flex justify-content-between flex-column">
-                                <!--begin::Hidden-->
-                                <div class="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
-                                    <div class="me-2">
-                                        <span class="fw-bolder text-gray-800 d-block fs-3">Doanh số lợi nhuận theo tháng</span>
-                                    </div>
-                                </div>
-                                <!--end::Hidden-->
-                                <!--begin::Chart-->
-                                <div class="mixed-widget-10-chart" data-kt-color="primary" style="height: 175px"></div>
-                                <!--end::Chart-->
-                            </div>
+            <div class="col-md-9">
+                <form class="float-md-end">
+                    <div class="row row-cols-md-auto g-lg-3">
+                        <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">From Date</label>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" id="inputFromDate">
                         </div>
-                        <!--end::Mixed Widget 10-->
-                    </div>
-                    <!--end::Col-->
-
-                </div>
-                <!--end::Row-->
-                <!--begin::Row-->
-                <div class="row g-5 g-xxl-8">
-                    <!--begin::Col-->
-                    <div class="col-xxl-6">
-                        <!--begin::Mixed Widget 5-->
-                        <div class="card card-xxl-stretch mb-5 mb-xl-8">
-                            <!--begin::Beader-->
-                            <div class="card-header border-0 py-5">
-                                <a href="/SummaryOfReceiptPayment/Index" class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder fs-3 mb-1">Tiền bạc</span>
-                                </a>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body d-flex flex-column">
-                                <!--begin::Items-->
-                                <div class="mt-5">
-                                    <!--begin::Item-->
-                                    <div class="d-flex mb-5">
-                                        <!--begin::Section-->
-                                        <div class="d-flex align-items-center me-2">
-                                            <!--begin::Title-->
-                                            <div>
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">Tổng thu : </a>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--begin::Label-->
-                                        <div class="badge badge-light-success fw-bold py-4 px-3 thu"></div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <div class="d-flex mb-5">
-                                        <!--begin::Section-->
-                                        <div class="d-flex align-items-center me-2">
-                                            <!--begin::Title-->
-                                            <div>
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">Tổng chi : </a>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--begin::Label-->
-                                        <div class="badge badge-light-danger fw-bold py-4 px-3 chi"></div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <div class="d-flex mb-5">
-                                        <!--begin::Section-->
-                                        <div class="d-flex align-items-center me-2">
-                                            <!--begin::Title-->
-                                            <div>
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">(Thu - Chi): </a>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--begin::Label-->
-                                        <div class="badge badge-light-warning fw-bold py-4 px-3 thuMinusChi"></div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Item-->
-
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Body-->
+                        <label for="inputToDate" class="col-md-2 col-form-label text-md-end">To Date</label>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" id="inputToDate">
                         </div>
-                        <!--end::Mixed Widget 5-->
                     </div>
-                    <!--end::Col-->
-                    <!--begin::Col-->
-                    <div class="col-xxl-6">
-                        <!--begin::Mixed Widget 5-->
-                        <div class="card card-xxl-stretch mb-5 mb-xl-8">
-                            <!--begin::Beader-->
-                            <div class="card-header border-0 py-5">
-                                <a href="/Warehouse/Index" class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder fs-3 mb-1">Tình trạng kho</span>
-                                </a>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body d-flex flex-column">
-                                <!--begin::Items-->
-                                <div class="mt-5">
-                                    <!--begin::Item-->
-                                    <div class="d-flex mb-5">
-                                        <!--begin::Section-->
-                                        <div class="d-flex align-items-center me-2">
-                                            <!--begin::Title-->
-                                            <div>
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">Số lượng sản phẩm còn hàng: </a>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--begin::Label-->
-                                        <div class="badge badge-light-success fw-bold py-4 px-3 totalProductInStock"></div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <div class="d-flex mb-5">
-                                        <!--begin::Section-->
-                                        <div class="d-flex align-items-center me-2">
-                                            <!--begin::Title-->
-                                            <div>
-                                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">Số lượng sản phẩm hết hàng : </a>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--begin::Label-->
-                                        <div class="badge badge-light-danger fw-bold py-4 px-3 totalProductOutStock"></div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Item-->
-
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Body-->
-                        </div>
-                        <!--end::Mixed Widget 5-->
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
+                </form>
             </div>
-            <!--end::Card body-->
         </div>
-
-
     </div>
-    <!--end::Container-->
 </div>
-<!--end::Post-->
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Total Revenue</p>
+                        <h4 class="my-1">$4805</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>$34 Previous Period</p>
+                    </div>
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='bx bx-dollar-circle'></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Total Appointments</p>
+                        <h4 class="my-1">640</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
+                    </div>
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='bx bx-calendar-check'></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Total New Patients</p>
+                        <h4 class="my-1">980</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
+                    </div>
+                    <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='bx bxs-group'></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Use service</p>
+                        <h4 class="my-1">759 service</h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>14% Previous Period</p>
+                    </div>
+                   <div class="widgets-icons bg-snail-orange text-success ms-auto">
+                        <i class='lni lni-sthethoscope'></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+ <div class="card">
+        <div class="card-body">
+            <div id="chartTQ"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div id="chart_noitru"></div>
+        </div>
+    </div>
+    
+    
+

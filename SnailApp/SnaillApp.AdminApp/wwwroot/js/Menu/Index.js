@@ -206,8 +206,9 @@ var Menu = function () {
                 $('input[data-field="ActionName"]').val(editingDataRow.actionName);
                 $('input[data-field="SortOrder"]').val(editingDataRow.sortOrder);
                 $('input[data-field="IsVisibled"]').prop('checked', editingDataRow.isVisibled);
-                $('#ParentId').append('<option value="' + (editingDataRow.parentId != null ? editingDataRow.parentId : -1) + '" selected>' + (editingDataRow.parentName != null ? editingDataRow.parentName : "Not selected") + '</option>');
 
+                $('#ParentId').append('<option value="' + (editingDataRow.parentId != null ? editingDataRow.parentId : -1) + '" selected>' + (editingDataRow.parentName != null ? editingDataRow.parentName : "Not selected") +'</option>');
+                
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });

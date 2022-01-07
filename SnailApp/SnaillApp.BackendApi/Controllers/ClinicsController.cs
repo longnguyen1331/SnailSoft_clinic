@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SnailApp.Application.Catalog.Clinics;
 using SnailApp.ViewModels.Common;
+using SnailApp.ViewModels.System.User_Clinics;
+using SnailApp.Application.SystemApplication.Users;
 
 namespace SnailApp.BackendApi.Controllers
 {
@@ -15,10 +17,14 @@ namespace SnailApp.BackendApi.Controllers
     public class ClinicsController : ControllerBase
     {
         private readonly IClinicService _clinicService;
+        private readonly IUser_ClinicService _user_ClinicService;
 
-        public ClinicsController(IClinicService clinicService)
+        public ClinicsController(IClinicService clinicService,
+            IUser_ClinicService user_ClinicService
+            )
         {
             _clinicService = clinicService;
+            _user_ClinicService = user_ClinicService;
         }
 
         [HttpGet("GetManageListPaging")]
@@ -44,7 +50,7 @@ namespace SnailApp.BackendApi.Controllers
         }
 
         [HttpPost("addorupdate")]
-        public async Task<IActionResult> AddOrUpdate([FromBody] ClinicRequest request)
+        public async Task<IActionResult> AddOrUpdate([FromForm] ClinicRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -79,6 +85,38 @@ namespace SnailApp.BackendApi.Controllers
             });
 
             return Ok(result);
+        }
+
+
+        [HttpPost("addusertoclinic")]
+        public async Task<IActionResult> AddUserToClinic([FromBody] User_ClinicDto request)
+        {
+            ApiResult<int> res =  await _user_ClinicService.AddAsync(request);
+            if (res.IsSuccessed)
+            {
+                if (res.ResultObj == 0)
+                    return BadRequest();
+            }
+
+            return Ok(res);
+        }
+
+        [HttpDelete("deleteuserfromclinic/{ids}")]
+        public async Task<IActionResult> DeleteUserFromClinic(string ids)
+        {
+            var result = await _user_ClinicService.DeleteByIds(new User_ClinicDeleteRequest()
+            {
+                Ids = ids.Split("|").Select(x => Convert.ToInt32(x)).ToList()
+            });
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetUserByClinicIdManageListPaging")]
+        public async Task<IActionResult> GetUserByClinicIdManageListPaging([FromQuery] ManageUser_ClinicPagingRequest request)
+        {
+            var clinics = await _user_ClinicService.GetUserByClinicIdManageListPaging(request);
+            return Ok(clinics);
         }
     }
 }
