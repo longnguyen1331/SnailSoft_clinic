@@ -28,6 +28,8 @@ namespace SnailApp.ApiIntegration
         Task<PagedResult<User_ClinicDto>> GetUserByClinicIdManageListPaging(ManageUser_ClinicPagingRequest request);
         Task<ApiResult<int>> AddUserToClinic(User_ClinicDto request);
         Task<ApiResult<int>> DeleteUserFromClinic(User_ClinicDeleteRequest request);
+        Task<List<User_ClinicDto>> GetClinicByUser(ManageUser_ClinicPagingRequest request);
+        Task<List<User_ClinicDto>> GetAll();
 
     }
     public class ClinicApiClient : BaseApiClient, IClinicApiClient
@@ -162,6 +164,25 @@ namespace SnailApp.ApiIntegration
         public async Task<ApiResult<int>> DeleteUserFromClinic(User_ClinicDeleteRequest request)
         {
             return await BaseDeleteByIds($"/api/clinics/deleteuserfromclinic/{string.Join("|", request.Ids)}");
+        }
+
+
+        public async Task<List<User_ClinicDto>> GetClinicByUser(ManageUser_ClinicPagingRequest request)
+        {
+            var data = await GetAsync<List<User_ClinicDto>>(
+                $"/api/clinics/GetClinicByUser?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&UserId={request.UserId}" +
+                (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+            return data;
+        }
+
+        public async Task<List<User_ClinicDto>> GetAll()
+        {
+            var data = await GetAsync<List<User_ClinicDto>>(
+                $"/api/clinics/GetAll");
+            return data;
         }
     }
 }

@@ -67,7 +67,7 @@ a {
 	width: 100%;
 	position: relative
 }
-.sidebar-wrapper {
+.sidebar-wrapper{
 	width: 250px;
 	height: 100%;
 	position: fixed;
@@ -77,7 +77,14 @@ a {
 	background: #fff;
 	border-right: 0 solid #e4e4e4;
 	z-index: 11;
-	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12)!important;
+	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12) !important;
+	transition: all .2s ease-out
+}
+
+ #RoleAssign {
+	border-right: 0 solid #e4e4e4;
+	z-index: 11;
+	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12) !important;
 	transition: all .2s ease-out
 }
 .sidebar-header {
@@ -157,7 +164,7 @@ a {
 .wrapper.toggled .page-footer {
 	left: 70px
 }
-.sidebar-wrapper ul {
+.sidebar-wrapper ul, #RoleAssign ul {
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -175,70 +182,88 @@ a {
 	-ms-flex-direction: column;
 	flex-direction: column
 }
-.sidebar-wrapper .metismenu li+li {
-	margin-top: 5px
-}
-.sidebar-wrapper .metismenu li:first-child {
-	margin-top: 5px
-}
-.sidebar-wrapper .metismenu li:last-child {
-	margin-bottom: 5px
-}
-.sidebar-wrapper .metismenu>li {
+
+ #RoleAssign .metismenu {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
-	flex-direction: column;
-	position: relative
+	flex-direction: column
 }
-.sidebar-wrapper .metismenu a {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: left;
-	padding: 8px 15px;
-	font-size: 15px;
-	color: #5f5f5f;
-	outline-width: 0;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	letter-spacing: .5px;
-	border: 1px solid #ffffff00;
-	transition: all .3s ease-out
-}
-.sidebar-wrapper .metismenu a .parent-icon {
-	font-size: 24px;
-	line-height: 1
-}
-.sidebar-wrapper .metismenu a .menu-title {
-	margin-left: 10px
-}
-.sidebar-wrapper .metismenu ul a {
-	padding: 6px 15px 6px 15px;
-	font-size: 15px;
-	border: 0
-}
-.sidebar-wrapper .metismenu ul a i {
-	margin-right: 10px
-}
-.sidebar-wrapper .metismenu ul {
-	border: 1px solid #ededed;
-	background: #fff
-}
-.sidebar-wrapper .metismenu ul ul a {
-	padding: 8px 15px 8px 30px
-}
-.sidebar-wrapper .metismenu ul ul ul a {
-	padding: 8px 15px 8px 45px
-}
-.sidebar-wrapper .metismenu .mm-active>a, .sidebar-wrapper .metismenu a:active, .sidebar-wrapper .metismenu a:focus, .sidebar-wrapper .metismenu a:hover {
-	color: #0d6efd;
-	text-decoration: none;
-	background: rgb(13 110 253 / .12)
-}
+
+	.sidebar-wrapper .metismenu li + li, #RoleAssign .metismenu li + li {
+		margin-top: 5px
+	}
+	.sidebar-wrapper .metismenu li:first-child, #RoleAssign .metismenu li:first-child {
+		margin-top: 5px
+	}
+	.sidebar-wrapper .metismenu li:last-child, #RoleAssign .metismenu li:last-child {
+		margin-bottom: 5px
+	}
+	.sidebar-wrapper .metismenu > li, #RoleAssign .metismenu > li {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		position: relative
+	}
+	.sidebar-wrapper .metismenu a, #RoleAssign .metismenu a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: left;
+		padding: 8px 15px;
+		font-size: 15px;
+		color: #5f5f5f;
+		outline-width: 0;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		letter-spacing: .5px;
+		border: 1px solid #ffffff00;
+		transition: all .3s ease-out
+	}
+		.sidebar-wrapper .metismenu a .parent-icon, #RoleAssign .metismenu a .parent-icon {
+			font-size: 24px;
+			line-height: 1
+		}
+		.sidebar-wrapper .metismenu a .menu-title, #RoleAssign .metismenu a .menu-title {
+			margin-left: 10px
+		}
+	.sidebar-wrapper .metismenu ul a, #RoleAssign .metismenu ul a {
+		padding: 6px 15px 6px 15px;
+		font-size: 15px;
+		border: 0
+	}
+		.sidebar-wrapper .metismenu ul a i, #RoleAssign .metismenu ul a i {
+			margin-right: 10px
+		}
+	.sidebar-wrapper .metismenu ul{
+		border: 1px solid #ededed;
+		background: #fff
+	}
+		.sidebar-wrapper .metismenu ul ul a, #RoleAssign .metismenu ul ul a {
+			padding: 8px 15px 8px 30px
+		}
+		.sidebar-wrapper .metismenu ul ul ul a, #RoleAssign .metismenu ul ul ul a {
+			padding: 8px 15px 8px 45px
+		}
+			.sidebar-wrapper .metismenu .mm-active > a,
+			.sidebar-wrapper .metismenu a:active,
+			.sidebar-wrapper .metismenu a:focus,
+			.sidebar-wrapper .metismenu a:hover,
+			#RoleAssign .metismenu .mm-active > a,
+			#RoleAssign .metismenu a:active,
+			#RoleAssign .metismenu a:focus,
+			#RoleAssign .metismenu a:hover {
+				color: #0d6efd;
+				text-decoration: none;
+				background: rgb(13 110 253 / .12)
+			}
 .menu-label {
 	padding: 20px 15px 5px 5px;
 	color: #b0afaf;
@@ -1960,4 +1985,23 @@ input::placeholder {
 
 w-100{
 	width:100% !important;
+}
+
+
+.role .switcher-body{
+	padding: .25em !important;
+}
+.switcher-body .accordion-body {
+	padding: 1rem .75rem;
+}
+.accordion-body .table .form-switch{
+	font-size:12px !important;
+}
+
+.accordion-body .table td {
+	border : none !important;
+}
+
+.switcher-body .accordion-body .accordion-button.collapsed {
+	border-bottom-width : 0.5 !important;
 }

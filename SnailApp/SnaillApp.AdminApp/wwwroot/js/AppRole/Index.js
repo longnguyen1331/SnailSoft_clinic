@@ -1,29 +1,20 @@
 ﻿//== Class definition
 
 var AppRole = function () {
-    let dtTable = null;
-    let modal = $("#modal_edit"),
-        modal_form = $("#modal_edit_form"),
-        modal_form_buttonSubmit = $('#modal_edit_submit'),
-        modal_header_text = $("#modal_edit_header_text");
-    let editingDataRow = null;
-
-    let modal_role_assign = $("#modal_edit_role_assign"),
-        modal_role_assign_form = $("#modal_edit_role_assign_form"),
-        modal_role_assign_form_buttonSubmit = $('#modal_edit_role_assign_submit'),
-        modal_role_assign_header_text = $("#modal_edit_role_assign_header_text"),
-        modal_role_assign_form_submit_text = $("#modal_edit_role_assign_submit_text");
+    let dtTable = null,editingData = null;
+    let edit_form = $("#edit_form");
+  
 
     let loadMenuAppRoleData = (appRoleId) => {
         App.sendDataToURL("/MenuAppRole/GetByAppRoleId?appRoleId=" + appRoleId, null, "GET")
             .then(function (res) {
-                
                 if (!res.isSuccessed) {
-                    Swal.fire(App.swalFireErrorDefaultOption(res.message))
+                    App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
                 }
                 else {
                     for (let i = 0; i < res.resultObj.length; i++) {
                         let item = res.resultObj[i];
+                        console.log(item.menuId, item.menuAppRoleType,  item.isAllow);
                         $("input[data-menuid='" + item.menuId + "'][data-menuapproletype='" + item.menuAppRoleType + "']").prop("checked", item.isAllow);
                     }                    
                 }
@@ -39,25 +30,26 @@ var AppRole = function () {
             }
         });
 
-        $('[name="btnCreate"]').click(function (e) {
+
+        $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
-            editingDataRow = null;
-            modal_header_text.text("Create");
             resetForm();
-            modal.modal("show");
+            $('#CreateInfomation').show();
+            $('#RoleAssign').hide();
+            $('.switcher-btn').trigger('click');
         });
+
 
         $('#btnRefreshData').click(function (e) {
             e.preventDefault();
             dtTable.draw();
         });
 
-        $('#modal_edit_submit').click(function (e) {
+        $('[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
             let result = {};
-            modal_form.find("select, textarea, input").each((index, el) => {
+            edit_form.find("select, textarea, input").each((index, el) => {
                 let fieldName = $(el).data("field");
-
                 if (fieldName) {
 
                     switch (fieldName) {
@@ -68,20 +60,20 @@ var AppRole = function () {
                 }
             }),
             data = {
-                Id: (editingDataRow != null ? editingDataRow.id : ""),
+                Id: (editingData != null ? editingData.id : ""),
                 Data: result
             },
             App.sendDataToURL("/AppRole/Save", data, "POST")
                 .then(function (res) {
-                    modal_form_buttonSubmit.removeAttr("data-kt-indicator");
                     if (!res.isSuccessed) {
-                        Swal.fire(App.swalFireErrorDefaultOption(res.message))
+                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+
                     }
                     else {
-                        Swal.fire(App.swalFireSuccessDefaultOption())
-                        editingDataRow = null;
+                        editingData = null;
                         dtTable.draw();
                         resetForm();
+                        App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
                     }
                 }
             )
@@ -106,14 +98,14 @@ var AppRole = function () {
             let data = {
                 MenuId: $(this).data("menuid"),
                 MenuAppRoleType: $(this).data("menuapproletype"),
-                AppRoleId: editingDataRow.id,
+                AppRoleId: editingData.id,
                 IsAllow: $(this).is(":checked")
             };
 
             App.sendDataToURL("/MenuAppRole/Save", data, "POST")
             .then(function (res) {
                 if (!res.isSuccessed) {
-                    Swal.fire(App.swalFireErrorDefaultOption(res.message))
+                    App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
                 }
             });
         });
@@ -191,7 +183,10 @@ var AppRole = function () {
                     
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit">\
+                        html += '<a href="#" class="role-assign">\
+					                <i class="bx bx-recycle"></i>\
+				                </a>\
+                            <a href="#" class="edit ms-3">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
@@ -210,17 +205,51 @@ var AppRole = function () {
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
-            editingDataRow = dtTable.row($(this).parents('tr')).data();
-             
-            modal_header_text.text("Update");
+            editingData = dtTable.row($(this).parents('tr')).data();
 
-            $('input[data-field="Code"]').val(editingDataRow.code);
-            $('input[data-field="Name"]').val(editingDataRow.name);
-            $('input[data-field="Description"]').val(editingDataRow.description);
+            edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
+                let fieldName = $(el).data("field");
+                let type = $(el).attr("type");
+                if (fieldName) {
+                    switch (fieldName) {
+                        default:
+                            if ($(el).is("textarea")) {
+                                $('textarea[data-field="' + fieldName + '"]').text(editingData[App.lowerFirstLetter(fieldName)]);
+                            } else if ($(el).is("input")) {
+                                if (type === "checkbox") {
+                                    $('input[data-field="' + fieldName + '"]').prop('checked', editingData[App.lowerFirstLetter(fieldName)]);
+                                } else if (type === "date") {
+                                    $('input[data-field="' + fieldName + '"]').val(editingData[App.lowerFirstLetter(fieldName)].substring(0, 10));
+                                } else if (type === "file") {
+                                    $('#avatarImage').attr('src', editingData[App.lowerFirstLetter(fieldName)]);
+                                } else {
+                                    $('input[data-field="' + fieldName + '"]').val(editingData[App.lowerFirstLetter(fieldName)]);
+                                }
+                            }
+                            break;
+                    }
+                }
+            });
+
+            $('#CreateInfomation').show();
+            $('#RoleAssign').hide();
+            if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+        });
+
+     
+        $('#dtTable tbody').on('click', 'a.role-assign', function (e) {
+            e.preventDefault();
+
+            resetForm_role_assign();
+
+            editingData = dtTable.row($(this).parents('tr')).data();
             
-            setTimeout(function () { $('input[name="modal_edit_form_code"]').focus() }, 500);
-
-            modal.modal('show');
+            if (editingData) {
+                loadMenuAppRoleData(editingData.id);
+                $('#CreateInfomation').hide();
+                $('#RoleAssign').show();
+                $('.switcher-btn').trigger('click');
+            }
         });
 
         $('#dtTable tbody').on('click', 'a.delete', function (e) {
@@ -231,40 +260,22 @@ var AppRole = function () {
             }
         });
 
-        $('#dtTable tbody').on('click', 'a.role-assign', function (e) {
-            e.preventDefault();
-
-            resetForm_role_assign();
-
-            editingDataRow = dtTable.row($(this).parents('tr')).data();
-            
-            if (editingDataRow) {
-                loadMenuAppRoleData(editingDataRow.id);
-            }
-            
-
-            modal_role_assign.modal('show');
-            
-        });
     };
 
     let resetForm = () => {
-        modal_form[0].reset();
-        setTimeout(function () { $('input[name="modal_edit_form_code"]').focus() }, 500);
+        edit_form[0].reset();
     }
 
     let resetForm_role_assign = () => {
-        modal_role_assign_form[0].reset();
-
         $("input[name='modal_edit_role_assign_checkbox']").prop("checked", false);
     }
 
     function deleteDataRows(dataRows) {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/AppRole/DeleteByIds", dtTable, null)
-            .then(function () {
-                dtTable.draw();
-                App.showHideButtonDelete(false);
-            });
+        .then(function () {
+            dtTable.draw();
+            App.showHideButtonDelete(false);
+        });
     }
 
     return {

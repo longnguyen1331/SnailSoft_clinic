@@ -8,15 +8,16 @@ namespace SnailApp.ViewModels.Enums
 {
     public enum MenuAppRoleType: Byte
     {
-        GlobalDataView = 0,
-        GlobalDataEdit = 1,
-        GlobalDataDelete = 2,
-        SystemDataView = 3,
-        SystemDataEdit = 4,
-        SystemDataDelete = 5,
-        PersonalDataView = 6,
-        PersonalDataEdit = 7,
-        PersonalDataDelete = 8,
-        DownloadExcel = 9
+      
+        SystemDataView = 0,
+        SystemDataEdit = 1,
+        SystemDataDelete = 2,
+        PersonalDataView = 3,
+        PersonalDataEdit = 4,
+        PersonalDataDelete = 5,
+        DownloadExcel = 6,
+        GlobalDataView = 7,
+        GlobalDataEdit = 8,
+        GlobalDataDelete = 9
     }
 }

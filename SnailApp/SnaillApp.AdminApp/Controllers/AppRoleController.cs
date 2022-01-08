@@ -34,8 +34,9 @@ namespace SnailApp.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            model.PageTitle = "Phân quyền";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Phân quyền" };
+            ViewBag.Title = "Role";
+            model.PageTitle = "Role";
+            model.Breadcrumbs = new List<string>() { "Setting", "Role" };
 
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
 
@@ -46,7 +47,7 @@ namespace SnailApp.AdminApp.Controllers
 
             if (menuApiClient.IsSuccessed)
             {
-                model.HTMLMenu = GenerateHtmlMenu(menuApiClient.ResultObj);
+                model.Menus = menuApiClient.ResultObj;
             }
 
             return View(model);
@@ -155,7 +156,7 @@ namespace SnailApp.AdminApp.Controllers
         {
             string result = string.Empty;
 
-            foreach (var menu in menus.Where(m => m.ParentId == null).OrderBy(m => m.SortOrder))
+            foreach (var menu in menus.Where(m => m.ParentId == null || m.ParentId.Value == 0).OrderBy(m => m.SortOrder))
             {
                 result += GenerateHtmlMenuNode(menu, menus);
             }
@@ -168,39 +169,17 @@ namespace SnailApp.AdminApp.Controllers
 
             string eleId = "modal_edit_role_assign_menu_" + currentMenu.Id.ToString();
             //begin::Section
-            str += $@"<div class='m-0'>";
-            //begin::Heading
-            str += $@"<div class='d-flex align-items-center collapsible py-3 toggle mb-0' data-bs-toggle='collapse' data-bs-target='#" + eleId + "'>";
-            //begin::Icon
-            str += $@"<div class='btn btn-sm btn-icon mw-20px btn-active-color-primary me-5'>";
-            //begin::Svg Icon | path: icons/duotone/Interface/Minus-Square.svg
-            str += $@"<span class='svg-icon toggle-on svg-icon-primary svg-icon-1'>";
-            str += $@"<svg xmlns = 'http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>";
-            str += $@"<path opacity='0.25' d='M6.54184 2.36899C4.34504 2.65912 2.65912 4.34504 2.36899 6.54184C2.16953 8.05208 2 9.94127 2 12C2 14.0587 2.16953 15.9479 2.36899 17.4582C2.65912 19.655 4.34504 21.3409 6.54184 21.631C8.05208 21.8305 9.94127 22 12 22C14.0587 22 15.9479 21.8305 17.4582 21.631C19.655 21.3409 21.3409 19.655 21.631 17.4582C21.8305 15.9479 22 14.0587 22 12C22 9.94127 21.8305 8.05208 21.631 6.54184C21.3409 4.34504 19.655 2.65912 17.4582 2.36899C15.9479 2.16953 14.0587 2 12 2C9.94127 2 8.05208 2.16953 6.54184 2.36899Z' fill='#12131A' />";
-            str += $@"<path d='M8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11H16C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13H8Z' fill='#12131A' />";
-            str += $@"</svg>";
-            str += $@"</span>";
-            //end::Svg Icon
-            //begin::Svg Icon | path: icons / duotone / Interface / Plus - Square.svg
-            str += $@"<span class='svg-icon toggle-off svg-icon-1'>";
-            str += $@"<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>";
-            str += $@"<path opacity='0.25' fill-rule='evenodd' clip-rule='evenodd' d='M6.54184 2.36899C4.34504 2.65912 2.65912 4.34504 2.36899 6.54184C2.16953 8.05208 2 9.94127 2 12C2 14.0587 2.16953 15.9479 2.36899 17.4582C2.65912 19.655 4.34504 21.3409 6.54184 21.631C8.05208 21.8305 9.94127 22 12 22C14.0587 22 15.9479 21.8305 17.4582 21.631C19.655 21.3409 21.3409 19.655 21.631 17.4582C21.8305 15.9479 22 14.0587 22 12C22 9.94127 21.8305 8.05208 21.631 6.54184C21.3409 4.34504 19.655 2.65912 17.4582 2.36899C15.9479 2.16953 14.0587 2 12 2C9.94127 2 8.05208 2.16953 6.54184 2.36899Z' fill='#12131A' />";
-            str += $@"<path fill-rule='evenodd' clip-rule='evenodd' d='M12 17C12.5523 17 13 16.5523 13 16V13H16C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11H13V8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8V11H8C7.44772 11 7 11.4477 7 12C7 12.5523 7.44771 13 8 13H11V16C11 16.5523 11.4477 17 12 17Z' fill='#12131A' />";
-            str += $@"</svg>";
-            str += $@"</span>";
-            //end::Svg Icon
+            str += $@"<div class='accordion-item'>";
+            str += $@"<h2 class='accordion-header' id='heading" + eleId + "'>";
+            str += $@"<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#" + eleId + "' aria-expanded='false' aria-controls='collapse" + eleId + "'>";
+            str += currentMenu.Name;
+            str += $@"</button>";
+            str += $@"</h2>";
             str += $@"</div>";
-            //end::Icon
-            //begin::Title
-            str += $@"<h4 class='text-gray-700 fw-bolder cursor-pointer mb-0'>" + currentMenu.Name + "</h4>";
-            //end::Title
-            str += $@"</div>";
-            //end::Heading
+
+            str += $@"<div id='" + eleId + "' class='accordion-collapse collapse' aria-labelledby='heading" + eleId + "' data-bs-parent='#accordion" + eleId + "'>";
             //begin::Body
-            str += $@"<div id='" + eleId + "' class='collapse show fs-6 ms-1'>";
-            //begin::Text
-            str += $@"<div class='mb-4 text-gray-600 fw-bold fs-6 ps-10'>";
-            //begin::Wrapper
+            str += $@"<div class='accordion-body'>";
             //begin::Table wrapper
             str += $@"<div class='table-responsive'>";
             //begin::Table
@@ -209,79 +188,61 @@ namespace SnailApp.AdminApp.Controllers
             str += $@"<tbody class='text-gray-600 fw-bold'>";
             str += $@"<tr>";
             str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<label class='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.GlobalDataView).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xem tất cả dữ liệu</span>";
-            str += $@"</label>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox-->
-            str += $@"<label class='form-check form-check-custom form-check-solid me-5 me-lg-20'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.GlobalDataEdit).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Chỉnh sửa tất cả dữ liệu</span>";
-            str += $@"</label>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<label class='form-check form-check-custom form-check-solid'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.GlobalDataDelete).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xóa tất cả dữ liệu</span>";
-            str += $@"</label>";
+
+
+
             //end::Checkbox
             str += $@"</td>";
             str += $@"</tr>";
             str += $@"<tr>";
             str += $@"<td>";
             //begin::Checkbox
-            str += $@"<label class='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataView).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xem dữ liệu hệ thống</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>View system</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"<td>";
             //begin::Checkbox-->
-            str += $@"<label class='form-check form-check-custom form-check-solid me-5 me-lg-20'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataEdit).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Chỉnh sửa dữ liệu hệ thống</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>Edit system</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"<td>";
             //begin::Checkbox
-            str += $@"<label class='form-check form-check-custom form-check-solid'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataDelete).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xóa dữ liệu hệ thống</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>Delete system</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"</tr>";
             str += $@"<tr>";
             str += $@"<td>";
             //begin::Checkbox
-            str += $@"<label class='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataView).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xem dữ liệu cá nhân</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>View person</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"<td>";
             //begin::Checkbox-->
-            str += $@"<label class='form-check form-check-custom form-check-solid me-5 me-lg-20'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataEdit).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Chỉnh sửa dữ liệu cá nhân</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>Edit person</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"<td>";
             //begin::Checkbox
-            str += $@"<label class='form-check form-check-custom form-check-solid'>";
+            str += $@"<div class='form-check form-switch'>";
             str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataDelete).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<span class='form-check-label'>Xóa dữ liệu cá nhân</span>";
-            str += $@"</label>";
+            str += $@"<label class='form-check-label'>Delete person</label>";
+            str += $@"</div>";
             //end::Checkbox
             str += $@"</td>";
             str += $@"</tr>";
@@ -290,21 +251,19 @@ namespace SnailApp.AdminApp.Controllers
             str += $@"</div>";
             //end::Table wrapper
 
+
             foreach (var subMenu in menus.Where(m => m.ParentId != null && m.ParentId == currentMenu.Id).OrderBy(m => m.SortOrder))
             {
                 str += GenerateHtmlMenuNode(subMenu, menus);
             }
 
-            str += $@"</div>";
-            //end::Text
+
             str += $@"</div>";
             //end::Body
-            //begin::Separator
-            str += $@"<div class='separator separator-dashed'></div>'";
-            //end::Separator
-            str += $@"</div>";
-            //end::Section
 
+            str += $@"</div>";
+
+          
             return str;
         }
     }

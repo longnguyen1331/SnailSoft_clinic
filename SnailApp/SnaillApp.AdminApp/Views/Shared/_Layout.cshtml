@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.css" integrity="sha512-jtQXcnq6H9BVx+dOsdudNCZmNe2hBMqcPpnVgeZcV9L3615F4+QMQebbWW9TV2otOSk/kQgum0MpWefB3uL3pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @RenderSection("Vendors_CSS", false)
 
+    <link href="~/snailsoft/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+	<link href="~/snailsoft/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
+    <link href="@Url.Content("~/css/customiseSelect2.css")" rel="stylesheet" />
 
     <!-- JQUERy -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -120,6 +123,7 @@
 
     <!-- Specific Page Scripts Put Here -->
     @RenderSection("Vendors_Scripts", false)
+	<script src="~/snailsoft/assets/plugins/select2/js/select2.min.js"></script>
 
     @RenderSection("FooterScript", false)
     @RenderSection("Custom_Scripts", false)

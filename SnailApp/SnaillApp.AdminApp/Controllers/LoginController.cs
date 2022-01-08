@@ -17,21 +17,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SnailApp.Application.SystemApplication.Users;
+using SnailApp.ViewModels.System.User_Clinics;
 
 namespace SnailApp.AdminApp.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IClinicApiClient _clinicApiClient;
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
         private readonly IAdminAppUIApiClient _adminAppUIApiClient;
 
-        public LoginController(IUserApiClient userApiClient, IConfiguration configuration,
-                                IAdminAppUIApiClient adminAppUIApiClient)
+        public LoginController(IUserApiClient userApiClient, 
+                                IConfiguration configuration,
+                                IAdminAppUIApiClient adminAppUIApiClient,
+                                IClinicApiClient clinicApiClient
+            )
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
             _adminAppUIApiClient = adminAppUIApiClient;
+            _clinicApiClient = clinicApiClient;
         }
 
         [HttpGet]
@@ -67,7 +74,9 @@ namespace SnailApp.AdminApp.Controllers
                 RememberMe = model.RememberMe
             });
 
-            if(!result.IsSuccessed)
+
+           
+            if (!result.IsSuccessed)
             {
                 model.Message = "Tên truy cập hoặc mật khẩu không đúng.";
                 return View(model);
@@ -80,7 +89,10 @@ namespace SnailApp.AdminApp.Controllers
                     return View(model);
                 }
             }
-            
+
+
+
+         
             var userPrincipal = this.ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
@@ -90,11 +102,27 @@ namespace SnailApp.AdminApp.Controllers
 
             int languageId = Convert.ToInt32(_configuration[SystemConstants.AppConstants.DefaultLanguageId]);
             string userId = userPrincipal.Claims.Where(c => c.Type == ClaimTypes.PrimarySid).Select(c => c.Value).SingleOrDefault();
+            string username = userPrincipal.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault();
+            List<User_ClinicDto> clinics = null;
+            if (username != "admin@gmail.com")
+            {
+                clinics = await _clinicApiClient.GetClinicByUser(
+                new ViewModels.System.User_Clinics.ManageUser_ClinicPagingRequest() { UserId = Guid.Parse(userId) });
+                if (clinics == null || clinics.Count == 0)
+                {
+                    model.Message = "No clinic management.";
+                    return View(model);
+                }
+            }
+            else
+            {
+                clinics = await _clinicApiClient.GetAll();
+            }
 
             HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultLanguageId, languageId.ToString());
             HttpContext.Session.SetString(SystemConstants.AppConstants.Token, result.ResultObj);
             HttpContext.Session.SetString(SystemConstants.AppConstants.UserId, userId);
-            HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultStoreId, _configuration[SystemConstants.AppConstants.DefaultStoreId]);
+            HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultClinicId, clinics[0].ClinicId.ToString());
 
             var userApiClient = await _userApiClient.GetAllRoleByUserId(new UserRoleRequest() {
                 LanguageId = languageId,

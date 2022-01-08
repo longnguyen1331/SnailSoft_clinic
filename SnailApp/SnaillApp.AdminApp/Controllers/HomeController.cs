@@ -50,7 +50,6 @@ namespace SnailApp.AdminApp.Controllers
             return Redirect(viewModel.ReturnUrl);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest rq)
         {
@@ -73,24 +72,16 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(result);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> GetReport([FromBody] ManageReportSummaryPagingRequest rq)
+        public IActionResult ChangeClinic([FromBody] ClinicFilterViewModel request)
         {
-            int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-            int storeId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultStoreId));
-
-            var request = new ManageReportSummaryPagingRequest()
+            if(!string.IsNullOrEmpty(request.CurrentClinicId))
             {
-                StoreId = storeId,
-                LanguageId = languageId,
-                FromDate = rq.FromDate,
-                ToDate = rq.ToDate,
-            };
-
-            return Json(new
-            {
-                data = "abc"
-            });
+                HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultClinicId, request.CurrentClinicId);
+            }
+           
+            return Json(request.ReturnUrl);
         }
     }
 }

@@ -8,5 +8,6 @@ namespace SnailApp.ViewModels.System.User_Clinics
     public class ManageUser_ClinicPagingRequest : PagingRequestBase
     {
         public int ClinicId { set; get; }
+        public Guid UserId { set; get; }
     }
 }
