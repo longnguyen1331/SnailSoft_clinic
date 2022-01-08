@@ -43,11 +43,16 @@
    
    $('#select_clinic').change(function (e) {
            e.preventDefault();
-   App.sendDataToURL("/Home/ChangeClinic?CurrentClinicId=" + $(this).val() + "&ReturnUrl="  + window.location.href, null, "GET")
-   .then(function (res) {
-   });
-       });
-   });
+           App.sendDataToURL("/Home/ChangeClinic",
+           {
+               CurrentClinicId :  $(this).val(),
+               ReturnUrl :  window.location.href
+           }, "POST")
+           .then(function (res) {
+              window.location.href= res;
+           });
+        });
+    });
    
    function CheckFormDoiMatKhau() {
        var check = true;

@@ -8,7 +8,6 @@ var AppRole = function () {
     let loadMenuAppRoleData = (appRoleId) => {
         App.sendDataToURL("/MenuAppRole/GetByAppRoleId?appRoleId=" + appRoleId, null, "GET")
             .then(function (res) {
-                console.log(res);
                 if (!res.isSuccessed) {
                     App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
                 }

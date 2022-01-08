@@ -73,14 +73,15 @@ namespace SnailApp.AdminApp.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult ChangeClinic(string CurrentClinicId, string ReturnUrl)
+        [HttpPost]
+        public IActionResult ChangeClinic([FromBody] ClinicFilterViewModel request)
         {
-            if(!string.IsNullOrEmpty(CurrentClinicId))
+            if(!string.IsNullOrEmpty(request.CurrentClinicId))
             {
-                HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultClinicId, CurrentClinicId);
+                HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultClinicId, request.CurrentClinicId);
             }
-            return Redirect(ReturnUrl);
+           
+            return Json(request.ReturnUrl);
         }
     }
 }
