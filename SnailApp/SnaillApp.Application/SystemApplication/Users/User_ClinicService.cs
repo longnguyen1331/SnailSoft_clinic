@@ -17,6 +17,7 @@ namespace SnailApp.Application.SystemApplication.Users
 {
     public interface IUser_ClinicService
     {
+        Task<List<User_ClinicDto>> GetAll();
         Task<List<User_ClinicDto>> GetClinicByUser(ManageUser_ClinicPagingRequest request);
         Task<PagedResult<User_ClinicDto>> GetUserByClinicIdManageListPaging(ManageUser_ClinicPagingRequest request);
         Task<ApiResult<int>> DeleteByIds(User_ClinicDeleteRequest request);
@@ -55,6 +56,23 @@ namespace SnailApp.Application.SystemApplication.Users
                 int totalRow = await query.CountAsync();
                 var data = await query.AsNoTracking().ToListAsync();
                 return data;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<User_ClinicDto>> GetAll()
+        {
+            try
+            {
+                return await  (from c in _context.Clinics 
+                            select new User_ClinicDto()
+                            {
+                                ClinicId = c.Id,
+                                ClinicName = c.Name
+                            }).AsNoTracking().ToListAsync(); ;
             }
             catch (Exception ex)
             {
@@ -148,10 +166,12 @@ namespace SnailApp.Application.SystemApplication.Users
 
                 if(check == null)
                 {
-                    var clinic = _mapper.Map<AppUser_Clinic>(request);
-                    _context.User_Clinics.Add(clinic);
+                    var appUser_clinic = _mapper.Map<AppUser_Clinic>(request);
+                    appUser_clinic.Clinic =  await _context.Clinics.FindAsync(appUser_clinic.ClinicID);
+                    appUser_clinic.AppUser =  await _context.AppUsers.FindAsync(appUser_clinic.UserId);
+                    _context.User_Clinics.Add(appUser_clinic);
                     await _context.SaveChangesAsync();
-                    return new ApiSuccessResult<int>(clinic.Id);
+                    return new ApiSuccessResult<int>(appUser_clinic.Id);
                 }
 
                 return new ApiResult<int>()

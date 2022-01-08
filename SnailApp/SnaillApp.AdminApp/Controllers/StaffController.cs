@@ -267,7 +267,6 @@ namespace SnailApp.AdminApp.Controllers
         public async Task<IActionResult> Filter(string textSearch)
         {
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
-            int storeId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultStoreId));
 
             var request = new ManageUserPagingRequest()
             {

@@ -126,7 +126,12 @@ namespace SnailApp.BackendApi.Controllers
             var clinics = await _user_ClinicService.GetClinicByUser(request);
             return Ok(clinics);
         }
-
-        
+        [AllowAnonymous]
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var clinics = await _user_ClinicService.GetAll();
+            return Ok(clinics);
+        }
     }
 }

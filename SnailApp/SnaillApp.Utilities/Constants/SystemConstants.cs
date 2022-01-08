@@ -9,7 +9,7 @@ namespace SnailApp.Utilities.Constants
         public class AppConstants
         {
             public const string DefaultLanguageId = "DefaultLanguageId";
-            public const string DefaultStoreId = "DefaultStoreId";
+            public const string DefaultClinicId = "DefaultClinicId";
             public const string Logo = "Logo";
             public const string StoreName = "StoreName";
             public const string UserId = "UserId"; 

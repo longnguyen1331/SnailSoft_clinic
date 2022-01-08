@@ -23,22 +23,6 @@ var Home = function () {
         if (!App.isNullOrEmpty($('#fromToDate').val())) {
             tDate=  $('#fromToDate').val().split('-')[1] !== undefined ? $('#fromToDate').val().split('-')[1].trim() : '';
         }
-
-        App.sendDataToURL("/Home/GetReport", { FromDate: fDate, ToDate: tDate }, "POST")
-            .then(function (res) {
-                console.log(res);
-                $('.thu').text(Util.dinhDangTien(res.data.totalCollectMoney) + "đ")
-                $('.chi').text(Util.dinhDangTien(res.data.totalPayment) + "đ")
-                $('.thuMinusChi').text(Util.dinhDangTien(res.data.totalCollectMoney - res.data.totalPayment) + "đ")
-                
-                $('.grossProfit').text(Util.dinhDangTien(res.data.grossProfit) + "đ")
-                $('.revenue').text(Util.dinhDangTien(res.data.revenue) + "đ")
-                $('.totalOrders').text(Util.dinhDangTien(res.data.totalOrders))
-                $('.ordeRaverageValue').text(Util.dinhDangTien(res.data.ordeRaverageValue) + "đ")
-                $('.totalProductInStock').text(Util.dinhDangTien(res.data.totalProductInStock))
-                $('.totalProductOutStock').text(Util.dinhDangTien(res.data.totalProductOutStock))
-            }
-        )
     };
 
 

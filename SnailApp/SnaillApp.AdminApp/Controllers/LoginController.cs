@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SnailApp.Application.SystemApplication.Users;
+using SnailApp.ViewModels.System.User_Clinics;
 
 namespace SnailApp.AdminApp.Controllers
 {
@@ -102,24 +103,26 @@ namespace SnailApp.AdminApp.Controllers
             int languageId = Convert.ToInt32(_configuration[SystemConstants.AppConstants.DefaultLanguageId]);
             string userId = userPrincipal.Claims.Where(c => c.Type == ClaimTypes.PrimarySid).Select(c => c.Value).SingleOrDefault();
             string username = userPrincipal.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault();
-
-            if(username != "admin@gmail.com")
+            List<User_ClinicDto> clinics = null;
+            if (username != "admin@gmail.com")
             {
-                var clinics = await _clinicApiClient.GetClinicByUser(
-              new ViewModels.System.User_Clinics.ManageUser_ClinicPagingRequest() { UserId = Guid.Parse(userId) });
+                clinics = await _clinicApiClient.GetClinicByUser(
+                new ViewModels.System.User_Clinics.ManageUser_ClinicPagingRequest() { UserId = Guid.Parse(userId) });
                 if (clinics == null || clinics.Count == 0)
                 {
                     model.Message = "No clinic management.";
                     return View(model);
                 }
             }
-            
-
+            else
+            {
+                clinics = await _clinicApiClient.GetAll();
+            }
 
             HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultLanguageId, languageId.ToString());
             HttpContext.Session.SetString(SystemConstants.AppConstants.Token, result.ResultObj);
             HttpContext.Session.SetString(SystemConstants.AppConstants.UserId, userId);
-            HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultStoreId, _configuration[SystemConstants.AppConstants.DefaultStoreId]);
+            HttpContext.Session.SetString(SystemConstants.AppConstants.DefaultClinicId, clinics[0].ClinicId.ToString());
 
             var userApiClient = await _userApiClient.GetAllRoleByUserId(new UserRoleRequest() {
                 LanguageId = languageId,

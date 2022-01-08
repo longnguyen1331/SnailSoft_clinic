@@ -9,8 +9,8 @@ namespace SnailApp.AdminApp.Models
         public List<LanguageDto> Languages { get; set; }
         public List<User_ClinicDto> Clinics { get; set; }
 
+        public int CurrentClinicId { get; set; }
         public int CurrentLanguageId { get; set; }
-        public string HtmlMenus { set; get; }
         public string ReturnUrl { set; get; }
         public string UserImage { set; get; }
         public string FullName { set; get; }
