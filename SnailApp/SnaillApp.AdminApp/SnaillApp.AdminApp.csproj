@@ -53,4 +53,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Appointments\" />
+    <Folder Include="Views\Examinations\" />
+    <Folder Include="Views\Doctors\" />
+    <Folder Include="Views\Services\" />
+  </ItemGroup>
+
 </Project>
