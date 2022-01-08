@@ -48,6 +48,16 @@ body {
 	background: rgb(255 255 255 / .81) !important;
 	background-clip: border-box;
 	border-radius: 1em !important;
+	width:80%
+}
+.snail-primary-color {
+	color: #E36828;
+}
+.snail-green-color {
+	color: #19A9A8;
+}
+.snail-text-shadow {
+	text-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)
 }
 /*END SNAIL SOFT*/
 a {
