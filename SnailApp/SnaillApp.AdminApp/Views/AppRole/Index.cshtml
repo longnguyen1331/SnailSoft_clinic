@@ -1,8 +1,5 @@
 ﻿@model AppRoleViewModel
-
-@{
-    ViewBag.Title = "Phân quyền";
-}
+@using SnailApp.ViewModels.Enums;
 
 @section Vendors_CSS{
     <link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
@@ -70,40 +67,270 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modal_edit" tabindex="-1" style="display: none;" aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modal_edit_header_text"></h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-                <form id="modal_edit_form">
-                    <div class="row g-0">
-					
-						<div class="col-md-12" >
-							<label class="form-label">Code</label>
-							<input type="text" class="form-control radius-15" name="modal_edit_form_code" data-field="Code" placeholder="Enter code">
-						</div>
-						<div class="col-md-12" >
-							<label class="form-label">Name</label>
-							<input type="text" class="form-control radius-15" name="modal_edit_form_name" data-field="Name" placeholder="Enter name">
-						</div>
-						<div class="col-md-12" >
-							<label class="form-label">Description</label>
-							<input type="text" class="form-control radius-15" data-field="Description" placeholder="Enter name">
-						</div>
+
+<div class="switcher-wrapper role">
+	<div class="switcher-btn" hidden> <i class="bx bx-cog bx-spin"></i>
+	</div>
+	<div class="switcher-body"  style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
+		<div class="d-flex align-items-center mb-5">
+			<h5 class="mb-0 text-uppercase" id="titleCreateOrUpdate">Create</h5>
+			<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+		</div>
+
+		<div id="CreateInfomation">
+			<form id="edit_form">
+			<div class="row g-0">
+				<div class="col-md-12 px-1" >
+					<div class="mb-3">
+						<label class="form-label">Code(*)</label>
+						<input type="text" class="form-control radius-15" data-field="Code" placeholder="Enter code">
 					</div>
-                </form>
-            </div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" id="modal_edit_submit" name="btnSubmitModal">Save</button>
+				</div>
+
+				<div class="col-md-12 px-1" >
+
+					<div class="mb-3 px-1">
+						<label class="form-label">Name(*)</label>
+						<input type="text" class="form-control radius-15" data-field="Name" placeholder="Enter name">
+					</div>
+				</div>
+
+				<div class="col-md-12" >
+					<div class="mb-3 px-1">
+						<label class="form-label">Description</label>
+						<input type="text" class="form-control radius-15" data-field="Description" placeholder="Enter description">
+					</div>
+				</div>
+
+				<div class="col-md-6" >
+					<div class="mb-3 px-1">
+						<button type="button" class="btn btn-danger px-5 radius-15 w-100" name="btnCancel">Cancel</button>
+
+					</div>
+				</div>
+				<div class="col-md-6" >
+					<div class="mb-3 px-1">
+						<button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Update</button>
+
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+
+		<div id="RoleAssign">
+			<div class="header-colors-indigators">
+				<div class="row g-0">
+					<div class="col-md-12" >
+					
+                        <div id="accordion">
+                         
+
+                            @foreach (var menuCap1 in Model.Menus.Where(m => m.ParentId == null || m.ParentId.Value == 0).OrderBy(m => m.SortOrder))
+                            {
+                                if (Model.Menus.Count(m => m.ParentId != null && m.ParentId == menuCap1.Id) > 0)
+                                {
+                                  
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="heading-@menuCap1.Id">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@menuCap1.Id" aria-expanded="false" aria-controls="collapse-@menuCap1.Id">
+                                              @menuCap1.Name
+                                            </button>
+                                          </h2>
+                                        </div>
+                                        <div id="collapse-@menuCap1.Id" class="accordion-collapse collapse" data-parent="#accordion" aria-labelledby="heading-@menuCap1.Id">
+                                          <div class="accordion-body">
+                                                <table class='table align-middle table-row-dashed fs-6 gy-5'>
+                                                    <tbody class='text-gray-600 fw-bold'>
+                                                        <tr>
+                                                        <td>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>View system</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Edit system</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Delete system</label>
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>View person</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Edit person</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Delete person</label>
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                @foreach (var menuCap2 in Model.Menus.Where(m => m.ParentId != null && m.ParentId == menuCap1.Id).OrderBy(m => m.SortOrder))
+                                                {
+                                                    <div id="accordion-@menuCap1.Id">
+                                                        <div class="card">
+                                                            <div class="accordion-item">
+                                                              <h2 class="accordion-header" id="heading-@menuCap2.Id">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@menuCap2.Id" aria-expanded="false" aria-controls="collapse-@menuCap1.Id">
+                                                                  @menuCap2.Name
+                                                                </button>
+                                                              </h2>
+                                                            </div>
+                                                            <div id="collapse-@menuCap2.Id" class="accordion-collapse collapse" data-parent="#accordion-@menuCap1.Id" aria-labelledby="heading-@menuCap2.Id">
+                                                              <div class="accordion-body">
+                                                                    <table class='table align-middle table-row-dashed fs-6 gy-5'>
+                                                                        <tbody class='text-gray-600 fw-bold'>
+                                                                            <tr>
+                                                                            <td>
+                                                                            </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>View system</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>Edit system</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>Delete system</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>View person</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>Edit person</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class='form-check form-switch'>
+                                                                                    <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap2.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                                    <label class='form-check-label'>Delete person</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                          </div>
+                                        </div>
+
+
+
+                                }
+                                else
+                                {
+                                        <div class="accordion-item">
+                                          <h2 class="accordion-header" id="heading-@menuCap1.Id">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@menuCap1.Id" aria-expanded="false" aria-controls="collapse-@menuCap1.Id">
+                                              @menuCap1.Name
+                                            </button>
+                                          </h2>
+                                        </div>
+                                        <div id="collapse-@menuCap1.Id" class="accordion-collapse collapse" data-parent="#accordion" aria-labelledby="heading-@menuCap1.Id">
+                                          <div class="accordion-body">
+                                                <table class='table align-middle table-row-dashed fs-6 gy-5'>
+                                                    <tbody class='text-gray-600 fw-bold'>
+                                                        <tr>
+                                                        <td>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>View system</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Edit system</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.SystemDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Delete system</label>
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataView)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>View person</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataEdit)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Edit person</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class='form-check form-switch'>
+                                                                <input class='form-check-input' type='checkbox' value='' data-menuid='@menuCap1.Id' data-menuapproletype='@((int)MenuAppRoleType.PersonalDataDelete)' name='modal_edit_role_assign_checkbox' />
+                                                                <label class='form-check-label'>Delete person</label>
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                          </div>
+                                        </div>
+                                }
+                            }
+                        </div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-	
-            @await Html.PartialAsync("_PartialConfirmDeleteModal")
+@await Html.PartialAsync("_PartialConfirmDeleteModal")
 
 

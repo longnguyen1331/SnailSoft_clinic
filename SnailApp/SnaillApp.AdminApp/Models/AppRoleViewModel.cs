@@ -6,6 +6,6 @@ namespace SnailApp.AdminApp.Models
 {
     public class AppRoleViewModel: BaseViewModel
     {
-        public string HTMLMenu { set; get; }
+        public List<MenuDto> Menus { set; get; }
     }
 }

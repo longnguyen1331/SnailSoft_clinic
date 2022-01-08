@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using SnailApp.ApiIntegration;
 using SnailApp.Utilities.Constants;
 using SnailApp.AdminApp.Models;
@@ -17,17 +16,21 @@ namespace SnailApp.AdminApp.Controllers.Components
     {
         private readonly IAdminAppUIApiClient _adminAppUIApiClient;
         private readonly IConfiguration _configuration;
+        private readonly IClinicApiClient _clinicApiClient;
 
-        public HeaderViewComponent(IAdminAppUIApiClient adminAppUIApiClient, IConfiguration configuration)
+        public HeaderViewComponent(IAdminAppUIApiClient adminAppUIApiClient, IConfiguration configuration,
+                                IClinicApiClient clinicApiClient)
         {
             _adminAppUIApiClient = adminAppUIApiClient;
             _configuration = configuration;
+            _clinicApiClient = clinicApiClient;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             string userId = HttpContext.Session.GetString(SystemConstants.AppConstants.UserId);
             var headerViewModel = new HeaderViewModel()
             {
+                Clinics = await _clinicApiClient.GetClinicByUser(new ViewModels.System.User_Clinics.ManageUser_ClinicPagingRequest() { UserId = Guid.Parse(userId) }),
                 CurrentLanguageId = Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId)),
                 UserImage = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.AppConstants.FileNoImagePerson]
             };
@@ -68,7 +71,6 @@ namespace SnailApp.AdminApp.Controllers.Components
 
             return View("Default", headerViewModel);
         }
-
 
         private string GenerateHtmlMenu(List<SnailApp.ViewModels.System.Menus.MenuDto> menus)
         {

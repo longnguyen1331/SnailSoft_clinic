@@ -79,6 +79,8 @@ namespace SnailApp.Application.SystemApplication.Users
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+
+
                 if (!result.Succeeded)
                 {
                     return new ApiErrorResult<string>("Password incorrect");

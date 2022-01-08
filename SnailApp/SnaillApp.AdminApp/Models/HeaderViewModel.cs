@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SnailApp.ViewModels.System.Users;
+﻿using System.Collections.Generic;
 using SnailApp.ViewModels.System.Languages;
+using SnailApp.ViewModels.System.User_Clinics;
 
 namespace SnailApp.AdminApp.Models
 {
     public class HeaderViewModel
     {
         public List<LanguageDto> Languages { get; set; }
+        public List<User_ClinicDto> Clinics { get; set; }
 
         public int CurrentLanguageId { get; set; }
         public string HtmlMenus { set; get; }

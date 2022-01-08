@@ -15,6 +15,7 @@ namespace SnailApp.ViewModels.System.User_Clinics
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Avatar { get; set; }
+        public string ClinicName { get; set; }
         public Guid UserId { set; get; }
         public int ClinicId { set; get; }
         public DateTime CreatedDate { set; get; }

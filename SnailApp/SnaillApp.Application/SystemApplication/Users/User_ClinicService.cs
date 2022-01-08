@@ -17,9 +17,11 @@ namespace SnailApp.Application.SystemApplication.Users
 {
     public interface IUser_ClinicService
     {
+        Task<List<User_ClinicDto>> GetClinicByUser(ManageUser_ClinicPagingRequest request);
         Task<PagedResult<User_ClinicDto>> GetUserByClinicIdManageListPaging(ManageUser_ClinicPagingRequest request);
         Task<ApiResult<int>> DeleteByIds(User_ClinicDeleteRequest request);
         Task<ApiResult<int>> AddAsync(User_ClinicDto request);
+
     }
     public class User_ClinicService : IUser_ClinicService
     {
@@ -36,6 +38,28 @@ namespace SnailApp.Application.SystemApplication.Users
             _mapper = mapper;
             _configuration = configuration;
             _context = context;
+        }
+        public async Task<List<User_ClinicDto>> GetClinicByUser(ManageUser_ClinicPagingRequest request)
+        {
+            try
+            {
+                var query = from u_c in _context.User_Clinics
+                            join c in _context.Clinics on u_c.ClinicID equals c.Id
+                            where u_c.UserId == request.UserId
+                            select new User_ClinicDto()
+                            {
+                                ClinicId = c.Id,
+                                ClinicName = c.Name
+                            };
+
+                int totalRow = await query.CountAsync();
+                var data = await query.AsNoTracking().ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<PagedResult<User_ClinicDto>> GetUserByClinicIdManageListPaging(ManageUser_ClinicPagingRequest request)
