@@ -53,14 +53,14 @@
 				@if (Model.CurrentUserRole.IsAllowEdit)
                 {
                     <text>
-						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate"><i class="fadeIn animated bx bx-add-to-queue"></i> Create</button>
                                   
                     </text>
                 }
                 @if (Model.CurrentUserRole.IsAllowDelete)
                 {
                     <text>
-						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete"><i class="fadeIn animated bx bx-trash-alt"></i> Delete</button>
                     </text>
                 }
 			</div>

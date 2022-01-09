@@ -227,12 +227,12 @@ var Staff = function () {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
                         html += '<a href="#" class="edit">\
-					                <i class="bx bxs-edit"></i>\
+					                <i class="fadeIn animated bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
                         html += '<a href="#" class="ms-3 delete">\
-					                <i class="bx bxs-trash"></i>\
+					                <i class="fadeIn animated bx bxs-trash"></i>\
 				                </a>';
                     }
 
