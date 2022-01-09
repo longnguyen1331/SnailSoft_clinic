@@ -7554,7 +7554,10 @@ textarea.form-control-lg {
 .bg-primary {
     background-color: #19A9A8 !important
 }
-
+.bg-snail-title {
+    background-color: rgb(25 169 168 / .12);
+    color: #19A9A8;
+}
 .bg-secondary {
     background-color: #6c757d !important
 }
