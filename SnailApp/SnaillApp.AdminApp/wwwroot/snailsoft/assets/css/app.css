@@ -60,9 +60,12 @@ body {
 .snail-text-shadow {
 	text-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)
 }
+.snail-title-right {
+	text-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)
+}
 #snail-edit-form {
 	overflow-y: scroll;
-	height: 99vh;
+	height: 90vh;
 	overflow-x: hidden;
 	padding-left: 20px;
 	padding-right: 20px;

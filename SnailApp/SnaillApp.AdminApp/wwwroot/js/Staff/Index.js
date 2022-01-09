@@ -4,7 +4,7 @@ var Staff = function () {
     let dtTable = null;
     let roles = [];
 
-    let edit_form = $("#edit_form"),
+    let edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
