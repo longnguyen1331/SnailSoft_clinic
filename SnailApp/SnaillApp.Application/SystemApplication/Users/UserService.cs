@@ -167,10 +167,19 @@ namespace SnailApp.Application.SystemApplication.Users
                                 LastName = u.LastName,
                                 FirstName = u.FirstName,
                                 Address = u.Address,
+                                Biography = u.Biography,
+                                Skills = u.Skills,
                                 Email = u.Email,
                                 PhoneNumber = u.PhoneNumber,
                                 UserName = u.UserName,
                                 GenderId = u.GenderId,
+                                Type = u.Type,
+                                CityId = u.CityId,
+                                ProvinceId = u.ProvinceId,
+                                WardId = u.WardId,
+                                BloodId = u.BloodId,
+                                Proifle = u.Proifle,
+                                ClinicId = u.ClinicId,
                                 IsActive = u.IsActive,
                                 Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
                                 StrCreatedDate = u.CreatedDate.ToString("dd/MM/yyyy")
@@ -186,17 +195,38 @@ namespace SnailApp.Application.SystemApplication.Users
                      );
                 }
 
+                IEnumerable<UserDto> datafilter = null;
+
+                if (request.ClinicId.HasValue)
+                {
+                    datafilter = await query.Where(x => x.ClinicId != null &&  x.ClinicId.Value == request.ClinicId.Value).ToListAsync();
+                }
+
+                if (request.Type.HasValue)
+                {
+                    if (datafilter == null) datafilter = await query.Where(x => x.Type != null && x.Type.Value == request.Type.Value).ToListAsync();
+                    else datafilter = datafilter.Where(x => x.Type != null && x.Type.Value == request.Type.Value);
+                }
+
                 //3. Paging
-                int totalRow = await query.CountAsync();
+                int totalRow = datafilter == null ? await query.CountAsync() : datafilter.Count();
 
                 if (request.PageIndex != null)
                 {
-                    query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
+                    if(datafilter == null)
+                    {
+                        query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
+                                    .Take(request.PageSize);
+                    }
+                    else 
+                    datafilter = datafilter.Skip((request.PageIndex.Value - 1) * request.PageSize)
                                     .Take(request.PageSize);
                 }
 
-                var data = await query.AsNoTracking().ToListAsync();
-
+                var data = datafilter == null ?  await query.AsNoTracking().ToListAsync()  : datafilter;
+                
+                IEnumerable<Region> regions = await _context.Regions.AsNoTracking().ToListAsync();
+                IEnumerable<Blood> bloods = await _context.Bloods.AsNoTracking().ToListAsync();
                 foreach (var user in data)
                 {
                     List<AppRoleDto> appRoles = await (from ur in _context.UserRoles
@@ -211,6 +241,11 @@ namespace SnailApp.Application.SystemApplication.Users
                                                        }).ToListAsync();
 
                     user.AppRoles = appRoles;
+
+                    if (user.CityId != null) user.CityName = regions.FirstOrDefault(x => x.Id == user.CityId.Value).Name; //(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.CityId.Value).Name;
+                    if (user.ProvinceId != null) user.ProvinceName = regions.FirstOrDefault(x => x.Id == user.ProvinceId.Value).Name;// (await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.ProvinceId.Value).Name;
+                    if (user.WardId != null) user.WardName = regions.FirstOrDefault(x => x.Id == user.WardId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
+                    if (user.BloodId != null) user.BloodName = bloods.FirstOrDefault(x => x.Id == user.BloodId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
                 }
 
                 //4. Select and projection
@@ -219,7 +254,7 @@ namespace SnailApp.Application.SystemApplication.Users
                     TotalRecords = totalRow,
                     PageIndex = request.PageIndex,
                     PageSize = request.PageSize,
-                    Items = data
+                    Items = data.ToList()
                 };
                 return pagedResult;
             }
@@ -252,7 +287,6 @@ namespace SnailApp.Application.SystemApplication.Users
                     {
                         return new ApiErrorResult<string>("Email account is exits.");
                     }
-
                     user = new AppUser() { 
                         UserName = request.Email,
                         Email = request.Email,
@@ -263,12 +297,20 @@ namespace SnailApp.Application.SystemApplication.Users
                         FirstName = request.FirstName,
                         LastName = request.LastName,
                         GenderId = request.GenderId,
-                        Dob= (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>()),
+                        ClinicId = request.ClinicId,
+                        Biography = request.Biography,
+                        Skills = request.Skills,
+                        Type = request.Type,
+                        CityId = request.CityId,
+                        ProvinceId = request.ProvinceId,
+                        WardId = request.WardId,
+                        BloodId = request.BloodId,
+                        Proifle = request.Proifle,
+                        Dob = (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>()),
                         IsActive = request.IsActive,
                         Address = request.Address,
                         ModifiedDate = DateTime.Now
                     };
-
                     if (request.Avatar != null)
                     {
                         if (!string.IsNullOrEmpty(user.Avatar))
@@ -276,8 +318,9 @@ namespace SnailApp.Application.SystemApplication.Users
                             await DeleteFile(user.Avatar);
                         }
 
-                        user.Avatar = await this.SaveFile(request.Avatar);
                     }
+
+
                 }
                 else
                 {
@@ -293,12 +336,24 @@ namespace SnailApp.Application.SystemApplication.Users
                         user.FirstName = request.FirstName;
                         user.LastName = request.LastName;
                         user.GenderId = request.GenderId;
+                        user.ClinicId = request.ClinicId;
+                        user.Biography = request.Biography;
+                        user.Skills = request.Skills;
+                        user.Type = request.Type;
+                        user.CityId = request.CityId;
+                        user.ProvinceId = request.ProvinceId;
+                        user.WardId = request.WardId;
+                        user.BloodId = request.BloodId;
+                        user.Proifle = request.Proifle;
                         user.Dob = (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>());
                         user.IsActive = request.IsActive;
                         user.Address = request.Address;
                         user.ModifiedDate = DateTime.Now;
                     }
                 }
+
+                user.Avatar = await this.SaveFile(request.Avatar);
+
 
                 if (isNew == true)
                 {
@@ -346,7 +401,14 @@ namespace SnailApp.Application.SystemApplication.Users
                     {
                         await _userManager.AddToRoleAsync(user, roleCode);
                     }
-                }                
+                }else if (request.Type.HasValue)
+                {
+                    var roles = await _context.Roles.Where(x => x.Type == request.Type.Value).AsNoTracking().ToListAsync();
+                    foreach (var role in roles)
+                    {
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                    }
+                }            
 
                 return new ApiSuccessResult<string>(user.Id.ToString());
             }

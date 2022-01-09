@@ -50,6 +50,7 @@ namespace SnailApp.Application.SystemApplication.AppRoles
             {
                 Id = x.r.Id.ToString(),
                 Code = x.r.Name,
+                Type = x.r.Type,
                 Name = x.rt.Name,
                 Description = x.rt.Description
             }).AsNoTracking().ToListAsync());
@@ -83,6 +84,7 @@ namespace SnailApp.Application.SystemApplication.AppRoles
             {
                 AppRoleTranslations = translations,
                 Name = request.Code,
+                Type = request.Type,
                 Description = request.Description
             };
 
@@ -152,6 +154,7 @@ namespace SnailApp.Application.SystemApplication.AppRoles
                 Code = x.r.Name,
                 Name = x.rt.Name,
                 Description = x.rt.Description,
+                Type = x.r.Type,
                 LanguageId = x.rt.LanguageId
             }).AsNoTracking().ToListAsync();
 
@@ -197,8 +200,8 @@ namespace SnailApp.Application.SystemApplication.AppRoles
             roleTranslations.Name = request.Name;
             roleTranslations.Description = request.Description;
             appRole.Name = request.Code;
+            appRole.Type = request.Type;
             appRole.Description = request.Description;
-
             
             _context.AppRoleTranslations.Update(roleTranslations);
             await _context.SaveChangesAsync();

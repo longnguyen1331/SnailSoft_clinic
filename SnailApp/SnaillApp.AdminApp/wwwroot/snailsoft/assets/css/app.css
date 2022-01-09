@@ -2008,3 +2008,9 @@ w-100{
 .switcher-body .accordion-body .accordion-button.collapsed {
 	border-bottom-width : 0.5 !important;
 }
+
+
+table .form-check .form-check-input {
+	float: unset !important;
+	font-size :16px;
+}

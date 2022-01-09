@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SnailApp.ViewModels.Catalog.AppUserTypes;
 using SnailApp.ViewModels.Catalog.Genders;
 using SnailApp.ViewModels.System.AppRoles;
-using SnailApp.ViewModels.System.AppUser_AppUserTypes;
 using SnailApp.ViewModels.System.MenuAppRoles;
-using SnailApp.ViewModels.System.Statuses.AppUserStatus;
 
 namespace SnailApp.ViewModels.System.Users
 {
@@ -23,47 +20,29 @@ namespace SnailApp.ViewModels.System.Users
         public string StrDob { set; get; }
         public IList<AppRoleDto> AppRoles { get; set; }
         public string Avatar { set; get; }
-        public AppUserStatusDto AppUserStatus { set; get; }
         public int? GenderId { set; get; }
         public GenderDto Gender { set; get; }
         public string Address { set; get; }
         public string StrCreatedDate { set; get; }
-        public string StrLastimePurchase { set; get; }
         public List<MenuAppRoleDto> MenuAppRoles { set; get; }
         public bool IsAllowView { set; get; }
         public bool IsAllowEdit { set; get; }
         public bool IsAllowDelete { set; get; }
         public bool IsActive { set; get; }
-        public bool IsStillInUse { set; get; }
         public string Id_Image_FullName_Email { set; get; }
-        public List<AppUserTypeDto> AppUserTypes { set; get; }
-        public string TaxCode { set; get; }
         public string Password { set; get; }
-        public DateTime? LeaveDate { set; get; }
-        public DateTime StartingDate { set; get; }
-        public string CountryCode { set; get; }
-        public string AddressStreet { set; get; }
-        public string AddressDistrict { set; get; }
-        public string AddressWard { set; get; }
-        public string AddressCity { set; get; }
-        public int AccountType { set; get; }
-        public string DateOfBirth { set; get; }
-        public bool IsEmailVerified { set; get; }
-        public bool IsPhoneVerified { set; get; }
-        public string Pin { set; get; }
-        public double RewardPoints { set; get; }
-        public List<int> RewardList { set; get; }
-        public List<int> FavoriteProductIds { set; get; }
-        public double TotalDebt { set; get; }
-        public string StrTotalDebt { set; get; }
-        public double TotalMoney { set; get; }
-        public string StrTotalMoney { set; get; }
-        public double TongTienTraHang { set; get; }
-        public string StrTongTienTraHang { set; get; }
-        public string CompanyName { set; get; }
-        public string GhiChu { set; get; }       
-        public int SoDonHang { set; get; }
-        public double NoNhaCungCap { set; get; }
-        public string StrNoNhaCungCap { set; get; }
+        public string Biography { set; get; }
+        public string Skills { set; get; }
+        public int? Type { set; get; }
+        public int? ClinicId { set; get; }
+        public int? CityId { set; get; }
+        public string CityName { set; get; }
+        public int? ProvinceId { set; get; }
+        public string ProvinceName { set; get; }
+        public int? WardId { set; get; }
+        public string WardName { set; get; }
+        public int? BloodId { set; get; }
+        public string BloodName { set; get; }
+        public string Proifle { set; get; }
     }
 }

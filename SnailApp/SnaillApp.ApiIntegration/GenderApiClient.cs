@@ -1,7 +1,7 @@
 ﻿using SnailApp.Utilities.Constants;
 using SnailApp.ViewModels.Catalog.Genders;
 using SnailApp.ViewModels.Common;
-using SnailApp.ViewModels.Catalog.ProductTypes;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

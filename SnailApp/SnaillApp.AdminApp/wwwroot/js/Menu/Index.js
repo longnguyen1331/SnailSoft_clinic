@@ -139,11 +139,7 @@ var Menu = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                    if (this.checked) {
-                        App.showHideButtonDelete(true);
-                    } else {
-                        App.showHideButtonDelete(false);
-                    }
+                   
                 });
 
 
@@ -227,7 +223,6 @@ var Menu = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Menu/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
-                App.showHideButtonDelete(false);
             });
     }
 

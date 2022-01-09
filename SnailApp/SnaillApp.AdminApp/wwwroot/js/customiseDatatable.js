@@ -1,7 +1,7 @@
 ﻿
 function initialDatatableOption(){
     return {
-        "dom": "<'row'<'col-sm-12 infopage'tr>>" +
+        "dom": "B<'row'<'col-sm-12 infopage'tr>>" +
             "<'row'<'col-sm-5'i><'col-sm-7 pageandlength'pl>>",
         "processing": true,
         "serverSide": true,

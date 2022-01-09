@@ -20,6 +20,7 @@ namespace SnailApp.ApiIntegration
 
             //new Clinic
             services.AddTransient<IClinicApiClient, ClinicApiClient>();
+            services.AddTransient<IBloodApiClient, BloodApiClient>();
 
 
             return services;

@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BHSNetCoreLib.ExcelUtil;
 using SnailApp.ApiIntegration;
 using SnailApp.ViewModels.System.AppRoles;
 using SnailApp.ViewModels.Common;
-using SnailApp.ViewModels.Enums;
 using SnailApp.ViewModels.System.Menus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SnailApp.Utilities.Constants;
 using SnailApp.Utilities.Session;
-using Microsoft.Extensions.Configuration;
 using SnailApp.AdminApp.Models;
 using SnailApp.ViewModels.System.Users;
 
@@ -152,119 +149,6 @@ namespace SnailApp.AdminApp.Controllers
             var appUserStatusApiClient = await _appRoleApiClient.GetManageListPaging(request);
             return Ok(appUserStatusApiClient);
         }
-        private string GenerateHtmlMenu(List<SnailApp.ViewModels.System.Menus.MenuDto> menus)
-        {
-            string result = string.Empty;
-
-            foreach (var menu in menus.Where(m => m.ParentId == null || m.ParentId.Value == 0).OrderBy(m => m.SortOrder))
-            {
-                result += GenerateHtmlMenuNode(menu, menus);
-            }
-
-            return result;
-        }
-        private string GenerateHtmlMenuNode(MenuDto currentMenu, List<MenuDto> menus)
-        {
-            string str = string.Empty;
-
-            string eleId = "modal_edit_role_assign_menu_" + currentMenu.Id.ToString();
-            //begin::Section
-            str += $@"<div class='accordion-item'>";
-            str += $@"<h2 class='accordion-header' id='heading" + eleId + "'>";
-            str += $@"<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#" + eleId + "' aria-expanded='false' aria-controls='collapse" + eleId + "'>";
-            str += currentMenu.Name;
-            str += $@"</button>";
-            str += $@"</h2>";
-            str += $@"</div>";
-
-            str += $@"<div id='" + eleId + "' class='accordion-collapse collapse' aria-labelledby='heading" + eleId + "' data-bs-parent='#accordion" + eleId + "'>";
-            //begin::Body
-            str += $@"<div class='accordion-body'>";
-            //begin::Table wrapper
-            str += $@"<div class='table-responsive'>";
-            //begin::Table
-            str += $@"<table class='table align-middle table-row-dashed fs-6 gy-5'>";
-            //begin::Table body
-            str += $@"<tbody class='text-gray-600 fw-bold'>";
-            str += $@"<tr>";
-            str += $@"<td>";
-
-
-
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"</tr>";
-            str += $@"<tr>";
-            str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataView).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>View system</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox-->
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataEdit).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>Edit system</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.SystemDataDelete).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>Delete system</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"</tr>";
-            str += $@"<tr>";
-            str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataView).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>View person</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox-->
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataEdit).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>Edit person</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"<td>";
-            //begin::Checkbox
-            str += $@"<div class='form-check form-switch'>";
-            str += $@"<input class='form-check-input' type='checkbox' value='' data-menuid='" + currentMenu.Id.ToString() + "' data-menuapproletype='" + ((int)MenuAppRoleType.PersonalDataDelete).ToString() + "' name='modal_edit_role_assign_checkbox' />";
-            str += $@"<label class='form-check-label'>Delete person</label>";
-            str += $@"</div>";
-            //end::Checkbox
-            str += $@"</td>";
-            str += $@"</tr>";
-            str += $@"</tbody>";
-            str += $@" </table>";
-            str += $@"</div>";
-            //end::Table wrapper
-
-
-            foreach (var subMenu in menus.Where(m => m.ParentId != null && m.ParentId == currentMenu.Id).OrderBy(m => m.SortOrder))
-            {
-                str += GenerateHtmlMenuNode(subMenu, menus);
-            }
-
-
-            str += $@"</div>";
-            //end::Body
-
-            str += $@"</div>";
-
-          
-            return str;
-        }
+      
     }
 }

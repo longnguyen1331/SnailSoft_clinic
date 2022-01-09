@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using SnailApp.Application.Common;
 using SnailApp.Data.Entities;
-using SnailApp.Application.Sales.Transactions;
 using SnailApp.Application.SystemApplication.AppConfigs;
 using SnailApp.Application.SystemApplication.Languages;
 using SnailApp.Application.SystemApplication.Menus;
@@ -22,7 +21,6 @@ namespace SnailApp.Application
        
             services.AddTransient<IFileStorageService, FileStorageService>();
           
-            services.AddTransient<ITransactionService, TransactionService>();
             services.AddTransient<IGenderService, GenderService>();
 
 
@@ -40,6 +38,7 @@ namespace SnailApp.Application
             
             services.AddTransient<IClinicService, ClinicService>();
             services.AddTransient<IUser_ClinicService, User_ClinicService>();
+            services.AddTransient<IBloodService, BloodService>();
 
             return services;
         }

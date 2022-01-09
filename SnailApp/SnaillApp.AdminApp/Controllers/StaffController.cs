@@ -6,7 +6,6 @@ using SnailApp.ApiIntegration;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.ViewModels.Common;
 using SnailApp.ViewModels.System.AppRoles;
-using SnailApp.ViewModels.Sales.AppUser_CommissionDiscounts;
 using SnailApp.AdminApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +37,8 @@ namespace SnailApp.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>(){ "Cài đặt", "Nhân viên" };
+            model.PageTitle = "User";
+            model.Breadcrumbs = new List<string>(){ "Super management", "User" };
 
             int languageId = Convert.ToInt32(System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId)));
             var appRoleApiClient = await _appRoleApiClient.GetAll(new ManageAppRolePagingRequest()
@@ -187,8 +186,8 @@ namespace SnailApp.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Nhân viên" };
+            model.PageTitle = "User";
+            model.Breadcrumbs = new List<string>() { "Super management", "User" };
             model.FileNoImagePerson = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.AppConstants.FileNoImagePerson];
 
             if (id != null)
@@ -222,8 +221,8 @@ namespace SnailApp.AdminApp.Controllers
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
 
-            model.PageTitle = "Nhân viên";
-            model.Breadcrumbs = new List<string>() { "Cài đặt", "Nhân viên" };
+            model.PageTitle = "User";
+            model.Breadcrumbs = new List<string>() { "Super management", "User" };
             model.FileNoImagePerson = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.AppConstants.FileNoImagePerson];
 
             if (id != null)

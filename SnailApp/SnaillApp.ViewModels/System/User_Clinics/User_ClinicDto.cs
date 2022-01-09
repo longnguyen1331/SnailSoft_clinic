@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using SnailApp.ViewModels.Catalog.AppUserTypes;
-using SnailApp.ViewModels.Catalog.Genders;
-using SnailApp.ViewModels.System.AppRoles;
-using SnailApp.ViewModels.System.MenuAppRoles;
-using SnailApp.ViewModels.System.Statuses.AppUserStatus;
 
 namespace SnailApp.ViewModels.System.User_Clinics
 {
