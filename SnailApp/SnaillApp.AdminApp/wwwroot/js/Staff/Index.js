@@ -9,7 +9,7 @@ var Staff = function () {
 
     let initialComponents = () => {
 
-      
+
         $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -82,7 +82,7 @@ var Staff = function () {
             }
 
             App.sendDataFileToURL("/Staff/SaveProfileDetail", formData, "POST", true, 'body')
-            .then(function (res) {
+                .then(function (res) {
                     if (!res.isSuccessed) {
                         App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
                     }
@@ -94,7 +94,7 @@ var Staff = function () {
                         };
                     }
                 }
-            )
+                )
         });
 
         $('[name="btnDelete"]').click(function (e) {
@@ -164,7 +164,7 @@ var Staff = function () {
                 "orderable": false
             },
             {
-                "targets": [2,3,4],
+                "targets": [2, 3, 4],
                 "className": 'dt-left'
             }
         ];
@@ -235,7 +235,7 @@ var Staff = function () {
                 }
 
             },
-       
+
             {
                 width: "120px", "title": "Action", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
@@ -251,7 +251,7 @@ var Staff = function () {
                     }
 
 
-                 
+
                     html += '</div> ';
 
                     return html;
@@ -282,7 +282,7 @@ var Staff = function () {
 
                 $('input[data-field="IsActive"]').prop('checked', editingDataRow.isActive);
                 $('input[data-field="Dob"]').val(editingDataRow.dob);
-                $('#avatarImage').attr('src',editingDataRow.avatar);
+                $('#avatarImage').attr('src', editingDataRow.avatar);
                 roles = [];
                 $('#addRoleChips').html('');
                 $.each(editingDataRow.appRoles, function (index, item) {
@@ -308,7 +308,7 @@ var Staff = function () {
 
         $('#edit_form_appRoleIds').change(function () {
             if (!roles.includes($('#edit_form_appRoleIds').val())) {
-                $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + $('#edit_form_appRoleIds :selected').text() + ' <span class="closebtn" id="removeRoleSpan_' +  $('#edit_form_appRoleIds').val() + '" data-id=' + $('#edit_form_appRoleIds').val() + '>×</span></div>');
+                $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + $('#edit_form_appRoleIds :selected').text() + ' <span class="closebtn" id="removeRoleSpan_' + $('#edit_form_appRoleIds').val() + '" data-id=' + $('#edit_form_appRoleIds').val() + '>×</span></div>');
                 roles.push($('#edit_form_appRoleIds').val());
                 intiEventRemoveRole($('#edit_form_appRoleIds').val());
             }
@@ -316,7 +316,7 @@ var Staff = function () {
     };
 
     function intiEventRemoveRole(id) {
-        $('#removeRoleSpan_' +id).click(function (e) {
+        $('#removeRoleSpan_' + id).click(function (e) {
             e.preventDefault();
             roles = roles.filter(function (item) {
 

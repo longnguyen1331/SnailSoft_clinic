@@ -1,18 +1,25 @@
 ﻿@model StaffViewModel
 
+@{
+ViewBag.Title = "Nhân viên";
+}
 
 @section Vendors_CSS{
+	
 	<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
-	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/dataTables.bootstrap4.min.css")" type="text/css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 }
 
 @section Custom_CSS{
 <link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+
 }
 
 @section Vendors_Scripts{
-	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
-	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
+	<script src="@Url.Content("~/plugins/DataTables/js/jquery.dataTables.min.js")"></script>
+	<script src="@Url.Content("~/plugins/DataTables/js/dataTables.bootstrap4.min.js")"></script>
 }
 
 @section Custom_Scripts{
@@ -60,23 +67,22 @@
                 }
 			</div>
 		</div>
-        <div class="table-responsive">
-			  <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
-        </div>
+		<div class="table-responsive">
+            <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
+		</div>
 	</div>
 </div>
 
 <div class="switcher-wrapper ">
 		<div class="switcher-btn" hidden> <i class="bx bx-cog bx-spin"></i>
 		</div>
-		<div class="p">
-			<div class="d-flex align-items-center mb-2 radius-10 bg-snail-title">
+		<div class="switcher-body">
+			<div class="d-flex align-items-center mb-5 radius-10 bg-primary">
 				<h4 class="mb-0"><i class="bx bx-user-circle"></i> </h4><h6 class="mb-1 text-uppercase" id="titleCreateOrUpdate">User Manager</h6>
-					<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
-				@*<button type="button" class="ms-auto" aria-label="Close"><i class="fadeIn animated bx bx-x-circle"></i></button>*@
+				<button type="button" class="ms-auto" aria-label="Close"><i class="fadeIn animated bx bx-x-circle"></i></button>
 			</div>
 
-			<form id="snail-edit-form">
+			<form id="edit_form" style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
 				<div class="mb-3">
 				<div class="row g-0">
 					<div class="col-md-4 text-center">
@@ -87,19 +93,19 @@
 					<div class="col-md-8 px-1" >
 						<div class="mb-3">
 							<label class="form-label">First Name(*)</label>
-							<input type="email" class="form-control radius-15" data-field="FirstName" placeholder="Enter first name">
+							<input type="email" class="form-control form-control-sm mb-3" data-field="FirstName" placeholder="Enter first name">
 						</div>
 
 						<div class="mb-3 px-1">
 							<label class="form-label">Last Name(*)</label>
-							<input type="email" class="form-control radius-15" data-field="LastName" placeholder="Enter last name">
+							<input type="email" class="form-control form-control-sm mb-3" data-field="LastName" placeholder="Enter last name">
 						</div>
 					</div>
 
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Email</label>
-							<input type="email" class="form-control radius-15" data-field="Email" placeholder="Enter email">
+							<input type="email" class="form-control form-control-sm mb-3" data-field="Email" placeholder="Enter email">
 						</div>
 					</div>
 
@@ -107,14 +113,14 @@
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Phone</label>
-							<input type="email" class="form-control radius-15" data-field="PhoneNumber" placeholder="Enter phone number">
+							<input type="email" class="form-control form-control-sm mb-3" data-field="PhoneNumber" placeholder="Enter phone number">
 						</div>
 					</div>
 
 					<div class="col-md-12" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Address</label>
-							<input type="email" class="form-control radius-15" data-field="Address" placeholder="Enter address">
+							<input type="email" class="form-control form-control-sm mb-3" data-field="Address" placeholder="Enter address">
 						</div>
 					</div>
 
@@ -122,17 +128,16 @@
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">DOB</label>
-							<input class="result form-control radius-15" type="date"  data-field="Dob" placeholder="Enter DOB">
+							<input class="result form-control form-control-sm mb-3" type="date"  data-field="Dob" placeholder="Enter DOB">
 						</div>
 					</div>
 
 					<div class="col-md-6" >
-						<br />
-						<br />
+						
 						<div class="d-flex align-items-center justify-content-between mb-3 px-1">
 							<div class="form-check">
 								<input class="form-check-input" type="radio" value="1" name="Gender" id="Male" checked>
-								<label class="form-check-label" for="Gender">Male</label>
+								<label class="form-check-label" for="Male">Male</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="radio" value="2" name="Gender" id="Female">
@@ -164,24 +169,25 @@
 
 			<div class="header-colors-indigators">
 				<div class="row row-cols-auto g-3 px-1 mb-3">
-					<div class="col-md-12" >
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked>
-							<label class="form-check-label" for="IsActive">Active</label>
-						</div>
-					</div>
+					
 
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Password</label>
-							<input type="text" class="form-control radius-15" data-field="Password" placeholder="Enter password">
+							<input type="text" class="form-control form-control-sm radius-15" data-field="Password" placeholder="Enter password">
 						</div>
 					</div>
 
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Repassword</label>
-							<input type="text" class="form-control radius-15" data-field="RePassword" placeholder="Enter repassword">
+							<input type="text" class="form-control form-control-sm radius-15" data-field="RePassword" placeholder="Enter repassword">
+						</div>
+					</div>
+					<div class="col-md-12" >
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked>
+							<label class="form-check-label" for="IsActive">Active</label>
 						</div>
 					</div>
 				</div>
