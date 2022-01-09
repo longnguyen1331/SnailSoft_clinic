@@ -72,9 +72,18 @@ namespace SnailApp.ApiIntegration
 
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/users/GetStaffManageListPaging?pageIndex=" +
-                $"{request.PageIndex}&pageSize={request.PageSize}&textSearch={request.TextSearch}" +
-                $"&languageId={request.LanguageId}");
+
+            var url = $"/api/users/GetStaffManageListPaging?pageIndex={request.PageIndex}&pageSize={request.PageSize}&textSearch={request.TextSearch}&languageId={request.LanguageId}";
+            if (request.Type.HasValue)
+            {
+                url += "&Type=" + request.Type.Value;
+            }
+
+            if (request.ClinicId.HasValue)
+            {
+                url += "&ClinicId=" + request.ClinicId.Value;
+            }
+            var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
             var users = JsonConvert.DeserializeObject<PagedResult<UserDto>>(body);
             return users;
@@ -138,7 +147,6 @@ namespace SnailApp.ApiIntegration
                     requestContent.Add(bytes, "Avatar", request.Avatar.FileName);
                 }
 
-                requestContent.Add(new StringContent(sessions), "Token");
 
                 if (!string.IsNullOrEmpty(request.FirstName))
                 {
@@ -167,7 +175,11 @@ namespace SnailApp.ApiIntegration
 
                 requestContent.Add(new StringContent(request.GenderId != null ? request.GenderId.Value.ToString() : "-1"), "GenderId");
                 requestContent.Add(new StringContent(request.IsActive.ToString()), "IsActive");
-                requestContent.Add(new StringContent(request.AppRoleCodes), "AppRoleCodes");
+
+                if (!string.IsNullOrEmpty(request.AppRoleCodes))
+                {
+                    requestContent.Add(new StringContent(request.AppRoleCodes), "AppRoleCodes");
+                }
 
                 if (!string.IsNullOrEmpty(request.Address))
                 {
@@ -187,6 +199,50 @@ namespace SnailApp.ApiIntegration
                 if (!string.IsNullOrEmpty(request.ModifiedUserId))
                 {
                     requestContent.Add(new StringContent(request.ModifiedUserId), "ModifiedUserId");
+                }
+
+                if (!string.IsNullOrEmpty(request.Biography))
+                {
+                    requestContent.Add(new StringContent(request.Biography), "Biography");
+                }
+
+                if (!string.IsNullOrEmpty(request.Skills))
+                {
+                    requestContent.Add(new StringContent(request.Skills), "Skills");
+                }
+
+                if (request.Type.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.Type.Value.ToString()), "Type");
+                }
+
+                if (request.ClinicId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.ClinicId.Value.ToString()), "ClinicId");
+                }
+                if (request.CityId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.CityId.Value.ToString()), "CityId");
+                }
+
+                if (request.ProvinceId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.ProvinceId.Value.ToString()), "ProvinceId");
+                }
+
+                if (request.WardId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.WardId.Value.ToString()), "WardId");
+                }
+
+                if (request.BloodId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.BloodId.Value.ToString()), "BloodId");
+                }
+
+                if (!string.IsNullOrEmpty(request.Proifle))
+                {
+                    requestContent.Add(new StringContent(request.Proifle), "Proifle");
                 }
 
                 var response = await client.PostAsync($"api/users/addorupdatestaff", requestContent);

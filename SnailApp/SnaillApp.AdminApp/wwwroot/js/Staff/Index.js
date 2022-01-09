@@ -147,6 +147,7 @@ var Staff = function () {
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
+        datatableOption.buttons = ['excel', 'pdf', 'print'];
         datatableOption.ajax.url = "/Staff/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
@@ -164,11 +165,10 @@ var Staff = function () {
                 "orderable": false
             },
             {
-                "targets": [3,4,5],
+                "targets": [0,3,4,5],
                 "className": 'dt-center'
             }
         ];
-
         datatableOption.initComplete = function () {
             var datatablesColumnsApi = this.api().columns();
 
@@ -188,11 +188,7 @@ var Staff = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                    if (this.checked) {
-                        App.showHideButtonDelete(true);
-                    } else {
-                        App.showHideButtonDelete(false);
-                    }
+                   
                 });
 
 
@@ -241,22 +237,22 @@ var Staff = function () {
                     }
 
 
-                 
+
                     html += '</div> ';
 
                     return html;
 
                 }
             },
-        ]
+        ];
         dtTable = $('#dtTable').DataTable(datatableOption);
+        dtTable.buttons().container().appendTo('#dtTable_wrapper .col-md-6:eq(0)');
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
             editingDataRow = dtTable.row($(this).parents('tr')).data();
 
             if (editingDataRow != null) {
-                console.log(editingDataRow);
                 $('input[data-field="PhoneNumber"]').val(editingDataRow.phoneNumber);
                 $('input[data-field="Email"]').val(editingDataRow.email);
                 $('input[data-field="Address"]').val(editingDataRow.address);
@@ -322,7 +318,6 @@ var Staff = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Staff/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
-                App.showHideButtonDelete(false);
             });
     }
 

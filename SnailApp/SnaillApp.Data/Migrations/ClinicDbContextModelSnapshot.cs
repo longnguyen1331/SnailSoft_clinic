@@ -239,6 +239,9 @@ namespace SnaillApp.Data.Migrations
                     b.Property<string>("NormalizedName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles", (string)null);
@@ -247,58 +250,65 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "6e93f351-d251-48ac-8f17-29b516047078",
+                            ConcurrencyStamp = "d8fb0537-bc19-487c-ad99-8f27966d242f",
                             Description = "Quản lý cửa hàng",
                             Name = "StoreManager",
-                            NormalizedName = "StoreManager"
+                            NormalizedName = "StoreManager",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba5-df3f325983dc"),
-                            ConcurrencyStamp = "1658429a-469f-4029-80df-7870b0d280e6",
+                            ConcurrencyStamp = "af8e9518-00d3-4721-b219-7a5d923d9372",
                             Description = "Quản lý",
                             Name = "Manager",
-                            NormalizedName = "manager"
+                            NormalizedName = "manager",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba6-df3f325983dc"),
-                            ConcurrencyStamp = "727ef0ff-37fa-45ec-9dab-b7fa302191fd",
+                            ConcurrencyStamp = "bea5de46-d7ee-4a95-a9de-98b918cb21c7",
                             Description = "Nhân viên kho",
                             Name = "WarehouseStaff",
-                            NormalizedName = "WarehouseStaff"
+                            NormalizedName = "WarehouseStaff",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba7-df3f325983dc"),
-                            ConcurrencyStamp = "3635b8e8-de93-4f76-ad55-1a00a8c6d4a0",
+                            ConcurrencyStamp = "8579b6b6-d690-467c-bc52-f2c7e8b53982",
                             Description = "Nhân viên thu ngân",
                             Name = "Cashier",
-                            NormalizedName = "Cashier"
+                            NormalizedName = "Cashier",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba8-df3f325983dc"),
-                            ConcurrencyStamp = "6c3daded-c533-4185-ad85-5931bcf2ab83",
+                            ConcurrencyStamp = "4ad8b6f6-b568-4975-bc1f-a343a07e9a19",
                             Description = "Nhân viên bán hàng",
                             Name = "ShopAssistant",
-                            NormalizedName = "ShopAssistant"
+                            NormalizedName = "ShopAssistant",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba9-df3f325983dc"),
-                            ConcurrencyStamp = "47c1098f-129b-433e-b8bf-0f69946ab3e9",
+                            ConcurrencyStamp = "cdb6d62b-b64e-4206-b07d-79db44cd6db9",
                             Description = "Quản lý chi nhánh",
                             Name = "BranchManager",
-                            NormalizedName = "BranchManager"
+                            NormalizedName = "BranchManager",
+                            Type = 0
                         },
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            ConcurrencyStamp = "8bcc5f76-4846-49b5-b481-e478d1cf177f",
+                            ConcurrencyStamp = "8abed257-63ee-45ad-938e-350232ddcde0",
                             Description = "Quản trị hệ thống",
                             Name = "admin",
-                            NormalizedName = "admin"
+                            NormalizedName = "admin",
+                            Type = 0
                         });
                 });
 
@@ -364,14 +374,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 1,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3233),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1994),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Quản lý cửa hàng",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3234),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1995),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Quản lý cửa hàng",
                             SortOrder = 0
@@ -380,14 +390,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 2,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3236),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1997),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Store owner",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3236),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1997),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Store manager",
                             SortOrder = 0
@@ -396,14 +406,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 3,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba5-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3237),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1999),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Quản lý",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3238),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1999),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Quản lý",
                             SortOrder = 0
@@ -412,14 +422,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 4,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba5-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3239),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2000),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "General manager",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3239),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2001),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "General manager",
                             SortOrder = 0
@@ -428,14 +438,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 5,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba6-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3240),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2002),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Nhân viên kho",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3241),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2002),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhân viên kho",
                             SortOrder = 0
@@ -444,14 +454,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 6,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba6-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3242),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2003),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Warehouse staff",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3242),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2004),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Warehouse staff",
                             SortOrder = 0
@@ -460,14 +470,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 7,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba7-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3243),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2006),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Nhân viên thu ngân",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3244),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2006),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhân viên thu ngân",
                             SortOrder = 0
@@ -476,14 +486,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 8,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba7-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3245),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2007),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Cashier",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3245),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2007),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Cashier",
                             SortOrder = 0
@@ -492,14 +502,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 9,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba8-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3246),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2008),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Nhân viên bán hàng",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3247),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2009),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhân viên bán hàng",
                             SortOrder = 0
@@ -508,14 +518,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 10,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba8-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3248),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2010),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Shop assistant",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3248),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2010),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Shop assistant",
                             SortOrder = 0
@@ -524,14 +534,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 11,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba9-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3249),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2011),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Quản lý chi nhánh",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3249),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2012),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Quản lý chi nhánh",
                             SortOrder = 0
@@ -540,14 +550,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 12,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba9-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3250),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2013),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Branch manager",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3251),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2013),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Branch manager",
                             SortOrder = 0
@@ -556,14 +566,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 13,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3252),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2014),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Quản trị hệ thống",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3252),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2014),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Quản trị hệ thống",
                             SortOrder = 0
@@ -572,14 +582,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 14,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3253),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2015),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Description = "Branch Manager",
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3253),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(2016),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Branch Manager",
                             SortOrder = 0
@@ -603,6 +613,18 @@ namespace SnaillApp.Data.Migrations
 
                     b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BloodId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CitysId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClinicId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -667,6 +689,15 @@ namespace SnaillApp.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Proifle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProvincesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -679,12 +710,31 @@ namespace SnaillApp.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WardId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WardsId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("BloodId");
+
+                    b.HasIndex("CitysId");
+
+                    b.HasIndex("ClinicId");
+
                     b.HasIndex("GenderId");
+
+                    b.HasIndex("ProvincesId");
+
+                    b.HasIndex("WardsId");
 
                     b.ToTable("AppUsers", (string)null);
 
@@ -695,7 +745,7 @@ namespace SnaillApp.Data.Migrations
                             AccessFailedCount = 0,
                             Address = "09 Lê Hồng Phong",
                             Code = "001",
-                            ConcurrencyStamp = "e84e7916-68a6-4de2-a038-3ac6e34e8404",
+                            ConcurrencyStamp = "e3ce2f19-bac3-4d2b-a74e-171212d9efa6",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -709,7 +759,7 @@ namespace SnaillApp.Data.Migrations
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELTe2ofXkx0uCB8B3yl5JQArHd/hs92LlBR9XOSSOnGuzWfnRCevLbes91XD9OLxsg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC2KjpHCsRrGLyNCzNoOGSrDq7awUQVjHFiUB1P4WeJvl6u00A0ddxp4RWNoXSsgeg==",
                             PhoneNumber = "0915780794",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -773,6 +823,52 @@ namespace SnaillApp.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AppUser_Clinics", (string)null);
+                });
+
+            modelBuilder.Entity("SnailApp.Data.Entities.Blood", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVisibled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ModifiedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bloods", (string)null);
                 });
 
             modelBuilder.Entity("SnailApp.Data.Entities.Clinic", b =>
@@ -964,12 +1060,12 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 1,
                             Code = "M",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1808),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4354),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1813),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4362),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -977,12 +1073,12 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 2,
                             Code = "F",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1815),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4364),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1815),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4365),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         });
@@ -1049,14 +1145,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1829),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4386),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             GenderId = 1,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1829),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4387),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nam",
                             SortOrder = 0
@@ -1064,14 +1160,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1831),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4388),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             GenderId = 1,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1831),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4389),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Male",
                             SortOrder = 0
@@ -1079,14 +1175,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1832),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4390),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             GenderId = 2,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1833),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4390),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nữ",
                             SortOrder = 0
@@ -1094,14 +1190,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1834),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4391),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             GenderId = 2,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1834),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4391),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Female",
                             SortOrder = 0
@@ -1162,12 +1258,12 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 1,
                             Code = "vi",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3056),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1796),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = true,
                             IsDeleted = false,
                             IsVisibled = true,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3064),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1803),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tiếng Việt",
                             SortOrder = 0
@@ -1176,12 +1272,12 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 2,
                             Code = "en",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3066),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1806),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 601, DateTimeKind.Local).AddTicks(3067),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 471, DateTimeKind.Local).AddTicks(1807),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "English",
                             SortOrder = 0
@@ -1257,7 +1353,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 1,
                             Code = "WebApp_TQ",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1849),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4409),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><path d='M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z' fill='#000000' opacity='0.3'></path>		<path d='M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z' fill='#000000'></path>	</svg></span></span>",
                             IsDefault = false,
@@ -1265,7 +1361,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1849),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4409),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 1
                         },
@@ -1275,14 +1371,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TQ_TQ",
                             ControllerName = "Summary",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1851),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4411),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Home/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1851),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4411),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 1,
                             SortOrder = 1
@@ -1293,14 +1389,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TQ_O",
                             ControllerName = "Order",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1853),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4413),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Order/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1853),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4413),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 1,
                             SortOrder = 2
@@ -1309,7 +1405,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 4,
                             Code = "WebApp_HHDV",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1854),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4414),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>	<path opacity='0.25' fill-rule='evenodd' clip-rule='evenodd' d='M11 4.25769C11 3.07501 9.9663 2.13515 8.84397 2.50814C4.86766 3.82961 2 7.57987 2 11.9999C2 13.6101 2.38057 15.1314 3.05667 16.4788C3.58731 17.5363 4.98303 17.6028 5.81966 16.7662L5.91302 16.6728C6.60358 15.9823 6.65613 14.9011 6.3341 13.9791C6.11766 13.3594 6 12.6934 6 11.9999C6 9.62064 7.38488 7.56483 9.39252 6.59458C10.2721 6.16952 11 5.36732 11 4.39046V4.25769ZM16.4787 20.9434C17.5362 20.4127 17.6027 19.017 16.7661 18.1804L16.6727 18.087C15.9822 17.3964 14.901 17.3439 13.979 17.6659C13.3594 17.8823 12.6934 17.9999 12 17.9999C11.3066 17.9999 10.6406 17.8823 10.021 17.6659C9.09899 17.3439 8.01784 17.3964 7.3273 18.087L7.23392 18.1804C6.39728 19.017 6.4638 20.4127 7.52133 20.9434C8.86866 21.6194 10.3899 21.9999 12 21.9999C13.6101 21.9999 15.1313 21.6194 16.4787 20.9434Z' fill='#12131A'></path>	<path fill-rule='evenodd' clip-rule='evenodd' d='M13 4.39046C13 5.36732 13.7279 6.16952 14.6075 6.59458C16.6151 7.56483 18 9.62064 18 11.9999C18 12.6934 17.8823 13.3594 17.6659 13.9791C17.3439 14.9011 17.3964 15.9823 18.087 16.6728L18.1803 16.7662C19.017 17.6028 20.4127 17.5363 20.9433 16.4788C21.6194 15.1314 22 13.6101 22 11.9999C22 7.57987 19.1323 3.82961 15.156 2.50814C14.0337 2.13515 13 3.07501 13 4.25769V4.39046Z' fill='#12131A'></path></svg></span></span>",
                             IsDefault = false,
@@ -1317,7 +1413,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1854),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4415),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 2
                         },
@@ -1327,14 +1423,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_HHDV_HHDV",
                             ControllerName = "Product",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1856),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4416),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Product/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1856),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4416),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 4,
                             SortOrder = 1
@@ -1345,14 +1441,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_HHDV_NH",
                             ControllerName = "StockIn",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1857),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4417),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/StockIn/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1857),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4417),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 4,
                             SortOrder = 2
@@ -1363,14 +1459,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_HHDV_W",
                             ControllerName = "Warehouse",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1858),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4419),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Warehouse/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1859),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4419),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 4,
                             SortOrder = 3
@@ -1379,7 +1475,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 8,
                             Code = "WebApp_KH",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1860),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4430),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns = 'http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><path d = 'M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z' fill='#000000' fill-rule='nonzero' opacity='0.3'></path><path d = 'M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z' fill='#000000' fill-rule='nonzero'></path></svg></span></span>",
                             IsDefault = false,
@@ -1387,7 +1483,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1860),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4430),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 3
                         },
@@ -1397,14 +1493,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_KH_KH",
                             ControllerName = "Customer",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1861),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4431),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Customer/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1862),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4431),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 8,
                             SortOrder = 1
@@ -1415,14 +1511,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_KH_NCC",
                             ControllerName = "Supplier",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1863),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4432),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Supplier/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1863),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4433),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 8,
                             SortOrder = 2
@@ -1433,14 +1529,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_KH_NKH",
                             ControllerName = "CustomerType",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1864),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4434),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/CustomerType/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1865),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4434),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 8,
                             SortOrder = 3
@@ -1449,7 +1545,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 12,
                             Code = "WebApp_TB",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1867),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4435),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>	<rect x='0' y='0' width='24' height='24'></rect>	<rect fill='#000000' opacity='0.3' x='2' y='5' width='20' height='14' rx='2'></rect>	<rect fill='#000000' x='2' y='8' width='20' height='3'></rect>	<rect fill='#000000' opacity='0.3' x='16' y='14' width='4' height='2' rx='1'></rect></g></svg></span></span>",
                             IsDefault = false,
@@ -1457,7 +1553,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1867),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4436),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 4
                         },
@@ -1467,14 +1563,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TB_TQ",
                             ControllerName = "SummaryOfReceiptPayment",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1868),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4437),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/SummaryOfReceiptPayment/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1868),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4437),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 12,
                             SortOrder = 1
@@ -1485,14 +1581,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TB_PT",
                             ControllerName = "Receipt",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1869),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4439),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Receipt/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1870),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4439),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 12,
                             SortOrder = 2
@@ -1503,14 +1599,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TB_PC",
                             ControllerName = "Payment",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1871),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4441),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Payment/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1871),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4441),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 12,
                             SortOrder = 3
@@ -1521,14 +1617,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_TB_SQ",
                             ControllerName = "CashBook",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1872),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4442),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/CashBook/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1873),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4442),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 12,
                             SortOrder = 4
@@ -1537,7 +1633,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 17,
                             Code = "WebApp_BC",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1874),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4443),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>	<polygon points='0 0 24 0 24 24 0 24'></polygon>	<path d='M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z' fill='#000000' fill-rule='nonzero' opacity='0.3'></path>	<rect fill='#000000' x='6' y='11' width='9' height='2' rx='1'></rect>	<rect fill='#000000' x='6' y='15' width='5' height='2' rx='1'></rect></g></svg></span></span>",
                             IsDefault = false,
@@ -1545,7 +1641,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1874),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4444),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 5
                         },
@@ -1553,14 +1649,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 18,
                             Code = "WebApp_BC_DS",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1875),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4445),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/SaleReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1875),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4446),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 1
@@ -1571,14 +1667,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BC_HHDV",
                             ControllerName = "ProductReport",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1876),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4447),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ProductReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1877),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4447),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 2
@@ -1589,14 +1685,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BC_TK",
                             ControllerName = "StockReport",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1878),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4448),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/StockReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1878),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4449),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 3
@@ -1607,14 +1703,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BC_LN",
                             ControllerName = "ProfitReport",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1879),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4450),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ProfitReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1880),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4450),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 4
@@ -1625,14 +1721,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BC_LL",
                             ControllerName = "ProfitAndLossReport",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1881),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4451),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ProfitAndLossReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1881),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4452),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 5
@@ -1643,14 +1739,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BC_BCT",
                             ControllerName = "MonthlyReport",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1882),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4453),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/MonthlyReport/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1882),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4453),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 17,
                             SortOrder = 6
@@ -1659,7 +1755,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 24,
                             Code = "WebApp_DM",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1883),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4454),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><rect x='0' y='0' width='24' height='24'></rect><rect fill='#000000' x='4' y='4' width='7' height='7' rx='1.5'></rect><path d='M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z' fill='#000000' opacity='0.3'></path></g></svg></span></span>",
                             IsDefault = false,
@@ -1667,7 +1763,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1884),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4455),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 6
                         },
@@ -1677,14 +1773,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_DM_NHH",
                             ControllerName = "ProductType",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1885),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4457),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ProductType/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1885),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4457),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 24,
                             SortOrder = 1
@@ -1695,14 +1791,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_DM_DVT",
                             ControllerName = "Unit",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1886),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4458),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Unit/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1887),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4459),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 24,
                             SortOrder = 2
@@ -1711,7 +1807,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 27,
                             Code = "WebApp_BHO",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1888),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4460),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-link'><span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><path d='M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z' fill='#000000'></path><path d='M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z' fill='#000000' opacity='0.3'></path></svg></span></span><span class='menu-title'>Chat</span><span class='menu-arrow'></span></span>",
                             IsDefault = false,
@@ -1719,7 +1815,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1888),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4460),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 7
                         },
@@ -1727,7 +1823,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 28,
                             Code = "WebApp_NV",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1890),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4461),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns = 'http://www.w3.org/2000/svg' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'><path d = 'M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z' fill='#000000' fill-rule='nonzero' opacity='0.3'></path><path d = 'M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z' fill='#000000' fill-rule='nonzero'></path></svg></span></span>",
                             IsDefault = false,
@@ -1735,7 +1831,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1890),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4461),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 8
                         },
@@ -1745,14 +1841,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_NV_BL",
                             ControllerName = "Payroll",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1891),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4464),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Payroll/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1891),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4464),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 28,
                             SortOrder = 1
@@ -1761,7 +1857,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 30,
                             Code = "WebApp_CD",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1900),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4465),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'><path opacity='0.25' d='M2 6.5C2 4.01472 4.01472 2 6.5 2H17.5C19.9853 2 22 4.01472 22 6.5V6.5C22 8.98528 19.9853 11 17.5 11H6.5C4.01472 11 2 8.98528 2 6.5V6.5Z' fill='#12131A'></path><path d='M20 6.5C20 7.88071 18.8807 9 17.5 9C16.1193 9 15 7.88071 15 6.5C15 5.11929 16.1193 4 17.5 4C18.8807 4 20 5.11929 20 6.5Z' fill='#12131A'></path><path opacity='0.25' d='M2 17.5C2 15.0147 4.01472 13 6.5 13H17.5C19.9853 13 22 15.0147 22 17.5V17.5C22 19.9853 19.9853 22 17.5 22H6.5C4.01472 22 2 19.9853 2 17.5V17.5Z' fill='#12131A'></path><path d='M9 17.5C9 18.8807 7.88071 20 6.5 20C5.11929 20 4 18.8807 4 17.5C4 16.1193 5.11929 15 6.5 15C7.88071 15 9 16.1193 9 17.5Z' fill='#12131A'></path></svg></span></span>",
                             IsDefault = false,
@@ -1769,7 +1865,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1901),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4466),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 10
                         },
@@ -1779,14 +1875,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_NV",
                             ControllerName = "Staff",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1902),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4467),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Staff/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1902),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4467),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 30,
                             SortOrder = 1
@@ -1797,14 +1893,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_PQ",
                             ControllerName = "AppRole",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1903),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4468),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/AppRole/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1903),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4468),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 30,
                             SortOrder = 2
@@ -1815,14 +1911,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_CH",
                             ControllerName = "Store",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1905),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4469),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Store/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1905),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4470),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 30,
                             SortOrder = 3
@@ -1833,14 +1929,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_MI",
                             ControllerName = "DocTemplate",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1906),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4471),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/DocTemplate/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1907),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4471),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 30,
                             SortOrder = 4
@@ -1849,14 +1945,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 35,
                             Code = "WebApp_CD_DMHT",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1908),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4472),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1908),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4473),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 30,
                             SortOrder = 5
@@ -1867,14 +1963,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_M",
                             ControllerName = "Menu",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1909),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4474),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Menu/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1909),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4474),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 35,
                             SortOrder = 1
@@ -1885,14 +1981,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_LMI",
                             ControllerName = "DocTemplateType",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1910),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4475),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/DocTemplateType/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1911),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4475),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 35,
                             SortOrder = 2
@@ -1901,7 +1997,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 38,
                             Code = "WebApp_QTW",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1912),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4477),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='svg-icon svg-icon-primary svg-icon-2x'><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo2/dist/../src/media/svg/icons/Devices/iMac.svg--><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24px' height='24px' viewBox='0 0 24 24' version='1.1'>    <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>        <rect x='0' y='0' width='24' height='24'/>        <path d='M5,5 L5,16 L19,16 L19,5 L5,5 Z M5,3 L19,3 C20.4201608,3 21,3.7163444 21,4.6 L21,17.4 C21,18.2836556 20.4201608,19 19,19 L5,19 C3.57983921,19 3,18.2836556 3,17.4 L3,4.6 C3,3.7163444 3.57983921,3 5,3 Z M12,18 C12.2761424,18 12.5,17.7761424 12.5,17.5 C12.5,17.2238576 12.2761424,17 12,17 C11.7238576,17 11.5,17.2238576 11.5,17.5 C11.5,17.7761424 11.7238576,18 12,18 Z' fill='#12131A' fill-rule='nonzero'/>        <polygon fill='#12131A' opacity='0.3' points='5 5 5 16 19 16 19 5'/>        <rect fill='#12131A' opacity='0.3' x='10' y='20' width='4' height='1' rx='0.5'/>    </g></svg><!--end::Svg Icon--></span>",
                             IsDefault = false,
@@ -1909,7 +2005,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1912),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4477),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 11
                         },
@@ -1919,14 +2015,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_P",
                             ControllerName = "Post",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1913),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4478),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Post/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1913),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4479),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 1
@@ -1937,14 +2033,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_PT",
                             ControllerName = "PostType",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1915),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4480),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/PostType/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1915),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4480),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 2
@@ -1955,14 +2051,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_S",
                             ControllerName = "Slider",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1916),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4481),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Slider/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1916),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4482),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 3
@@ -1973,14 +2069,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_KH_NSX",
                             ControllerName = "Manufacturer",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1917),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4483),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Manufacturer/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1918),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4483),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 8,
                             SortOrder = 3
@@ -1991,14 +2087,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_DM_TT",
                             ControllerName = "Attribute",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1920),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4484),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Attribute/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1920),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4485),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 24,
                             SortOrder = 1
@@ -2007,14 +2103,14 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 44,
                             Code = "WebApp_CD_DMHT_STATUS",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1921),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4486),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1922),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4486),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 35,
                             SortOrder = 4
@@ -2025,14 +2121,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_AUS",
                             ControllerName = "AppUserStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1922),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4488),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/AppUserStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1923),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4488),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 1
@@ -2043,14 +2139,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_OS",
                             ControllerName = "AppUsOrderStatuserStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1924),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4489),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/OrderStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1924),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4489),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 2
@@ -2061,14 +2157,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_PS",
                             ControllerName = "PhieuKeToanStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1925),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4491),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/PhieuKeToanStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1926),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4491),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 2
@@ -2079,14 +2175,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_POSTS",
                             ControllerName = "PostStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1927),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4492),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/PostStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1927),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4492),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 3
@@ -2097,14 +2193,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_POSTTYPES",
                             ControllerName = "PostTypeStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1928),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4493),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/PostTypeStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1928),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4494),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 4
@@ -2115,14 +2211,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_PRODUCTTYPES",
                             ControllerName = "ProductTypeStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1929),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4495),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ProductTypeStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1930),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4495),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 5
@@ -2133,14 +2229,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_STATUS_STS",
                             ControllerName = "StoreStatus",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1931),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4496),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/StoreStatus/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1931),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4497),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 44,
                             SortOrder = 6
@@ -2151,14 +2247,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_DM_GTTT",
                             ControllerName = "AttributeValue",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1932),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4498),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/AttributeValue/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1933),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4498),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 24,
                             SortOrder = 1
@@ -2169,14 +2265,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_P",
                             ControllerName = "PaperSize",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1934),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4499),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/PaperSize/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1934),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4500),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 35,
                             SortOrder = 3
@@ -2187,14 +2283,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_CD_DMHT_AUT",
                             ControllerName = "AppUserType",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1935),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4501),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/AppUserType/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1935),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4501),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 35,
                             SortOrder = 5
@@ -2203,7 +2299,7 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 55,
                             Code = "WebApp_BH",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1937),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4502),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Icon = "<span class='menu-icon'><span class='svg-icon svg-icon-2'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'><path opacity='0.25' d='M2 6.5C2 4.01472 4.01472 2 6.5 2H17.5C19.9853 2 22 4.01472 22 6.5V6.5C22 8.98528 19.9853 11 17.5 11H6.5C4.01472 11 2 8.98528 2 6.5V6.5Z' fill='#12131A'></path><path d='M20 6.5C20 7.88071 18.8807 9 17.5 9C16.1193 9 15 7.88071 15 6.5C15 5.11929 16.1193 4 17.5 4C18.8807 4 20 5.11929 20 6.5Z' fill='#12131A'></path><path opacity='0.25' d='M2 17.5C2 15.0147 4.01472 13 6.5 13H17.5C19.9853 13 22 15.0147 22 17.5V17.5C22 19.9853 19.9853 22 17.5 22H6.5C4.01472 22 2 19.9853 2 17.5V17.5Z' fill='#12131A'></path><path d='M9 17.5C9 18.8807 7.88071 20 6.5 20C5.11929 20 4 18.8807 4 17.5C4 16.1193 5.11929 15 6.5 15C7.88071 15 9 16.1193 9 17.5Z' fill='#12131A'></path></svg></span></span>",
                             IsDefault = false,
@@ -2211,7 +2307,7 @@ namespace SnaillApp.Data.Migrations
                             IsVisibled = true,
                             Link = "",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1937),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4503),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 9
                         },
@@ -2221,14 +2317,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BH_P",
                             ControllerName = "Promotion",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1938),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4503),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Promotion/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1938),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4504),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 55,
                             SortOrder = 1
@@ -2239,14 +2335,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_BH_CD",
                             ControllerName = "CommissionDiscount",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1939),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4508),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/CommissionDiscount/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1940),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4509),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 55,
                             SortOrder = 2
@@ -2257,14 +2353,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_NV_BS",
                             ControllerName = "BasicSalary",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1941),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4510),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/BasicSalary/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1942),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4511),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 28,
                             SortOrder = 2
@@ -2275,14 +2371,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_M",
                             ControllerName = "WebsiteMenu",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1943),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4512),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/WebsiteMenu/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1943),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4512),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 4
@@ -2293,14 +2389,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_B",
                             ControllerName = "Booking",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1944),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4514),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Booking/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1945),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4514),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 5
@@ -2311,14 +2407,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_C",
                             ControllerName = "Contact",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1946),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4515),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Contact/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1946),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4516),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 6
@@ -2329,14 +2425,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_CI",
                             ControllerName = "ContactInformation",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1947),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4517),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/ContactInformation/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1947),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4517),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 7
@@ -2347,14 +2443,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_N",
                             ControllerName = "Newsletter",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1948),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4518),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Newsletter/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1949),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4518),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 8
@@ -2365,14 +2461,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Index",
                             Code = "WebApp_QTW_T",
                             ControllerName = "Testimonial",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1950),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4519),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Testimonial/Index",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1950),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4520),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 38,
                             SortOrder = 9
@@ -2383,14 +2479,14 @@ namespace SnaillApp.Data.Migrations
                             ActionName = "Print",
                             Code = "WebApp_HHDV_QRC",
                             ControllerName = "Product",
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1951),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4521),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             Link = "/Product/Print",
                             MenuType = 0,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1952),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4521),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             ParentId = 4,
                             SortOrder = 4
@@ -2463,15 +2559,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 1,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2191),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4770),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2191),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4770),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2479,15 +2575,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 2,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2192),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4771),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2193),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4772),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2495,15 +2591,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 3,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2194),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4773),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2195),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4773),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2511,15 +2607,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 4,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2195),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4774),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2196),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4774),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2527,15 +2623,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 5,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2200),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4775),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2201),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4775),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2543,15 +2639,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 6,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2202),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4776),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2202),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4777),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2559,15 +2655,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 7,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2203),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4777),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 3,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2203),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4778),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2575,15 +2671,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 8,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2204),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4778),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 3,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2205),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4779),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2591,15 +2687,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 9,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2205),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4780),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 3,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2206),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4780),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2607,15 +2703,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 10,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2206),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4781),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 4,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2207),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4781),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2623,15 +2719,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 11,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2208),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4782),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 4,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2208),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4782),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2639,15 +2735,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 12,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2209),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4783),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 4,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2209),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4784),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2655,15 +2751,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 13,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2210),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4784),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 5,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2210),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4785),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2671,15 +2767,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 14,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2211),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4785),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 5,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2211),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4786),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2687,15 +2783,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 15,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2212),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4787),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 5,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2213),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4787),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2703,15 +2799,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 16,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2213),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4788),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 6,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2214),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4788),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2719,15 +2815,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 17,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2214),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4789),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 6,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2215),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4790),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2735,15 +2831,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 18,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2216),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4790),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 6,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2217),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4791),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2751,15 +2847,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 19,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2218),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4792),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 7,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2218),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4792),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2767,15 +2863,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 20,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2219),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4793),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 7,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2219),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4793),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2783,15 +2879,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 21,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2220),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4794),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 7,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2220),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4794),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2799,15 +2895,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 22,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2221),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4795),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 8,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2222),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4795),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2815,15 +2911,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 23,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2222),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4796),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 8,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2223),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4796),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2831,15 +2927,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 24,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2224),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4798),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 8,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2225),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4798),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2847,15 +2943,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 25,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2225),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4799),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 9,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2226),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4800),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2863,15 +2959,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 26,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2227),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4801),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 9,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2227),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4802),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2879,15 +2975,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 27,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2228),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4803),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 9,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2228),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4803),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2895,15 +2991,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 28,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2229),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4804),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 10,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2229),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4804),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2911,15 +3007,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 29,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2231),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4805),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 10,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2231),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4805),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2927,15 +3023,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 30,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2232),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4806),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 10,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2232),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4806),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2943,15 +3039,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 31,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2233),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4807),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 11,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2234),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4808),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2959,15 +3055,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 32,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2234),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4808),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 11,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2235),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4809),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2975,15 +3071,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 33,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2235),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4809),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 11,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2236),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4810),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -2991,15 +3087,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 34,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2237),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4811),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 12,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2237),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4811),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3007,15 +3103,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 35,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2238),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4812),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 12,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2238),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4812),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3023,15 +3119,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 36,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2239),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4816),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 12,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2239),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4817),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3039,15 +3135,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 37,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2240),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4818),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 13,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2240),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4818),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3055,15 +3151,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 38,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2241),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4819),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 13,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2241),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4819),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3071,15 +3167,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 39,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2242),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4820),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 13,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2243),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4821),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3087,15 +3183,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 40,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2243),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4821),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 14,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2244),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4822),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3103,15 +3199,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 41,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2245),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4822),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 14,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2245),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4823),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3119,15 +3215,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 42,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2246),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4824),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 14,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2246),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4824),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3135,15 +3231,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 43,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2247),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4825),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 15,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2247),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4825),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3151,15 +3247,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 44,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2248),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4826),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 15,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2248),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4826),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3167,15 +3263,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 45,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2250),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4827),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 15,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2250),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4827),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3183,15 +3279,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 46,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2251),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4829),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 16,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2251),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4829),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3199,15 +3295,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 47,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2252),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4830),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 16,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2253),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4830),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3215,15 +3311,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 48,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2253),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4831),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 16,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2254),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4831),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3231,15 +3327,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 49,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2255),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4832),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 17,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2255),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4833),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3247,15 +3343,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 50,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2256),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4833),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 17,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2257),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4834),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3263,15 +3359,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 51,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2257),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4834),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 17,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2258),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4835),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3279,15 +3375,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 52,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2259),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4836),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 18,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2259),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4836),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3295,15 +3391,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 53,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2260),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4837),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 18,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2261),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4837),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3311,15 +3407,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 54,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2261),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4838),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 18,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2262),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4838),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3327,15 +3423,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 55,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2262),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4839),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 19,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2263),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4839),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3343,15 +3439,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 56,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2264),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4840),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 19,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2264),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4841),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3359,15 +3455,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 57,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2265),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4841),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 19,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2265),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4842),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3375,15 +3471,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 58,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2266),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4842),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 20,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2266),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4843),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3391,15 +3487,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 59,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2267),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4844),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 20,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2267),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4844),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3407,15 +3503,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 60,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2269),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4847),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 20,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2269),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4847),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3423,15 +3519,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 61,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2270),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4848),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 21,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2270),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4848),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3439,15 +3535,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 62,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2274),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4849),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 21,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2275),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4849),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3455,15 +3551,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 63,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2276),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4850),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 21,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2276),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4850),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3471,15 +3567,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 64,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2277),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4851),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 22,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2277),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4851),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3487,15 +3583,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 65,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2279),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4852),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 22,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2279),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4853),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3503,15 +3599,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 66,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2280),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4853),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 22,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2280),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4854),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3519,15 +3615,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 67,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2282),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4855),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 23,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2282),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4856),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3535,15 +3631,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 68,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2283),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4856),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 23,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2283),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4857),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3551,15 +3647,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 69,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2284),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4857),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 23,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2284),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4858),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3567,15 +3663,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 70,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2285),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4859),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 24,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2285),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4859),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3583,15 +3679,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 71,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2286),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4860),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 24,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2287),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4860),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3599,15 +3695,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 72,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2287),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4861),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 24,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2288),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4861),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3615,15 +3711,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 73,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2288),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4862),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 25,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2289),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4862),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3631,15 +3727,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 74,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2290),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4863),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 25,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2290),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4864),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3647,15 +3743,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 75,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2291),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4864),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 25,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2291),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4865),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3663,15 +3759,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 76,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2292),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4865),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 26,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2292),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4866),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3679,15 +3775,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 77,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2295),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4867),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 26,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2295),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4867),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3695,15 +3791,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 78,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2296),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4868),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 26,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2296),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4868),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3711,15 +3807,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 79,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2297),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4869),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 27,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2298),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4869),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3727,15 +3823,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 80,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2298),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4870),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 27,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2299),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4870),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3743,15 +3839,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 81,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2299),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4871),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 27,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2300),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4872),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3759,15 +3855,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 82,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2301),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4872),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 28,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2301),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4873),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3775,15 +3871,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 83,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2302),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4873),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 28,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2302),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4874),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3791,15 +3887,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 84,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2303),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4875),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 28,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2303),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4875),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3807,15 +3903,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 85,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2304),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4876),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 29,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2304),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4876),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3823,15 +3919,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 86,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2306),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4877),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 29,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2306),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4877),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3839,15 +3935,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 87,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2308),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4878),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 29,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2308),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4878),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3855,15 +3951,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 88,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2309),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4880),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 30,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2309),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4880),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3871,15 +3967,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 89,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2310),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4881),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 30,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2310),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4881),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3887,15 +3983,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 90,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2311),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4882),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 30,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2312),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4883),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3903,15 +3999,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 91,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2312),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4883),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 31,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2313),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4884),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3919,15 +4015,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 92,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2313),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4884),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 31,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2314),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4885),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3935,15 +4031,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 93,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2315),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4889),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 31,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2315),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4890),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3951,15 +4047,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 94,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2316),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4890),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 32,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2316),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4891),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3967,15 +4063,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 95,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2317),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4892),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 32,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2317),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4892),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3983,15 +4079,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 96,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2318),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4893),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 32,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2318),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4893),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -3999,15 +4095,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 97,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2319),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4894),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 33,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2319),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4894),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4015,15 +4111,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 98,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2320),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4895),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 33,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2321),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4895),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4031,15 +4127,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 99,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2321),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4896),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 33,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2322),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4897),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4047,15 +4143,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 100,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2323),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4897),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 34,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2323),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4898),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4063,15 +4159,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 101,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2324),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4898),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 34,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2324),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4899),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4079,15 +4175,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 102,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2325),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4900),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 34,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2325),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4900),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4095,15 +4191,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 103,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2326),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4901),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 35,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2326),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4901),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4111,15 +4207,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 104,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2327),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4902),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 35,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2328),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4902),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4127,15 +4223,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 105,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2328),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4903),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 35,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2329),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4903),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4143,15 +4239,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 106,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2329),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4904),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 36,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2330),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4905),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4159,15 +4255,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 107,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2331),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4905),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 36,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2332),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4906),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4175,15 +4271,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 108,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2332),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4907),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 36,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2333),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4907),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4191,15 +4287,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 109,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2334),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4908),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 37,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2334),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4909),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4207,15 +4303,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 110,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2335),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4910),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 37,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2335),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4910),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4223,15 +4319,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 111,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2336),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4911),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 37,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2336),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4911),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4239,15 +4335,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 112,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2337),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4912),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 38,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2337),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4912),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4255,15 +4351,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 113,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2338),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4913),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 38,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2339),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4913),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4271,15 +4367,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 114,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2339),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4914),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 38,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2340),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4915),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4287,15 +4383,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 115,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2340),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4915),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 39,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2341),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4916),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4303,15 +4399,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 116,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2342),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4917),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 39,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2342),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4917),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4319,15 +4415,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 117,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2343),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4918),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 39,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2343),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4918),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4335,15 +4431,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 118,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2347),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4919),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 40,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2348),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4919),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4351,15 +4447,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 119,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2349),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4920),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 40,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2349),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4920),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4367,15 +4463,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 120,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2350),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4921),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 40,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2350),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4922),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4383,15 +4479,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 121,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2351),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4924),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 41,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2352),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4924),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4399,15 +4495,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 122,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2352),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4925),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 41,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2353),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4926),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4415,15 +4511,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 123,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2353),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4926),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 41,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2354),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4927),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4431,15 +4527,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 124,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2355),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4927),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 42,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2355),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4928),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4447,15 +4543,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 125,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2356),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4929),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 42,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2356),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4929),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4463,15 +4559,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 126,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2357),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4930),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 42,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2357),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4930),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4479,15 +4575,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 127,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2358),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4931),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 43,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2358),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4931),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4495,15 +4591,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 128,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2360),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4932),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 43,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2360),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4933),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4511,15 +4607,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 129,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2361),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4934),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 43,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2361),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4935),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4527,15 +4623,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 130,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2362),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4935),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 44,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2363),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4936),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4543,15 +4639,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 131,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2363),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4937),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 44,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2364),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4937),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4559,15 +4655,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 132,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2364),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4938),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 44,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2365),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4938),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4575,15 +4671,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 133,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2366),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4939),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 45,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2367),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4939),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4591,15 +4687,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 134,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2367),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4940),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 45,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2368),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4940),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4607,15 +4703,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 135,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2372),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4941),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 45,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2373),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4942),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4623,15 +4719,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 136,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2373),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4942),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 46,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2374),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4943),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4639,15 +4735,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 137,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2375),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4944),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 46,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2375),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4944),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4655,15 +4751,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 138,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2376),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4945),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 46,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2376),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4945),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4671,15 +4767,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 139,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2377),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4946),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 47,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2377),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4946),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4687,15 +4783,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 140,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2378),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4947),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 47,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2378),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4947),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4703,15 +4799,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 141,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2380),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4948),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 47,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2380),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4948),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4719,15 +4815,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 142,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2381),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4949),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 48,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2381),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4950),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4735,15 +4831,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 143,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2382),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4950),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 48,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2382),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4951),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4751,15 +4847,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 144,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2383),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4952),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 48,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2384),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4952),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4767,15 +4863,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 145,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2384),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4953),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 49,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2385),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4953),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4783,15 +4879,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 146,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2386),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4954),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 49,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2386),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4954),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4799,15 +4895,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 147,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2387),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4955),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 49,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2387),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4955),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4815,15 +4911,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 148,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2389),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4956),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 50,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2389),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4957),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4831,15 +4927,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 149,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2390),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4957),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 50,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2390),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4958),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4847,15 +4943,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 150,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2392),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4962),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 50,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2393),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4963),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4863,15 +4959,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 151,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2393),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4964),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 51,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2394),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4964),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4879,15 +4975,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 152,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2394),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4965),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 51,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2395),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4966),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4895,15 +4991,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 153,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2396),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4966),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 51,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2396),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4967),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4911,15 +5007,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 154,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2397),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4967),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 52,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2397),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4968),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4927,15 +5023,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 155,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2398),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4969),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 52,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2398),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4969),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4943,15 +5039,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 156,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2399),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4970),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 52,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2399),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4970),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4959,15 +5055,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 157,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2400),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4971),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 53,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2401),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4971),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4975,15 +5071,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 158,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2401),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4972),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 53,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2402),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4972),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -4991,15 +5087,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 159,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2402),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4973),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 53,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2403),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4974),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5007,15 +5103,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 160,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2404),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4974),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 54,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2404),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4975),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5023,15 +5119,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 161,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2405),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4975),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 54,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2405),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4976),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5039,15 +5135,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 162,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2406),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4977),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 54,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2406),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4977),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5055,15 +5151,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 163,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2407),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4978),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 55,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2407),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4978),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5071,15 +5167,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 164,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2409),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4979),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 55,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2409),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4979),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5087,15 +5183,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 165,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2410),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4980),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 55,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2410),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4980),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5103,15 +5199,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 166,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2411),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4981),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 56,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2412),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4982),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5119,15 +5215,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 167,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2412),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4982),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 56,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2413),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4983),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5135,15 +5231,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 168,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2414),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4983),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 56,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2415),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4984),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5151,15 +5247,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 169,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2415),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4985),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 57,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2416),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4985),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5167,15 +5263,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 170,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2417),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4986),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 57,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2418),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4986),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5183,15 +5279,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 171,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2418),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4988),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 57,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2419),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4988),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5199,15 +5295,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 172,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2419),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4989),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 58,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2420),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4989),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5215,15 +5311,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 173,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2421),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4990),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 58,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2421),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4990),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5231,15 +5327,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 174,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2422),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4991),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 58,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2422),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4991),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5247,15 +5343,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 175,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2426),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4992),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 59,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2427),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4993),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5263,15 +5359,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 176,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2428),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4993),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 59,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2428),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4994),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5279,15 +5375,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 177,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2429),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4995),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 59,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2429),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4995),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5295,15 +5391,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 178,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2430),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4996),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 60,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2430),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4996),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5311,15 +5407,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 179,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2431),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4997),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 60,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2432),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4997),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5327,15 +5423,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 180,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2432),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4998),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 60,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2433),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4998),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5343,15 +5439,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 181,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2434),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4999),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 61,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2434),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5000),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5359,15 +5455,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 182,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2435),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5000),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 61,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2436),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5001),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5375,15 +5471,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 183,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2436),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5002),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 61,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2437),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5003),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5391,15 +5487,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 184,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2437),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5004),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 62,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2438),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5004),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5407,15 +5503,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 185,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2439),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5005),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 62,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2439),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5005),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5423,15 +5519,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 186,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2440),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5006),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 62,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2440),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5006),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5439,15 +5535,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 187,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2441),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5007),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 63,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2441),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5007),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5455,15 +5551,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 188,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2443),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5008),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 63,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2443),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5009),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5471,15 +5567,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 189,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2444),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5009),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 63,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2445),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5010),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5487,15 +5583,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 190,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2446),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5010),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 64,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2446),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5011),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5503,15 +5599,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 191,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2447),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5012),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 64,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2447),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5012),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5519,15 +5615,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 192,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2448),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5013),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 64,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2448),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5013),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5535,15 +5631,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 193,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2450),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5014),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)0,
+                            MenuAppRoleType = (byte)7,
                             MenuId = 65,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2451),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5014),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5551,15 +5647,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 194,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2451),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5015),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)1,
+                            MenuAppRoleType = (byte)8,
                             MenuId = 65,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2452),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5016),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         },
@@ -5567,15 +5663,15 @@ namespace SnaillApp.Data.Migrations
                         {
                             Id = 195,
                             AppRoleId = new Guid("8d04dce2-969a-435d-bba3-df3f325983dc"),
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2452),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5017),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsAllow = true,
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
-                            MenuAppRoleType = (byte)2,
+                            MenuAppRoleType = (byte)9,
                             MenuId = 65,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2453),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(5017),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             SortOrder = 0
                         });
@@ -5644,14 +5740,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1983),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4559),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1984),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4560),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tổng quan",
                             SortOrder = 0
@@ -5659,14 +5755,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1985),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4561),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 1,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1986),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4562),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Dashboard",
                             SortOrder = 0
@@ -5674,14 +5770,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1987),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4563),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1987),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4563),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tổng quan",
                             SortOrder = 0
@@ -5689,14 +5785,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1988),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4564),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 2,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1988),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4564),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Summary",
                             SortOrder = 0
@@ -5704,14 +5800,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1989),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4565),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 3,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1990),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4566),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Đơn hàng",
                             SortOrder = 0
@@ -5719,14 +5815,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1990),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4566),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 3,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1991),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4567),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Orders",
                             SortOrder = 0
@@ -5734,14 +5830,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1992),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4568),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 4,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1992),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4568),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Hàng hóa & Dịch vụ",
                             SortOrder = 0
@@ -5749,14 +5845,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1993),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4569),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 4,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1994),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4569),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Products & Services",
                             SortOrder = 0
@@ -5764,14 +5860,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1994),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4570),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 5,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1995),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4571),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Hàng hóa/Dịch vụ",
                             SortOrder = 0
@@ -5779,14 +5875,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1996),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4571),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 5,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1996),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4572),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Products/Services",
                             SortOrder = 0
@@ -5794,14 +5890,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1998),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4573),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 6,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1998),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4573),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhập hàng",
                             SortOrder = 0
@@ -5809,14 +5905,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1999),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4574),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 6,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(1999),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4574),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Stock in",
                             SortOrder = 0
@@ -5824,14 +5920,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2000),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4575),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 7,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2001),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4576),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Kho hàng",
                             SortOrder = 0
@@ -5839,14 +5935,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2002),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4577),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 7,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2002),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4578),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Warehouses",
                             SortOrder = 0
@@ -5854,14 +5950,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2003),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4579),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 8,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2003),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4579),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Khách hàng",
                             SortOrder = 0
@@ -5869,14 +5965,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2004),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4580),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 8,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2005),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4580),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Customers",
                             SortOrder = 0
@@ -5884,14 +5980,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2005),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4581),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 9,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2006),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4581),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Khách hàng",
                             SortOrder = 0
@@ -5899,14 +5995,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2007),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4582),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 9,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2007),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4583),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Customers",
                             SortOrder = 0
@@ -5914,14 +6010,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 19,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2008),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4584),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 10,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2008),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4584),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhà cung cấp",
                             SortOrder = 0
@@ -5929,14 +6025,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 20,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2009),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4585),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 10,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2010),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4585),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Suppliers",
                             SortOrder = 0
@@ -5944,14 +6040,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 21,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2010),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4586),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 11,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2011),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4586),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhóm khách hàng",
                             SortOrder = 0
@@ -5959,14 +6055,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 22,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2012),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4587),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 11,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2012),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4588),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Customer types",
                             SortOrder = 0
@@ -5974,14 +6070,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 23,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2013),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4589),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 12,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2013),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4589),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tiền bạc",
                             SortOrder = 0
@@ -5989,14 +6085,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 24,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2014),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4590),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 12,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2015),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4590),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Receipts & payments",
                             SortOrder = 0
@@ -6004,14 +6100,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 25,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2015),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4591),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 13,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2016),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4591),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tổng quan",
                             SortOrder = 0
@@ -6019,14 +6115,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 26,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2017),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4592),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 13,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2017),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4593),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Summary",
                             SortOrder = 0
@@ -6034,14 +6130,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 27,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2018),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4597),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 14,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2018),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4597),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Thu",
                             SortOrder = 0
@@ -6049,14 +6145,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 28,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2020),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4599),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 14,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2020),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4599),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Receipts",
                             SortOrder = 0
@@ -6064,14 +6160,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 29,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2021),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4600),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 15,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2021),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4600),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Chi",
                             SortOrder = 0
@@ -6079,14 +6175,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 30,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2022),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4601),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 15,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2022),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4602),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Payments",
                             SortOrder = 0
@@ -6094,14 +6190,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 31,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2023),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4603),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 16,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2024),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4603),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Sổ quỹ",
                             SortOrder = 0
@@ -6109,14 +6205,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 32,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2024),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4604),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 16,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2025),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4604),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Cash book",
                             SortOrder = 0
@@ -6124,14 +6220,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 33,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2026),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4605),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 17,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2026),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4605),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Báo cáo",
                             SortOrder = 0
@@ -6139,14 +6235,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 34,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2027),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4606),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 17,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2027),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4607),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Reports",
                             SortOrder = 0
@@ -6154,14 +6250,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 35,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2028),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4607),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 18,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2029),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4608),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Doanh số",
                             SortOrder = 0
@@ -6169,14 +6265,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 36,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2030),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4609),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 18,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2031),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4609),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Sales",
                             SortOrder = 0
@@ -6184,14 +6280,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 37,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2032),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4610),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 19,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2032),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4610),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Hàng hóa & Dịch vụ",
                             SortOrder = 0
@@ -6199,14 +6295,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 38,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2033),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4612),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 19,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2033),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4613),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Products & Services",
                             SortOrder = 0
@@ -6214,14 +6310,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 39,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2034),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4613),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 20,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2035),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4614),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Tồn kho",
                             SortOrder = 0
@@ -6229,14 +6325,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 40,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2036),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4615),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 20,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2036),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4615),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Stock",
                             SortOrder = 0
@@ -6244,14 +6340,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 41,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2037),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4616),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 21,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2037),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4616),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Lợi nhuận",
                             SortOrder = 0
@@ -6259,14 +6355,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 42,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2038),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4617),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 21,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2039),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4617),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Profit",
                             SortOrder = 0
@@ -6274,14 +6370,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 43,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2039),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4618),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 22,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2040),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4619),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Lãi lỗ",
                             SortOrder = 0
@@ -6289,14 +6385,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 44,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2041),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4620),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 22,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2041),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4620),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Profit & Loss",
                             SortOrder = 0
@@ -6304,14 +6400,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 45,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2042),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4621),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 23,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2042),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4621),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Báo cáo tháng",
                             SortOrder = 0
@@ -6319,14 +6415,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 46,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2043),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4622),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 23,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2044),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4623),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Monthly report",
                             SortOrder = 0
@@ -6334,14 +6430,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 47,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2045),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4623),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 24,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2045),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4624),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Danh mục",
                             SortOrder = 0
@@ -6349,14 +6445,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 48,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2046),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4625),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 24,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2046),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4625),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Directories",
                             SortOrder = 0
@@ -6364,14 +6460,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 49,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2047),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4626),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 25,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2048),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4626),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhóm hàng hóa",
                             SortOrder = 0
@@ -6379,14 +6475,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 50,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2049),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4627),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 25,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2049),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4628),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Product types",
                             SortOrder = 0
@@ -6394,14 +6490,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 51,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2050),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4628),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 26,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2050),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4629),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Đơn vị tính",
                             SortOrder = 0
@@ -6409,14 +6505,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 52,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2051),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4630),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 26,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2051),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4630),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Units",
                             SortOrder = 0
@@ -6424,14 +6520,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 53,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2052),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4631),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 27,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2053),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4631),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Bán hàng Online",
                             SortOrder = 0
@@ -6439,14 +6535,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 54,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2054),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4632),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 27,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2054),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4632),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Sale Online",
                             SortOrder = 0
@@ -6454,14 +6550,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 55,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2060),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4633),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 28,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2061),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4634),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhân viên",
                             SortOrder = 0
@@ -6469,14 +6565,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 56,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2062),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4635),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 28,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2062),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4635),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Staff",
                             SortOrder = 0
@@ -6484,14 +6580,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 57,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2063),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4636),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 29,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2064),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4636),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Bảng lương",
                             SortOrder = 0
@@ -6499,14 +6595,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 58,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2065),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4637),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 29,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2066),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4637),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Payroll",
                             SortOrder = 0
@@ -6514,14 +6610,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 59,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2066),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4638),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 30,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2067),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4639),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Cài đặt",
                             SortOrder = 0
@@ -6529,14 +6625,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 60,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2068),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4640),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 30,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2068),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4640),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Setting",
                             SortOrder = 0
@@ -6544,14 +6640,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 61,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2069),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4641),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 31,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2069),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4641),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhân viên",
                             SortOrder = 0
@@ -6559,14 +6655,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 62,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2070),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4642),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 31,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2071),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4642),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Staffs",
                             SortOrder = 0
@@ -6574,14 +6670,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 63,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2071),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4644),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 32,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2072),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4644),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Phân quyền",
                             SortOrder = 0
@@ -6589,14 +6685,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 64,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2073),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4645),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 32,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2073),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4646),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Roles",
                             SortOrder = 0
@@ -6604,14 +6700,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 65,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2074),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4647),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 33,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2074),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4647),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Cửa hàng",
                             SortOrder = 0
@@ -6619,14 +6715,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 66,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2075),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4648),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 33,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2076),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4648),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Stores",
                             SortOrder = 0
@@ -6634,14 +6730,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 67,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2076),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4649),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 34,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2077),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4649),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Mẫu in",
                             SortOrder = 0
@@ -6649,14 +6745,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 68,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2078),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4650),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 34,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2078),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4651),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Document templates",
                             SortOrder = 0
@@ -6664,14 +6760,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 69,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2079),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4651),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 35,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2079),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4652),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Danh mục hệ thống",
                             SortOrder = 0
@@ -6679,14 +6775,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 70,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2080),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4653),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 35,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2080),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4653),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "System directories",
                             SortOrder = 0
@@ -6694,14 +6790,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 71,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2081),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4654),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 36,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2082),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4654),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Menu",
                             SortOrder = 0
@@ -6709,14 +6805,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 72,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2083),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4655),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 36,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2083),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4656),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Menu",
                             SortOrder = 0
@@ -6724,14 +6820,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 73,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2084),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4656),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 37,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2084),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4657),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Loại mẫu in",
                             SortOrder = 0
@@ -6739,14 +6835,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 74,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2085),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4658),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 37,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2085),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4658),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Document printing template type",
                             SortOrder = 0
@@ -6754,14 +6850,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 75,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2086),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4659),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 38,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2087),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4659),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Website",
                             SortOrder = 0
@@ -6769,14 +6865,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 76,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2087),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4660),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 38,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2088),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4661),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Website",
                             SortOrder = 0
@@ -6784,14 +6880,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 77,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2089),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4661),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 39,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2089),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4662),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Bài viết",
                             SortOrder = 0
@@ -6799,14 +6895,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 78,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2090),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4663),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 39,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2090),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4663),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Post",
                             SortOrder = 0
@@ -6814,14 +6910,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 79,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2091),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4664),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 40,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2092),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4664),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Chuyên mục",
                             SortOrder = 0
@@ -6829,14 +6925,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 80,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2092),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4665),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 40,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2093),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4665),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Categories",
                             SortOrder = 0
@@ -6844,14 +6940,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 81,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2094),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4666),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 41,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2094),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4667),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Slider",
                             SortOrder = 0
@@ -6859,14 +6955,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 82,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2095),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4667),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 41,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2095),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4668),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Slider",
                             SortOrder = 0
@@ -6874,14 +6970,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 83,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2096),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4669),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 42,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2097),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4669),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Nhà sản xuất",
                             SortOrder = 0
@@ -6889,14 +6985,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 84,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2097),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4670),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 42,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2098),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4671),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Manufacturer",
                             SortOrder = 0
@@ -6904,14 +7000,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 85,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2099),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4672),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 43,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2100),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4672),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Thuộc tính sản phẩm",
                             SortOrder = 0
@@ -6919,14 +7015,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 86,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2101),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4673),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 43,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2101),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4673),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Attribute",
                             SortOrder = 0
@@ -6934,14 +7030,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 87,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2102),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4674),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 44,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2102),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4675),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái",
                             SortOrder = 0
@@ -6949,14 +7045,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 88,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2103),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4675),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 44,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2103),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4676),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Status",
                             SortOrder = 0
@@ -6964,14 +7060,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 89,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2104),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4677),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 45,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2105),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4677),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái người sử dụng",
                             SortOrder = 0
@@ -6979,14 +7075,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 90,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2106),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4681),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 45,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2106),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4682),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "User status",
                             SortOrder = 0
@@ -6994,14 +7090,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 91,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2107),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4683),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 46,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2107),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4683),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái đơn hàng",
                             SortOrder = 0
@@ -7009,14 +7105,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 92,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2108),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4684),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 46,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2108),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4684),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Order status",
                             SortOrder = 0
@@ -7024,14 +7120,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 93,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2109),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4685),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 47,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2110),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4686),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái phiếu kế toán",
                             SortOrder = 0
@@ -7039,14 +7135,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 94,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2111),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4686),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 47,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2111),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4687),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Phiếu kế toán status",
                             SortOrder = 0
@@ -7054,14 +7150,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 95,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2112),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4688),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 48,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2112),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4688),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái bài viết",
                             SortOrder = 0
@@ -7069,14 +7165,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 96,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2113),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4689),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 48,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2113),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4689),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Post status",
                             SortOrder = 0
@@ -7084,14 +7180,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 97,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2114),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4690),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 49,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2115),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4691),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái loại bài viết",
                             SortOrder = 0
@@ -7099,14 +7195,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 98,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2116),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4691),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 49,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2116),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4692),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Post type status",
                             SortOrder = 0
@@ -7114,14 +7210,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 99,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2117),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4693),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 50,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2117),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4693),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái slide",
                             SortOrder = 0
@@ -7129,14 +7225,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 100,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2118),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4694),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 50,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2118),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4694),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Slide status",
                             SortOrder = 0
@@ -7144,14 +7240,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 101,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2119),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4695),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 51,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2120),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4696),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Trạng thái cửa hàng",
                             SortOrder = 0
@@ -7159,14 +7255,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 102,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2120),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4696),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 51,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2121),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4697),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Store status",
                             SortOrder = 0
@@ -7174,14 +7270,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 103,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2122),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4698),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 52,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2122),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4698),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Giá trị thuộc tính",
                             SortOrder = 0
@@ -7189,14 +7285,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 104,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2123),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4699),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 52,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2123),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4699),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Attribute value",
                             SortOrder = 0
@@ -7204,14 +7300,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 105,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2124),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4700),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 53,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2125),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4700),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Khổ giấy",
                             SortOrder = 0
@@ -7219,14 +7315,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 106,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2126),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4701),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 53,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2126),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4702),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Paper size",
                             SortOrder = 0
@@ -7234,14 +7330,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 107,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2127),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4702),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 54,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2127),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4703),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Loại người sử dụng",
                             SortOrder = 0
@@ -7249,14 +7345,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 108,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2128),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4704),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 54,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2128),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4704),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "App user type",
                             SortOrder = 0
@@ -7264,14 +7360,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 109,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2130),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4705),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 55,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2130),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4705),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Bán hàng",
                             SortOrder = 0
@@ -7279,14 +7375,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 110,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2131),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4707),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 55,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2132),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4707),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Sales",
                             SortOrder = 0
@@ -7294,14 +7390,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 111,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2132),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4708),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 56,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2133),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4708),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Chương trình khuyến mãi",
                             SortOrder = 0
@@ -7309,14 +7405,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 112,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2134),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4709),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 56,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2134),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4710),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Sales Promotion",
                             SortOrder = 0
@@ -7324,14 +7420,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 113,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2135),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4711),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 57,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2135),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4711),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Hoa hồng - Giảm giá",
                             SortOrder = 0
@@ -7339,14 +7435,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 114,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2136),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4712),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 57,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2137),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4712),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Commission - Discount",
                             SortOrder = 0
@@ -7354,14 +7450,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 115,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2137),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4713),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 58,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2138),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4713),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Lương căn bản",
                             SortOrder = 0
@@ -7369,14 +7465,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 116,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2139),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4714),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 58,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2139),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4715),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Basic salary",
                             SortOrder = 0
@@ -7384,14 +7480,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 117,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2140),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4716),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 59,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2140),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4716),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Menu",
                             SortOrder = 0
@@ -7399,14 +7495,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 118,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2141),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4717),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 59,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2142),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4717),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Menu",
                             SortOrder = 0
@@ -7414,14 +7510,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 119,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2145),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4718),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 60,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2146),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4719),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Đặt lịch",
                             SortOrder = 0
@@ -7429,14 +7525,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 120,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2147),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4720),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 60,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2148),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4720),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Booking",
                             SortOrder = 0
@@ -7444,14 +7540,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 121,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2148),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4721),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 61,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2149),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4721),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Liên hệ",
                             SortOrder = 0
@@ -7459,14 +7555,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 122,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2150),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4722),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 61,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2150),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4723),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Contact",
                             SortOrder = 0
@@ -7474,14 +7570,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 123,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2151),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4723),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 62,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2151),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4724),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Thông tin liên hệ",
                             SortOrder = 0
@@ -7489,14 +7585,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 124,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2152),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4725),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 62,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2153),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4725),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Contact information",
                             SortOrder = 0
@@ -7504,14 +7600,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 125,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2153),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4726),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 63,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2154),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4726),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Newsletter",
                             SortOrder = 0
@@ -7519,14 +7615,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 126,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2155),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4727),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 63,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2155),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4728),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Newsletter",
                             SortOrder = 0
@@ -7534,14 +7630,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 127,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2156),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4729),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 64,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2156),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4729),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Testimonial",
                             SortOrder = 0
@@ -7549,14 +7645,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 128,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2157),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4730),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 64,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2157),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4730),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Testimonial",
                             SortOrder = 0
@@ -7564,14 +7660,14 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 129,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2158),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4731),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 1,
                             MenuId = 65,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2159),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4732),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "In mã QR",
                             SortOrder = 0
@@ -7579,18 +7675,70 @@ namespace SnaillApp.Data.Migrations
                         new
                         {
                             Id = 130,
-                            CreatedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2160),
+                            CreatedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4733),
                             CreatedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsDefault = false,
                             IsDeleted = false,
                             IsVisibled = true,
                             LanguageId = 2,
                             MenuId = 65,
-                            ModifiedDate = new DateTime(2022, 1, 7, 15, 20, 11, 607, DateTimeKind.Local).AddTicks(2160),
+                            ModifiedDate = new DateTime(2022, 1, 9, 14, 52, 36, 477, DateTimeKind.Local).AddTicks(4733),
                             ModifiedUserId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Name = "Print QR code",
                             SortOrder = 0
                         });
+                });
+
+            modelBuilder.Entity("SnailApp.Data.Entities.Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVisibled")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ModifiedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Regions", (string)null);
                 });
 
             modelBuilder.Entity("SnailApp.Data.Entities.Transaction", b =>
@@ -7686,11 +7834,41 @@ namespace SnaillApp.Data.Migrations
 
             modelBuilder.Entity("SnailApp.Data.Entities.AppUser", b =>
                 {
+                    b.HasOne("SnailApp.Data.Entities.Blood", "Bloods")
+                        .WithMany()
+                        .HasForeignKey("BloodId");
+
+                    b.HasOne("SnailApp.Data.Entities.Region", "Citys")
+                        .WithMany()
+                        .HasForeignKey("CitysId");
+
+                    b.HasOne("SnailApp.Data.Entities.Clinic", "Clinics")
+                        .WithMany()
+                        .HasForeignKey("ClinicId");
+
                     b.HasOne("SnailApp.Data.Entities.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");
 
+                    b.HasOne("SnailApp.Data.Entities.Region", "Provinces")
+                        .WithMany()
+                        .HasForeignKey("ProvincesId");
+
+                    b.HasOne("SnailApp.Data.Entities.Region", "Wards")
+                        .WithMany()
+                        .HasForeignKey("WardsId");
+
+                    b.Navigation("Bloods");
+
+                    b.Navigation("Citys");
+
+                    b.Navigation("Clinics");
+
                     b.Navigation("Gender");
+
+                    b.Navigation("Provinces");
+
+                    b.Navigation("Wards");
                 });
 
             modelBuilder.Entity("SnailApp.Data.Entities.AppUser_Clinic", b =>

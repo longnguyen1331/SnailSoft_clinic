@@ -12,5 +12,6 @@ namespace SnailApp.ViewModels.System.AppRoles
         public string Name { set; get; }
         public string Description { set; get; }
         public int LanguageId { set; get; }
+        public int Type { set; get; }
     }
 }

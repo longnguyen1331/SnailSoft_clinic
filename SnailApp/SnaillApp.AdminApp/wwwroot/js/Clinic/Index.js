@@ -19,8 +19,8 @@ var Clinic = function () {
                 $(el).colpickHide();
             }
         });
-
-     
+        
+ 
         $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -265,6 +265,7 @@ var Clinic = function () {
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
+        datatableOption.buttons = ['excel', 'pdf', 'print'];
         datatableOption.ajax.url = "/Clinic/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
@@ -282,7 +283,7 @@ var Clinic = function () {
                 "orderable": false
             },
             {
-                "targets": [3,6],
+                "targets": [0,3,6],
                 "className": 'dt-center'
             }
         ];
@@ -306,11 +307,7 @@ var Clinic = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                    if (this.checked) {
-                        App.showHideButtonDelete(true);
-                    } else {
-                        App.showHideButtonDelete(false);
-                    }
+                    
                 });
 
 
@@ -374,6 +371,7 @@ var Clinic = function () {
             },
         ]
         dtTable = $('#dtTable').DataTable(datatableOption);
+        dtTable.buttons().container().appendTo('#buttonExtension .col-md-6:eq(0)');
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
@@ -507,7 +505,6 @@ var Clinic = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
-                App.showHideButtonDelete(false);
             });
     }
 
@@ -515,7 +512,6 @@ var Clinic = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteUserByIds", dtTable, null)
             .then(function () {
                 dtTableClinic.draw();
-                App.showHideButtonDelete(false);
             });
     }
 

@@ -22,12 +22,13 @@ namespace SnailApp.Data.EF
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
             modelBuilder.ApplyConfiguration(new AppUser_ClinicConfiguration());
-            modelBuilder.ApplyConfiguration(new ClinicConfiguration());
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new BloodConfiguration());
+            modelBuilder.ApplyConfiguration(new ClinicConfiguration());
+            modelBuilder.ApplyConfiguration(new RegionConfiguration());
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new GenderTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
@@ -40,6 +41,8 @@ namespace SnailApp.Data.EF
             modelBuilder.Seed();
         }
         
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Blood> Bloods { get; set; }
         public DbSet<AppUser_Clinic> User_Clinics { get; set; }
         public DbSet<Clinic> Clinics{ get; set; }
         public DbSet<AppConfig> AppConfigs { get; set; }

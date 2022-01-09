@@ -149,11 +149,7 @@ var AppUserStatus = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                    if (this.checked) {
-                        App.showHideButtonDelete(true);
-                    } else {
-                        App.showHideButtonDelete(false);
-                    }
+                   
                 });
 
                 resolve();
@@ -241,7 +237,6 @@ var AppUserStatus = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/AppUserStatus/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
-            App.showHideButtonDelete(false);
         });
     }
 

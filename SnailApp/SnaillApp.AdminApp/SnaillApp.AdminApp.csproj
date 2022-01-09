@@ -5,10 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Doctors\**" />
+    <Compile Remove="Views\Examinations\**" />
     <Compile Remove="Views\GroupCustomer\**" />
+    <Compile Remove="Views\Services\**" />
+    <Content Remove="Views\Doctors\**" />
+    <Content Remove="Views\Examinations\**" />
     <Content Remove="Views\GroupCustomer\**" />
+    <Content Remove="Views\Services\**" />
+    <EmbeddedResource Remove="Views\Doctors\**" />
+    <EmbeddedResource Remove="Views\Examinations\**" />
     <EmbeddedResource Remove="Views\GroupCustomer\**" />
+    <EmbeddedResource Remove="Views\Services\**" />
+    <None Remove="Views\Doctors\**" />
+    <None Remove="Views\Examinations\**" />
     <None Remove="Views\GroupCustomer\**" />
+    <None Remove="Views\Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,9 +67,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Appointments\" />
-    <Folder Include="Views\Examinations\" />
-    <Folder Include="Views\Doctors\" />
-    <Folder Include="Views\Services\" />
   </ItemGroup>
 
 </Project>

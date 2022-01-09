@@ -48,35 +48,39 @@ var AppRole = function () {
         $('[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
             let result = {};
-            edit_form.find("select, textarea, input").each((index, el) => {
-                let fieldName = $(el).data("field");
-                if (fieldName) {
+            if (checkDataUpdate()) {
+                edit_form.find("select, textarea, input").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    if (fieldName) {
 
-                    switch (fieldName) {
+                        switch (fieldName) {
 
-                        default:
-                            result[$(el).data("field")] = $(el).val();
+                            default:
+                                result[$(el).data("field")] = $(el).val();
+                        }
                     }
-                }
-            }),
-            data = {
-                Id: (editingData != null ? editingData.id : ""),
-                Data: result
-            },
-            App.sendDataToURL("/AppRole/Save", data, "POST")
-                .then(function (res) {
-                    if (!res.isSuccessed) {
-                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                }),
+                    data = {
+                        Id: (editingData != null ? editingData.id : ""),
+                        Data: result
+                    },
+                    App.sendDataToURL("/AppRole/Save", data, "POST")
+                        .then(function (res) {
+                            if (!res.isSuccessed) {
+                                App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
 
-                    }
-                    else {
-                        editingData = null;
-                        dtTable.draw();
-                        resetForm();
-                        App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
-                    }
-                }
-            )
+                            }
+                            else {
+                                editingData = null;
+                                dtTable.draw();
+                                resetForm();
+                                App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+                            }
+                        }
+                        )
+            }
+
+          
         });
 
         $('#btnDelete').click(function (e) {
@@ -110,6 +114,26 @@ var AppRole = function () {
             });
         });
     };
+
+
+    function checkDataUpdate() {
+        if ($('select[data-field="Type"]').val() == '-1') {
+            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Choose Role Type");
+            return false;
+        }
+
+        if ($('input[data-field="Code"]').val() == '') {
+            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter code");
+            return false;
+        }
+
+        if ($('input[data-field="Name"]').val() == '') {
+            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter name");
+            return false;
+        }
+
+        return true;
+    }
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
@@ -152,11 +176,7 @@ var AppRole = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                    if (this.checked) {
-                        App.showHideButtonDelete(true);
-                    } else {
-                        App.showHideButtonDelete(false);
-                    }
+                    
                 });
 
 
@@ -206,13 +226,16 @@ var AppRole = function () {
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
             editingData = dtTable.row($(this).parents('tr')).data();
-
             edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
                 let fieldName = $(el).data("field");
                 let type = $(el).attr("type");
                 if (fieldName) {
                     switch (fieldName) {
                         default:
+
+                            if ($(el).is("select")) {
+                                $(el).val(editingData[App.lowerFirstLetter(fieldName)]).trigger('change');
+                            }else
                             if ($(el).is("textarea")) {
                                 $('textarea[data-field="' + fieldName + '"]').text(editingData[App.lowerFirstLetter(fieldName)]);
                             } else if ($(el).is("input")) {
@@ -230,7 +253,6 @@ var AppRole = function () {
                     }
                 }
             });
-
             $('#CreateInfomation').show();
             $('#RoleAssign').hide();
             if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
@@ -274,7 +296,6 @@ var AppRole = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/AppRole/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
-            App.showHideButtonDelete(false);
         });
     }
 

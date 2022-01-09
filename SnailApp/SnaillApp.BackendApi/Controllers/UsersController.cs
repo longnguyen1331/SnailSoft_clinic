@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SnailApp.Utilities.Constants;
 using SnailApp.ViewModels.Common;
-using SnailApp.ViewModels.Sales.AppUserFeedbacks;
-using SnailApp.ViewModels.Sales.AppUserHelps;
 using BHSNetCoreLib;
 
 namespace SnailApp.BackendApi.Controllers

@@ -8,7 +8,7 @@ namespace SnailApp.ViewModels.Accountants.PhieuKeToans
 {
     public class PhieuKeToanDto : BaseDto
     {
-        public LoaiPhieuKeToan LoaiPhieuKeToan { set; get; }
+        public RoleType LoaiPhieuKeToan { set; get; }
         public Guid SaleStaffId { set; get; }
         public Guid  CustomerId { set; get; }
         public string CustomerPhone { set; get; }
