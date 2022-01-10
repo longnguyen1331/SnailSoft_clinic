@@ -181,7 +181,7 @@ namespace SnailApp.Application.SystemApplication.Users
                                 Proifle = u.Proifle,
                                 ClinicId = u.ClinicId,
                                 IsActive = u.IsActive,
-                                Dob = u.Dob != null ? u.Dob.Value.ToString("dd/MM/yyyy") : String.Empty,
+                                Dob = u.Dob != null ? u.Dob.Value.ToString("yyyy-MM-dd") : String.Empty,
                                 StrCreatedDate = u.CreatedDate.ToString("dd/MM/yyyy")
                             };
 
@@ -242,9 +242,8 @@ namespace SnailApp.Application.SystemApplication.Users
 
                     user.AppRoles = appRoles;
 
-                    if (user.ProvinceId != null) user.CityName = regions.FirstOrDefault(x => x.Id == user.ProvinceId.Value).Name; //(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.ProvinceId.Value).Name;
-                    if (user.DistrictId != null) user.ProvinceName = regions.FirstOrDefault(x => x.Id == user.DistrictId.Value).Name;// (await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.DistrictId.Value).Name;
-                    if (user.WardId != null) user.WardName = regions.FirstOrDefault(x => x.Id == user.WardId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
+                    if (user.ProvinceId != null) user.ProvinceName = regions.FirstOrDefault(x => x.Id == user.ProvinceId.Value).Name; //(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.ProvinceId.Value).Name;
+                    if (user.DistrictId != null) user.DistrictName = regions.FirstOrDefault(x => x.Id == user.DistrictId.Value).Name;// (await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.DistrictId.Value).Name;
                     if (user.BloodId != null) user.BloodName = bloods.FirstOrDefault(x => x.Id == user.BloodId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
                 }
 
@@ -306,7 +305,6 @@ namespace SnailApp.Application.SystemApplication.Users
                         WardId = request.WardId,
                         BloodId = request.BloodId,
                         Proifle = request.Proifle,
-                        Dob = (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>()),
                         IsActive = request.IsActive,
                         Address = request.Address,
                         ModifiedDate = DateTime.Now
@@ -345,13 +343,18 @@ namespace SnailApp.Application.SystemApplication.Users
                         user.WardId = request.WardId;
                         user.BloodId = request.BloodId;
                         user.Proifle = request.Proifle;
-                        user.Dob = (DateTime.TryParseExact(request.Dob, _configuration[SystemConstants.AppConstants.DateFormat], null, DateTimeStyles.None, out ngayValue) ? ngayValue : new Nullable<DateTime>());
                         user.IsActive = request.IsActive;
                         user.Address = request.Address;
                         user.ModifiedDate = DateTime.Now;
                     }
                 }
 
+
+                if (DateTime.TryParseExact(request.Dob, "yyyy-MM-dd", null, DateTimeStyles.None, out ngayValue))
+                {
+                    user.Dob = ngayValue;
+                }
+               
                 if (request.Avatar != null) {
                     user.Avatar = await this.SaveFile(request.Avatar);
                 }

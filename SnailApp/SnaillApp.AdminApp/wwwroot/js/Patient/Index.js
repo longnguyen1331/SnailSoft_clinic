@@ -254,14 +254,31 @@ var Patient = function () {
                 } else {
                     $('#Female').prop('checked', true);
                 }
+                console.log(editingData);
                 edit_form.find("select, textarea, input:not(:radio)").each((index, el) => {
                     let fieldName = $(el).data("field");
                     let type = $(el).attr("type");
 
                     if (fieldName) {
                         switch (fieldName) {
+
+
                             case "GenderId":
                                 break;
+
+                            case "ProvinceId":
+                                    $(el).append('<option value="' + editingData['provinceId'] + '" selected>' + editingData['provinceName']+'</option>').trigger('change');
+                                break;
+
+                            case "BloodId":
+                                $(el).append('<option value="' + editingData['bloodId'] + '" selected>' + editingData['bloodName']+'</option>').trigger('change');
+                                break;
+
+                            case "DistrictId":
+                                $(el).append('<option value="' + editingData['districtId'] + '" selected>' + editingData['districtName']+'</option>').trigger('change');
+                                break;
+
+                         
                             default:
                                 if ($(el).is("textarea")) {
                                     $('textarea[data-field="' + fieldName + '"]').text(editingData[App.lowerFirstLetter(fieldName)]);
