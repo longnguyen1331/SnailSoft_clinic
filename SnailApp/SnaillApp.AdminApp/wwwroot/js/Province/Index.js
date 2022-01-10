@@ -1,6 +1,6 @@
 ﻿//== Class definition
 
-var Blood = function () {
+var Province = function () {
     let dtTable = null,editingData = null;
     let edit_form = $("#edit_form");
 
@@ -17,7 +17,7 @@ var Blood = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             resetForm();
-            editingData = null
+            editingData = null;
             $('.switcher-btn').trigger('click');
         });
 
@@ -46,7 +46,8 @@ var Blood = function () {
                         Id: (editingData != null ? editingData.id : "0"),
                         Data: result
                     },
-                    App.sendDataToURL("/Blood/Save", data, "POST")
+                    console.log(data);
+                    App.sendDataToURL("/Province/Save", data, "POST")
                         .then(function (res) {
                             if (!res.isSuccessed) {
                                 App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
@@ -59,7 +60,7 @@ var Blood = function () {
                                 App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
                             }
                         }
-                        )
+                    )
             }
 
           
@@ -100,7 +101,7 @@ var Blood = function () {
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
         datatableOption.buttons = ['excel', 'pdf', 'print'];
-        datatableOption.ajax.url = "/Blood/DataTableGetList";
+        datatableOption.ajax.url = "/Province/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
@@ -237,7 +238,7 @@ var Blood = function () {
     }
 
     function deleteDataRows(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Blood/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Province/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
             App.showHideButtonDelete(false);

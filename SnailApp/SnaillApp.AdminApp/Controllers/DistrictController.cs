@@ -10,16 +10,17 @@ using SnailApp.Utilities.Constants;
 using SnailApp.Utilities.Session;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
+using SnailApp.ViewModels.Catalog.Regions;
 
 namespace SnailApp.AdminApp.Controllers
 {
-    public class BloodController : BaseController
+    public class DistrictController : BaseController
     {
-        private readonly IBloodApiClient _bloodApiClient;
+        private readonly IRegionApiClient _regionApiClient;
         private readonly IMenuApiClient _menuApiClient;
-        public BloodController(IBloodApiClient bloodApiClient, IMenuApiClient menuApiClient)
+        public DistrictController(IRegionApiClient regionApiClient, IMenuApiClient menuApiClient)
         {
-            _bloodApiClient = bloodApiClient;
+            _regionApiClient = regionApiClient;
             _menuApiClient = menuApiClient;
         }
 
@@ -29,8 +30,8 @@ namespace SnailApp.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Title = "Blood";
-            model.Breadcrumbs = new List<string>() { "Setting", "Blood" };
+            ViewBag.Title = "District";
+            model.Breadcrumbs = new List<string>() { "Category", "District" };
             return View(model);
         }
 
@@ -43,24 +44,25 @@ namespace SnailApp.AdminApp.Controllers
             int pageSize = length != null ? Convert.ToInt32(length) : 10;
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
 
-            var request = new PagingRequestBase()
+            var request = new ManageRegionPagingRequest()
             {
                 TextSearch = textSearch,
                 PageIndex = skip,
                 PageSize = pageSize,
+                Level = 2,
                 LanguageId = languageId,
                 OrderCol = !string.IsNullOrEmpty(sortColumn) ? sortColumn : "Id",
                 OrderDir = !string.IsNullOrEmpty(sortColumnDir) ? sortColumnDir : "desc"
             };
 
-            var bloodApiClient = await _bloodApiClient.GetManageListPaging(request);
+            var regionApiClient = await _regionApiClient.GetManageListPaging(request);
 
             return Json(new
             {
                 draw = draw,
-                recordsFiltered = bloodApiClient.TotalRecords,
-                recordsTotal = bloodApiClient.TotalRecords,
-                data = bloodApiClient.Items
+                recordsFiltered = regionApiClient.TotalRecords,
+                recordsTotal = regionApiClient.TotalRecords,
+                data = regionApiClient.Items
             });
         }
 
@@ -68,7 +70,7 @@ namespace SnailApp.AdminApp.Controllers
         public async Task<IActionResult> DeleteByIds([FromBody] DeleteRequest request)
         {
             string resultMessage = string.Empty;
-            var result = await _bloodApiClient.DeleteByIds(request);
+            var result = await _regionApiClient.DeleteByIds(request);
 
             if (!result.IsSuccessed)
             {
@@ -83,7 +85,7 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] AddEditRequest<BaseRequest> rq)
+        public async Task<IActionResult> Save([FromBody] AddEditRequest<RegionRequest> rq)
         {
             ApiResult<int> result = null;
 
@@ -91,11 +93,11 @@ namespace SnailApp.AdminApp.Controllers
 
             if (rq != null)
             {
-                rq.Data.LanguageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
                 rq.Data.CreatedUserId = userGuid;
                 rq.Data.ModifiedUserId = userGuid;
-                rq.Data.Id = rq.Id.Value;
-                result = await _bloodApiClient.AddOrUpdateAsync(rq.Data);
+                rq.Data.Level = 2;
+                rq.Data.Id = rq.Id;
+                result = await _regionApiClient.AddOrUpdateAsync(rq.Data);
             }
             else
             {
@@ -109,21 +111,23 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(result);
         }
 
-        public async Task<IActionResult> Filter(string textSearch)
+        public async Task<IActionResult> Filter(string textSearch, int parentId)
         {
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
 
-            var request = new PagingRequestBase()
+            var request = new ManageRegionPagingRequest()
             {
+                ParentId = parentId,
                 TextSearch = textSearch,
                 PageIndex = 1,
                 PageSize = 20,
+                Level = 2,
                 LanguageId = languageId,
                 OrderCol = "Id",
                 OrderDir = "desc"
             };
 
-            var appUserStatusApiClient = await _bloodApiClient.GetManageListPaging(request);
+            var appUserStatusApiClient = await _regionApiClient.GetManageListPaging(request);
             return Ok(appUserStatusApiClient);
         }
     }

@@ -1,6 +1,6 @@
 ﻿//== Class definition
 
-var Blood = function () {
+var District = function () {
     let dtTable = null,editingData = null;
     let edit_form = $("#edit_form");
 
@@ -17,7 +17,9 @@ var Blood = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             resetForm();
-            editingData = null
+            editingData = null;
+            $('#ParentId').val(null).trigger('change');
+
             $('.switcher-btn').trigger('click');
         });
 
@@ -46,7 +48,8 @@ var Blood = function () {
                         Id: (editingData != null ? editingData.id : "0"),
                         Data: result
                     },
-                    App.sendDataToURL("/Blood/Save", data, "POST")
+                    console.log(data);
+                    App.sendDataToURL("/District/Save", data, "POST")
                         .then(function (res) {
                             if (!res.isSuccessed) {
                                 App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
@@ -100,7 +103,7 @@ var Blood = function () {
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
         datatableOption.buttons = ['excel', 'pdf', 'print'];
-        datatableOption.ajax.url = "/Blood/DataTableGetList";
+        datatableOption.ajax.url = "/District/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
@@ -162,7 +165,7 @@ var Blood = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            { "data": "code", "name": "code", "autoWidth": true, "title": "Code" },
+            { "data": "parentName", "name": "parentName", "autoWidth": true, "title": "Province" },
             { "data": "name", "name": "name", "autoWidth": true, "title": "Name" },
             {
                 width: "120px", "title": "Active", "render": function (data, type, full, meta) {
@@ -196,9 +199,8 @@ var Blood = function () {
                 if (fieldName) {
                     switch (fieldName) {
                         default:
-
                             if ($(el).is("select")) {
-                                $(el).val(editingData[App.lowerFirstLetter(fieldName)]).trigger('change');
+                                $(el).append('<option value="' + editingData['parentId'] + '" selected>' + editingData['parentName']+'</option>').trigger('change');
                             }else
                             if ($(el).is("textarea")) {
                                 $('textarea[data-field="' + fieldName + '"]').text(editingData[App.lowerFirstLetter(fieldName)]);
@@ -230,6 +232,8 @@ var Blood = function () {
             }
         });
 
+
+        App.initSelect2Base($('#ProvinceId'), '/Province/Filter', { selectedFields: ["id", "name"] });
     };
 
     let resetForm = () => {
@@ -237,7 +241,7 @@ var Blood = function () {
     }
 
     function deleteDataRows(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Blood/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/District/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
             App.showHideButtonDelete(false);

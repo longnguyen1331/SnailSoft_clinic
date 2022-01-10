@@ -1,0 +1,109 @@
+﻿@model BaseViewModel
+
+
+
+@section Vendors_CSS{
+	<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
+}
+
+@section Custom_CSS{
+<link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
+}
+
+@section Custom_Scripts{
+<script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/Province/Index.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+
+    $(document).ready(function () {
+        Province.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+<div class="card">
+	<div class="card-body">
+		<div class="d-lg-flex align-items-center mb-4 gap-3">
+			<div class="position-relative">
+				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+			</div>
+			<div class="ms-auto">
+				@if (Model.CurrentUserRole.IsAllowEdit)
+                {
+                    <text>
+						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+                                  
+                    </text>
+                }
+                @if (Model.CurrentUserRole.IsAllowDelete)
+                {
+                    <text>
+						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+                    </text>
+                }
+			</div>
+		</div>
+		<div class="table-responsive">
+            <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
+		</div>
+	</div>
+</div>
+
+
+<div class="switcher-wrapper role">
+	<div class="switcher-btn" hidden> <i class="bx bx-cog bx-spin"></i>
+	</div>
+	<div class="switcher-body"  style="overflow-y:scroll; height:90vh; overflow-x: hidden;">
+		<div class="d-flex align-items-center mb-5">
+			<h5 class="mb-0 text-uppercase" id="titleCreateOrUpdate">Create</h5>
+			<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+		</div>
+
+		<form id="edit_form">
+			<div class="row g-0">
+
+				<div class="col-md-12 px-1" >
+
+					<div class="mb-3 px-1">
+						<label class="form-label">Name(*)</label>
+						<input type="text" class="form-control radius-15" data-field="Name" placeholder="Enter name">
+					</div>
+				</div>
+
+				<div class="col-md-6" >
+					<div class="mb-3 px-1">
+						<button type="button" class="btn btn-danger px-5 radius-15 w-100" name="btnCancel">Cancel</button>
+
+					</div>
+				</div>
+				<div class="col-md-6" >
+					<div class="mb-3 px-1">
+						<button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Update</button>
+
+					</div>
+				</div>
+			</div>
+			</form>
+	</div>
+</div>
+@await Html.PartialAsync("_PartialConfirmDeleteModal")
+
+

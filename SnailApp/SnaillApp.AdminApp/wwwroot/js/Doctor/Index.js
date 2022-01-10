@@ -16,6 +16,7 @@ var Doctor = function () {
 
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
+            editingData = null;
             reset();
             $('.switcher-btn').trigger('click');
         });

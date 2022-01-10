@@ -28,8 +28,8 @@ namespace SnailApp.ViewModels.System.Users
         public bool IsActive { set; get; }
         public IFormFile Avatar { set; get; }
         public int LanguageId { set; get; }
-        public int? CityId { get; set; }
         public int? ProvinceId { get; set; }
+        public int? DistrictId { get; set; }
         public int? WardId { get; set; }
         public string Proifle { set; get; }
         public int? BloodId { get; set; }

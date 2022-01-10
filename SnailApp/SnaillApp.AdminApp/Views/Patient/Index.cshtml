@@ -109,29 +109,24 @@
 						</div>
 					</div>
 
-					<div class="col-md-12" >
+					<div class="col-md-6" >
 						<div class="mb-3 px-1 select2-sm">
-							 <select aria-label="Select a blood" data-control="select2" data-field="CityId"
-							 class="form-select form-select-solid form-select-md radius-15 single-select">
-                             </select>
-						</div>
-					</div>
-
-					<div class="col-md-12" >
-						<div class="mb-3 px-1 select2-sm">
+							<label class="form-label">Province</label>
 							 <select aria-label="Select a blood" data-control="select2" data-field="ProvinceId"
 							 class="form-select form-select-solid form-select-md radius-15 single-select">
                              </select>
 						</div>
 					</div>
 
-					<div class="col-md-12" >
+					<div class="col-md-6" >
 						<div class="mb-3 px-1 select2-sm">
-							 <select aria-label="Select a blood" data-control="select2" data-field="WardId"
+							<label class="form-label">District</label>
+							 <select aria-label="Select a blood" data-control="select2" data-field="DistrictId"
 							 class="form-select form-select-solid form-select-md radius-15 single-select">
                              </select>
 						</div>
 					</div>
+
 
 					<div class="col-md-12" >
 						<div class="mb-3 px-1">
@@ -149,8 +144,9 @@
 					</div>
 
 
-					<div class="col-md-6" >
+					<div class="col-md-12" >
 						<div class="mb-3 px-1 select2-sm">
+							<label class="form-label">Blood</label>
 							 <select aria-label="Select a blood" data-control="select2" data-field="BloodId"
 							 class="form-select form-select-solid form-select-md radius-15 single-select">
                              </select>
@@ -163,8 +159,10 @@
 							<input class="result form-control radius-15" type="date"  data-field="Dob" placeholder="Enter DOB">
 						</div>
 					</div>
-					
+				
 					<div class="col-md-6" >
+						<br />
+						<br />
 						<div class="d-flex align-items-center justify-content-between mb-3 px-1">
 							<div class="form-check">
 								<input class="form-check-input" type="radio" value="1" name="Gender" id="Male" checked>
@@ -176,18 +174,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="header-colors-indigators">
-				<div class="row row-cols-auto g-3 px-1 mb-3">
-					<div class="col-md-12" >
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked>
-							<label class="form-check-label" for="IsActive">Active</label>
-						</div>
-					</div>
-
+					
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">
 							<label class="form-label">Password</label>
@@ -201,8 +188,17 @@
 							<input type="password" class="form-control radius-15" data-field="RePassword" placeholder="Enter repassword">
 						</div>
 					</div>
+				
+					<div class="col-md-6" >
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" data-field="IsActive"  checked>
+							<label class="form-check-label" for="IsActive">Active</label>
+						</div>
+					</div>
 				</div>
+			</div>
 
+			<div class="header-colors-indigators">
 				<div class="row row-cols-auto g-3 px-1">
 					<div class="col-md-6" >
 						<div class="mb-3 px-1">

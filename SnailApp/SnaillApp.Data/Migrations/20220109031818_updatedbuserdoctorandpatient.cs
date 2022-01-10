@@ -16,7 +16,7 @@ namespace SnaillApp.Data.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "CityId",
+                name: "ProvinceId",
                 table: "AppUsers",
                 type: "int",
                 nullable: true);
@@ -40,7 +40,7 @@ namespace SnaillApp.Data.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "ProvinceId",
+                name: "DistrictId",
                 table: "AppUsers",
                 type: "int",
                 nullable: true);
@@ -3172,7 +3172,7 @@ namespace SnaillApp.Data.Migrations
                 table: "AppUsers");
 
             migrationBuilder.DropColumn(
-                name: "CityId",
+                name: "ProvinceId",
                 table: "AppUsers");
 
             migrationBuilder.DropColumn(
@@ -3188,7 +3188,7 @@ namespace SnaillApp.Data.Migrations
                 table: "AppUsers");
 
             migrationBuilder.DropColumn(
-                name: "ProvinceId",
+                name: "DistrictId",
                 table: "AppUsers");
 
             migrationBuilder.DropColumn(

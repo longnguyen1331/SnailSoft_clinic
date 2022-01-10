@@ -18,6 +18,8 @@ var Menu = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             reset();
+            editingDataRow = null;
+
             $('.switcher-btn').trigger('click');
         });
 
@@ -51,7 +53,6 @@ var Menu = function () {
                 Id: (editingDataRow != null ? editingDataRow.id : -1),
                 Data: result
             },
-                console.log(data),
                 App.sendDataToURL("/Menu/Save", data, "POST", true, 'body')
                     .then(function (res) {
                         if (!res.isSuccessed) {

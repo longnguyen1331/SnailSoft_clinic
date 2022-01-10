@@ -33,6 +33,8 @@ var AppRole = function () {
 
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
+            editingData = null;
+
             resetForm();
             $('#CreateInfomation').show();
             $('#RoleAssign').hide();

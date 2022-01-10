@@ -17,6 +17,8 @@ var Patient = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             reset();
+            editingData = null;
+
             $('.switcher-btn').trigger('click');
         });
 
@@ -289,6 +291,17 @@ var Patient = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
+
+
+
+        App.initSelect2Base($('select[data-field="BloodId"]'), '/Blood/Filter', { selectedFields: ["id", "name"] });
+        App.initSelect2Base($('select[data-field="ProvinceId"]'), '/Province/Filter', { selectedFields: ["id", "name"] });
+        App.initSelect2Base($('select[data-field="DistrictId"]'), '/District/Filter', { selectedFields: ["id", "name"] }, { parentFilter: [0] });
+
+        $('select[data-field="ProvinceId"]').change(function () {
+            App.initSelect2Base($('select[data-field="DistrictId"]'), '/District/Filter', { selectedFields: ["id", "name"] }, { parentFilter: [$(this).val()] });
+        })
+
     };
 
    

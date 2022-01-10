@@ -36,9 +36,9 @@ namespace SnailApp.Data.Entities
         public virtual Clinic Clinics { get; set; }
         public int? BloodId { get; set; }
         public virtual Blood Bloods { get; set; }
-        public int? CityId { get; set; }
-        public virtual Region Citys { get; set; }
         public int? ProvinceId { get; set; }
+        public virtual Region Districts { get; set; }
+        public int? DistrictId { get; set; }
         public virtual Region Provinces { get; set; }
         public int? WardId { get; set; }
         public virtual Region Wards { get; set; }

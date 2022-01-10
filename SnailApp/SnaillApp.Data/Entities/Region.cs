@@ -9,6 +9,7 @@ namespace SnailApp.Data.Entities
 {
     public class Region : BaseEntity
     {
+        public int? ParentId { get; set; }
         public string ParentName { get; set; }
         public int Level { get; set; }
     }

@@ -31,6 +31,7 @@ var Clinic = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             reset();
+            editingData = null;
             $('#CreateInfomation').show();
             $('#CreateRoleToUser').hide();
             $('.switcher-btn').trigger('click');

@@ -3,6 +3,7 @@
 using AutoMapper;
 using SnailApp.ViewModels.System.User_Clinics;
 using SnailApp.ViewModels.Common;
+using SnailApp.ViewModels.Catalog.Regions;
 
 namespace SnailApp.Data.EF
 {
@@ -25,6 +26,8 @@ namespace SnailApp.Data.EF
             CreateMap<AppUser_Clinic, User_ClinicDto>().ReverseMap();
             CreateMap<Blood, BaseDto>().ReverseMap();
             CreateMap<Blood, BaseRequest>().ReverseMap();
+            CreateMap<Region, RegionDto>().ReverseMap();
+            CreateMap<Region, RegionRequest>().ReverseMap();
 
         }
     }

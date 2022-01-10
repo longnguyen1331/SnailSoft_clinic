@@ -35,9 +35,9 @@ namespace SnailApp.ViewModels.System.Users
         public string Skills { set; get; }
         public int? Type { set; get; }
         public int? ClinicId { set; get; }
-        public int? CityId { set; get; }
-        public string CityName { set; get; }
         public int? ProvinceId { set; get; }
+        public string CityName { set; get; }
+        public int? DistrictId { set; get; }
         public string ProvinceName { set; get; }
         public int? WardId { set; get; }
         public string WardName { set; get; }

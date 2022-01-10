@@ -619,7 +619,7 @@ namespace SnaillApp.Data.Migrations
                     b.Property<int?>("BloodId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CityId")
+                    b.Property<int?>("ProvinceId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CitysId")
@@ -694,7 +694,7 @@ namespace SnaillApp.Data.Migrations
                     b.Property<string>("Proifle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProvinceId")
+                    b.Property<int?>("DistrictId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProvincesId")
@@ -7837,7 +7837,7 @@ namespace SnaillApp.Data.Migrations
                         .WithMany()
                         .HasForeignKey("BloodId");
 
-                    b.HasOne("SnailApp.Data.Entities.Region", "Citys")
+                    b.HasOne("SnailApp.Data.Entities.Region", "Districts")
                         .WithMany()
                         .HasForeignKey("CitysId");
 
@@ -7859,7 +7859,7 @@ namespace SnaillApp.Data.Migrations
 
                     b.Navigation("Bloods");
 
-                    b.Navigation("Citys");
+                    b.Navigation("Districts");
 
                     b.Navigation("Clinics");
 

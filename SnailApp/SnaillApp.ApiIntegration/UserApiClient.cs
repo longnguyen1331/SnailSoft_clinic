@@ -220,14 +220,14 @@ namespace SnailApp.ApiIntegration
                 {
                     requestContent.Add(new StringContent(request.ClinicId.Value.ToString()), "ClinicId");
                 }
-                if (request.CityId.HasValue)
-                {
-                    requestContent.Add(new StringContent(request.CityId.Value.ToString()), "CityId");
-                }
-
                 if (request.ProvinceId.HasValue)
                 {
                     requestContent.Add(new StringContent(request.ProvinceId.Value.ToString()), "ProvinceId");
+                }
+
+                if (request.DistrictId.HasValue)
+                {
+                    requestContent.Add(new StringContent(request.DistrictId.Value.ToString()), "DistrictId");
                 }
 
                 if (request.WardId.HasValue)

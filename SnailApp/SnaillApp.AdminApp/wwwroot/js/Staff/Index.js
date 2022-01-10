@@ -20,6 +20,8 @@ var Staff = function () {
         $('[name="btnCreate"],[name="btnCancel"]').click(function (e) {
             e.preventDefault();
             reset();
+            editingData = null;
+
             $('.switcher-btn').trigger('click');
         });
 

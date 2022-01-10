@@ -174,8 +174,8 @@ namespace SnailApp.Application.SystemApplication.Users
                                 UserName = u.UserName,
                                 GenderId = u.GenderId,
                                 Type = u.Type,
-                                CityId = u.CityId,
                                 ProvinceId = u.ProvinceId,
+                                DistrictId = u.DistrictId,
                                 WardId = u.WardId,
                                 BloodId = u.BloodId,
                                 Proifle = u.Proifle,
@@ -242,8 +242,8 @@ namespace SnailApp.Application.SystemApplication.Users
 
                     user.AppRoles = appRoles;
 
-                    if (user.CityId != null) user.CityName = regions.FirstOrDefault(x => x.Id == user.CityId.Value).Name; //(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.CityId.Value).Name;
-                    if (user.ProvinceId != null) user.ProvinceName = regions.FirstOrDefault(x => x.Id == user.ProvinceId.Value).Name;// (await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.ProvinceId.Value).Name;
+                    if (user.ProvinceId != null) user.CityName = regions.FirstOrDefault(x => x.Id == user.ProvinceId.Value).Name; //(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.ProvinceId.Value).Name;
+                    if (user.DistrictId != null) user.ProvinceName = regions.FirstOrDefault(x => x.Id == user.DistrictId.Value).Name;// (await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.DistrictId.Value).Name;
                     if (user.WardId != null) user.WardName = regions.FirstOrDefault(x => x.Id == user.WardId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
                     if (user.BloodId != null) user.BloodName = bloods.FirstOrDefault(x => x.Id == user.BloodId.Value).Name;//(await _context.Regions.AsNoTracking().ToListAsync()).FirstOrDefault(x=>x.Id==user.WardId.Value).Name;
                 }
@@ -301,8 +301,8 @@ namespace SnailApp.Application.SystemApplication.Users
                         Biography = request.Biography,
                         Skills = request.Skills,
                         Type = request.Type,
-                        CityId = request.CityId,
                         ProvinceId = request.ProvinceId,
+                        DistrictId = request.DistrictId,
                         WardId = request.WardId,
                         BloodId = request.BloodId,
                         Proifle = request.Proifle,
@@ -340,8 +340,8 @@ namespace SnailApp.Application.SystemApplication.Users
                         user.Biography = request.Biography;
                         user.Skills = request.Skills;
                         user.Type = request.Type;
-                        user.CityId = request.CityId;
                         user.ProvinceId = request.ProvinceId;
+                        user.DistrictId = request.DistrictId;
                         user.WardId = request.WardId;
                         user.BloodId = request.BloodId;
                         user.Proifle = request.Proifle;
@@ -352,8 +352,9 @@ namespace SnailApp.Application.SystemApplication.Users
                     }
                 }
 
-                user.Avatar = await this.SaveFile(request.Avatar);
-
+                if (request.Avatar != null) {
+                    user.Avatar = await this.SaveFile(request.Avatar);
+                }
 
                 if (isNew == true)
                 {

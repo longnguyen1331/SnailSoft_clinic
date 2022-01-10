@@ -226,15 +226,24 @@
         }
     }
 
-    let initSelect2Base = (el, url, options) => {
+    let initSelect2Base = (el, url, options, filters) => {
         el.select2(
             {
                 ajax: {
                     url: url,
                     data: function (params) {
-                        var query = {
-                            textSearch: params.term
-                        };
+                        var query = null;
+
+                        if (filters && filters.parentFilter) {
+                            query = {
+                                textSearch: params.term,
+                                parentId: filters.parentFilter[0]
+                            };
+                        } else {
+                            query = {
+                                textSearch: params.term
+                            };
+                        }
 
                         if (options && options.query) {
                             for (var key in options.query) {
