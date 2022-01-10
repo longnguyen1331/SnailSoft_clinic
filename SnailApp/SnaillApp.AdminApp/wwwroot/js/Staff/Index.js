@@ -4,12 +4,12 @@ var Staff = function () {
     let dtTable = null;
     let roles = [];
 
-    let edit_form = $("#edit_form"),
+    let edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
 
-      
+
         $('[name="inputSearch"]').on('keyup', function (e) {
             e.preventDefault();
             if (e.keyCode == 13) {
@@ -84,7 +84,7 @@ var Staff = function () {
             }
 
             App.sendDataFileToURL("/Staff/SaveProfileDetail", formData, "POST", true, 'body')
-            .then(function (res) {
+                .then(function (res) {
                     if (!res.isSuccessed) {
                         App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
                     }
@@ -96,7 +96,7 @@ var Staff = function () {
                         };
                     }
                 }
-            )
+                )
         });
 
         $('[name="btnDelete"]').click(function (e) {
@@ -149,7 +149,6 @@ var Staff = function () {
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
-        datatableOption.buttons = ['excel', 'pdf', 'print'];
         datatableOption.ajax.url = "/Staff/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
@@ -167,10 +166,11 @@ var Staff = function () {
                 "orderable": false
             },
             {
-                "targets": [0,3,4,5],
-                "className": 'dt-center'
+                "targets": [2, 3, 4],
+                "className": 'dt-left'
             }
         ];
+
         datatableOption.initComplete = function () {
             var datatablesColumnsApi = this.api().columns();
 
@@ -190,7 +190,11 @@ var Staff = function () {
 
                     $('#dtTable tbody input[type="checkbox"]').prop('checked', this.checked);
 
-                   
+                    if (this.checked) {
+                        App.showHideButtonDelete(true);
+                    } else {
+                        App.showHideButtonDelete(false);
+                    }
                 });
 
 
@@ -210,30 +214,40 @@ var Staff = function () {
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
             {
-                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "autoWidth": true, "title": "Infomaiton",
+                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "width": "40%", "title": "Infomaiton",
                 "render": function (data, type, full, meta) {
 
                     return '<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\
 							<img src="' + full.avatar + '" class="user-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.firstName + ' ' + full.lastName + '</p>\
-								<p class="designattion mb-0">' + full.email + '</p>\
+								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.Address + '</p>\
+                                <p class="designattion mb-0"><i class="fadeIn animated bx bx-phone"></i> ' + full.phoneNumber + '</p>\
 							</div>\
 						</a>';
                 }
             },
-            { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": true, "title": "Phone" },
-            { "data": "email", "name": "email", "autoWidth": true, "title": "Email" },
             {
-                width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
+                "data": "phoneNumber", "name": "Contact", "width": "20%", "title": "Contact",
+                "render": function (data, type, full, meta) {
+
+                    return '<div class="list-inline d-flex customers-contacts ms-auto"><a class="btn-outline-primary" href="tel:' + full.phoneNumber + '"><i class="fadeIn animated bx bx-phone"></i></a>\
+                    &ensp;<a class="btn-outline-primary" href="mailto:' + full.email + '"><i class="fadeIn animated bx bx-envelope"></i></a></div\
+                    ';
+                }
+
+            },
+
+            {
+                width: "120px", "title": "Action", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit">\
+                        html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="fadeIn animated bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
 					                <i class="fadeIn animated bx bxs-trash"></i>\
 				                </a>';
                     }
@@ -246,15 +260,15 @@ var Staff = function () {
 
                 }
             },
-        ];
+        ]
         dtTable = $('#dtTable').DataTable(datatableOption);
-        dtTable.buttons().container().appendTo('#dtTable_wrapper .col-md-6:eq(0)');
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
             editingDataRow = dtTable.row($(this).parents('tr')).data();
 
             if (editingDataRow != null) {
+                console.log(editingDataRow);
                 $('input[data-field="PhoneNumber"]').val(editingDataRow.phoneNumber);
                 $('input[data-field="Email"]').val(editingDataRow.email);
                 $('input[data-field="Address"]').val(editingDataRow.address);
@@ -270,7 +284,7 @@ var Staff = function () {
 
                 $('input[data-field="IsActive"]').prop('checked', editingDataRow.isActive);
                 $('input[data-field="Dob"]').val(editingDataRow.dob);
-                $('#avatarImage').attr('src',editingDataRow.avatar);
+                $('#avatarImage').attr('src', editingDataRow.avatar);
                 roles = [];
                 $('#addRoleChips').html('');
                 $.each(editingDataRow.appRoles, function (index, item) {
@@ -296,7 +310,7 @@ var Staff = function () {
 
         $('#edit_form_appRoleIds').change(function () {
             if (!roles.includes($('#edit_form_appRoleIds').val())) {
-                $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + $('#edit_form_appRoleIds :selected').text() + ' <span class="closebtn" id="removeRoleSpan_' +  $('#edit_form_appRoleIds').val() + '" data-id=' + $('#edit_form_appRoleIds').val() + '>×</span></div>');
+                $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + $('#edit_form_appRoleIds :selected').text() + ' <span class="closebtn" id="removeRoleSpan_' + $('#edit_form_appRoleIds').val() + '" data-id=' + $('#edit_form_appRoleIds').val() + '>×</span></div>');
                 roles.push($('#edit_form_appRoleIds').val());
                 intiEventRemoveRole($('#edit_form_appRoleIds').val());
             }
@@ -304,7 +318,7 @@ var Staff = function () {
     };
 
     function intiEventRemoveRole(id) {
-        $('#removeRoleSpan_' +id).click(function (e) {
+        $('#removeRoleSpan_' + id).click(function (e) {
             e.preventDefault();
             roles = roles.filter(function (item) {
 
@@ -320,6 +334,7 @@ var Staff = function () {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Staff/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
+                App.showHideButtonDelete(false);
             });
     }
 

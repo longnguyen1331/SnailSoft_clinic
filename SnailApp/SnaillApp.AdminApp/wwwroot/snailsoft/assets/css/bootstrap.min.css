@@ -495,6 +495,11 @@ progress {
     line-height: 1.2
 }
 
+.display-7 {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.2
+}
 @media (min-width:1200px) {
     .display-6 {
         font-size: 2.5rem
@@ -2926,25 +2931,25 @@ textarea.form-control-lg {
 
     .btn-primary:hover {
         color: #fff;
-        background-color: #0b5ed7;
-        border-color: #0a58ca
+        background-color: #008786;
+        border-color: #008786
     }
 
     .btn-check:focus + .btn-primary, .btn-primary:focus {
         color: #fff;
-        background-color: #0b5ed7;
-        border-color: #0a58ca;
-        box-shadow: 0 0 0 .25rem rgba(49,132,253,.5)
+        background-color: #008786;
+        border-color: #19A9A8;
+        box-shadow: 0 0 0 .25rem rgba(25,169,168,.5)
     }
 
     .btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
         color: #fff;
-        background-color: #0a58ca;
-        border-color: #0a53be
+        background-color: #008786;
+        border-color: #19A9A8
     }
 
         .btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
-            box-shadow: 0 0 0 .25rem rgba(49,132,253,.5)
+            box-shadow: 0 0 0 .25rem rgba(25,169,168,.5)
         }
 
     .btn-primary.disabled, .btn-primary:disabled {
@@ -6178,7 +6183,7 @@ textarea.form-control-lg {
 }
 
 .carousel-dark .carousel-indicators li {
-    background-color: #000
+    background-color: #E36828
 }
 
 .carousel-dark .carousel-caption {
@@ -7554,7 +7559,10 @@ textarea.form-control-lg {
 .bg-primary {
     background-color: #19A9A8 !important
 }
-
+.bg-snail-title {
+    background-color: rgb(25 169 168 / .12);
+    color: #19A9A8;
+}
 .bg-secondary {
     background-color: #6c757d !important
 }

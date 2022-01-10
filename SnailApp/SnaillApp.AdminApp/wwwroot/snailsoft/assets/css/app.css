@@ -60,6 +60,17 @@ body {
 .snail-text-shadow {
 	text-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)
 }
+.snail-title-right {
+	text-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 12%)
+}
+#snail-edit-form {
+	overflow-y: scroll;
+	height: 90vh;
+	overflow-x: hidden;
+	padding-left: 20px;
+	padding-right: 20px;
+
+}
 /*END SNAIL SOFT*/
 a {
 	text-decoration: none
@@ -253,18 +264,18 @@ a {
 		.sidebar-wrapper .metismenu ul ul ul a, #RoleAssign .metismenu ul ul ul a {
 			padding: 8px 15px 8px 45px
 		}
-			.sidebar-wrapper .metismenu .mm-active > a,
-			.sidebar-wrapper .metismenu a:active,
-			.sidebar-wrapper .metismenu a:focus,
-			.sidebar-wrapper .metismenu a:hover,
-			#RoleAssign .metismenu .mm-active > a,
-			#RoleAssign .metismenu a:active,
-			#RoleAssign .metismenu a:focus,
-			#RoleAssign .metismenu a:hover {
-				color: #0d6efd;
-				text-decoration: none;
-				background: rgb(13 110 253 / .12)
-			}
+.sidebar-wrapper .metismenu .mm-active > a,
+.sidebar-wrapper .metismenu a:active,
+.sidebar-wrapper .metismenu a:focus,
+.sidebar-wrapper .metismenu a:hover,
+#RoleAssign .metismenu .mm-active > a,
+#RoleAssign .metismenu a:active,
+#RoleAssign .metismenu a:focus,
+#RoleAssign .metismenu a:hover {
+	color: #19A9A8;
+	text-decoration: none;
+	background: rgb(25 169 168 / .12)
+}
 .menu-label {
 	padding: 20px 15px 5px 5px;
 	color: #b0afaf;
@@ -1728,10 +1739,12 @@ input::placeholder {
 	right: 0
 }
 .switcher-body {
-	padding: 1.25rem
+	padding: 1.25rem;
+	border-radius: 1.5em;
 }
 .switcher-body .form-check .form-check-input, .switcher-body .form-check .form-check-label {
-	cursor: pointer
+	cursor: pointer;
+	
 }
 .header-colors-indigators .indigator {
 	width: 45px;
