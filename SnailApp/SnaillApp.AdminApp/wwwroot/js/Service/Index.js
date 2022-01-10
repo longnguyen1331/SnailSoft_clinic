@@ -147,7 +147,7 @@ var Service = function () {
                 "orderable": false
             },
             {
-                "targets": [0, 2,4,5],
+                "targets": [0, 2,4,5,6],
                 "className": 'dt-center'
             }
         ];
@@ -208,6 +208,7 @@ var Service = function () {
 						</div>';
                 }
             },
+            { "data": "charges", "name": "charges", "autoWidth": true, "title": "Charge" },
             {
                 "data": "isVisibled", "name": "isVisibled", "autoWidth": true, "title": "Active",
                 "render": function (data, type, full, meta) {
@@ -246,6 +247,8 @@ var Service = function () {
                 $('select[data-field="ServiceTypeId"]').append('<option value="' + editingData['serviceTypeId'] + '" selected>' + editingData['serviceTypeName'] + '</option>').trigger('change');
                 $('input[data-field="Name"]').val(editingData.name);
                 $('input[data-field="SortOrder"]').val(editingData.sortOrder);
+                $('input[data-field="Charges"]').val(editingData.charges);
+                $('input[data-field="Description"]').val(editingData.description);
                 $('input[data-field="IsVisibled"]').prop('checked', editingData.isVisibled);
                 $('#avatarImage').attr('src', editingData.image);
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');

@@ -186,6 +186,14 @@ namespace SnailApp.Application.Catalog.Services
 
                             break;
 
+                        case "charges":
+                            query = (request.OrderDir == "asc") ?
+                                query.OrderBy(x => x.st.Charges) :
+                                query.OrderByDescending(x => x.st.Charges);
+
+                            break;
+
+
                         case "sortOrder":
                             query = (request.OrderDir == "asc") ?
                                 query.OrderBy(x => x.st.SortOrder) :
@@ -211,7 +219,9 @@ namespace SnailApp.Application.Catalog.Services
                     IsVisibled = x.st.IsVisibled,
                     Image = _configuration[SystemConstants.AppConstants.BaseAddress] + (!string.IsNullOrEmpty(x.st.Image) ? (_configuration[SystemConstants.UserConstants.UserImagePath] + "/" + x.st.Image) : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
                     Name =  x.st.Name,
-                    SortOrder= x.st.SortOrder,
+                    Charges =  x.st.Charges,
+                    Description =  x.st.Description,
+                    SortOrder = x.st.SortOrder,
                     ServiceTypeId = x.st.ServiceTypeId
                 }).AsNoTracking().ToListAsync();
 

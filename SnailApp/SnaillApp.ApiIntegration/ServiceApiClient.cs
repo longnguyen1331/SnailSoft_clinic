@@ -72,7 +72,12 @@ namespace SnailApp.ApiIntegration
                 }
                 requestContent.Add(new StringContent(request.ServiceTypeId.ToString()), "ServiceTypeId");
                 requestContent.Add(new StringContent(request.IsVisibled.ToString()), "IsVisibled");
+                requestContent.Add(new StringContent(request.Charges.ToString()), "Charges");
 
+                if (!string.IsNullOrEmpty(request.Description))
+                {
+                    requestContent.Add(new StringContent(request.Description), "Description");
+                }
                 var response = await client.PostAsync($"api/services/addorupdate", requestContent);
                 return JsonConvert.DeserializeObject<ApiResult<int>>(await response.Content.ReadAsStringAsync());
             }
