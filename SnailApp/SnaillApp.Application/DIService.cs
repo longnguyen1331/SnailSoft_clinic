@@ -12,6 +12,7 @@ using SnailApp.Application.Catalog.Genders;
 using SnailApp.Application.Catalog.Clinics;
 using SnailApp.Application.Utilities.UI;
 using SnailApp.Application.Catalog.Regions;
+using SnailApp.Application.Catalog.Services;
 
 namespace SnailApp.Application
 {
@@ -41,6 +42,8 @@ namespace SnailApp.Application
             services.AddTransient<IUser_ClinicService, User_ClinicService>();
             services.AddTransient<IBloodService, BloodService>();
             services.AddTransient<IRegionService, RegionService>();
+            services.AddTransient<IServiceTypeService, ServiceTypeService>();
+            services.AddTransient<IServiceService, ServiceService>();
 
             return services;
         }

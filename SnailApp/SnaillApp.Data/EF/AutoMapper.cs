@@ -4,6 +4,8 @@ using AutoMapper;
 using SnailApp.ViewModels.System.User_Clinics;
 using SnailApp.ViewModels.Common;
 using SnailApp.ViewModels.Catalog.Regions;
+using SnailApp.ViewModels.Catalog.ServiceTypes;
+using SnailApp.ViewModels.Catalog.Services;
 
 namespace SnailApp.Data.EF
 {
@@ -22,13 +24,15 @@ namespace SnailApp.Data.EF
                 .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("dd/MM/yyyy")))
                 .ReverseMap();
 
-
             CreateMap<AppUser_Clinic, User_ClinicDto>().ReverseMap();
             CreateMap<Blood, BaseDto>().ReverseMap();
             CreateMap<Blood, BaseRequest>().ReverseMap();
             CreateMap<Region, RegionDto>().ReverseMap();
             CreateMap<Region, RegionRequest>().ReverseMap();
-
+            CreateMap<Service, ServiceDto>().ReverseMap();
+            CreateMap<Service, ServiceRequest>().ReverseMap();
+            CreateMap<ServiceType, ServiceTypeDto>().ReverseMap();
+            CreateMap<ServiceType, ServiceTypeRequest>().ReverseMap();
         }
     }
 }

@@ -36,6 +36,8 @@ namespace SnailApp.Data.EF
             modelBuilder.ApplyConfiguration(new MenuConfiguration());
             modelBuilder.ApplyConfiguration(new MenuTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceConfiguration());
 
             //Data seeding
             modelBuilder.Seed();
@@ -56,6 +58,8 @@ namespace SnailApp.Data.EF
         public DbSet<MenuAppRole> MenuAppRoles { get; set; }
         public DbSet<MenuTranslation> MenuTranslations { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<Service> Services { get; set; }
 
     }
 }

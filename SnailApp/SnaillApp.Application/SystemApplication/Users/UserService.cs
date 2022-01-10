@@ -45,8 +45,8 @@ namespace SnailApp.Application.SystemApplication.Users
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
-        private readonly IConfiguration _configuration;
         private readonly ClinicDbContext _context;
+        private readonly IConfiguration _configuration;
         private readonly IFileStorageService _storageService;
 
         public UserService(UserManager<AppUser> userManager,

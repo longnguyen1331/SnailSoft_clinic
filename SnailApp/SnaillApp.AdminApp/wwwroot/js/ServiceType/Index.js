@@ -1,8 +1,8 @@
 ﻿//== Class definition
 
-var Staff = function () {
+var ServiceType = function () {
     let dtTable = null;
-    let roles = [];
+    let editingData = null;
 
     let edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
@@ -43,16 +43,15 @@ var Staff = function () {
                 let fieldName = $(el).data("field");
                 if (fieldName) {
                     switch (fieldName) {
-                        case "Avatar":
+                        case "Image":
                             let files = $(el).prop('files');
                             if (files.length > 0) {
-                                formData.append("Avatar", files[0]);
+                                formData.append("Image", files[0]);
                             }
                             break;
 
-                        case "IsActive":
-                            formData.append("IsActive", $(el).is(':checked'));
-
+                        case "IsVisibled":
+                            formData.append("IsVisibled", $(el).is(':checked'));
                             break;
 
                         default:
@@ -64,27 +63,11 @@ var Staff = function () {
                 }
             });
 
-            var radios = document.getElementsByName('Gender');
-            var sexValue = true;
-            for (var i = 0, length = radios.length; i < length; i++) {
-                if (radios[i].checked) {
-                    sexValue = radios[i].value
-                    break;
-                }
+            if (editingData != null) {
+                formData.set("Id", editingData.id);
             }
 
-            formData.append("GenderId", sexValue);
-            let roleString = '';
-            for (let i = 0; i < roles.length; i++) {
-
-                roleString += (i == roles.length - 1) ? roles[i] : roles[i] + '|';
-            }
-            formData.set("AppRoleCodes", roleString);
-            if (editingDataRow != null) {
-                formData.set("Id", editingDataRow.id);
-            }
-
-            App.sendDataFileToURL("/Staff/SaveProfileDetail", formData, "POST", true, 'body')
+            App.sendDataFileToURL("/ServiceType/Save", formData, "POST", true, 'body')
                 .then(function (res) {
                     if (!res.isSuccessed) {
                         App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
@@ -122,8 +105,6 @@ var Staff = function () {
         $('#image-upload').change(function (e) {
             e.preventDefault();
             readURL(this);
-            var filename = $(this).val().replace(/.*(\/|\\)/, '');
-            $('#image-upload-src').val(filename);
         });
 
         $('#dtTableSearch').keyup(function (e) {
@@ -132,11 +113,9 @@ var Staff = function () {
         });
     };
     function reset() {
-        editingDataRow = null;
+        editingData = null;
         edit_form[0].reset();
-        roles = [];
         dtTable.draw();
-        $('#addRoleChips').html('');
     }
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -150,13 +129,13 @@ var Staff = function () {
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
-        datatableOption.ajax.url = "/Staff/DataTableGetList";
+        datatableOption.ajax.url = "/ServiceType/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
             }
         };
-        datatableOption.order = [[1, "desc"]];
+        datatableOption.order = [[2, "desc"]];
         datatableOption.columnDefs = [
             {
                 "targets": [1],
@@ -167,7 +146,7 @@ var Staff = function () {
                 "orderable": false
             },
             {
-                "targets": [0,  3, 4],
+                "targets": [0, 2,4,5],
                 "className": 'dt-center'
             }
         ];
@@ -214,31 +193,25 @@ var Staff = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            { "data": "sortOrder", "name": "sortOrder", "autoWidth": true, "title": "Odx" },
             {
-                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "width": "40%", "title": "Infomaiton",
+                "data": "name", "name": "name", "width": "40%", "title": "Infomaiton",
                 "render": function (data, type, full, meta) {
 
                     return '<div class="d-flex align-items-center nav-link">\
-							<img src="' + full.avatar + '" class="user-img" alt="user avatar">\
+							<img src="' + full.image + '" class="user-img" alt="user avatar">\
 							<div class="user-info ps-3">\
-								<p class="user-name mb-0">' + full.firstName + ' ' + full.lastName + '</p>\
-								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.address + '</p>\
-                                <p class="designattion mb-0"><i class="fadeIn animated bx bx-phone"></i> ' + full.phoneNumber + '</p>\
+								<p class="user-name mb-0">' + full.name + '</p>\
 							</div>\
 						</div>';
                 }
             },
             {
-                "data": "phoneNumber", "name": "Contact", "width": "20%", "title": "Contact",
+                "data": "isVisibled", "name": "isVisibled", "autoWidth": true, "title": "Active",
                 "render": function (data, type, full, meta) {
-
-                    return '<div class="list-inline d-flex customers-contacts ms-auto"><a class="btn-outline-primary" href="tel:' + full.phoneNumber + '"><i class="fadeIn animated bx bx-phone"></i></a>\
-                    &ensp;<a class="btn-outline-primary" href="mailto:' + full.email + '"><i class="fadeIn animated bx bx-envelope"></i></a></div\
-                    ';
+                    return data == true ? '<span class="badge rounded-pill bg-primary">Active</span>' : '<span class="badge rounded-pill bg-danger">Disable</span>';
                 }
-
             },
-
             {
                 width: "120px", "title": "Action", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
@@ -266,35 +239,12 @@ var Staff = function () {
 
         $('#dtTable tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
-            editingDataRow = dtTable.row($(this).parents('tr')).data();
-
-            if (editingDataRow != null) {
-                console.log(editingDataRow);
-                $('input[data-field="PhoneNumber"]').val(editingDataRow.phoneNumber);
-                $('input[data-field="Email"]').val(editingDataRow.email);
-                $('input[data-field="Address"]').val(editingDataRow.address);
-                $('input[data-field="LastName"]').val(editingDataRow.lastName);
-                $('input[data-field="FirstName"]').val(editingDataRow.firstName);
-                $('input[data-field="Dob"]').val(editingDataRow.dob);
-                if (editingDataRow.genderId != null && editingDataRow.genderId == 1) {
-                    $('#Male').prop('checked', true);
-
-                } else {
-                    $('#Female').prop('checked', true);
-                }
-
-                $('input[data-field="IsActive"]').prop('checked', editingDataRow.isActive);
-                $('input[data-field="Dob"]').val(editingDataRow.dob);
-                $('#avatarImage').attr('src', editingDataRow.avatar);
-                roles = [];
-                $('#addRoleChips').html('');
-                $.each(editingDataRow.appRoles, function (index, item) {
-                    if (!roles.includes(item.code)) {
-                        $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + item.name + ' <span class="closebtn" id="removeRoleSpan_' + item.code + '" data-id=' + item.code + '>×</span></div>');
-                        roles.push(item.code);
-                        intiEventRemoveRole(item.code);
-                    }
-                })
+            editingData = dtTable.row($(this).parents('tr')).data();
+            if (editingData != null) {
+                $('input[data-field="Name"]').val(editingData.name);
+                $('input[data-field="SortOrder"]').val(editingData.sortOrder);
+                $('input[data-field="isVisibled"]').prop('checked', editingData.isVisibled);
+                $('#avatarImage').attr('src', editingData.image);
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
@@ -306,33 +256,13 @@ var Staff = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
-
-        App.initSelect2Base($('#edit_form_appRoleIds'), '/AppRole/Filter', { selectedFields: ["code", "name"] });
-
-        $('#edit_form_appRoleIds').change(function () {
-            if (!roles.includes($('#edit_form_appRoleIds').val())) {
-                $('#addRoleChips').append('<div class="chip chip-md bg-info text-white chipRole">' + $('#edit_form_appRoleIds :selected').text() + ' <span class="closebtn" id="removeRoleSpan_' + $('#edit_form_appRoleIds').val() + '" data-id=' + $('#edit_form_appRoleIds').val() + '>×</span></div>');
-                roles.push($('#edit_form_appRoleIds').val());
-                intiEventRemoveRole($('#edit_form_appRoleIds').val());
-            }
-        });
     };
 
-    function intiEventRemoveRole(id) {
-        $('#removeRoleSpan_' + id).click(function (e) {
-            e.preventDefault();
-            roles = roles.filter(function (item) {
-
-                return item.trim() != id
-            });
-            $(this).parents('.chipRole').remove();
-        });
-    }
-
+  
     function deleteDataRows(dataRows) {
 
 
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Staff/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ServiceType/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
                 App.showHideButtonDelete(false);
