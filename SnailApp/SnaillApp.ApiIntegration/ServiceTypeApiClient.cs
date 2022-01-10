@@ -14,11 +14,13 @@ namespace SnailApp.ApiIntegration
 {
     public interface IServiceTypeApiClient
     {
+        Task<PagedResult<ServiceTypeDto>> GetManageListFilterPaging(ManageServiceTypePagingRequest request);
         Task<PagedResult<ServiceTypeDto>> GetManageListPaging(ManageServiceTypePagingRequest request);
         Task<ApiResult<int>> AddOrUpdateAsync(ServiceTypeRequest request);
         Task<ApiResult<ServiceTypeDto>> GetById(ServiceTypeRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
     }
+    
     public class ServiceTypeApiClient : BaseApiClient, IServiceTypeApiClient
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -82,7 +84,16 @@ namespace SnailApp.ApiIntegration
                 return new ApiErrorResult<int>() { IsSuccessed = false, Message = ex.Message };
             }
         }
-
+        public async Task<PagedResult<ServiceTypeDto>> GetManageListFilterPaging(ManageServiceTypePagingRequest request)
+        {
+            var data = await GetAsync<PagedResult<ServiceTypeDto>>(
+                $"/api/serviceTypes/GetManageListFilterPaging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&ClinicId={request.ClinicId}" +
+                (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+            return data;
+        }
         public async Task<PagedResult<ServiceTypeDto>> GetManageListPaging(ManageServiceTypePagingRequest request)
         {
             var data = await GetAsync<PagedResult<ServiceTypeDto>>(
@@ -93,7 +104,7 @@ namespace SnailApp.ApiIntegration
                 (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
             return data;
         }
-     
+        
         public async Task<ApiResult<ServiceTypeDto>> GetById(ServiceTypeRequest request)
         {
             var data = await GetAsync<ApiResult<ServiceTypeDto>>($"/api/serviceTypes/ServiceTypeId?Id={request.Id}");

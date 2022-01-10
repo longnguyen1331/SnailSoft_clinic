@@ -5,6 +5,10 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using SnailApp.ViewModels.Catalog.Services;
+using Newtonsoft.Json;
+using System.IO;
+using SnailApp.Utilities.Constants;
+using System.Net.Http.Headers;
 
 namespace SnailApp.ApiIntegration
 {
@@ -31,18 +35,53 @@ namespace SnailApp.ApiIntegration
             _httpClientFactory = httpClientFactory;
         }
 
-      
+
         public async Task<ApiResult<int>> AddOrUpdateAsync(ServiceRequest request)
         {
             try
             {
-                return await BaseAddOrUpdateAsync($"/api/services/addorupdate", request);
+                var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstants.AppConstants.Token);
+
+                var client = _httpClientFactory.CreateClient();
+                client.BaseAddress = new Uri(_configuration[SystemConstants.AppConstants.BaseAddress]);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+                var requestContent = new MultipartFormDataContent();
+                requestContent.Add(new StringContent(request.Id.ToString()), "id");
+
+
+                if (request.Image != null)
+                {
+                    byte[] data;
+                    using (var br = new BinaryReader(request.Image.OpenReadStream()))
+                    {
+                        data = br.ReadBytes((int)request.Image.OpenReadStream().Length);
+                    }
+                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    requestContent.Add(bytes, "Image", request.Image.FileName);
+                }
+
+                requestContent.Add(new StringContent(request.SortOrder.ToString()), "SortOrder");
+                requestContent.Add(new StringContent(request.ClinicId.ToString()), "ClinicId");
+                if (!string.IsNullOrEmpty(request.Name))
+                {
+                    requestContent.Add(new StringContent(request.Name), "Name");
+                }
+                requestContent.Add(new StringContent(request.ServiceTypeId.ToString()), "ServiceTypeId");
+                requestContent.Add(new StringContent(request.IsVisibled.ToString()), "IsVisibled");
+
+                var response = await client.PostAsync($"api/services/addorupdate", requestContent);
+                return JsonConvert.DeserializeObject<ApiResult<int>>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
             {
                 return new ApiErrorResult<int>() { IsSuccessed = false, Message = ex.Message };
             }
         }
+
 
         public async Task<PagedResult<ServiceDto>> GetManageListPaging(ManageServicePagingRequest request)
         {

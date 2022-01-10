@@ -10,20 +10,20 @@ using SnailApp.Utilities.Constants;
 using SnailApp.Utilities.Session;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
-using SnailApp.ViewModels.Catalog.ServiceTypes;
+using SnailApp.ViewModels.Catalog.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace SnailApp.AdminApp.Controllers
 {
-    public class ServiceTypeController : BaseController
+    public class ServiceController : BaseController
     {
-        private readonly IServiceTypeApiClient _serviceTypeApiClient;
+        private readonly IServiceApiClient _serviceApiClient;
         private readonly IMenuApiClient _menuApiClient;
         private readonly IConfiguration _configuration;
-        public ServiceTypeController(IServiceTypeApiClient serviceTypeApiClient, IMenuApiClient menuApiClient,
+        public ServiceController(IServiceApiClient serviceApiClient, IMenuApiClient menuApiClient,
                                     IConfiguration configuration)
         {
-            _serviceTypeApiClient = serviceTypeApiClient;
+            _serviceApiClient = serviceApiClient;
             _menuApiClient = menuApiClient;
             _configuration = configuration;
         }
@@ -34,8 +34,8 @@ namespace SnailApp.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Title = "Service Type";
-            model.Breadcrumbs = new List<string>() { "Services", "Service Type" };
+            ViewBag.Title = "Service List";
+            model.Breadcrumbs = new List<string>() { "Services", "Service List" };
             return View(model);
         }
 
@@ -48,7 +48,7 @@ namespace SnailApp.AdminApp.Controllers
             int pageSize = length != null ? Convert.ToInt32(length) : 10;
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
 
-            var request = new ManageServiceTypePagingRequest()
+            var request = new ManageServicePagingRequest()
             {
                 TextSearch = textSearch,
                 ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId)),
@@ -59,10 +59,10 @@ namespace SnailApp.AdminApp.Controllers
                 OrderDir = !string.IsNullOrEmpty(sortColumnDir) ? sortColumnDir : "desc"
             };
 
-            var serviceTypeApiClient = await _serviceTypeApiClient.GetManageListPaging(request);
+            var serviceApiClient = await _serviceApiClient.GetManageListPaging(request);
 
 
-            foreach (var item in serviceTypeApiClient.Items)
+            foreach (var item in serviceApiClient.Items)
             {
                 item.Image = _configuration[SystemConstants.AppConstants.BaseAddress] + item.Image;
             }
@@ -70,9 +70,9 @@ namespace SnailApp.AdminApp.Controllers
             return Json(new
             {
                 draw = draw,
-                recordsFiltered = serviceTypeApiClient.TotalRecords,
-                recordsTotal = serviceTypeApiClient.TotalRecords,
-                data = serviceTypeApiClient.Items
+                recordsFiltered = serviceApiClient.TotalRecords,
+                recordsTotal = serviceApiClient.TotalRecords,
+                data = serviceApiClient.Items
             });
         }
 
@@ -80,7 +80,7 @@ namespace SnailApp.AdminApp.Controllers
         public async Task<IActionResult> DeleteByIds([FromBody] DeleteRequest request)
         {
             string resultMessage = string.Empty;
-            var result = await _serviceTypeApiClient.DeleteByIds(request);
+            var result = await _serviceApiClient.DeleteByIds(request);
 
             if (!result.IsSuccessed)
             {
@@ -95,7 +95,7 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromForm] ServiceTypeRequest rq)
+        public async Task<IActionResult> Save([FromForm] ServiceRequest rq)
         {
             ApiResult<int> result = null;
 
@@ -107,7 +107,7 @@ namespace SnailApp.AdminApp.Controllers
                 rq.ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId));
                 rq.CreatedUserId = userGuid;
                 rq.ModifiedUserId = userGuid;
-                result = await _serviceTypeApiClient.AddOrUpdateAsync(rq);
+                result = await _serviceApiClient.AddOrUpdateAsync(rq);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace SnailApp.AdminApp.Controllers
 
         public async Task<IActionResult> Filter(string textSearch)
         {
-            var request = new ManageServiceTypePagingRequest()
+            var request = new ManageServicePagingRequest()
             {
                 ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId)),
                 TextSearch = textSearch,
@@ -134,7 +134,7 @@ namespace SnailApp.AdminApp.Controllers
                 OrderDir = "desc"
             };
 
-            var data = await _serviceTypeApiClient.GetManageListFilterPaging(request);
+            var data = await _serviceApiClient.GetManageListPaging(request);
             return Ok(data);
         }
     }

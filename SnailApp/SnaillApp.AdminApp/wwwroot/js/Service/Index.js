@@ -1,6 +1,6 @@
 ﻿//== Class definition
 
-var ServiceType = function () {
+var Service = function () {
     let dtTable = null;
     let editingData = null;
 
@@ -67,7 +67,7 @@ var ServiceType = function () {
                 formData.set("Id", editingData.id);
             }
 
-            App.sendDataFileToURL("/ServiceType/Save", formData, "POST", true, 'body')
+            App.sendDataFileToURL("/Service/Save", formData, "POST", true, 'body')
                 .then(function (res) {
                     if (!res.isSuccessed) {
                         App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
@@ -130,7 +130,7 @@ var ServiceType = function () {
 
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
-        datatableOption.ajax.url = "/ServiceType/DataTableGetList";
+        datatableOption.ajax.url = "/Service/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
@@ -203,6 +203,7 @@ var ServiceType = function () {
 							<img src="' + full.image + '" class="user-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.name + '</p>\
+								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.serviceTypeName + '</p>\
 							</div>\
 						</div>';
                 }
@@ -242,6 +243,7 @@ var ServiceType = function () {
             e.preventDefault();
             editingData = dtTable.row($(this).parents('tr')).data();
             if (editingData != null) {
+                $('select[data-field="ServiceTypeId"]').append('<option value="' + editingData['serviceTypeId'] + '" selected>' + editingData['serviceTypeName'] + '</option>').trigger('change');
                 $('input[data-field="Name"]').val(editingData.name);
                 $('input[data-field="SortOrder"]').val(editingData.sortOrder);
                 $('input[data-field="IsVisibled"]').prop('checked', editingData.isVisibled);
@@ -257,13 +259,16 @@ var ServiceType = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
+
+        App.initSelect2Base($('#ServiceType'), '/ServiceType/Filter', { selectedFields: ["id", "name"] });
+
     };
 
   
     function deleteDataRows(dataRows) {
 
 
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ServiceType/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Service/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
                 App.showHideButtonDelete(false);

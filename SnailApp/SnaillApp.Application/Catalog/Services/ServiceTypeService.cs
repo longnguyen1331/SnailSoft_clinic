@@ -28,6 +28,7 @@ namespace SnailApp.Application.Catalog.Services
         Task<ApiResult<ServiceTypeDto>> GetById(ServiceTypeRequest request);
 
         Task<PagedResult<ServiceTypeDto>> GetManageListPaging(ManageServiceTypePagingRequest request);
+        Task<PagedResult<ServiceTypeDto>> GetManageListFilterPaging(ManageServiceTypePagingRequest request);
     }
 
     public class ServiceTypeService : IServiceTypeService
@@ -263,6 +264,100 @@ namespace SnailApp.Application.Catalog.Services
         private async Task DeleteFile(string fileName)
         {
             await _storageService.DeleteFileAsync(_configuration[SystemConstants.UserConstants.UserImagePath] + "/" + fileName);
+        }
+
+        public async Task<PagedResult<ServiceTypeDto>> GetManageListFilterPaging(ManageServiceTypePagingRequest request)
+        {
+            try
+            {
+                //1. Select join
+
+                var query = from st in _context.ServiceTypes
+                            where st.ClinicId == request.ClinicId
+                            && st.IsVisibled == true
+                            select new { st };
+
+
+                //2. filter
+                if (!string.IsNullOrEmpty(request.TextSearch))
+                    query = query.Where(x => x.st.Name.Contains(request.TextSearch)
+                    || x.st.Code.Contains(request.TextSearch));
+
+                //3.Sort
+
+                if (!string.IsNullOrEmpty(request.OrderCol))
+                {
+                    switch (request.OrderCol)
+                    {
+                        case "id":
+                            query = (request.OrderDir == "asc") ?
+                                query.OrderBy(x => x.st.Id) :
+                                query.OrderByDescending(x => x.st.Id);
+
+                            break;
+
+                        case "code":
+                            query = (request.OrderDir == "asc") ?
+                                query.OrderBy(x => x.st.Code) :
+                                query.OrderByDescending(x => x.st.Code);
+
+                            break;
+
+                        case "name":
+                            query = (request.OrderDir == "asc") ?
+                                query.OrderBy(x => x.st.Name) :
+                                query.OrderByDescending(x => x.st.Name);
+
+                            break;
+
+                        case "sortOrder":
+                            query = (request.OrderDir == "asc") ?
+                                query.OrderBy(x => x.st.SortOrder) :
+                                query.OrderByDescending(x => x.st.SortOrder);
+
+                            break;
+
+                        default: break;
+                    }
+                }
+
+                //4. Paging
+                int totalRow = await query.CountAsync();
+
+                if (request.PageIndex != null && request.PageIndex.Value != 0 && request.PageSize != 0)
+                {
+                    query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
+                                    .Take(request.PageSize);
+                }
+
+                var data = await query.Select(x => new ServiceTypeDto()
+                {
+                    Id = x.st.Id,
+                    SortOrder = x.st.SortOrder,
+                    Name = x.st.Name,
+                }).AsNoTracking().ToListAsync();
+
+                //5. Select and projection
+                var pagedResult = new PagedResult<ServiceTypeDto>()
+                {
+                    TotalRecords = totalRow,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = data
+                };
+                return pagedResult;
+            }
+            catch (Exception ex)
+            {
+                return new PagedResult<ServiceTypeDto>()
+                {
+                    TotalRecords = 0,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = null,
+                    Message = ex.Message
+                };
+            }
         }
     }
 }

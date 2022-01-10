@@ -45,7 +45,7 @@ namespace SnailApp.BackendApi.Controllers
         }
 
         [HttpPost("addorupdate")]
-        public async Task<IActionResult> AddOrUpdate([FromBody] ServiceRequest request)
+        public async Task<IActionResult> AddOrUpdate([FromForm] ServiceRequest request)
         {
             if (!ModelState.IsValid)
             {

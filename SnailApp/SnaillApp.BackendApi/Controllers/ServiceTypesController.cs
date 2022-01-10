@@ -81,5 +81,14 @@ namespace SnailApp.BackendApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetManageListFilterPaging")]
+        public async Task<IActionResult> GetManageListFilterPaging([FromQuery] ManageServiceTypePagingRequest request)
+        {
+            var serviceTypes = await _serviceTypeService.GetManageListFilterPaging(request);
+            return Ok(serviceTypes);
+        }
+
+        
     }
 }
