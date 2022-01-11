@@ -61,14 +61,14 @@
                 @if (Model.CurrentUserRole.IsAllowEdit)
                 {
                     <text>
-                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
+                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnCreate"><i class="fadeIn animated bx bx-add-to-queue"></i> Create</button>
 
                     </text>
                 }
                 @if (Model.CurrentUserRole.IsAllowDelete)
                 {
                     <text>
-                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete"><i class="fadeIn animated bx bx-trash-alt"></i> Delete</button>
                     </text>
                 }
             </div>
@@ -90,7 +90,7 @@
         </div>
 
         <form id="snail-edit-form">
-            <div class="row g-3">
+            <div class="row g-1">
                
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" id="avatarImage" class="rounded-circle p-1 bg-primary" alt="">

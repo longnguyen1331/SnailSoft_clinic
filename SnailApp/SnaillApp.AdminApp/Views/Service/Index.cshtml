@@ -3,8 +3,8 @@
 
 
 @section Vendors_CSS{
-	<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
-	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
+<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
 }
 
 @section Custom_CSS{
@@ -12,13 +12,13 @@
 }
 
 @section Vendors_Scripts{
-	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
-	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
+<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
+<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
 }
 
 @section Custom_Scripts{
 <script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/Service/Index.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/Service/Index.js")"></script>
 }
 
 <script>
@@ -26,8 +26,22 @@
         userId: '@Model.CurrentUserRole.Id',
         userName: '@User.Identity.Name',
         roles: {
-            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
-            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    },
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    }
         }
     };
 
@@ -40,31 +54,50 @@
 
 @await Html.PartialAsync("_PartialToolbar")
 <div class="card">
-	<div class="card-body">
-		<div class="d-lg-flex align-items-center mb-4 gap-3">
-			<div class="position-relative">
-				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-			</div>
-			<div class="ms-auto">
-				@if (Model.CurrentUserRole.IsAllowEdit)
-                {
-                    <text>
-						<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnCreate">Create</button>
-                                  
-                    </text>
-                }
-                @if (Model.CurrentUserRole.IsAllowDelete)
-                {
-                    <text>
-						<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
-                    </text>
-                }
-			</div>
-		</div>
-		<div class="table-responsive">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+               
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-xl-2">
+                            </div>
+                            <div class="col-lg-9 col-xl-10">
+                                <div class="float-lg-end">
+                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-auto g-2">
+                                        <div class="col">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control ps-5 radius-15" placeholder="Search by service name" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col">
+                                            @if (Model.CurrentUserRole.IsAllowEdit)
+                                            {
+                                                <text>
+                                                    <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnCreate"><i class="fadeIn animated bx bx-add-to-queue"></i> Create</button>
+
+                                                </text>
+                                            }
+                                            @if (Model.CurrentUserRole.IsAllowDelete)
+                                            {
+                                                <text>
+                                                    <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete"><i class="fadeIn animated bx bx-trash-alt"></i> Delete</button>
+                                                </text>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                </div>
+            </div>
+          
+        </div>
+        <div class="table-responsive customers-list">
             <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTable" role="grid"></table>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 
@@ -87,14 +120,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-12" >
-					<div class="mb-3 px-1 select2-sm">
-							<label class="form-label">Service Type</label>
-						<select id="ServiceType" aria-label="Select a province" data-control="select2" 
-						data-field="ServiceTypeId" class="form-select form-select-solid form-select-lg radius-15 single-select">
+                <div class="col-md-12">
+                    <div class="mb-3 px-1 select2-sm">
+                        <label class="form-label">Service Type</label>
+                        <select id="ServiceType" aria-label="Select a province" data-control="select2"
+                                data-field="ServiceTypeId" class="form-select form-select-solid form-select-lg radius-15 single-select">
                         </select>
-					</div>
-				</div>
+                    </div>
+                </div>
 
                 <div class="col-md-12">
                     <div class="card-body mx-0 px-0 px-0 py-2">
@@ -105,7 +138,7 @@
                     </div>
                 </div>
 
-                 <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="card-body mx-0 px-0 px-0 py-2">
                         <div class="input-group">
                             <span class="input-group-text form-control-sm"><small>Charge</small></span>
@@ -114,7 +147,7 @@
                     </div>
                 </div>
 
-                 <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="card-body mx-0 px-0 px-0 py-2">
                         <div class="input-group">
                             <span class="input-group-text form-control-sm"><small>Note</small></span>
@@ -123,7 +156,7 @@
                     </div>
                 </div>
 
-                 <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="card-body mx-0 px-0 px-0 py-2">
                         <div class="input-group">
                             <span class="input-group-text form-control-sm"><small>Sort</small></span>
@@ -134,7 +167,7 @@
 
                 <div class="col-md-12">
                     <div class="form-check form-switch">
-                        <input class="form-check-input px-3 py-2" type="checkbox" data-field="IsVisibled" >
+                        <input class="form-check-input px-3 py-2" type="checkbox" data-field="IsVisibled">
                         <label class="form-check-label  py-1" for="IsVisibled"> Active</label>
                     </div>
                 </div>

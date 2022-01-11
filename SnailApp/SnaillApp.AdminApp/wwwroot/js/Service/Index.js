@@ -193,14 +193,14 @@ var Service = function () {
                     return html;
                 }
             },
-            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            { "data": "sortOrder", "name": "sortOrder", "autoWidth": true, "title": "Odx" },
+            { "data": "id", "name": "id", "Width": "20px", "title": "Id" },
+            { "data": "sortOrder", "name": "sortOrder", "Width": "20px", "title": "Odx" },
             {
-                "data": "name", "name": "name", "width": "40%", "title": "Infomaiton",
+                "data": "name", "name": "name", "Width": "40%", "title": "Infomation",
                 "render": function (data, type, full, meta) {
 
                     return '<div class="d-flex align-items-center nav-link">\
-							<img src="' + full.image + '" class="user-img" alt="user avatar">\
+							<img src="' + full.image + '" class="recent-product-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.name + '</p>\
 								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.serviceTypeName + '</p>\
@@ -208,11 +208,13 @@ var Service = function () {
 						</div>';
                 }
             },
-            { "data": "charges", "name": "charges", "autoWidth": true, "title": "Charge" },
+           
+            { "data": "description", "name": "description", "Width": "30%", "title": "Description" },
+            { "data": "charges", "name": "charges", "Width": "10%", "title": "Charge" },
             {
                 "data": "isVisibled", "name": "isVisibled", "autoWidth": true, "title": "Active",
                 "render": function (data, type, full, meta) {
-                    return data == true ? '<span class="badge rounded-pill bg-primary">Active</span>' : '<span class="badge rounded-pill bg-danger">Disable</span>';
+                    return data == true ? '<div class="d-flex align-items-center text-success"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Active</span></div>' : '<div class="d-flex align-items-center text-danger">	<i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Disable</span>	</div >';
                 }
             },
             {
