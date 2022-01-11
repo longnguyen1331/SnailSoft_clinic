@@ -2,7 +2,7 @@
 
 var Doctor = function () {
     let dtTable = null, editingData = null,
-        edit_form = $("#edit_form"),
+        edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
