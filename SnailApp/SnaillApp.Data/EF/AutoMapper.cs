@@ -7,6 +7,7 @@ using SnailApp.ViewModels.Catalog.Regions;
 using SnailApp.ViewModels.Catalog.ServiceTypes;
 using SnailApp.ViewModels.Catalog.Services;
 using SnailApp.ViewModels.Catalog.Doctor_Services;
+using SnailApp.ViewModels.Catalog.Appointments;
 
 namespace SnailApp.Data.EF
 {
@@ -16,13 +17,13 @@ namespace SnailApp.Data.EF
         {
           
             CreateMap<Clinic, ViewModels.Catalog.Clinics.ClinicDto>()
-                .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
-                .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("dd/MM/yyyy")))
+                .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("yyyy-MM-dd")))
+                .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("yyyy-MM-dd")))
                 .ReverseMap();
 
             CreateMap<Clinic, ViewModels.Catalog.Clinics.ClinicRequest>()
-                .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
-                .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("dd/MM/yyyy")))
+                .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("yyyy-MM-dd")))
+                .ForMember(x => x.ExpirationDate, opt => opt.MapFrom(src => src.ExpirationDate.ToString("yyyy-MM-dd")))
                 .ReverseMap();
 
             CreateMap<AppUser_Clinic, User_ClinicDto>().ReverseMap();
@@ -36,6 +37,12 @@ namespace SnailApp.Data.EF
             CreateMap<ServiceType, ServiceTypeRequest>().ReverseMap();
             CreateMap<Doctor_Service, Doctor_ServiceRequest>().ReverseMap();
             CreateMap<Doctor_Service, Doctor_ServiceDto>().ReverseMap();
+
+            CreateMap<Appointment, AppointmentDto>()
+            .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
+            .ReverseMap();
+
+            CreateMap<Appointment, AppointmentRequest>().ReverseMap();
         }
     }
 }

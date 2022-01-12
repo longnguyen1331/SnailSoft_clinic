@@ -58,7 +58,7 @@ namespace SnailApp.Application.Catalog.Clinics
 
 
                 DateTime datetim1, datetime2;
-                if (DateTime.TryParseExact(request.StartDate, "dd/MM/yyyy", null, DateTimeStyles.None, out datetim1))
+                if (DateTime.TryParseExact(request.StartDate, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
                 {
                     clinic.StartDate = datetim1;
                 }
@@ -67,7 +67,7 @@ namespace SnailApp.Application.Catalog.Clinics
                     clinic.StartDate = DateTime.Now;
                 }
 
-                if (DateTime.TryParseExact(request.ExpirationDate, "dd/MM/yyyy", null, DateTimeStyles.None, out datetime2))
+                if (DateTime.TryParseExact(request.ExpirationDate, "yyyy-MM-dd", null, DateTimeStyles.None, out datetime2))
                 {
                     clinic.ExpirationDate = datetime2;
                 }
@@ -126,9 +126,7 @@ namespace SnailApp.Application.Catalog.Clinics
                 {
                     clinic.ExpirationDate = DateTime.Now;
                 }
-                clinic.CreatedDate = DateTime.Now;
                 clinic.ModifiedDate = DateTime.Now;
-
 
                 if (request.Logo != null)
                 {
