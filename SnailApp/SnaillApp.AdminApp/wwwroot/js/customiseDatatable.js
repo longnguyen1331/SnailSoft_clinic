@@ -25,26 +25,26 @@ function initialDatatableOption(){
         "language": {
             "decimal": ",",
             "thousands": ".",
-            "lengthMenu": "Hiển thị _MENU_",
-            "zeroRecords": "Không có dữ liệu",
+            "lengthMenu": "Show _MENU_",
+            "zeroRecords": "Not data",
             "info": "Trang _PAGE_ / _PAGES_",
-            "infoEmpty": "Không có dữ liệu",
-            "infoFiltered": "(Tìm thấy _MAX_ dòng)",
+            "infoEmpty": "Not data",
+            "infoFiltered": "(Found _MAX_ lines)",
             "oAria": {
-                "sSortAscending": "Nhấn vào để sắp xếp tăng dần",
-                "sSortDescending": "Nhấn vào để sắp xếp giảm dần"
+                "sSortAscending": "Click to sort ascending",
+                "sSortDescending": "Click to sort descending"
             },
-            "sProcessing": "Đang xử lý...",
-            "sLoadingRecords": "Đang tải dữ liệu...",
+            "sProcessing": "Processing...",
+            "sLoadingRecords": "Loading...",
             "oPaginate": {
-                "sFirst": "Đầu",
-                "sLast": "Cuối",
-                "sNext": "Sau",
-                "sPrevious": "Trước"
+                "sFirst": "First",
+                "sLast": "End",
+                "sNext": "Next",
+                "sPrevious": "Previous"
             },
-            "sEmptyTable": "Không có dữ liệu",
-            "sInfo": "Hiển thị từ dòng _START_ đến _END_ trong tổng số _TOTAL_ dòng",
-            "sSearch": "Tìm kiếm:"
+            "sEmptyTable": "Not found",
+            "sInfo": "Show lines _START_ to _END_ out of _TOTAL_",
+            "sSearch": "Search:"
         },
         "layout": {
             "theme": 'default', // datatable theme

@@ -89,7 +89,10 @@
             <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
         </div>
 
-        <form id="snail-edit-form">
+     
+
+        <div id="CreateInfomation">
+               <form id="snail-edit-form">
             <div class="row g-1">
                
                     <div class="d-flex flex-column align-items-center text-center">
@@ -212,8 +215,33 @@
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         </form>
+        </div>
+        <div id="CreateServiceToUser">
+            <div class="header-colors-indigators">
+				<div class="row g-0">
+					<div class="col-md-8" >
+						<div class="mb-3 px-1 select2-sm">
+							 <select id="edit_form_serivceIds" data-control="select2"
+							 class="form-select form-select-solid form-select-md radius-15 single-select">
+                             </select>
+						</div>
+					</div>
+					<div class="col-md-4" >
+						<div class="mb-3 px-1 select2-sm">
+							<button type="button" class="btn btn-primary w-100" name="btnCreateUserToService">Create</button>
+						</div>
+					</div>
+
+					<div class="col-md-12" >
+						<div class="table-responsive">
+							<table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTableUserService" role="grid"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
     </div>
 </div>
 

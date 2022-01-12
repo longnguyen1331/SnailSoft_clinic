@@ -13,7 +13,6 @@ namespace SnailApp.Data.EF
         public ClinicDbContext(DbContextOptions options) : base(options)
         {
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
@@ -21,6 +20,9 @@ namespace SnailApp.Data.EF
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+            modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new AppointmentPaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new Appointment_ServiceConfiguration());
             modelBuilder.ApplyConfiguration(new AppUser_ClinicConfiguration());
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
@@ -28,6 +30,8 @@ namespace SnailApp.Data.EF
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new BloodConfiguration());
             modelBuilder.ApplyConfiguration(new ClinicConfiguration());
+            modelBuilder.ApplyConfiguration(new Doctor_ServiceConfiguration());
+            modelBuilder.ApplyConfiguration(new ExaminationsResultConfiguration());
             modelBuilder.ApplyConfiguration(new RegionConfiguration());
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new GenderTranslationConfiguration());
@@ -42,19 +46,22 @@ namespace SnailApp.Data.EF
             //Data seeding
             modelBuilder.Seed();
         }
-        
-        public DbSet<Region> Regions { get; set; }
-        public DbSet<Blood> Bloods { get; set; }
-        public DbSet<AppUser_Clinic> User_Clinics { get; set; }
-        public DbSet<Clinic> Clinics{ get; set; }
-        public DbSet<AppConfig> AppConfigs { get; set; }
         public DbSet<AppRoleTranslation> AppRoleTranslations { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }        
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppConfig> AppConfigs { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Appointment_Service> Appointment_Services { get; set; }
+        public DbSet<AppointmentPayment> AppointmentPayments { get; set; }
+        public DbSet<Blood> Bloods { get; set; }
+        public DbSet<Clinic> Clinics{ get; set; }
+        public DbSet<Doctor_Service> Doctor_Services { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<ExaminationsResult> ExaminationsResults { get; set; }
+        public DbSet<AppUser_Clinic> User_Clinics { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<GenderTranslation> GenderTranslations { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Menu> Menus { get; set; }
-       
         public DbSet<MenuAppRole> MenuAppRoles { get; set; }
         public DbSet<MenuTranslation> MenuTranslations { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

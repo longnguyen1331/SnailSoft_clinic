@@ -439,6 +439,7 @@ var Clinic = function () {
 
     let initialDatatableClinic = function () {
         var datatableOption = initialDatatableOption();
+        datatableOption.buttons = [];
         datatableOption.ajax.url = "/Clinic/DataTableUserClinicGetList";
         datatableOption.ajax.data = {
             clinicId: function () {
@@ -487,6 +488,7 @@ var Clinic = function () {
             },
         ]
         dtTableClinic = $('#dtTableUserClinic').DataTable(datatableOption);
+        dtTableClinic.buttons().container().appendTo('#dtTableUserClinic .col-md-6:eq(0)');
 
         $('#dtTableUserClinic tbody').on('click', 'a.edit', function (e) {
             e.preventDefault();
@@ -510,7 +512,7 @@ var Clinic = function () {
     }
 
     function deleteDataUsereClinics(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteUserByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Clinic/DeleteUserByIds", dtTableClinic, null)
             .then(function () {
                 dtTableClinic.draw();
             });

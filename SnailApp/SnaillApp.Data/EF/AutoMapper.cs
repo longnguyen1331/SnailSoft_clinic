@@ -6,6 +6,7 @@ using SnailApp.ViewModels.Common;
 using SnailApp.ViewModels.Catalog.Regions;
 using SnailApp.ViewModels.Catalog.ServiceTypes;
 using SnailApp.ViewModels.Catalog.Services;
+using SnailApp.ViewModels.Catalog.Doctor_Services;
 
 namespace SnailApp.Data.EF
 {
@@ -33,6 +34,8 @@ namespace SnailApp.Data.EF
             CreateMap<Service, ServiceRequest>().ReverseMap();
             CreateMap<ServiceType, ServiceTypeDto>().ReverseMap();
             CreateMap<ServiceType, ServiceTypeRequest>().ReverseMap();
+            CreateMap<Doctor_Service, Doctor_ServiceRequest>().ReverseMap();
+            CreateMap<Doctor_Service, Doctor_ServiceDto>().ReverseMap();
         }
     }
 }

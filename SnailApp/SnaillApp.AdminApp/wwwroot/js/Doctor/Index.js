@@ -1,8 +1,10 @@
 ﻿//== Class definition
 
 var Doctor = function () {
-    let dtTable = null, editingData = null,
+    let dtTable = null, editingData = null, dtTableService = null,
+        userId = "",
         edit_form = $("#snail-edit-form"),
+        create_user_service_form_buttonSubmit = $('[name="btnCreateUserToService"]'),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
@@ -18,6 +20,8 @@ var Doctor = function () {
             e.preventDefault();
             editingData = null;
             reset();
+            $('#CreateInfomation').show();
+            $('#CreateServiceToUser').hide();
             $('.switcher-btn').trigger('click');
         });
 
@@ -89,6 +93,55 @@ var Doctor = function () {
             )
         });
 
+
+        create_user_service_form_buttonSubmit.click(function (e) {
+            e.preventDefault();
+            if ($('#edit_form_serivceIds').val() != null && $('#edit_form_serivceIds').val() != '') {
+                let data = {
+                    serviceId: $('#edit_form_serivceIds').val(),
+                    doctorId: userId
+                }
+                App.sendDataToURL("/Doctor_Service/Save", data, "POST", true, 'body')
+                .then(function (res) {
+                        if (!res.isSuccessed) {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                        }
+                        else {
+                            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+                            $('#edit_form_serivceIds').val(null).trigger('change');
+                            dtTableService.draw();
+                        }
+                    }
+                )
+            }
+        });
+
+
+        $('#edit_form_serivceIds').select2(
+            {
+                ajax: {
+                    url: '/Service/Filter',
+                    data: function (params) {
+                        var query = {
+                            textSearch: params.term
+                        };
+                        return query;
+                    },
+                    processResults: function (res) {
+                        var data = $.map(res.items, function (item, i) {
+                            return {
+                                id: item.id,
+                                text: item.name
+                            }
+                        });
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                allowClear: true,
+            }).trigger('change');
+
         $('[name="btnDelete"]').click(function (e) {
             e.preventDefault();
             let arr = [];
@@ -121,10 +174,12 @@ var Doctor = function () {
         });
     };
     function reset() {
+        userId = "";
         editingData = null;
         edit_form[0].reset();
         dtTable.draw();
     }
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -223,6 +278,9 @@ var Doctor = function () {
                         html += '<a href="#" class="edit">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
+                        html += '<a href="#" class="ms-3 assign-service">\
+					                <i class="bx bxs-info-circle"></i>\
+				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
                         html += '<a href="#" class="ms-3 delete">\
@@ -279,7 +337,23 @@ var Doctor = function () {
                         }
                     }
                 });
+
+                $('#CreateInfomation').show();
+                $('#CreateServiceToUser').hide();
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+            }
+        });
+
+        $('#dtTable tbody').on('click', 'a.assign-service', function (e) {
+            e.preventDefault();
+            editingData = dtTable.row($(this).parents('tr')).data();
+
+            if (editingData != null) {
+                userId = editingData.id;
+                dtTableService.draw();
+                $('#CreateInfomation').hide();
+                $('#CreateServiceToUser').show();
+                $('.switcher-btn').trigger('click');
             }
         });
 
@@ -291,7 +365,6 @@ var Doctor = function () {
             }
         });
     };
-
    
     function deleteDataRows(dataRows) {
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Doctor/DeleteByIds", dtTable, null)
@@ -301,10 +374,70 @@ var Doctor = function () {
             });
     }
 
+    function deleteDataUsereServices(dataRows) {
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Doctor_Service/DeleteByIds", dtTableService, null)
+            .then(function () {
+                dtTableService.draw();
+            });
+    }
+
+    let initialDatatableService = function () {
+        var datatableOption = initialDatatableOption();
+        datatableOption.ajax.url = "/Doctor_Service/DataTableGetServiceList";
+        datatableOption.buttons = [];
+        datatableOption.ajax.data = {
+            textSearch: function () {
+                return '';
+            },
+            userId: function () {
+                return userId;
+            }
+        };
+        datatableOption.order = [[0, "desc"]];
+        datatableOption.columnDefs = [
+            {
+                "targets": [0],
+                "visible": false,
+                "orderable": false
+            },
+            {
+                "targets": [2],
+                "className": 'dt-center'
+            }
+        ];
+        datatableOption.columns = [
+            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            { "data": "serviceName", "name": "serviceName", "autoWidth": true, "title": "Service" },
+            {
+                width: "120px", "title": "Active", "render": function (data, type, full, meta) {
+                    let html = '<div class="d-flex order-actions">';
+                    if (user.roles.isAllowDelete == true) {
+                        html += '<a href="#" class="ms-3 deleteService">\
+					                <i class="bx bxs-trash"></i>\
+				                </a>';
+                    }
+                    html += '</div> ';
+
+                    return html;
+                }
+            },
+        ]
+        dtTableService = $('#dtTableUserService').DataTable(datatableOption);
+        $('#dtTableUserService tbody').on('click', 'a.deleteService', function (e) {
+            e.preventDefault();
+            let sel = dtTableService.row($(this).parents('tr')).data();
+            if (sel) {
+                deleteDataUsereServices([sel]);
+            }
+        });
+        dtTableService.buttons().container().appendTo('#dtTableUserService .col-md-6:eq(0)');
+    };
+
     return {
         // public functions
         init: function () {
             initialDatatable();
+            initialDatatableService();
             initialComponents();
         }
     };

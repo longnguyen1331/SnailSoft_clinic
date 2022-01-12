@@ -320,8 +320,6 @@ namespace SnailApp.Application.Catalog.Clinics
             return new ApiSuccessResult<ClinicDto>(clinicDto);
         }
 
-
-
         private async Task<string> SaveFile(IFormFile file)
         {
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');

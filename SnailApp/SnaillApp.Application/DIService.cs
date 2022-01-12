@@ -13,6 +13,7 @@ using SnailApp.Application.Catalog.Clinics;
 using SnailApp.Application.Utilities.UI;
 using SnailApp.Application.Catalog.Regions;
 using SnailApp.Application.Catalog.Services;
+using SnailApp.Application.Catalog.Doctor_Services;
 
 namespace SnailApp.Application
 {
@@ -20,12 +21,6 @@ namespace SnailApp.Application
     {
         public static IServiceCollection AddDIService(this IServiceCollection services)
         {
-       
-            services.AddTransient<IFileStorageService, FileStorageService>();
-          
-            services.AddTransient<IGenderService, GenderService>();
-
-
             //New Clinic
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
@@ -37,14 +32,15 @@ namespace SnailApp.Application
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IMenuAppRoleService, MenuAppRoleService>();
             services.AddTransient<IAdminAppUIService, AdminAppUIService>();
-            
             services.AddTransient<IClinicService, ClinicService>();
+            services.AddTransient<IGenderService, GenderService>();
+            services.AddTransient<IFileStorageService, FileStorageService>();
             services.AddTransient<IUser_ClinicService, User_ClinicService>();
             services.AddTransient<IBloodService, BloodService>();
             services.AddTransient<IRegionService, RegionService>();
             services.AddTransient<IServiceTypeService, ServiceTypeService>();
             services.AddTransient<IServiceService, ServiceService>();
-
+            services.AddTransient<IDoctor_ServiceService, Doctor_ServiceService>();
             return services;
         }
     }

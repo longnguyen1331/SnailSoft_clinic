@@ -1,10 +1,11 @@
 ﻿//== Class definition
 
 var Service = function () {
-    let dtTable = null;
-    let editingData = null;
-
-    let edit_form = $("#snail-edit-form"),
+    let dtTable = null, editingData = null,
+        dtTableUser = null,
+        serviceId = 0,
+        create_user_service_form_buttonSubmit = $('[name="btnCreateUserToService"]'),
+        edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
@@ -21,7 +22,8 @@ var Service = function () {
             e.preventDefault();
             reset();
             editingData = null;
-
+            $('#CreateInfomation').show();
+            $('#CreateServiceToUser').hide();
             $('.switcher-btn').trigger('click');
         });
 
@@ -78,10 +80,34 @@ var Service = function () {
                         editingData = {
                             id: res.resultObj
                         };
+                        $('.switcher-btn').trigger('click');
                     }
                 }
-                )
+            )
         });
+
+        create_user_service_form_buttonSubmit.click(function (e) {
+            e.preventDefault();
+            if ($('#edit_form_userIds').val() != null && $('#edit_form_userIds').val() != '') {
+                let data = {
+                    serviceId: serviceId,
+                    doctorId: $('#edit_form_userIds').val()
+                }
+                App.sendDataToURL("/Doctor_Service/Save", data, "POST", true, 'body')
+                    .then(function (res) {
+                        if (!res.isSuccessed) {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                        }
+                        else {
+                            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Updated success.");
+                            $('#edit_form_serivceIds').val(null).trigger('change');
+                            dtTableUser.draw();
+                        }
+                    }
+                )
+            }
+        });
+
 
         $('[name="btnDelete"]').click(function (e) {
             e.preventDefault();
@@ -115,6 +141,7 @@ var Service = function () {
     function reset() {
         editingData = null;
         edit_form[0].reset();
+        serviceId = 0;
         $('#avatarImage').attr('src','/snailsoft/assets/images/avatars/avatar-1.png');
         dtTable.draw();
     }
@@ -224,14 +251,16 @@ var Service = function () {
                         html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="fadeIn animated bx bxs-edit"></i>\
 				                </a>';
+
+                        html += '<a href="#" class="ms-3 assign-user">\
+					                <i class="bx bxs-user-plus"></i>\
+				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
                         html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
 					                <i class="fadeIn animated bx bxs-trash"></i>\
 				                </a>';
                     }
-
-
 
                     html += '</div> ';
 
@@ -253,6 +282,8 @@ var Service = function () {
                 $('input[data-field="Description"]').val(editingData.description);
                 $('input[data-field="IsVisibled"]').prop('checked', editingData.isVisibled);
                 $('#avatarImage').attr('src', editingData.image);
+                $('#CreateInfomation').show();
+                $('#CreateServiceToUser').hide();
                 if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
@@ -264,15 +295,48 @@ var Service = function () {
                 deleteDataRows([selectedDataRow]);
             }
         });
+        $('#dtTable tbody').on('click', 'a.assign-user', function (e) {
+            e.preventDefault();
+            editingData = dtTable.row($(this).parents('tr')).data();
 
-        App.initSelect2Base($('#ServiceType'), '/ServiceType/Filter', { selectedFields: ["id", "name"] });
+            if (editingData != null) {
+                serviceId = editingData.id;
+                dtTableUser.draw();
+                $('#CreateInfomation').hide();
+                $('#CreateServiceToUser').show();
+                $('.switcher-btn').trigger('click');
+            }
+        });
+        $('#edit_form_userIds').select2(
+            {
+                ajax: {
+                    url: '/Doctor/Filter',
+                    data: function (params) {
+                        var query = {
+                            textSearch: params.term
+                        };
 
+                        return query;
+                    },
+                    processResults: function (res) {
+
+                        var data = $.map(res.items, function (item, i) {
+                            return {
+                                id: item.id,
+                                text: item.firstName + " " + item.lastName
+                            }
+                        });
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                allowClear: true,
+            }).trigger('change');
     };
 
   
     function deleteDataRows(dataRows) {
-
-
         App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Service/DeleteByIds", dtTable, null)
             .then(function () {
                 dtTable.draw();
@@ -280,10 +344,73 @@ var Service = function () {
             });
     }
 
+
+    function deleteDataUsereServices(dataRows) {
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/Doctor_Service/DeleteByIds", dtTableUser, null)
+            .then(function () {
+                dtTableUser.draw();
+            });
+    }
+
+    let initialDatatableService = function () {
+        var datatableOption = initialDatatableOption();
+        datatableOption.ajax.url = "/Doctor_Service/DataTableGetUserList";
+        datatableOption.buttons = [];
+        datatableOption.ajax.data = {
+            textSearch: function () {
+                return '';
+            },
+            serviceId: function () {
+                return serviceId;
+            }
+        };
+        datatableOption.order = [[0, "desc"]];
+        datatableOption.columnDefs = [
+            {
+                "targets": [0],
+                "visible": false,
+                "orderable": false
+            },
+            {
+                "targets": [2],
+                "className": 'dt-center'
+            }
+        ];
+        datatableOption.columns = [
+            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            { "data": "doctorFullName", "name": "doctorFullName", "autoWidth": true, "title": "Doctor" },
+            {
+                width: "120px", "title": "Active", "render": function (data, type, full, meta) {
+                    let html = '<div class="d-flex order-actions">';
+                    if (user.roles.isAllowDelete == true) {
+                        html += '<a href="#" class="ms-3 deleteService">\
+					                <i class="bx bxs-trash"></i>\
+				                </a>';
+                    }
+                    html += '</div> ';
+
+                    return html;
+                }
+            },
+        ]
+        dtTableUser = $('#dtTableUserService').DataTable(datatableOption);
+        $('#dtTableUserService tbody').on('click', 'a.deleteService', function (e) {
+            e.preventDefault();
+            let sel = dtTableUser.row($(this).parents('tr')).data();
+            if (sel) {
+                deleteDataUsereServices([sel]);
+            }
+        });
+        dtTableUser.buttons().container().appendTo('#dtTableUserService .col-md-6:eq(0)');
+    };
+
+
+
     return {
         // public functions
         init: function () {
             initialDatatable();
+            initialDatatableService();
             initialComponents();
         }
     };
