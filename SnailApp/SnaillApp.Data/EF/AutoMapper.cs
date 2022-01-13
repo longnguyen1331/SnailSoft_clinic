@@ -43,6 +43,7 @@ namespace SnailApp.Data.EF
             .ReverseMap();
 
             CreateMap<Appointment, AppointmentRequest>().ReverseMap();
+            CreateMap<Appointment_Service, Appointment_ServiceRequest>().ReverseMap();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace SnailApp.Application.Catalog.Doctor_Services
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
         Task<PagedResult<Doctor_ServiceDto>> GetManageServiceByUserListPaging(ManageDoctor_ServicePagingRequest request);
         Task<PagedResult<Doctor_ServiceDto>> GetManageUserByServiceListPaging(ManageDoctor_ServicePagingRequest request);
+        Task<PagedResult<Doctor_ServiceDto>> GetUserFilterService(ManageDoctor_ServicePagingRequest request);
+        
     }
     public class Doctor_ServiceService : IDoctor_ServiceService
     {
@@ -91,7 +93,7 @@ namespace SnailApp.Application.Catalog.Doctor_Services
                 //1. Select join
                 var query = from st in _context.Doctor_Services
                             where st.ClinicId == request.ClinicId
-                            where st.DoctorId == request.DoctorId
+                            && st.DoctorId == request.DoctorId
                             select new { st };
 
                 //2. filter
@@ -189,7 +191,7 @@ namespace SnailApp.Application.Catalog.Doctor_Services
                 //1. Select join
                 var query = from st in _context.Doctor_Services
                             where st.ClinicId == request.ClinicId
-                            where st.ServiceId == request.ServiceId
+                            && st.ServiceId == request.ServiceId
                             select new { st };
 
                 //2. filter
@@ -252,6 +254,69 @@ namespace SnailApp.Application.Catalog.Doctor_Services
                     DoctorId = x.st.DoctorId,
                     Description = x.st.Description,
                     SortOrder = x.st.SortOrder,
+                }).AsNoTracking().ToListAsync();
+
+                foreach (var item in data)
+                {
+                    var doctor = await _context.AppUsers.FindAsync(item.DoctorId);
+                    item.DoctorFullName = doctor.FirstName + " " + doctor.LastName;
+                }
+
+                //5. Select and projection
+                var pagedResult = new PagedResult<Doctor_ServiceDto>()
+                {
+                    TotalRecords = totalRow,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = data
+                };
+                return pagedResult;
+            }
+            catch (Exception ex)
+            {
+                return new PagedResult<Doctor_ServiceDto>()
+                {
+                    TotalRecords = 0,
+                    PageSize = request.PageSize,
+                    PageIndex = request.PageIndex,
+                    Items = null,
+                    Message = ex.Message
+                };
+            }
+        }
+        
+        public async Task<PagedResult<Doctor_ServiceDto>> GetUserFilterService(ManageDoctor_ServicePagingRequest request)
+        {
+            try
+            {
+                //1. Select join
+                var query = from st in _context.Doctor_Services
+                            join s in _context.Services on st.ServiceId equals s.Id
+                            join u in _context.AppUsers on st.DoctorId equals u.Id
+                            where st.ClinicId == request.ClinicId
+                            && s.IsVisibled == true 
+                            && u.IsActive == true
+                            group new { st, u } by new { st.DoctorId } into pg
+                            select new Doctor_ServiceDto { DoctorId = pg.Key.DoctorId, DoctorFullName = pg.FirstOrDefault(x=>x.u.Id== pg.Key.DoctorId).u.FirstName + " " + pg.FirstOrDefault(x => x.u.Id == pg.Key.DoctorId).u.LastName };
+
+             
+                //2. filter
+                if (!string.IsNullOrEmpty(request.TextSearch))
+                    query = query.Where(x => (x.DoctorFullName).Contains(request.TextSearch));
+
+                //4. Paging
+                int totalRow = await query.CountAsync();
+
+                if (request.PageIndex != null && request.PageIndex.Value != 0 && request.PageSize != 0)
+                {
+                    query = query.Skip((request.PageIndex.Value - 1) * request.PageSize)
+                                    .Take(request.PageSize);
+                }
+
+                var data = await query.Select(x => new Doctor_ServiceDto()
+                {
+                    DoctorId = x.DoctorId,
+                    DoctorFullName = x.DoctorFullName
                 }).AsNoTracking().ToListAsync();
 
                 foreach (var item in data)

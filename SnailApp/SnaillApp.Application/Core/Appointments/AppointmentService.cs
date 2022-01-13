@@ -15,6 +15,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using SnailApp.Application.Common;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace SnailApp.Application.Catalog.Appointments
 {
@@ -56,17 +57,42 @@ namespace SnailApp.Application.Catalog.Appointments
             {
                 var appointment = _mapper.Map<Appointment>(request);
 
-
                 DateTime datetim1;
                 if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
                 {
                     appointment.Date = datetim1;
                 }
-               
+                else
+                {
+                    appointment.Date = DateTime.Now;
+                }
+
                 appointment.CreatedDate = DateTime.Now;
                 appointment.ModifiedDate = DateTime.Now;
                 _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
+                if(request.Appointment_ServiceRequests.Count > 0)
+                {
+                    var appointment_services = _mapper.Map<List<Appointment_Service>>(request.Appointment_ServiceRequests);
+
+                    for(int i=0; i< appointment_services.Count; i++)
+                    {
+                        DateTime date;
+                        if (DateTime.TryParseExact(request.Appointment_ServiceRequests[i].Date, "yyyy-MM-dd", null, DateTimeStyles.None, out date))
+                        {
+                            appointment_services[i].Date = date;
+                        }
+                        else
+                        {
+                            appointment_services[i].Date = DateTime.Now;
+                        }
+
+                        appointment_services[i].AppointmentId = appointment.Id;
+                    }
+
+                    _context.Appointment_Services.AddRange(appointment_services);
+                    await _context.SaveChangesAsync();
+                }
                 return new ApiSuccessResult<int>(appointment.Id);
             }
             catch (Exception ex)
@@ -124,6 +150,10 @@ namespace SnailApp.Application.Catalog.Appointments
 
                 if (appointments == null) throw new EShopException($"Cannot find Id: {string.Join(";", request.Ids)}");
 
+                foreach(var item in appointments)
+                {
+                    _context.Appointment_Services.RemoveRange(item.Appointment_Services);
+                }
                 _context.Appointments.RemoveRange(appointments);
 
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());

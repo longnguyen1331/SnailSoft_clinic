@@ -165,6 +165,19 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetById(string userId)
+        {
+            var userApiClient = await _userApiClient.GetById(new UserRequest() { Id = userId });
+
+            if (userApiClient.IsSuccessed)
+            {
+                userApiClient.ResultObj.Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + userApiClient.ResultObj.Avatar;
+            }
+
+            return Ok(userApiClient);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Filter(string textSearch)
         {
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));

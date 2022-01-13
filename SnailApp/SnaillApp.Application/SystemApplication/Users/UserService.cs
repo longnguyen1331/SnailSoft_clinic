@@ -122,12 +122,14 @@ namespace SnailApp.Application.SystemApplication.Users
             var userDto = new UserDto()
             {
                 Email = user.Email,
+                Code = user.Code,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
                 Dob = user.Dob != null ? user.Dob.Value.ToString("yyyy-MM-dd") : String.Empty,
                 Id = user.Id.ToString(),
                 LastName = user.LastName,
                 UserName = user.UserName,
+                Address = user.Address,
                 Avatar = (!string.IsNullOrEmpty(user.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + user.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
                 IsActive = user.IsActive,
             };
@@ -287,6 +289,7 @@ namespace SnailApp.Application.SystemApplication.Users
                         return new ApiErrorResult<string>("Email account is exits.");
                     }
                     user = new AppUser() { 
+                        Code = request.ClinicId.HasValue ? request.ClinicId.Value + "_"  + DateTime.Now.ToString("yyyyMMDDHHmmssfff")  : DateTime.Now.ToString("yyyyMMDDHHmmssfff"),
                         UserName = request.Email,
                         Email = request.Email,
                         CreatedDate = DateTime.Now,
@@ -699,6 +702,8 @@ namespace SnailApp.Application.SystemApplication.Users
                 return new ApiErrorResult<string>(ex.Message);
             }
         }
+
+
     }
 }
 

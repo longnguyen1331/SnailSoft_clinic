@@ -29,6 +29,15 @@ namespace SnailApp.BackendApi.Controllers
             return Ok(doctor_Services);
         }
 
+        [HttpGet("GetUserFilterService")]
+        public async Task<IActionResult> GetUserFilterService([FromQuery] ManageDoctor_ServicePagingRequest request)
+        {
+            var doctor_Services = await _doctor_ServiceService.GetUserFilterService(request);
+            return Ok(doctor_Services);
+        }
+
+        
+
         [HttpGet("GetManageUserByServiceListPaging")]
         public async Task<IActionResult> GetManageUserByServiceListPaging([FromQuery] ManageDoctor_ServicePagingRequest request)
         {

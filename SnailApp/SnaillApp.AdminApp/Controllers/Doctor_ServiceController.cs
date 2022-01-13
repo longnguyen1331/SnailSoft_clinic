@@ -147,5 +147,23 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(data);
         }
 
+        public async Task<IActionResult> FilterDoctorByService(string textSearch)
+        {
+            var request = new ManageDoctor_ServicePagingRequest()
+            {
+                DoctorId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                ServiceId = 0,
+                ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId)),
+                TextSearch = textSearch,
+                PageIndex = 1,
+                PageSize = 20,
+                LanguageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId)),
+                OrderCol = "Id",
+                OrderDir = "desc"
+            };
+
+            var data = await _doctor_ServiceApiClient.GetUserFilterService(request);
+            return Ok(data);
+        }
     }
 }

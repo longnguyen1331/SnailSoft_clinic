@@ -20,13 +20,9 @@ namespace SnailApp.Application.Catalog.Services
     public interface IServiceService
     {
         Task<ApiResult<int>> CreateAsync(ServiceRequest request);
-
         Task<ApiResult<int>> UpdateAsync(ServiceRequest request);
-
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
-
         Task<ApiResult<ServiceDto>> GetById(ServiceRequest request);
-
         Task<PagedResult<ServiceDto>> GetManageListPaging(ManageServicePagingRequest request);
         Task<PagedResult<ServiceDto>> GetManageListFilterPaging(ManageServicePagingRequest request);
     }
@@ -347,6 +343,7 @@ namespace SnailApp.Application.Catalog.Services
                     Id = x.st.Id,
                     Code = x.st.Code,
                     Name = x.st.Name,
+                    Charges = x.st.Charges,
                     SortOrder = x.st.SortOrder,
                 }).AsNoTracking().ToListAsync();
 
@@ -372,5 +369,6 @@ namespace SnailApp.Application.Catalog.Services
                 };
             }
         }
+
     }
 }
