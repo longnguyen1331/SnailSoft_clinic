@@ -230,7 +230,7 @@ var Service = function () {
 							<img src="' + full.image + '" class="recent-product-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.name + '</p>\
-								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.serviceTypeName + '</p>\
+								<p class="designattion mb-0"><i class="bx bx-detail"></i> ' + full.serviceTypeName + '</p>\
 							</div>\
 						</div>';
                 }
@@ -252,12 +252,12 @@ var Service = function () {
 					                <i class="fadeIn animated bx bxs-edit"></i>\
 				                </a>';
 
-                        html += '<a href="#" class="ms-3 btn btn-outline-primary assign-user">\
+                        html += '<a href="#" class="ms-2 btn btn-outline-primary assign-user">\
 					                <i class="fadeIn animated bx bxs-user-plus"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
+                        html += '<a href="#" class="ms-2 delete btn btn-outline-danger">\
 					                <i class="fadeIn animated bx bxs-trash"></i>\
 				                </a>';
                     }
