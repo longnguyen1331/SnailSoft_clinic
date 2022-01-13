@@ -289,6 +289,7 @@ namespace SnailApp.Application.SystemApplication.Users
                         return new ApiErrorResult<string>("Email account is exits.");
                     }
                     user = new AppUser() { 
+                        Code = request.ClinicId.HasValue ? request.ClinicId.Value + "_"  + DateTime.Now.ToString("yyyyMMDDHHmmssfff")  : DateTime.Now.ToString("yyyyMMDDHHmmssfff"),
                         UserName = request.Email,
                         Email = request.Email,
                         CreatedDate = DateTime.Now,
@@ -701,6 +702,8 @@ namespace SnailApp.Application.SystemApplication.Users
                 return new ApiErrorResult<string>(ex.Message);
             }
         }
+
+
     }
 }
 
