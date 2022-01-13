@@ -14,6 +14,7 @@ namespace SnailApp.ApiIntegration
 {
     public interface IServiceApiClient
     {
+        Task<PagedResult<ServiceDto>> GetManageListFilterPaging(ManageServicePagingRequest request);
         Task<PagedResult<ServiceDto>> GetManageListPaging(ManageServicePagingRequest request);
         Task<ApiResult<int>> AddOrUpdateAsync(ServiceRequest request);
         Task<ApiResult<ServiceDto>> GetById(ServiceRequest request);
@@ -87,21 +88,30 @@ namespace SnailApp.ApiIntegration
             }
         }
 
-
         public async Task<PagedResult<ServiceDto>> GetManageListPaging(ManageServicePagingRequest request)
         {
             var data = await GetAsync<PagedResult<ServiceDto>>(
                 $"/api/services/GetManageListPaging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&ClinicId={request.ClinicId}" +
+                (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+            return data;
+        }
+        public async Task<PagedResult<ServiceDto>> GetManageListFilterPaging(ManageServicePagingRequest request)
+        {
+            var data = await GetAsync<PagedResult<ServiceDto>>(
+                $"/api/services/GetManageListFilterPaging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" + 
                 $"&ClinicId={request.ClinicId}" + 
                 (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}" ): "") +
                 (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
             return data;
         }
-     
+        
         public async Task<ApiResult<ServiceDto>> GetById(ServiceRequest request)
         {
-            var data = await GetAsync<ApiResult<ServiceDto>>($"/api/services/ServiceId?Id={request.Id}");
+            var data = await GetAsync<ApiResult<ServiceDto>>($"/api/services/serviceId?Id={request.Id}");
             return data;
         }
 

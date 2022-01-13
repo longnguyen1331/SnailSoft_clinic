@@ -12,6 +12,7 @@ namespace SnailApp.ApiIntegration
     {
         Task<PagedResult<Doctor_ServiceDto>> GetManageServiceByUserListPaging(ManageDoctor_ServicePagingRequest request);
         Task<PagedResult<Doctor_ServiceDto>> GetManageUserByServiceListPaging(ManageDoctor_ServicePagingRequest request);
+        Task<PagedResult<Doctor_ServiceDto>> GetUserFilterService(ManageDoctor_ServicePagingRequest request);
         Task<ApiResult<int>> AddOrUpdateAsync(Doctor_ServiceRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
     }
@@ -61,6 +62,19 @@ namespace SnailApp.ApiIntegration
         {
             var data = await GetAsync<PagedResult<Doctor_ServiceDto>>(
                 $"/api/doctor_services/GetManageUserByServiceListPaging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&ClinicId={request.ClinicId}" +
+                $"&DoctorId={request.DoctorId}" +
+                $"&ServiceId={request.ServiceId}" +
+                (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+            return data;
+        }
+
+        public async Task<PagedResult<Doctor_ServiceDto>> GetUserFilterService(ManageDoctor_ServicePagingRequest request)
+        {
+            var data = await GetAsync<PagedResult<Doctor_ServiceDto>>(
+                $"/api/doctor_services/GetUserFilterService?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" +
                 $"&ClinicId={request.ClinicId}" +
                 $"&DoctorId={request.DoctorId}" +

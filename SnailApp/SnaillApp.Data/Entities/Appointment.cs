@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SnailApp.ViewModels.Enums;
 
 namespace SnailApp.Data.Entities
@@ -10,5 +11,7 @@ namespace SnailApp.Data.Entities
         public Guid DoctorId { get; set; }
         public AppointmentStatus Status { set; get; }
         public int ClinicId { set; get; }
+        public virtual ICollection<Appointment_Service> Appointment_Services { set; get; }
+
     }
 }

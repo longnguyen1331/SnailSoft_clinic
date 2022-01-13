@@ -134,7 +134,13 @@ namespace SnailApp.AdminApp.Controllers
                 OrderDir = "desc"
             };
 
-            var data = await _serviceApiClient.GetManageListPaging(request);
+            var data = await _serviceApiClient.GetManageListFilterPaging(request);
+            return Ok(data);
+        }
+
+        public async Task<IActionResult> GetById(int id)
+        {
+            var data = await _serviceApiClient.GetById(new ServiceRequest { Id= id});
             return Ok(data);
         }
     }

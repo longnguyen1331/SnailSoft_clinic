@@ -122,12 +122,14 @@ namespace SnailApp.Application.SystemApplication.Users
             var userDto = new UserDto()
             {
                 Email = user.Email,
+                Code = user.Code,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
                 Dob = user.Dob != null ? user.Dob.Value.ToString("yyyy-MM-dd") : String.Empty,
                 Id = user.Id.ToString(),
                 LastName = user.LastName,
                 UserName = user.UserName,
+                Address = user.Address,
                 Avatar = (!string.IsNullOrEmpty(user.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + user.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
                 IsActive = user.IsActive,
             };

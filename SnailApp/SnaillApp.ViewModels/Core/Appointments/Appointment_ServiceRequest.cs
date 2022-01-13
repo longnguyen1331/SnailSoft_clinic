@@ -7,13 +7,14 @@ using SnailApp.ViewModels.Enums;
 
 namespace SnailApp.ViewModels.Catalog.Appointments
 {
-    public class AppointmentRequest : BaseRequest
+    public class Appointment_ServiceRequest 
     {
+        public string Description { set; get; }
         public string Date { set; get; }
-        public Guid PatientId { get; set; }
+        public decimal Charges { get; set; }
+        public int Quantity { get; set; }
+        public int ServiceId { get; set; }
         public Guid DoctorId { get; set; }
-        public int Status { set; get; }
-        public int ClinicId { set; get; }
-        public List<Appointment_ServiceRequest> Appointment_ServiceRequests { set; get; }   
     }
+
 }

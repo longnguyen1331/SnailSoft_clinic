@@ -29,6 +29,7 @@ namespace SnailApp.ApiIntegration
         Task<ApiResult<UserDto>> GetStaffSecurityByUserId(UserRequest request);
         Task<ApiResult<string>> DeleteAvatarByUserIdAsync(int userId);
         Task<ApiResult<int>> ChangePassword(ChangePasswordRequest rq);
+        Task<ApiResult<UserDto>> GetById(UserRequest request);
     }
     public class UserApiClient : BaseApiClient, IUserApiClient
     {
@@ -268,6 +269,11 @@ namespace SnailApp.ApiIntegration
         public async Task<ApiResult<UserDto>> GetStaffSecurityByUserId(UserRequest request)
         {
             return await GetAsync<ApiResult<UserDto>>($"/api/users/getstaffsecuritybyuserid?Id={request.Id}&LanguageId={ request.LanguageId}");
+        }
+
+        public async Task<ApiResult<UserDto>> GetById(UserRequest request)
+        {
+            return await GetAsync<ApiResult<UserDto>>($"/api/users/getbyid?Id={request.Id}");
         }
 
         public async Task<ApiResult<int>> ChangePassword(ChangePasswordRequest request)
