@@ -48,10 +48,10 @@ function initialDatatableOption(){
         },
         "layout": {
             "theme": 'default', // datatable theme
-            "class": '', // custom wrapper class
+            "class": 'nowrap', // custom wrapper class
             "scroll": false, // enable/disable datatable scroll both horizontal and vertical when needed.
-				// height: 450, // datatable's body's fixed height
-            "footer": false // display/hide footer
+			"height": '450', // datatable's body's fixed height
+            "footer": true // display/hide footer
 			},
     };
 }

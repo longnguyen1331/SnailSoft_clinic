@@ -252,8 +252,8 @@ var Service = function () {
 					                <i class="fadeIn animated bx bxs-edit"></i>\
 				                </a>';
 
-                        html += '<a href="#" class="ms-3 assign-user">\
-					                <i class="bx bxs-user-plus"></i>\
+                        html += '<a href="#" class="ms-3 btn btn-outline-primary assign-user">\
+					                <i class="fadeIn animated bx bxs-user-plus"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
