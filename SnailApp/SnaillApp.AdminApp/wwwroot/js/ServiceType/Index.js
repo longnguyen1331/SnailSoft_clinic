@@ -246,7 +246,7 @@ var ServiceType = function () {
                 $('input[data-field="SortOrder"]').val(editingData.sortOrder);
                 $('input[data-field="IsVisibled"]').prop('checked', editingData.isVisibled);
                 $('#avatarImage').attr('src', editingData.image);
-                if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+                if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
 

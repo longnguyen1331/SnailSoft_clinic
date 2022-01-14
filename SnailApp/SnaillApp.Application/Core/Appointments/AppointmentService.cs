@@ -16,19 +16,17 @@ using Microsoft.AspNetCore.Http;
 using SnailApp.Application.Common;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using SnailApp.ViewModels.Enums;
 
 namespace SnailApp.Application.Catalog.Appointments
 {
     public interface IAppointmentService
     {
         Task<ApiResult<int>> CreateAsync(AppointmentRequest request);
-
+        Task<ApiResult<int>> ChangeStatus(AppointmentRequest request);
         Task<ApiResult<int>> UpdateAsync(AppointmentRequest request);
-
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
-
         Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request);
-
         Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request);
     }
 
@@ -58,7 +56,7 @@ namespace SnailApp.Application.Catalog.Appointments
                 var appointment = _mapper.Map<Appointment>(request);
 
                 DateTime datetim1;
-                if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
+                if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd HH:mm", null, DateTimeStyles.None, out datetim1))
                 {
                     appointment.Date = datetim1;
                 }
@@ -78,7 +76,7 @@ namespace SnailApp.Application.Catalog.Appointments
                     for(int i=0; i< appointment_services.Count; i++)
                     {
                         DateTime date;
-                        if (DateTime.TryParseExact(request.Appointment_ServiceRequests[i].Date, "yyyy-MM-dd", null, DateTimeStyles.None, out date))
+                        if (DateTime.TryParseExact(request.Appointment_ServiceRequests[i].Date, "yyyy-MM-dd HH:mm", null, DateTimeStyles.None, out date))
                         {
                             appointment_services[i].Date = date;
                         }
@@ -111,7 +109,7 @@ namespace SnailApp.Application.Catalog.Appointments
             {
                 var check = await _context.Appointments.Where(x=>x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
 
-                if (check == null ) throw new EShopException($"Cannot find a product with id: {request.Id}");
+                if (check == null ) throw new EShopException($"Cannot find a appointment with id: {request.Id}");
 
                 var appointment = _mapper.Map<Appointment>(request);
 
@@ -131,6 +129,27 @@ namespace SnailApp.Application.Catalog.Appointments
                 await _context.SaveChangesAsync();
                 return new ApiSuccessResult<int>(appointment.Id);
 
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<ApiResult<int>> ChangeStatus(AppointmentRequest request)
+        {
+            try
+            {
+                var appointment = await _context.Appointments.Where(x => x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
+                if (appointment == null) throw new EShopException($"Cannot find a appointment with id: {request.Id}");
+                appointment.Status = (AppointmentStatus)request.Status;
+                _context.Appointments.Update(appointment);
+                await _context.SaveChangesAsync();
+                return new ApiSuccessResult<int>(appointment.Id);
             }
             catch (Exception ex)
             {
@@ -181,9 +200,13 @@ namespace SnailApp.Application.Catalog.Appointments
                     tDate = firstDayOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59);
                 }
 
-
                 //1. Select join
-                var query = (from a in _context.Appointments where  fDate <= a.Date && a.Date <= tDate select new {a}).AsNoTracking();
+
+                var query = (from a in _context.Appointments
+                         where fDate <= a.Date && a.Date <= tDate
+                         && (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status  : a.Status >= 0)
+                         select new { a }
+                            ).AsNoTracking();
 
                 //2. filter
                 if (!string.IsNullOrEmpty(request.TextSearch))
@@ -261,8 +284,36 @@ namespace SnailApp.Application.Catalog.Appointments
         }
         public async Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request)
         {
-            var appointment = await _context.Appointments.FindAsync(request.Id);
-            var appointmentDto = _mapper.Map<AppointmentDto>(appointment);
+            var appointment = await (from a in _context.Appointments
+                                     join doctor in _context.AppUsers on a.DoctorId equals doctor.Id
+                                     join patient in _context.AppUsers on a.PatientId equals patient.Id
+                                     where a.Id == request.Id select new { a , doctor, patient}
+                                     ).AsNoTracking().FirstOrDefaultAsync();
+
+            var appointmentDto = _mapper.Map<AppointmentDto>(appointment.a);
+            appointmentDto.DoctorFullName = appointment.doctor.FirstName + " " + appointment.doctor.LastName;   
+            appointmentDto.PatientFullName = appointment.patient.FirstName + " " + appointment.patient.LastName;
+            appointmentDto.PatientAvatar = (!string.IsNullOrEmpty(appointment.patient.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + appointment.patient.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]);
+            appointmentDto.PatientAddress = appointment.patient.Address;
+            appointmentDto.PatientEmail = appointment.patient.Email;
+            appointmentDto.PatientPhone = appointment.patient.PhoneNumber;
+            appointmentDto.PatientCode = appointment.patient.Code;
+
+            var appointmentService = await _context.Appointment_Services.Where(x => x.AppointmentId == request.Id).AsNoTracking().ToListAsync();
+            if (appointmentService != null && appointmentService.Count > 0)
+            {
+                appointmentDto.Appointment_Services = new List<Appointment_ServiceDto>();
+                foreach(var item in appointmentService)
+                {
+                    var serviceDto = _mapper.Map<Appointment_ServiceDto>(item);
+                    var service = await _context.Services.FindAsync(item.ServiceId);
+                    var doctor = await _context.AppUsers.FindAsync(item.DoctorId);
+                    serviceDto.DoctorFullName = doctor.FirstName + " " + doctor.LastName;
+                    serviceDto.ServiceName = service.Name;
+                    appointmentDto.Appointment_Services.Add(serviceDto);
+                }
+            }
+
             return new ApiSuccessResult<AppointmentDto>(appointmentDto);
         }
 

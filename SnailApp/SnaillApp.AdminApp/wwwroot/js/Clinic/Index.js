@@ -409,7 +409,7 @@ var Clinic = function () {
 
                 $('#CreateInfomation').show();
                 $('#CreateRoleToUser').hide();
-                if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+                if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
 

@@ -15,6 +15,14 @@ namespace SnailApp.ViewModels.Enums
         MembershipCard = 4
     }
 
+    public enum PaymentStatus
+    {
+        Unpaid = 0,
+        Paid = 1,
+        Debit = 2
+    }
+
+
     public enum AppointmentStatus
     {
         Cancel = 0,

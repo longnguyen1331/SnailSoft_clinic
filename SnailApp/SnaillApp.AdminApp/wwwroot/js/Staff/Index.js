@@ -295,7 +295,7 @@ var Staff = function () {
                         intiEventRemoveRole(item.code);
                     }
                 })
-                if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+                if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
 

@@ -219,7 +219,7 @@ var District = function () {
                     }
                 }
             });
-            if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+            if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
         });
 
      

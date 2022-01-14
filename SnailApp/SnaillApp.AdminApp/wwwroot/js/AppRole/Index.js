@@ -257,7 +257,7 @@ var AppRole = function () {
             });
             $('#CreateInfomation').show();
             $('#RoleAssign').hide();
-            if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+            if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
         });
 
      

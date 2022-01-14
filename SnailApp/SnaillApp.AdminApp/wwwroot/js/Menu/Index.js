@@ -206,7 +206,7 @@ var Menu = function () {
 
                 $('#ParentId').append('<option value="' + (editingDataRow.parentId != null ? editingDataRow.parentId : -1) + '" selected>' + (editingDataRow.parentName != null ? editingDataRow.parentName : "Not selected") +'</option>');
                 
-                if (!$('.switcher-wrapper').hasClass('.switcher-toggled')) $('.switcher-btn').trigger('click');
+                if (!$('.switcher-wrapper').hasClass('switcher-toggled')) $('.switcher-btn').trigger('click');
             }
         });
 

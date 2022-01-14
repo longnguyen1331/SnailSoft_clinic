@@ -42,8 +42,22 @@ namespace SnailApp.Data.EF
             .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
             .ReverseMap();
 
-            CreateMap<Appointment, AppointmentRequest>().ReverseMap();
-            CreateMap<Appointment_Service, Appointment_ServiceRequest>().ReverseMap();
+            CreateMap<Appointment, AppointmentRequest>()
+                .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
+                .ReverseMap();
+            CreateMap<Appointment_Service, Appointment_ServiceRequest>()
+                .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
+                .ReverseMap();
+
+          CreateMap<Appointment_Service, Appointment_ServiceDto>()
+          .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
+          .ReverseMap();
+
+
+            CreateMap<AppointmentPayment, AppointmentPaymentRequest>()
+              .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd HH:mm")))
+              .ReverseMap();
+
         }
     }
 }

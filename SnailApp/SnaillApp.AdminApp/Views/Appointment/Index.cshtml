@@ -6,6 +6,9 @@
 	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
 	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/fullcalendar/css/main.min.css")" type="text/css">
 	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/smart-wizard/css/smart_wizard_all.min.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css")" type="text/css">
+ 
 }
 @section Custom_CSS{
 <link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
@@ -16,10 +19,15 @@
 	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
 	<script src="@Url.Content("~/snailsoft/assets/plugins/fullcalendar/js/main.min.js")"></script>
 	<script src="@Url.Content("~/snailsoft/assets/plugins/smart-wizard/js/jquery.smartWizard.min.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js")"></script>
+	<script src="@Url.Content("~/plugins/autoNumeric/autoNumeric.js")"></script>
+
 }
 
 @section Custom_Scripts{
-<script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/customiseAutoNumeric.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/Appointment/Index.js")"></script>
 }
 
@@ -32,7 +40,8 @@
             isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
         }
     };
-
+    var checkinStaus = '@((int)AppointmentStatus.Checkin)';
+    var checkoutStaus = '@((int)AppointmentStatus.Checkout)';
 
     $(document).ready(function () {
         Appointment.init();
@@ -115,16 +124,17 @@
                                                  </select>
 						                    </div>
 					                    </div>
-                                        <div class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret">
-                                            <img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" id="avatarImage" class="rounded-circle p-1 bg-primary" alt="">
-
-                                            <div class="user-info ps-3">
-								                <h5><i class="bx bxs-user"></i> <span data-name="patientFullName"></span></h5>
-								                <span class="text-secondary mb-1"><i class="fadeIn animated bx bx-barcode-reader"></i> <span data-name="patientCode"></span></span><br />
-								                <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-phone-call"></i> <span data-name="patientPhoneNumber"></span></span><br />
-								                <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-envelope-open"></i> <span data-name="patientEmail"></span></span><br />
-								                <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-been-here"></i> <span data-name="patientAddress"></span></span><br />
-							                </div>
+                                        <div  id="PatientInfomation">
+                                            <div class=" d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret">
+                                                <img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" id="avatarImage" class="rounded-circle p-1 bg-primary" alt="">
+                                                <div class="user-info ps-3">
+								                    <h5><i class="bx bxs-user"></i> <span data-name="patientFullName"></span></h5>
+								                    <span class="text-secondary mb-1"><i class="fadeIn animated bx bx-barcode-reader"></i> <span data-name="patientCode"></span></span><br />
+								                    <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-phone-call"></i> <span data-name="patientPhoneNumber"></span></span><br />
+								                    <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-envelope-open"></i> <span data-name="patientEmail"></span></span><br />
+								                    <span class="text-muted font-size-sm"><i class="fadeIn animated bx bx-been-here"></i> <span data-name="patientAddress"></span></span><br />
+							                    </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                            <div class="card-body mx-0 px-0 px-0 py-2">
@@ -134,11 +144,21 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                           <div class="card-body mx-0 px-0 px-0 py-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-time"></i></span>
+                                                    <input class="result form-control form-control-sm timepicker" type="text" id="timeCreated" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6">
                                             <div class="card-body mx-0 px-0 px-0 py-2">
                                                 <div class="input-group">
                                                 <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
-                                                    <select  data-control="select2" data-field="Status" class="form-select form-select-solid  radius-15 single-select">
+                                                    <select disabled  data-control="select2" data-field="Status" class="form-select form-select-solid  radius-15 single-select">
 						                                <option value="@((int)AppointmentStatus.Cancel)">Cancel</option>
 						                                <option value="@((int)AppointmentStatus.Booking)" selected>Booking</option>
 						                                <option value="@((int)AppointmentStatus.Approve)">Approve</option>
@@ -163,7 +183,7 @@
                                             <div class="card-body mx-0 px-0 px-0 py-2">
                                                 <div class="input-group">
                                                     <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-book"></i></span>
-                                                    <textarea type="text"  class="form-control form-control-sm" data-field="Description" rows="3" placeholder="Enter Note..."></textarea>
+                                                    <textarea class="form-control form-control-sm" data-field="Description" rows="3" placeholder="Enter Note..."></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -192,8 +212,6 @@
                         </div>
                         <div id="step-3" class="tab-pane" role="tabpanel">
                             <div class="row row-cols-auto g-3 px-1">
-
-
                                 <div class="table-responsive col-md-12">
 							        <table class="table mb-0">
 								        <thead class="table-light">
@@ -209,15 +227,107 @@
 								        </tbody>
 							        </table>
 						        </div>
+                            </div>
 
-                                <div class="col-md-6">
-                                    <div class="mb-3 px-1">
-                                        <button type="button" class="btn btn-danger px-5 radius-15 w-100" name="btnCancel">Cancel</button>
+                            <form id="payment_form" class="tableCheckout">
+                                <div class="row g-1">
+                                    <div class="table-responsive col-md-12">
+							            <table class="table mb-0">
+                                                <thead class="table-light">
+									            <tr>
+										            <th style="width: 40%; white-space: normal;"></th>
+										            <th style="width: 20%;"></th>
+										            <th style="width: 20%;"></th>
+										            <th style="width: 20%;"></th>
+									            </tr>
+								            </thead>
+								            <tbody>
+                                                <tr>
+										            <td colspan="2">Total</td>
+										            <td colspan="2">
+                                                        <input disabled class="result vnd form-control form-control-sm" type="text" data-field="Total" >
+                                                    </td>
+									            </tr>
+									            <tr>
+										            <td colspan="2">Discount</td>
+										            <td colspan="2">
+                                                        <input class="result form-control vnd form-control-sm" type="number" data-field="Discount" value="0" min="0">
+                                                    </td>
+									            </tr>
+                                                <tr>
+										            <td colspan="2">AmountDue</td>
+										            <td colspan="2">
+                                                        <input disabled class="result vnd form-control form-control-sm" type="text" data-field="AmountDue">
+                                                    </td>
+									            </tr>
+								            </tbody>
+							            </table>
+						            </div>
+                                
+                                    <div class="col-md-6">
+                                        <div class="card-body mx-0 px-0 px-0 py-2">
+                                            <div class="input-group">
+                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
+                                                <select   data-control="select2" data-field="PaymentMethod" class="form-select form-select-solid  radius-15 single-select">
+						                            <option value="@((int)PaymentMethod.Cash)">Cash</option>
+						                            <option value="@((int)PaymentMethod.Bank)">Bank</option>
+						                            <option value="@((int)PaymentMethod.Transfer)">Transfer</option>
+						                            <option value="@((int)PaymentMethod.Debit)">Debit</option>
+						                            <option value="@((int)PaymentMethod.MembershipCard)">MembershipCard</option>
+					                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card-body mx-0 px-0 px-0 py-2">
+                                            <div class="input-group">
+                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
+                                                <select   data-control="select2" data-field="Status" class="form-select form-select-solid  radius-15 single-select">
+						                            <option value="@((int)PaymentStatus.Unpaid)">Unpaid</option>
+						                            <option value="@((int)PaymentStatus.Paid)">Paid</option>
+						                            <option value="@((int)PaymentStatus.Debit)">Debit</option>
+					                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card-body mx-0 px-0 px-0 py-2">
+                                            <div class="input-group">
+                                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-calendar-check"></i></span>
+                                                <input class="result form-control form-control-sm" type="date" data-field="Date" placeholder="Enter date" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="card-body mx-0 px-0 px-0 py-2">
+                                            <div class="input-group">
+                                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-book"></i></span>
+                                                <textarea class="form-control form-control-sm" data-field="Description" rows="3" placeholder="Enter Note..."></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                            </form>
+
+                            <div class="row row-cols-auto g-3 px-1">
+                                <div class="col-md-12">
                                     <div class="mb-3 px-1">
-                                        <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Update</button>
+                                        <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Save</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="mb-3 px-1">
+                                        <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnCheckout">Checkout</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="mb-3 px-1">
+                                        <button type="button" class="btn btn-danger px-5 radius-15 w-100" name="btnCheckin">Checkin</button>
                                     </div>
                                 </div>
                             </div>

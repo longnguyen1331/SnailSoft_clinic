@@ -31,7 +31,7 @@ namespace SnailApp.BackendApi.Controllers
         }
 
         [HttpGet("appointmentId")]
-        public async Task<IActionResult> GetById(AppointmentRequest request)
+        public async Task<IActionResult> GetById([FromQuery] AppointmentRequest request)
         {
             var appointment = await _appointmentService.GetById(request);
             if (appointment.IsSuccessed)
@@ -72,6 +72,29 @@ namespace SnailApp.BackendApi.Controllers
             return Ok(res);
         }
 
+        [HttpPost("changeStatus")]
+        public async Task<IActionResult> ChangeStatus([FromBody] AppointmentRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApiResult<int> res = null;
+            if (request.Id > 0)
+            {
+                res = await _appointmentService.ChangeStatus(request);
+            }
+
+            if (res.IsSuccessed)
+            {
+                if (res.ResultObj == 0)
+                    return BadRequest();
+            }
+
+            return Ok(res);
+
+        }
 
         [HttpDelete("{ids}")]
         public async Task<IActionResult> DeleteByIds(string ids)

@@ -11,6 +11,7 @@ namespace SnailApp.ApiIntegration
     public interface IAppointmentApiClient
     {
         Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request);
+        Task<ApiResult<int>> ChangeStatus(AppointmentRequest request);
         Task<ApiResult<int>> AddOrUpdateAsync(AppointmentRequest request);
         Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
@@ -44,6 +45,17 @@ namespace SnailApp.ApiIntegration
             }
         }
 
+        public async Task<ApiResult<int>> ChangeStatus(AppointmentRequest request)
+        {
+            try
+            {
+                return await BaseAddOrUpdateAsync($"/api/appointments/changeStatus", request);
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<int>() { IsSuccessed = false, Message = ex.Message };
+            }
+        }
         public async Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request)
         {
             var data = await GetAsync<PagedResult<AppointmentDto>>(
@@ -52,6 +64,7 @@ namespace SnailApp.ApiIntegration
                 $"&ClinicId={request.ClinicId}" +
                 $"&ToDate={request.ToDate}" +
                 $"&FromDate={request.FromDate}" +
+                $"&Status={request.Status}" +
                 (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}" ): "") +
                 (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
             return data;
@@ -59,7 +72,7 @@ namespace SnailApp.ApiIntegration
      
         public async Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request)
         {
-            var data = await GetAsync<ApiResult<AppointmentDto>>($"/api/appointments/AppointmentId?Id={request.Id}");
+            var data = await GetAsync<ApiResult<AppointmentDto>>($"/api/appointments/appointmentId?Id={request.Id}");
             return data;
         }
 

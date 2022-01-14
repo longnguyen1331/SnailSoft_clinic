@@ -15,6 +15,7 @@ namespace SnailApp.Data.Entities
         public decimal Discount { set; get; }
         public decimal AmountDue { set; get; }
         public int PaymentMethodId { get; set; }
+        public DateTime Date { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
         public string PaymentMethodNote { set; get; }
         public int Status { set; get; }

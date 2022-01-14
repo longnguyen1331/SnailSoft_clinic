@@ -11,17 +11,25 @@ using SnailApp.Utilities.Session;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
 using SnailApp.ViewModels.Catalog.Appointments;
+using Microsoft.Extensions.Configuration;
 
 namespace SnailApp.AdminApp.Controllers
 {
     public class AppointmentController : BaseController
     {
         private readonly IAppointmentApiClient _appointmentApiClient;
+        private readonly IAppointmentPaymentApiClient _appointmentPaymentApiClient;
         private readonly IMenuApiClient _menuApiClient;
-        public AppointmentController(IAppointmentApiClient appointmentApiClient, IMenuApiClient menuApiClient)
+        private readonly IConfiguration _configuration;
+        public AppointmentController(IAppointmentApiClient appointmentApiClient,
+            IMenuApiClient menuApiClient,
+            IAppointmentPaymentApiClient appointmentPaymentApiClient,
+                                    IConfiguration configuration)
         {
             _appointmentApiClient = appointmentApiClient;
             _menuApiClient = menuApiClient;
+            _appointmentPaymentApiClient = appointmentPaymentApiClient;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -36,11 +44,12 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DataTableGetList([FromQuery] string fDate, string tDate)
+        public async Task<IActionResult> DataTableGetList([FromQuery] int status, string fDate, string tDate)
         {
 
             var request = new ManageAppointmentPagingRequest()
             {
+                Status = status,
                 FromDate = fDate,
                 ToDate = tDate,  
                 ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId)),
@@ -57,8 +66,6 @@ namespace SnailApp.AdminApp.Controllers
                 data = appointmentApiClient.Items
             });
         }
-
-
 
         [HttpDelete]
         public async Task<IActionResult> DeleteByIds([FromBody] DeleteRequest request)
@@ -104,6 +111,30 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(result);
         }
 
+        public async Task<IActionResult> UpdateStatusCheckin([FromBody] AppointmentRequest rq)
+        {
+            ApiResult<int> result = null;
+            Guid userGuid = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
+
+            if (rq != null)
+            {
+                rq.ModifiedDate = DateTime.Now;
+                rq.ModifiedUserId = userGuid;
+                rq.Status = (int)ViewModels.Enums.AppointmentStatus.Checkin;
+                result = await _appointmentApiClient.ChangeStatus(rq);
+            }
+            else
+            {
+                result = new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = "Not found"
+                };
+            }
+
+            return Ok(result);
+        }
+
         public async Task<IActionResult> Filter(string textSearch)
         {
             int languageId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId));
@@ -122,5 +153,39 @@ namespace SnailApp.AdminApp.Controllers
             var appUserStatusApiClient = await _appointmentApiClient.GetManageListPaging(request);
             return Ok(appUserStatusApiClient);
         }
+
+        public async Task<IActionResult> GetById(int id)
+        {
+            var appUserStatusApiClient = await _appointmentApiClient.GetById(new AppointmentRequest() { Id = id});
+            appUserStatusApiClient.ResultObj.PatientAvatar = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + appUserStatusApiClient.ResultObj.PatientAvatar;
+            return Ok(appUserStatusApiClient);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SavePayment([FromBody] AppointmentPaymentRequest rq)
+        {
+            ApiResult<int> result = null;
+
+            Guid userGuid = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
+
+            if (rq != null)
+            {
+                rq.CreatedUserId = userGuid;
+                rq.ModifiedUserId = userGuid;
+                result = await _appointmentPaymentApiClient.AddOrUpdateAsync(rq);
+            }
+            else
+            {
+                result = new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = "Not found"
+                };
+            }
+
+            return Ok(result);
+        }
+
     }
 }
