@@ -197,8 +197,6 @@ var Appointment = function () {
 
         $('#service-form-service').change(function (e) {
             e.preventDefault();
-            console.log(checkExistServices($(this).val()));
-
             if (!checkExistServices($(this).val())) {
                 App.sendDataToURL("/Service/GetById?id=" + $(this).val(), null, "GET", true, 'body')
                 .then(function (res) {
@@ -242,6 +240,37 @@ var Appointment = function () {
                 $('.tableCheckout tbody input[data-field="Total"]').autoNumeric('set', total);
                 $('.tableCheckout tbody input[data-field="AmountDue"]').autoNumeric('set', total);
                 $('#reviewService').append(html);
+            }
+        });
+
+        $('#smartwizard').on("leaveStep", function (e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
+            if (nextStepIndex == 'forward') {
+
+                switch (currentStepIndex) {
+                    case 0:
+                        if (checkDataUpdate()) return true; else return false;
+                        break;
+
+                    case 1:
+
+                        $.each($('.accordion-item'), function (index, item) {
+                            listDoctor_Service.push({
+                                Description: $(item).find('textarea[data-field="Description"]').val(),
+                                Date: $(item).find('input[data-field="Date"]').val() + " " + $(item).find('input[data-field="Time"]').val(),
+                                Charges: $(item).find('input[data-field="Charges"]').val(),
+                                Quantity: $(item).find('input[data-field="Quantity"]').val(),
+                                ServiceId: $(item).data('id'),
+                                DoctorId: $(item).find('select[data-field="DoctorId"]').val(),
+                            });
+                        });
+
+                        if (checkDataServiceUpdate()) return true; else return false;
+                        break;
+
+                    default:
+                        return false
+                        break;
+                }
             }
         });
 
@@ -294,6 +323,10 @@ var Appointment = function () {
     };
 
     function createAccordionService(id, name, charge) {
+
+        let date = edit_form.find('input[data-field="Date"]').val();
+        let time = $('#timeCreated').val();
+
         return '<div class="accordion-item itemService_' + id + '" data-id="' + id +'" data-name="'+name+'" >\
 					<h2 class="accordion-header" id="heading'+ id+'">\
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+ id + '" aria-expanded="false" aria-controls="collapse' + id +'"> '+name+'\
@@ -314,7 +347,7 @@ var Appointment = function () {
                                     <div class="card-body mx-0 px-0 px-0 py-2">\
                                         <div class="input-group">\
                                             <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-calendar-check"></i></span>\
-                                            <input data-field="Date" class="result form-control form-control-sm" type="date"  placeholder="Enter date">\
+                                            <input data-field="Date" class="result form-control form-control-sm" type="date" value="'+ date +'">\
                                         </div>\
                                     </div>\
                                 </div>\
@@ -322,7 +355,7 @@ var Appointment = function () {
                                     <div class="card-body mx-0 px-0 px-0 py-2">\
                                         <div class="input-group">\
                                             <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-time"></i></span>\
-                                            <input  data-field="Time" class="result form-control form-control-sm timepicker timeService_'+id+'" type="text">\
+                                            <input  data-field="Time" class="result form-control form-control-sm timepicker timeService_'+id+'" value="'+time+'" type="text">\
                                         </div>\
                                     </div>\
                                 </div>\
@@ -418,6 +451,36 @@ var Appointment = function () {
     }
 
     function checkDataUpdate() {
+        let check = true;
+        edit_form.find("select, input").each((index, el) => {
+            let fieldName = $(el).data("field");
+            if (fieldName) {
+                switch (fieldName) {
+                    case "Date":
+                        if ($(el).val() == '' || $(el).val() == '-1') {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter " + fieldName);
+                            check =  false;
+                        }
+                        break;
+
+                    case "DoctorId":
+                    case "PatientId":
+                        if (isNullOrEmpty($(el).val()) || $(el).val() == '-1') {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter " + fieldName);
+                            check =  false;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+        return check;
+    }
+
+    function checkDataServiceUpdate() {
 
         if (listDoctor_Service.length == 0) {
             App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Choose Service");
@@ -426,36 +489,8 @@ var Appointment = function () {
             App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Choose Doctor and Date in each service");
             return false;
         }
-
-        edit_form.find("select, input").each((index, el) => {
-            let fieldName = $(el).data("field");
-            if (fieldName) {
-                switch (fieldName) {
-                    case "Date":
-                        if ($(el).val() == '' || $(el).val() == '-1') {
-                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter " + fieldName);
-                            return false;
-                        }
-                        break;
-
-                    case "DoctorId":
-                    case "PatientId":
-                        if (isNullOrEmpty($(el).val()) || $(el).val() == '-1') {
-                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter " + fieldName);
-                            return false;
-                        }
-                        break;
-
-
-                    default:
-                        break;
-                }
-            }
-        });
-
         return true;
     }
-
 
     function checkDataUpdatePayment() {
 
@@ -489,8 +524,6 @@ var Appointment = function () {
         return true;
     }
 
-    
- 
     let resetForm = () => {
         showHIdeButton(-1);
         editingData = null;
@@ -591,7 +624,14 @@ var Appointment = function () {
                             initAllEvent(item.serviceId);
                         });
 
-                        payment_form.find('input[data-field="Discount"]').val(0);
+                        payment_form.find('input[data-field="Discount"]').val(res.resultObj.appointmentPayment.discount);
+                        payment_form.find('input[data-field="AmountDue"]').val(res.resultObj.appointmentPayment.amountDue);
+                        payment_form.find('select[data-field="PaymentMethod"]').val(res.resultObj.appointmentPayment.paymentMethod).trigger('change');
+                        payment_form.find('select[data-field="Status"]').val(res.resultObj.appointmentPayment.status).trigger('change');
+                        payment_form.find('input[data-field="Date"]').val(res.resultObj.appointmentPayment.date);
+                        payment_form.find('textarea[data-field="Description"]').text(res.resultObj.appointmentPayment.description);
+
+
                     }
                 );
             },
@@ -608,6 +648,8 @@ var Appointment = function () {
 
                             events.push({
                                 id: item.id,
+                                time: item.date,
+                                status: item.status,
                                 title: item.name,
                                 start: item.date
                             });
@@ -615,27 +657,60 @@ var Appointment = function () {
 
                         if (events != null && events != undefined) successCallback(events);
                     })
+            },
+            eventContent: function (arg) {
+                let italicEl = document.createElement('div')
+                let status = arg.event._def.extendedProps.status;
+                let date = arg.event._def.extendedProps.time.substring(11,16);
+                switch (status) {
+                    case 0:
+                        italicEl.innerHTML = '<span class="mb-0 text-danger"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                    case 1:
+                        italicEl.innerHTML = '<span class="mb-0 text-info"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                    case 2:
+                        italicEl.innerHTML = '<span class="mb-0 text-warning"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                    case 3:
+                        italicEl.innerHTML = '<span class="mb-0 text-warning"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                    case 4:
+                        italicEl.innerHTML = '<span class="mb-0"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                    case 5:
+                        italicEl.innerHTML = '<span class="mb-0 text-primary"> ' + date + " " + arg.event._def.title + '</span>';
+                        break;
+                }
+                
+
+                let arrayOfDomNodes = [italicEl]
+                return { domNodes: arrayOfDomNodes }
             }
+
         });
         return calendar;
     }
 
     let showHIdeButton = (status) => {
-        if (status == checkinStaus) {
+        if (status == parseInt(checkinStaus)) {
             $('.tableCheckout').show();
             $('button[name="btnCheckout"]').show();
             $('button[name="btnCheckin"]').hide();
             $('button[name="btnUpdate"]').hide();
-        } else if (status == checkoutStaus) {
-
-            $('button[name="btnCheckout"]').hide();
+        } else if (status == parseInt(checkoutStaus)) {
             $('.tableCheckout').hide();
+            $('button[name="btnCheckout"]').hide();
             $('button[name="btnCheckin"]').hide();
             $('button[name="btnUpdate"]').hide();
-        } else {
-
-            $('button[name="btnCheckout"]').hide();
+        } else if (status == parseInt(bookingStaus)){
             $('.tableCheckout').hide();
+            $('button[name="btnCheckout"]').hide();
+            $('button[name="btnCheckin"]').show();
+            $('button[name="btnUpdate"]').hide();
+        } else  {
+            $('.tableCheckout').hide();
+            $('button[name="btnCheckout"]').hide();
             $('button[name="btnCheckin"]').hide();
             $('button[name="btnUpdate"]').show();
         }
@@ -703,6 +778,7 @@ var Appointment = function () {
 
     function checkNullListServices() {
         return listDoctor_Service.some(function (el) {
+            console.log(el);
             return el.DoctorId === null || el.Date =='';
         });
     }

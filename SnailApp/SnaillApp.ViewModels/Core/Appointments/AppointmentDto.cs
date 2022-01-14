@@ -21,6 +21,7 @@ namespace SnailApp.ViewModels.Catalog.Appointments
         public AppointmentStatus Status { set; get; }
         public int ClinicId { set; get; }
         public List<Appointment_ServiceDto> Appointment_Services { set; get; }   
+        public AppointmentPaymentDto AppointmentPayments { set; get; }
     }
     
 }

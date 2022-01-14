@@ -314,6 +314,16 @@ namespace SnailApp.Application.Catalog.Appointments
                 }
             }
 
+
+            var appointmentPayment = await _context.AppointmentPayments.Where(x => x.AppointmentId == request.Id).AsNoTracking().FirstOrDefaultAsync();
+
+            if (appointmentPayment != null)
+            {
+                var payment = _mapper.Map<AppointmentPaymentDto>(appointmentPayment);
+
+                appointmentDto.AppointmentPayments = payment;
+            }
+
             return new ApiSuccessResult<AppointmentDto>(appointmentDto);
         }
 

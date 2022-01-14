@@ -12,6 +12,7 @@ namespace SnailApp.Data.Entities
         public AppointmentStatus Status { set; get; }
         public int ClinicId { set; get; }
         public virtual ICollection<Appointment_Service> Appointment_Services { set; get; }
+        public virtual ICollection<AppointmentPayment> AppointmentPayments { set; get; }
 
     }
 }
