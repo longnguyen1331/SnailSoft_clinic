@@ -87,11 +87,7 @@
                         <option value="@((int)AppointmentStatus.Examined)">Examined</option>
                         <option value="@((int)AppointmentStatus.Checkout)">Checkout</option>
                     </select>
-
-
                 </div>
-
-
             </div>
             @if (Model.CurrentUserRole.IsAllowEdit)
             {
@@ -113,23 +109,29 @@
     <div class="switcher-btn" hidden>
         <i class="bx bx-cog bx-spin"></i>
     </div>
-    <div>
-        <div class="d-flex align-items-center white mb-2 mx-0 radius-10 bg-primary py-2 px-1">
-            <h4 class="mb-0"><i class="bx bx-user-circle"></i> </h4><h6 class="mb-1 text-uppercase" id="titleCreateOrUpdate">Create Appointment</h6>
+    <div class="switcher-body snail-bg-blue">
+       
+         <div class="card-title d-flex align-items-center">
+            <h5 class="mb-0 text-uppercase"><i class="bx bx-book-add"></i> Create Appointment</h5>
             <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
         </div>
-
+        <hr>
         <div id="CreateInfomation">
             <div id="smartwizard">
                 <ul class="nav">
                     <li>
                         <a class="nav-link" href="#step-1">
-                            Infomation
+                            <strong>INFORMATION</strong>
+                            <br>
+                            thông tin
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="#step-2">
-                            Choose service
+                            
+                             <strong>SERVICES</strong>
+                            <br>
+                            thông tin
                         </a>
                     </li>
                     <li>
