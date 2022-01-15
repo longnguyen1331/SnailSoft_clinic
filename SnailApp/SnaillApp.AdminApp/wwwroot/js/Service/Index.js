@@ -307,6 +307,10 @@ var Service = function () {
                 $('.switcher-btn').trigger('click');
             }
         });
+
+        App.initSelect2Base($('#ServiceType'), '/ServiceType/Filter', { selectedFields: ["id", "name"] });
+
+
         $('#edit_form_userIds').select2(
             {
                 ajax: {

@@ -4,6 +4,10 @@ var ExaminationsResult = function () {
     let dtTable = null,editingData = null;
 
     let initialComponents = () => {
+        $('#inputFromDate').val(new Date().toISOString().slice(0, 8) + '01');
+        $('#inputToDate').val(new Date().toISOString().slice(0, 10));
+
+
 
         $('#dtTableSearch').on('keyup', function (e) {
             e.preventDefault();
@@ -12,11 +16,17 @@ var ExaminationsResult = function () {
             }
         });
 
-
         $('#btnRefreshData').click(function (e) {
             e.preventDefault();
             dtTable.draw();
         });
+
+
+        $('#FilterStatus, #inputFromDate, #inputToDate').change(function (e) {
+            e.preventDefault();
+            dtTable.draw();
+        });
+
 
         $('#btnDelete').click(function (e) {
             e.preventDefault();
