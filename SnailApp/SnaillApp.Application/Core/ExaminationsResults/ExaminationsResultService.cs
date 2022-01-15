@@ -66,6 +66,15 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         {
             try
             {
+                DateTime fDate, tDate, firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                if (!DateTime.TryParseExact(request.FromDate, "yyyy-MM-dd", null, DateTimeStyles.None, out fDate))
+                {
+                    fDate = firstDayOfMonth;
+                }
+                if (!DateTime.TryParseExact(request.ToDate, "yyyy-MM-dd", null, DateTimeStyles.None, out tDate))
+                {
+                    tDate = firstDayOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59);
+                }
                 Guid doctocIdValue = !string.IsNullOrEmpty(request.DoctorId) ? Guid.Parse(request.DoctorId) : new Guid();
 
                 //1. Select join
@@ -73,9 +82,9 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                 var query = (from a in _context.Appointments
                              join patient in _context.AppUsers on a.PatientId equals patient.Id
                              join doctor in _context.AppUsers on a.DoctorId equals doctor.Id
-                             //where (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status : a.Status >= 0)
-                             //&& (!string.IsNullOrEmpty(request.DoctorId) ? a.DoctorId == doctocIdValue : a.Status >= 0)
-                             select new { a, patient, doctor }
+                             where fDate <= a.Date && a.Date <= tDate
+                             && (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status : a.Status >= 0)
+                                 select new { a, patient, doctor }
                             ).AsNoTracking();
 
                 //2. filter

@@ -42,8 +42,14 @@ var ExaminationsResult = function () {
             textSearch: function () {
                 return $('#dtTableSearch').val();
             },
+            fDate: function () {
+                return $('#inputFromDate').val();
+            },
+            tDate: function () {
+                return $('#inputToDate').val();
+            },
             status: function () {
-                return -1;
+                return $('#FilterStatus').val();
             },
             doctorId: function () {
                 return '';
