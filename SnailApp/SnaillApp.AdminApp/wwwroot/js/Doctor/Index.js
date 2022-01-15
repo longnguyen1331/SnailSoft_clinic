@@ -257,33 +257,47 @@ var Doctor = function () {
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
             {
-                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "autoWidth": true, "title": "Infomaiton",
+                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "width": "40%", "title": "Infomaiton",
                 "render": function (data, type, full, meta) {
 
-                    return '<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\
+                    return '<div class="d-flex align-items-center nav-link">\
 							<img src="' + full.avatar + '" class="user-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.firstName + ' ' + full.lastName + '</p>\
-								<p class="designattion mb-0">' + full.email + '</p>\
+								<p class="designattion mb-0"><i class="fadeIn animated bx bx-map"></i> ' + full.address + '</p>\
+                                <p class="designattion mb-0"><i class="fadeIn animated bx bx-phone"></i> ' + full.phoneNumber + '</p>\
 							</div>\
-						</a>';
+						</div>';
                 }
             },
+      //      {
+      //          "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "autoWidth": true, "title": "Infomaiton",
+      //          "render": function (data, type, full, meta) {
+
+      //              return '<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\
+						//	<img src="' + full.avatar + '" class="user-img" alt="user avatar">\
+						//	<div class="user-info ps-3">\
+						//		<p class="user-name mb-0">' + full.firstName + ' ' + full.lastName + '</p>\
+						//		<p class="designattion mb-0">' + full.email + '</p>\
+						//	</div>\
+						//</a>';
+      //          }
+      //      },
             { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": true, "title": "Phone" },
             { "data": "email", "name": "email", "autoWidth": true, "title": "Email" },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit">\
+                        html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
-                        html += '<a href="#" class="ms-3 assign-service">\
-					                <i class="bx bxs-info-circle"></i>\
+                        html += '<a href="#" class="assign-service ms-2 btn-outline-primary">\
+					                <i class="fadeIn animated bx bx-book-add"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-2 delete btn btn-outline-danger">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }

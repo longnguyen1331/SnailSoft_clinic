@@ -79,88 +79,89 @@
     </div>
 </div>
 
-<div class="switcher-wrapper ">
+<div class="switcher-wrapper border-top border-0 border-4 border-primary  snail-bg-blue">
     <div class="switcher-btn" hidden>
         <i class="bx bx-cog bx-spin"></i>
     </div>
-    <div>
-       <div class="d-flex align-items-center white mb-2 mx-0 radius-10 bg-primary py-2 px-1">
-            <h4 class="mb-0"><i class="bx bx-user-circle"></i> </h4><h6 class="mb-1 text-uppercase" id="titleCreateOrUpdate">DOCTOR</h6>
+   <div class="switcher-body snail-bg-blue">
+         <div class="card-title d-flex align-items-center">
+             <h5 class="mb-0 text-uppercase"><i class="bx bx-user-circle"></i> DOCTOR</h5>
             <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
         </div>
-
-     
-
+          <hr>
         <div id="CreateInfomation">
-               <form id="snail-edit-form">
-            <div class="row g-1">
-               
+            <form id="snail-edit-form">
+                <div class="row g-2">
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="~/snailsoft/assets/images/avatars/avatar-1.png" width="110" height="110" id="avatarImage" class="rounded-circle p-1 bg-primary" alt="">
                         <div class="mt-3">
-
-
-                        <a href="#" class="btn btn-primary" id="btnUpload"><i class="bx bx-cloud-upload mr-1"></i> Choose avatar</a>
-                        <input id="image-upload" data-field="Avatar" type="file" accept=".png, .jpg, .jpeg" hidden>
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="bx bxs-user"></i></span>
-                                <input type="text" class="form-control form-control-sm" data-field="FirstName" placeholder="First name">
-                                <input type="text" class="form-control form-control-sm" data-field="LastName" placeholder="Last name">
-
-                            </div>
+                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="bx bx-cloud-upload mr-1"></i> Choose avatar</a>
+                            <input id="image-upload" data-field="Avatar" type="file" accept=".png, .jpg, .jpeg" hidden>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-envelope-open"></i></span>
-                                @*  <input type="text" class="form-control" data-field="FirstName" placeholder="First name">*@
-                                <input type="email" class="form-control form-control-sm" data-field="Email" placeholder="Enter email">
+                     <div class="col-md-12">
+                            <div class="card-body mx-0 px-0 px-0 py-0">
+                                <label class="form-label">Fullname</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="bx bxs-user"></i></span>
+                                    <input type="text" class="form-control form-control-sm" data-field="FirstName" placeholder="First name">
+                                    <input type="text" class="form-control form-control-sm" data-field="LastName" placeholder="Last name">
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-phone-call"></i></span>
 
-                                <input type="number" class="form-control form-control-sm" data-field="PhoneNumber" placeholder="Enter phone number">
+                   
+                   <div class="col-md-6">
+                            <div class="card-body mx-0 px-0 px-0 py-0">
+                                <label class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-envelope-open"></i></span>
+                                    @*  <input type="text" class="form-control" data-field="FirstName" placeholder="First name">*@
+                                    <input type="email" class="form-control form-control-sm" data-field="Email" placeholder="Enter email">
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-been-here"></i></span>
+                        <div class="col-md-6">
+                            <div class="card-body mx-0 px-0 px-0 py-0">
+                                <label class="form-label">Phone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-phone-call"></i></span>
 
-                                <input type="text" class="form-control form-control-sm" data-field="Address" placeholder="Enter address">
+                                    <input type="number" class="form-control form-control-sm" data-field="PhoneNumber" placeholder="Enter phone number">
 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                     <div class="col-md-12">
+                            <div class="card-body mx-0 px-0 px-0 py-0">
+                                <label class="form-label">Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-been-here"></i></span>
+
+                                    <input type="text" class="form-control form-control-sm" data-field="Address" placeholder="Enter address">
+
+                                </div>
+                            </div>
+                        </div>
                     <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
+                        <div class="card-body mx-0 px-0 px-0 py-0">
+                             <label class="form-label">Biography</label>
                             <div class="input-group">
                                 <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-book"></i></span>
 
-                                <textarea type="text"  class="form-control form-control-sm" data-field="Biography" rows="3" placeholder="Enter Biography..."></textarea>
+                                <textarea type="text" class="form-control form-control-sm" data-field="Biography" rows="3" placeholder="Enter Biography..."></textarea>
 
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="card-body mx-0 px-0 px-0 py-2">
+                        <div class="card-body mx-0 px-0 px-0 py-0">
+                              <label class="form-label">Skills</label>
                             <div class="input-group">
                                 <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-folder-plus"></i></span>
-
                                 <textarea type="text" class="form-control form-control-sm" data-field="Skills" rows="3" placeholder="Enter Skills..."></textarea>
-
                             </div>
                         </div>
                     </div>
@@ -176,71 +177,74 @@
                             </div>
                         </div>
                     </div>
-                      <div class="row row-cols-auto g-0 px-1 mb-0">
-                    <div class="col-md-6">
-                        <div class="card-body mx-0 px-0 px-0 px-0">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-lock-open-alt"></i></span>
-                                <input type="password" class="form-control form-control-sm" data-field="Password" placeholder="Password">
+                    <div class="row row-cols-auto g-0 px-1 mb-0">
+                            
+                        <div class="col-md-6">
+                            <div class="card-body mx-0 px-0 px-0 px-0">
+                                 <label class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-lock-open-alt"></i></span>
+                                    <input type="password" class="form-control form-control-sm" data-field="Password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body mx-0 px-0 px-0 px-2">
+                                 <label class="form-label">RePassword</label>
+                                <div class="input-group">
+                                    <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-lock-open-alt"></i></span>
+                                    <input type="password" class="form-control form-control-sm" data-field="RePassword" placeholder="Repassword">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card-body mx-0 px-0 px-0 px-2">
-                            <div class="input-group">
-                                <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-lock-open-alt"></i></span>
-                                <input type="password" class="form-control form-control-sm" data-field="RePassword" placeholder="Repassword">
-                            </div>
+
+                    <div class="col-md-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input px-3 py-2" type="checkbox" data-field="IsActive">
+                            <label class="form-check-label  py-1" for="IsActive"> Active</label>
                         </div>
                     </div>
+                      <div class="row row-cols-auto g-3 px-1">
+                    <div class="col-md-6">
+                        <div class="mb-3 px-1">
+                            <button type="button" class="btn btn-danger mt-2 mt-lg-0 radius-15  w-100" name="btnCancel"><i class="bx bx-x-circle"></i> Cancel</button>
+
+                        </div>
                     </div>
-              
-                <div class="col-md-12">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input px-3 py-2" type="checkbox" data-field="IsActive">
-                        <label class="form-check-label  py-1" for="IsActive"> Active</label>
+                    <div class="col-md-6">
+                        <div class="mb-3 px-1">
+                            <button type="button" class="btn btn-primary mt-2 mt-lg-0 radius-15  w-100" name="btnUpdate"><i class="bx bx-save"></i> Update</button>
+
+                        </div>
                     </div>
                 </div>
-                <div class="row row-cols-auto g-3 px-1">
-                    <div class="col-md-6">
-                        <div class="mb-3 px-1">
-                            <button type="button" class="btn btn-danger px-5 radius-15" name="btnCancel">Cancel</button>
-
+                </div>
+            </form>
+        </div>
+        <div id="CreateServiceToUser">
+            <div class="header-colors-indigators">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="mb-3 px-1 select2-sm">
+                            <select id="edit_form_serivceIds" data-control="select2"
+                                    class="form-select form-select-solid form-select-md radius-15 single-select">
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3 px-1">
-                            <button type="button" class="btn btn-primary px-5 radius-15" name="btnUpdate">Update</button>
+                    <div class="col-md-4">
+                        <div class="mb-3 px-1 select2-sm">
+                            <button type="button" class="btn btn-primary w-100" name="btnCreateUserToService">Create</button>
+                        </div>
+                    </div>
 
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTableUserService" role="grid"></table>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-        </div>
-        <div id="CreateServiceToUser">
-            <div class="header-colors-indigators">
-				<div class="row g-0">
-					<div class="col-md-8" >
-						<div class="mb-3 px-1 select2-sm">
-							 <select id="edit_form_serivceIds" data-control="select2"
-							 class="form-select form-select-solid form-select-md radius-15 single-select">
-                             </select>
-						</div>
-					</div>
-					<div class="col-md-4" >
-						<div class="mb-3 px-1 select2-sm">
-							<button type="button" class="btn btn-primary w-100" name="btnCreateUserToService">Create</button>
-						</div>
-					</div>
-
-					<div class="col-md-12" >
-						<div class="table-responsive">
-							<table class="table mb-0 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="dtTableUserService" role="grid"></table>
-						</div>
-					</div>
-				</div>
-			</div>
         </div>
     </div>
 </div>

@@ -115,7 +115,7 @@
             <form id="snail-edit-form">
                 <div class="row g-3">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="~/snailsoft/assets/images/avatars/avatar-1.png" id="avatarImage" class="radius-15  w-50 p-1 bg-primary" alt="">
+                        <img src="~/snailsoft/assets/images/avatars/avatar-1.png" id="avatarImage" class="radius-15  w-50 p-1" alt="">
                         <div class="mt-3">
                             <a href="#" class="btn btn-primary" id="btnUpload"><i class="bx bx-cloud-upload mr-1"></i> Choose image</a>
                             <input id="image-upload" data-field="Image" type="file" accept=".png, .jpg, .jpeg" hidden>
@@ -191,23 +191,13 @@
                             <div class="col-md-12">
                                 <label class="form-label">FIND A DOCTOR</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-transparent"><i class="bx bx-book-add"></i></span>
+                                   @* <span class="input-group-text bg-transparent"><i class="bx bx-book-add"></i></span>*@
                                     <select id="edit_form_userIds" aria-label="Select a Service Type" data-control="select2"
                                             data-field="select2" class="form-select form-select-solid form-select-lg radius-15 single-select">
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <label class="form-label">FIND A DOCTOR</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-transparent"><i class="fadeIn animated bx bx-arrow-from-top"></i></span>
-                                    <select id="edit_form_userIds" data-control="select2"
-                                            class="form-select form-select-solid form-select-lg radius-15 single-select">
-                                    </select>
-                                </div>
-
-
-                            </div>
+                            
                             <div class="col-md-12">
                                 <div class="mb-3 px-1 select2-sm">
                                     <button type="button" class="btn btn-primary" name="btnCreateUserToService"><i class="fadeIn animated bx bx-add-to-queue"></i> ADD TO DOCTOR</button>

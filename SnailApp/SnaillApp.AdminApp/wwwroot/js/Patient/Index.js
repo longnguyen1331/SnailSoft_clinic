@@ -2,7 +2,7 @@
 
 var Patient = function () {
     let dtTable = null, editingData = null,
-        edit_form = $("#edit_form"),
+        edit_form = $("#snail-edit-form"),
         edit_form_buttonSubmit = $('[name="btnUpdate"]');
 
     let initialComponents = () => {
@@ -221,12 +221,12 @@ var Patient = function () {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit">\
+                        html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-2 delete btn btn-outline-danger">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }

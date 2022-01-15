@@ -68,7 +68,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row  mb-4">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="badge border-left border-4 bg-cancel text-cancel"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-cancel"> Cancel </span></div>
                 <div class="badge border-left border-4 bg-booking text-booking"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-booking"> Booking </span></div>
                 <div class="badge border-left border-4 bg-confirm text-confirm"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-confirm"> Confirm </span></div>
@@ -76,8 +76,8 @@
                 <div class="badge border-left border-4  bg-examination text-examination"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-examination"> Examination </span></div>
                 <div class="badge border-left border-4  bg-checkout text-checkout"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-checkout"> Checkout </span></div>
             </div>
-            <div class="col-md-3">
-                <div class="d-flex align-items-center gap-3">
+            <div class="col-md-2">
+                <div class="d-flex py-2">
                     <select data-control="select2" id="FilterStatus" class="form-select form-select-solid  radius-10 single-select">
                         <option value="-1" selected>All</option>
                         <option value="@((int)AppointmentStatus.Cancel)">Cancel</option>
@@ -92,7 +92,7 @@
             @if (Model.CurrentUserRole.IsAllowEdit)
             {
                 <text>
-                    <div class="col-md-3">
+                    <div class="col-md-2 d-flex py-2">
                         <button type="button" class="btn btn-primary w-100" name="btnCreate"><i class="fadeIn animated bx bx-add-to-queue"></i> Create Appointment</button>
                     </div>
                 </text>

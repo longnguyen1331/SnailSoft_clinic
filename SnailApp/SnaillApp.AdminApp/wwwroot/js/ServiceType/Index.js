@@ -143,7 +143,7 @@ var ServiceType = function () {
                 "visible": false
             },
             {
-                "targets": [0, 3],
+                "targets": [0],
                 "orderable": false
             },
             {
@@ -186,17 +186,17 @@ var ServiceType = function () {
         };
         datatableOption.columns = [
             {
-                "autoWidth": true, "title": "", "render": function (data, type, full, meta) {
+                "width": '20px', "title": "", "render": function (data, type, full, meta) {
                     let html = '<div class="form-check form-check-sm form-check-custom form-check-solid">\
                             <input class="form-check-input" onchange="App.initevencheckbox()"  type ="checkbox" value ="" >\
                                     </div>';
                     return html;
                 }
             },
-            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
-            { "data": "sortOrder", "name": "sortOrder", "autoWidth": true, "title": "Odx" },
+            { "data": "id", "name": "id", "width": '20px', "title": "Id" },
+            { "data": "sortOrder", "name": "sortOrder", "width": '20px', "title": "Odx" },
             {
-                "data": "name", "name": "name", "width": "40%", "title": "Infomaiton",
+                "data": "name", "name": "name", "width": "70%", "title": "Infomaiton",
                 "render": function (data, type, full, meta) {
 
                     return '<div class="d-flex align-items-center nav-link">\
@@ -208,13 +208,13 @@ var ServiceType = function () {
                 }
             },
             {
-                "data": "isVisibled", "name": "isVisibled", "autoWidth": true, "title": "Active",
+                "data": "isVisibled", "name": "isVisibled", "width": '10%', "title": "Active",
                 "render": function (data, type, full, meta) {
-                    return data == true ? '<span class="badge rounded-pill bg-primary">Active</span>' : '<span class="badge rounded-pill bg-danger">Disable</span>';
+                    return data == true ? '<div class="d-flex align-items-center text-success"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Active</span></div>' : '<div class="d-flex align-items-center text-danger">	<i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Disable</span>	</div >';
                 }
             },
             {
-                width: "120px", "title": "Action", "render": function (data, type, full, meta) {
+                "width": "10%x", "title": "Action", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
                         html += '<a href="#" class="edit btn btn-outline-primary">\
