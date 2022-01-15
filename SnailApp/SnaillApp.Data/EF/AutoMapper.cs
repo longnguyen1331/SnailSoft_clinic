@@ -8,6 +8,7 @@ using SnailApp.ViewModels.Catalog.ServiceTypes;
 using SnailApp.ViewModels.Catalog.Services;
 using SnailApp.ViewModels.Catalog.Doctor_Services;
 using SnailApp.ViewModels.Catalog.Appointments;
+using SnailApp.ViewModels.Catalog.ExaminationsResults;
 
 namespace SnailApp.Data.EF
 {
@@ -61,6 +62,17 @@ namespace SnailApp.Data.EF
 
             CreateMap<AppointmentPayment, AppointmentPaymentDto>()
               .ForMember(x => x.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd")))
+              .ReverseMap();
+
+            CreateMap<ExaminationsResult, ExaminationsResultDto>()
+              .ForMember(x => x.ExaminationDate, opt => opt.MapFrom(src => src.ExaminationDate.ToString("yyyy-MM-dd")))
+              .ForMember(x => x.Re_Examination, opt => opt.MapFrom(src => src.Re_Examination.HasValue ? src.Re_Examination.Value.ToString("yyyy-MM-dd") : string.Empty))
+              .ReverseMap();
+
+
+            CreateMap<ExaminationsResult, ExaminationsResultRequest>()
+              .ForMember(x => x.ExaminationDate, opt => opt.MapFrom(src => src.ExaminationDate.ToString("yyyy-MM-dd")))
+              .ForMember(x => x.Re_Examination, opt => opt.MapFrom(src => src.Re_Examination.HasValue ? src.Re_Examination.Value.ToString("yyyy-MM-dd") : string.Empty))
               .ReverseMap();
         }
     }

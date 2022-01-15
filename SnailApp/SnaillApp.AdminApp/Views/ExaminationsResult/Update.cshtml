@@ -1,0 +1,268 @@
+﻿@using SnailApp.ViewModels.Enums;
+@model ExaminationViewModel
+
+@section Vendors_CSS{
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css")" type="text/css">
+ 
+}
+@section Custom_CSS{
+}
+
+@section Vendors_Scripts{
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js")"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/ExaminationsResult/Update.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+    let editorValue;
+
+    
+    $(document).ready(function () {
+        ExaminationsResult.init();
+		var promises = [init_editor()];
+		Promise.all(promises).then(function(results) {
+		});
+    });
+
+
+    function init_editor() {
+        return ClassicEditor
+            .create(document.querySelector('#editor'), {
+                extraPlugins: [MyCustomUploadAdapterPlugin]
+            })
+            .then(editor => {
+                editor.ui.view.editable.element.style.height = '300px';
+                editorValue = editor;
+                 editor.setData('@Html.Raw(Model.ExaminationsResult != null ? Model.ExaminationsResult.Results : "")');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+	
+    class MyUploadAdapter {
+        constructor(loader) {
+            // The file loader instance to use during the upload.
+            this.loader = loader;
+            this.url = '/ExaminationsResult/CKEditorUploadImage';
+        }
+
+        // Starts the upload process.
+        upload() {
+            return this.loader.file.then(file => new Promise((resolve, reject) => {
+                this._initRequest();
+                this._initListeners(resolve, reject, file);
+                this._sendRequest(file);
+            }));
+        }
+
+        // Aborts the upload process.
+        abort() {
+            if (this.xhr) {
+                this.xhr.abort();
+            }
+        }
+
+        _initRequest() {
+            const xhr = this.xhr = new XMLHttpRequest();
+
+            xhr.open('POST', this.url, true);
+            xhr.responseType = 'json';
+        }
+
+        // Initializes XMLHttpRequest listeners.
+        _initListeners(resolve, reject, file) {
+            const xhr = this.xhr;
+            const loader = this.loader;
+            const genericErrorText = `Couldn't upload file: ${file.name}.`;
+
+            xhr.addEventListener('error', () => reject(genericErrorText));
+            xhr.addEventListener('abort', () => reject());
+            xhr.addEventListener('load', () => {
+                const response = xhr.response;
+                console.log(response)
+                // This example assumes the XHR server's "response" object will come with
+                // an "error" which has its own "message" that can be passed to reject()
+                // in the upload promise.
+                //
+                // Your integration may handle upload errors in a different way so make sure
+                // it is done properly. The reject() function must be called when the upload fails.
+                if (!response || response.error) {
+                    return reject(response && response.error ? response.error.message : genericErrorText);
+                }
+
+                // If the upload is successful, resolve the upload promise with an object containing
+                // at least the "default" URL, pointing to the image on the server.
+                // This URL will be used to display the image in the content. Learn more in the
+                // UploadAdapter#upload documentation.
+                resolve({
+                    default: response.url
+                });
+            });
+
+            // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
+            // properties which are used e.g. to display the upload progress bar in the editor
+            // user interface.
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', evt => {
+                    if (evt.lengthComputable) {
+                        loader.uploadTotal = evt.total;
+                        loader.uploaded = evt.loaded;
+                    }
+                });
+            }
+        }
+
+        // Prepares the data and sends the request.
+        _sendRequest(file) {
+            // Prepare the form data.
+            const data = new FormData();
+
+            data.append('upload', file);
+
+            // Important note: This is the right place to implement security mechanisms
+            // like authentication and CSRF protection. For instance, you can use
+            // XMLHttpRequest.setRequestHeader() to set the request headers containing
+            // the CSRF token generated earlier by your application.
+
+            // Send the request.
+            this.xhr.send(data);
+        }
+    }
+     function MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            return new MyUploadAdapter(loader);
+        };
+    }
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+<div class="card">
+	<div class="card-body">
+            <div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex flex-column">
+								@if(Model.Appointment != null)
+								{
+										<img src="@Model.Appointment.PatientAvatar" alt="@Model.Appointment.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
+										<div class="mt-3">
+											<h4>@Model.Appointment.PatientFullName</h4>
+											<p class="text-secondary mb-1">Code : @Model.Appointment.PatientCode</p>
+											<p class="text-muted font-size-sm">Phone : @Model.Appointment.PatientPhone</p>
+											<p class="text-muted font-size-sm">Email : @Model.Appointment.PatientEmail</p>
+											<p class="text-muted font-size-sm">Address : @Model.Appointment.PatientAddress</p>
+										</div>
+										<hr class="my-4">
+										<div class="invoice" style="min-height:auto !important;">
+											<table>
+												<tbody>
+													@for(int i = 1; i <=  Model.Appointment.Appointment_Services.Count(); i++)
+													{
+														<tr>
+															<td class="no">@i</td>
+															<td class="text-left">
+																<a target="_blank" href="javascript:;">
+																	@Html.Raw(Model.Appointment.Appointment_Services[i-1].ServiceName)
+																</a>
+																<br/>
+																<a target="_blank" href="javascript:;">
+																	Doctor : @Html.Raw(Model.Appointment.Appointment_Services[i-1].DoctorFullName)
+																</a>
+															</td>
+														</tr>
+													}
+												</tbody>
+										
+											</table>
+										</div>
+									}
+							</div>
+						
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<form id="edit_form">
+						<input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Id : 0)">
+						<input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.Appointment != null ? Model.Appointment.Id : 0)">
+
+						<div class="row">
+							<div class="col-md-6" >
+								<div class="mb-3 px-1">
+									<label class="form-label">Date</label>
+									<input class="result form-control radius-15" type="date" data-field="ExaminationDate" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.ExaminationDate : "")" placeholder="Enter Date">
+								</div>
+							</div>
+
+							<div class="col-md-6" >
+								<div class="mb-3 px-1">
+									<label class="form-label">Re examination date</label>
+									<input class="result form-control radius-15" type="date" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Re_Examination : "")" data-field="Re_Examination">
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="mb-3">
+									<label class="form-label">Results</label>
+									<div id="editor" data-field="Results"></div>
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="mb-3">
+									<label class="form-label">Doctor advice</label>
+									<textarea class="form-control radius-15" rows="5" data-field="DoctorAdvice">@(Model.ExaminationsResult != null ? Model.ExaminationsResult.DoctorAdvice : "")</textarea>
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="mb-3 text-center">
+									@if (Model.CurrentUserRole.IsAllowEdit)
+									{
+										<text>
+											<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
+                                  
+										</text>
+									}
+									@if (Model.CurrentUserRole.IsAllowDelete && Model.ExaminationsResult != null)
+									{
+										<text>
+											<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+										</text>
+									}
+										<button type="button"class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>
+								</div>
+								
+							</div>
+						</div>
+					</form>
+
+				</div>
+                
+		    </div>
+		
+	</div>
+</div>
+
+@await Html.PartialAsync("_PartialConfirmDeleteModal")
+
+
