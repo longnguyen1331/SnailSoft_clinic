@@ -29,12 +29,12 @@
             isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
         }
     };
-    let editorValue;
+    let editorValue, editorDoctorValue;
 
     
     $(document).ready(function () {
         ExaminationsResult.init();
-		var promises = [init_editor()];
+		var promises = [init_editor(), init_editorDoctorAdvice()];
 		Promise.all(promises).then(function(results) {
 		});
     });
@@ -49,6 +49,22 @@
                 editor.ui.view.editable.element.style.height = '300px';
                 editorValue = editor;
                  editor.setData('@Html.Raw(Model.ExaminationsResult != null ? Model.ExaminationsResult.Results : "")');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    
+    function init_editorDoctorAdvice() {
+        return ClassicEditor
+            .create(document.querySelector('#editorDoctorAdvice'), {
+                extraPlugins: [MyCustomUploadAdapterPlugin]
+            })
+            .then(editor => {
+                editor.ui.view.editable.element.style.height = '300px';
+                editorDoctorValue = editor;
+                editor.setData('@Html.Raw(Model.ExaminationsResult != null ? Model.ExaminationsResult.DoctorAdvice : "")');
             })
             .catch(error => {
                 console.error(error);
@@ -230,7 +246,7 @@
 							<div class="col-sm-12">
 								<div class="mb-3">
 									<label class="form-label">Doctor advice</label>
-									<textarea class="form-control radius-15" rows="5" data-field="DoctorAdvice">@(Model.ExaminationsResult != null ? Model.ExaminationsResult.DoctorAdvice : "")</textarea>
+									<div id="editorDoctorAdvice" data-field="Results"></div>
 								</div>
 							</div>
 

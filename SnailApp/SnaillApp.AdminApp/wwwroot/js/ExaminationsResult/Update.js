@@ -17,7 +17,8 @@ var ExaminationsResult = function () {
                         }
                     }
                 }),
-                result["Results"] = editorValue.getData(),
+                    result["Results"] = editorValue.getData(),
+                    result["DoctorAdvice"] = editorDoctorValue.getData(),
                     App.sendDataToURL("/ExaminationsResult/Save", result, "POST")
                     .then(function (res) {
                         if (!res.isSuccessed) {
