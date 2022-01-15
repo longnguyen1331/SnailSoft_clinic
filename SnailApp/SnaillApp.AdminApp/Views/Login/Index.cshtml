@@ -5,11 +5,8 @@
     ViewBag.Title = "Đăng nhập";
     Layout = null;
 }
-
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from codervent.com/syndron/demo/vertical/authentication-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 May 2021 03:40:05 GMT -->
 <head>
     <meta charset="utf-8">
     <title>Login | SnailSoft - Clinic management system</title>
@@ -18,9 +15,7 @@
     <meta name="author" content="snailsoft">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="~/snailsoft/assets/images/favicon-32x32.png" type="image/png" />
-
-
+    <link rel="icon" href="~/images/favicon.ico" type="image/x-icon" />
     <!-- Bootstrap CSS -->
     <link href="~/snailsoft/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/snailsoft/assets/css/app.css" rel="stylesheet">
@@ -124,10 +119,10 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Enter Password</label>
-												
+
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="Password" name="Password" class="form-control border-end-0" id="Password" placeholder="Enter Password..."> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-                                                    	
+
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -164,22 +159,22 @@
     <script src="~/snailsoft/assets/js/jquery.min.js"></script>
 
     <!--Password show & hide js -->
-   <script>
-		$(document).ready(function () {
-			$("#show_hide_password a").on('click', function (event) {
-				event.preventDefault();
-				if ($('#show_hide_password input').attr("type") == "text") {
-					$('#show_hide_password input').attr('type', 'Password');
-					$('#show_hide_password i').addClass("bx-hide");
-					$('#show_hide_password i').removeClass("bx-show");
-				} else if ($('#show_hide_password input').attr("type") == "Password") {
-					$('#show_hide_password input').attr('type', 'text');
-					$('#show_hide_password i').removeClass("bx-hide");
-					$('#show_hide_password i').addClass("bx-show");
-				}
-			});
-		});
-	</script>
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'Password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "Password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
