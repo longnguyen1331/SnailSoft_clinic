@@ -1,0 +1,53 @@
+﻿@using SnailApp.ViewModels.Enums;
+@model ExaminationViewModel
+
+@section Vendors_CSS{
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css")" type="text/css">
+ 
+}
+@section Custom_CSS{
+}
+
+@section Vendors_Scripts{
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js")"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/<version>/classic/ckeditor.js"></script>
+
+}
+
+@section Custom_Scripts{
+    <script type="text/javascript" src="@Url.Content("~/js/ExaminationsResult/Update.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+    
+    $(document).ready(function () {
+        ExaminationsResult.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+<div class="card">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12 col-md-4">
+                <div id="editor"></div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+@await Html.PartialAsync("_PartialConfirmDeleteModal")
+
+
