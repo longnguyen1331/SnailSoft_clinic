@@ -664,22 +664,22 @@ var Appointment = function () {
                 let date = arg.event._def.extendedProps.time.substring(11,16);
                 switch (status) {
                     case 0:
-                        italicEl.innerHTML = '<span class="mb-0 text-danger"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4 bg-cancel text-cancel"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-cancel"> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                     case 1:
-                        italicEl.innerHTML = '<span class="mb-0 text-info"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-booking text-booking"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-booking"> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                     case 2:
-                        italicEl.innerHTML = '<span class="mb-0 text-warning"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-confirm text-confirm "><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-confirm "> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                     case 3:
-                        italicEl.innerHTML = '<span class="mb-0 text-warning"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkin text-checkin"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-checkin"> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                     case 4:
-                        italicEl.innerHTML = '<span class="mb-0"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-examination text-examination"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-examination"> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                     case 5:
-                        italicEl.innerHTML = '<span class="mb-0 text-primary"> ' + date + " " + arg.event._def.title + '</span>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkout text-checkout"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0 text-checkou"> ' + date + " " + arg.event._def.title + '</span>	</div>';
                         break;
                 }
                 

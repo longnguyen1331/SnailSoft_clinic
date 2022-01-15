@@ -7515,6 +7515,63 @@ textarea.form-control-lg {
 .text-dark {
     color: #212529 !important
 }
+/*SNAIL COLOR*/
+.text-checkout {
+    color: #19A9A8 !important
+}
+.text-cancel {
+    color: #C5C7CD !important
+}
+
+.text-booking {
+    color: #64BBFF !important
+}
+
+.text-confirm {
+    color: #67D5B1 !important
+}
+
+.text-checkin {
+    color: #7B61FF !important
+}
+.text-examination {
+    color: #E36828 !important
+}
+.bg-checkout {
+    border-left: 4px solid #19A9A8 !important;
+    border-radius: 3px 0 0 3px ;
+  /*  background: #E0F1FF !important*/
+}
+
+.bg-cancel {
+    border-left: 4px solid #C5C7CD !important;
+    /* background: #E0F1FF !important*/
+    border-radius: 3px 0 0 3px;
+}
+
+.bg-booking {
+    
+    border-left: 4px solid #64BBFF !important;
+    border-radius: 3px 0 0 3px;
+}
+
+.bg-confirm {
+    border-left: 4px solid #67D5B1 !important;
+    border-radius: 3px 0 0 3px;
+}
+
+.bg-checkin {
+    border-left: 4px solid #7B61FF !important;
+    border-radius: 3px 0 0 3px;
+}
+
+.bg-examination {
+    border-left: 4px solid #E36828 !important;
+    border-radius: 3px 0 0 3px;
+}
+
+
+/*SNAIL COLOR*/
 
 .text-white {
     color: #fff !important
