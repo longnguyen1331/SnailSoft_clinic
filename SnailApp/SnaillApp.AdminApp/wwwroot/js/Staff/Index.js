@@ -213,9 +213,9 @@ var Staff = function () {
                     return html;
                 }
             },
-            { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            { "data": "id", "name": "id", "width": '20px', "title": "Id" },
             {
-                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "width": "40%", "title": "Infomaiton",
+                "data": "id_Image_FullName_Email", "name": "image_FullName_Email", "width": "70%", "title": "Infomaiton",
                 "render": function (data, type, full, meta) {
 
                     return '<div class="d-flex align-items-center nav-link">\
@@ -229,7 +229,7 @@ var Staff = function () {
                 }
             },
             {
-                "data": "phoneNumber", "name": "Contact", "width": "20%", "title": "Contact",
+                "data": "phoneNumber", "name": "Contact", "width": '30px', "title": "Contact",
                 "render": function (data, type, full, meta) {
 
                     return '<div class="list-inline d-flex customers-contacts ms-auto"><a class="btn-outline-primary" href="tel:' + full.phoneNumber + '"><i class="fadeIn animated bx bx-phone"></i></a>\

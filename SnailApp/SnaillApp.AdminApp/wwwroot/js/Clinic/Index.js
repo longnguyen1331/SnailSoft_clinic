@@ -338,10 +338,11 @@ var Clinic = function () {
 						</a>';
                 }
             },
+           
             {
                 "data": "status", "name": "status", "autoWidth": true, "title": "Active",
                 "render": function (data, type, full, meta) {
-                    return data == true ? '<span class="badge rounded-pill bg-primary">Active</span>' : '<span class="badge rounded-pill bg-danger">Disable</span>';
+                    return data == true ? '<div class="d-flex align-items-center text-success"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Active</span></div>' : '<div class="d-flex align-items-center text-danger">	<i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span>Disable</span>	</div >';
                 }
             },
             { "data": "phone", "name": "phone", "autoWidth": true, "title": "Phone" },
@@ -350,17 +351,17 @@ var Clinic = function () {
                 width: "120px", "title": "Active", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit">\
+                        html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 role">\
+                        html += '<a href="#" class="ms-3 role btn btn-outline-primary">\
 					                <i class="bx bxs-user-check"></i>\
 				                </a>';
                     }
