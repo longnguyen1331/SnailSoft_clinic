@@ -6,6 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using SnailApp.ViewModels.Catalog.ExaminationsResults;
 using SnailApp.ViewModels.Catalog.Appointments;
+using SnailApp.Utilities.Constants;
+using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace SnailApp.ApiIntegration
 {
@@ -16,6 +20,7 @@ namespace SnailApp.ApiIntegration
         Task<ApiResult<ExaminationsResultDto>> GetById(ExaminationsResultRequest request);
         Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
+        Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
     public class ExaminationsResultApiClient : BaseApiClient, IExaminationsResultApiClient
     {
@@ -33,7 +38,43 @@ namespace SnailApp.ApiIntegration
             _httpClientFactory = httpClientFactory;
         }
 
-      
+        public async Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile)
+        {
+            try
+            {
+                var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstants.AppConstants.Token);
+
+                var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultLanguageId);
+
+                var client = _httpClientFactory.CreateClient();
+                client.BaseAddress = new Uri(_configuration[SystemConstants.AppConstants.BaseAddress]);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+                var requestContent = new MultipartFormDataContent();
+
+                if (uploadFile != null)
+                {
+                    byte[] data;
+                    using (var br = new BinaryReader(uploadFile.OpenReadStream()))
+                    {
+                        data = br.ReadBytes((int)uploadFile.OpenReadStream().Length);
+                    }
+                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    requestContent.Add(bytes, "uploadFile", uploadFile.FileName);
+                }
+
+                var response = await client.PostAsync($"/api/examinationsResults/ckeditoruploadfile", requestContent);
+
+                return JsonConvert.DeserializeObject<ApiResult<string>>(await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<string>(ex.Message);
+            }
+        }
         public async Task<ApiResult<int>> AddOrUpdateAsync(ExaminationsResultRequest request)
         {
             try
@@ -74,7 +115,7 @@ namespace SnailApp.ApiIntegration
 
         public async Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request)
         {
-            var data = await GetAsync<ApiResult<ExaminationsResultDto>>($"/api/examinationsResults/appointmentId?Id={request.Id}");
+            var data = await GetAsync<ApiResult<ExaminationsResultDto>>($"/api/examinationsResults/AppointmentId?AppointmentId={request.AppointmentId}");
             return data;
         }
 

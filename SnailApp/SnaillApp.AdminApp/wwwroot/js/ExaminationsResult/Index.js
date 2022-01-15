@@ -140,7 +140,7 @@ var ExaminationsResult = function () {
                     
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit ms-3">\
+                        html += '<a href="/ExaminationsResult/Update?appointmentId='+full.id+'"  class="edit ms-3">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
@@ -158,10 +158,10 @@ var ExaminationsResult = function () {
         dtTable = $('#dtTable').DataTable(datatableOption);
         dtTable.buttons().container().appendTo('#buttonExtension .col-md-6:eq(0)');
 
-        $('#dtTable tbody').on('click', 'a.edit', function (e) {
-            e.preventDefault();
-            editingData = dtTable.row($(this).parents('tr')).data();
-        });
+        //$('#dtTable tbody').on('click', 'a.edit', function (e) {
+        //    e.preventDefault();
+        //    editingData = dtTable.row($(this).parents('tr')).data();
+        //});
 
      
 

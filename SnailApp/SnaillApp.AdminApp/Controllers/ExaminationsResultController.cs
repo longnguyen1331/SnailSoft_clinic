@@ -17,13 +17,15 @@ namespace SnailApp.AdminApp.Controllers
 {
     public class ExaminationsResultController : BaseController
     {
+        private readonly IAppointmentApiClient _appointmentApiClient;
         private readonly IExaminationsResultApiClient _examinationsResultApiClient;
         private readonly IMenuApiClient _menuApiClient;
         private readonly IConfiguration _configuration;
-        public ExaminationsResultController(IExaminationsResultApiClient examinationsResultApiClient,
+        public ExaminationsResultController(IAppointmentApiClient appointmentApiClient, IExaminationsResultApiClient examinationsResultApiClient,
             IMenuApiClient menuApiClient,
                                     IConfiguration configuration)
         {
+            _appointmentApiClient = appointmentApiClient;
             _examinationsResultApiClient = examinationsResultApiClient;
             _menuApiClient = menuApiClient;
             _configuration = configuration;
@@ -35,24 +37,30 @@ namespace SnailApp.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Title = "Examination Result";
             model.Breadcrumbs = new List<string>() {  "Examinations", "Examination Result" };
             return View(model);
         }
 
-        public async Task<IActionResult> Udpate(int appointmentId)
+        public async Task<IActionResult> Update(int appointmentId)
         {
             ExaminationViewModel model = new ExaminationViewModel();
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Title = "Examination Result";
             model.Breadcrumbs = new List<string>() { "Examinations", "Examination Result" };
             var result = await _examinationsResultApiClient.GetByAppointmentId(new ExaminationsResultRequest() { AppointmentId = appointmentId });
             if (result.IsSuccessed)
             {
                 model.ExaminationsResult = result.ResultObj;
             }
+            var appointment = await _appointmentApiClient.GetById(new ViewModels.Catalog.Appointments.AppointmentRequest() { Id = appointmentId });
+            if (appointment.IsSuccessed)
+            {
+                model.Appointment = appointment.ResultObj;
+                model.Appointment.PatientAvatar = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + appointment.ResultObj.PatientAvatar;
+
+            }
+
 
             return View(model);
         }
@@ -134,11 +142,37 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(result);
         }
 
-        public async Task<IActionResult> GetById(int id)
+    
+        public async Task<IActionResult> CKEditorUploadImage()
         {
-            var appUserStatusApiClient = await _examinationsResultApiClient.GetById(new ExaminationsResultRequest() { Id = id});
-            return Ok(appUserStatusApiClient);
+            string fileUrl = string.Empty;
+            var urls = new List<string>();
+            if (Request.Form.Files != null && Request.Form.Files.Count > 0)
+            {
+                var postApiClient = await _examinationsResultApiClient.CKEditorUploadFile(Request.Form.Files[0]);
+
+                if (postApiClient.IsSuccessed)
+                {
+                    fileUrl = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + postApiClient.ResultObj;
+                }
+
+                return new JsonResult(new
+                {
+                    uploaded = 1,
+                    fileName = Request.Form.Files[0].FileName,
+                    url = fileUrl
+                });
+            }
+
+            return new JsonResult(new
+            {
+                uploaded = 0,
+                fileName = "",
+                url = ""
+            });
         }
+
+       
 
     }
 }

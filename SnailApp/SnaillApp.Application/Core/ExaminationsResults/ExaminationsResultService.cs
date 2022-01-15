@@ -28,6 +28,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         Task<ApiResult<ExaminationsResultDto>> GetById(ExaminationsResultRequest request);
         Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request);
         Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageExaminationsResulttPagingRequest request);
+        Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
     
 
@@ -50,6 +51,17 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
             _context = context;
         }
 
+        public async Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile)
+        {
+            try
+            {
+                return new ApiSuccessResult<string>(_configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + (await this.SaveFile(uploadFile)));
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<string>(ex.Message);
+            }
+        }
         public async Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageExaminationsResulttPagingRequest request)
         {
             try
@@ -151,6 +163,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         {
             try
             {
+                if (string.IsNullOrEmpty(request.Re_Examination)) request.Re_Examination = null;
                 var appointment = _mapper.Map<ExaminationsResult>(request);
 
                 DateTime datetim1, redate;
@@ -198,6 +211,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
 
                 if (check == null ) throw new EShopException($"Cannot find a appointment with id: {request.Id}");
 
+                if (string.IsNullOrEmpty(request.Re_Examination)) request.Re_Examination = null;
                 var appointment = _mapper.Map<ExaminationsResult>(request);
 
                 DateTime datetim1,redate;
@@ -285,7 +299,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             try
             {
-                await _storageService.SaveFileAsync(file.OpenReadStream(), _configuration[SystemConstants.UserConstants.ImageImagePath] + "/" + fileName);
+                await _storageService.SaveFileAsync(file.OpenReadStream(), _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + fileName);
                 return fileName;
             }
             catch (Exception ex)

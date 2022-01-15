@@ -9,8 +9,8 @@ namespace SnailApp.ViewModels.Catalog.ExaminationsResults
     public class ExaminationsResultDto : BaseDto
     {
         public int AppointmentId { set; get; }
-        public DateTime ExaminationDate { set; get; }
-        public DateTime? Re_Examination { set; get; }
+        public string ExaminationDate { set; get; }
+        public string Re_Examination { set; get; }
         public string Results { set; get; }
         public string DoctorAdvice { set; get; }
         public string Examination_File { get; set; }

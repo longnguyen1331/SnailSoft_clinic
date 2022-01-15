@@ -314,7 +314,6 @@ namespace SnailApp.Application.Catalog.Appointments
                 }
             }
 
-
             var appointmentPayment = await _context.AppointmentPayments.Where(x => x.AppointmentId == request.Id).AsNoTracking().FirstOrDefaultAsync();
 
             if (appointmentPayment != null)

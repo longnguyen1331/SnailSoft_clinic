@@ -2438,3 +2438,8 @@ table .form-check .form-check-input {
 }
 
 
+
+
+.ck-editor__editable {
+    min-height: 300px !important;
+}

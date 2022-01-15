@@ -7,6 +7,7 @@ using SnailApp.ViewModels.Common;
 using SnailApp.Application.Catalog.Clinics;
 using SnailApp.Application.Catalog.ExaminationsResults;
 using SnailApp.ViewModels.Catalog.ExaminationsResults;
+using Microsoft.AspNetCore.Http;
 
 namespace SnailApp.BackendApi.Controllers
 {
@@ -30,7 +31,7 @@ namespace SnailApp.BackendApi.Controllers
             return Ok(examinationsResults);
         }
         
-        [HttpGet("appointmentId")]
+        [HttpGet("AppointmentId")]
         public async Task<IActionResult> GetByAppointmentId([FromQuery] ExaminationsResultRequest request)
         {
             var examinationsResult = await _examinationsResultService.GetByAppointmentId(request);
@@ -96,5 +97,14 @@ namespace SnailApp.BackendApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("ckeditoruploadfile")]
+        public async Task<IActionResult> CKEditorUploadFile([FromForm] IFormFile uploadFile)
+        {
+            var result = await _examinationsResultService.CKEditorUploadFile(uploadFile);
+
+            return Ok(result);
+        }
+
     }
 }
