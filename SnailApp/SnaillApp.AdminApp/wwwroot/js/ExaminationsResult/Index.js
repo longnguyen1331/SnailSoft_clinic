@@ -129,22 +129,22 @@ var ExaminationsResult = function () {
                     let html = '';
                     switch (data) {
                         case 0:
-                            html = '<span class="mb-0 text-danger"> Cancel </span>';
+                            html = '<div class="d-flex align-items-center border-left border-4  text-cancel"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0l"> Cancel </span></div>';
                             break;
                         case 1:
-                            html = '<span class="mb-0 text-info"> Booking</span>';
+                            html = '<div class="d-flex align-items-center border-left border-4 text-booking"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Booking</span></div>';
                             break;
                         case 2:
-                            html = '<span class="mb-0 text-warning">Approve</span>';
+                            html = '<div class="d-flex align-items-center border-left border-4  text-confirm"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0">Approve</span></div>';
                             break;
                         case 3:
-                            html = '<span class="mb-0 text-warning"> Checkin</span>';
+                            html = '<div class="d-flex align-items-center border-left border-4  text-checkin"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Checkin</span></div>';
                             break;
                         case 4:
-                            html = '<span class="mb-0"> Examined</span>';
+                            html = '<div class="d-flex align-items-center border-left border-4  text-examination"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Examined</span></div>';
                             break;
                         case 5:
-                            html = '<span class="mb-0 text-primary"> Checkout</span>';
+                            html = '<div class="d-flex align-items-center border-left border-4   text-checkout"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Checkout</span></div>';
                             break;
                     }
 
