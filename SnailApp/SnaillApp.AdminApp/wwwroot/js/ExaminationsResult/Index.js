@@ -156,12 +156,12 @@ var ExaminationsResult = function () {
                     
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="/ExaminationsResult/Update?appointmentId='+full.id+'"  class="edit ms-3">\
-					                <i class="bx bxs-edit"></i>\
+                        html += '<a href="/ExaminationsResult/Update?appointmentId=' + full.id +'"  class="edit btn btn-outline-primary">\
+					                <i class="fadeIn animated bx bx-first-aid"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }

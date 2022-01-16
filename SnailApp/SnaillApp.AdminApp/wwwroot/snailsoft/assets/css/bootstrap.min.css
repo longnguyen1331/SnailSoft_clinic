@@ -2018,9 +2018,13 @@ progress {
 .table-responsive {
     overflow-x: auto;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch
+    -webkit-overflow-scrolling: touch;
+ 
 }
-
+.table-responsive div.row {
+  
+    margin-top: 5px;
+}
 @media (max-width:575.98px) {
     .table-responsive-sm {
         overflow-x: auto;

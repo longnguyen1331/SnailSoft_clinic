@@ -169,12 +169,12 @@ var Blood = function () {
                     
                     let html = '<div class="d-flex order-actions">';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit ms-3">\
+                        html += '<a href="#" class="edit btn btn-outline-primary">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete">\
+                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }
