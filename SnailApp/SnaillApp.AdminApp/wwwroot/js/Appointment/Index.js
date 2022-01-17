@@ -664,22 +664,22 @@ var Appointment = function () {
                 let date = arg.event._def.extendedProps.time.substring(11,16);
                 switch (status) {
                     case 0:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4 bg-cancel text-cancel"><span class="mb-0 text-cancel"><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4 bg-cancel text-cancel"><span class="mb-0 "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user-circle"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                     case 1:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-booking text-booking"><span class="mb-0 text-booking"><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-booking text-booking"><span class="mb-0 "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user-circle"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                     case 2:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-confirm text-confirm"><span class="mb-0 text-confirm "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-confirm text-confirm"><span class="mb-0  "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user-circler"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                     case 3:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkin text-checkin"><span class="mb-0 text-checkin"><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkin text-checkin"><span class="mb-0 "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user-circle"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                     case 4:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-examination text-examination"><span class="mb-0 text-examination"><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-examination text-examination"><span class="mb-0 "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx-user-circle"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                     case 5:
-                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkout text-checkout"><span class="mb-0 text-checkou"><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user"></i> ' + arg.event._def.title + '</span>	</div>';
+                        italicEl.innerHTML = '<div class="d-flex align-items-center border-left border-4  bg-checkout text-checkout"><span class="mb-0 "><i class="fadeIn animated bx bx-alarm-exclamation"></i> ' + date + '<br /><i class="fadeIn animated bx bx-user-circle"></i> ' + arg.event._def.title + '</span>	</div>';
                         break;
                 }
                 
