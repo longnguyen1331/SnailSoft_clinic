@@ -154,14 +154,14 @@ var ExaminationsResult = function () {
             {
                 width: "120px", "title": "Active", "render": function (data, type, full, meta) {
                     
-                    let html = '<div class="d-flex order-actions">';
+                    let html = '<div class="d-flex order-actions"><a href="#" class="edit btn btn-outline-orange"><i class="fadeIn animated bx bx-mail-send"></i></a>';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="/ExaminationsResult/Update?appointmentId=' + full.id +'"  class="edit btn btn-outline-primary">\
+                        html += '<a href="/ExaminationsResult/Update?appointmentId=' + full.id +'"  class="edit btn btn-outline-orange ms-2">\
 					                <i class="fadeIn animated bx bx-first-aid"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-3 delete btn btn-outline-danger">\
+                        html += '<a href="#" class="ms-2 delete btn btn-outline-orange">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }

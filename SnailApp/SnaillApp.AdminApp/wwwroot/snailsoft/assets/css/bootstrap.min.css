@@ -3206,6 +3206,17 @@ textarea.form-control-lg {
         background-color: #212529;
         border-color: #212529
     }
+.btn-outline-orange {
+    color: #E36828;
+    border-color: #E36828
+}
+
+    .btn-outline-orange:hover {
+        color: #fff;
+        background-color: #E36828;
+        border-color: #E36828
+    }
+
 
 .btn-outline-primary {
     color: #19A9A8;
@@ -7542,36 +7553,41 @@ textarea.form-control-lg {
     color: #E36828 !important
 }
 .bg-checkout {
-    border-left: 4px solid #19A9A8 !important;
-    border-radius: 3px 0 0 3px ;
-  /*  background: #E0F1FF !important*/
+    border-left: 8px solid #19A9A8 !important;
+    border-radius: 3px 0 0 3px;
+    padding-left: 5px;
+    /*  background: #E0F1FF !important*/
 }
 
 .bg-cancel {
-    border-left: 4px solid #C5C7CD !important;
+    border-left: 8px solid #C5C7CD !important;
     /* background: #E0F1FF !important*/
     border-radius: 3px 0 0 3px;
+    padding-left:5px;
 }
 
 .bg-booking {
-    
-    border-left: 4px solid #64BBFF !important;
+    border-left: 8px solid #64BBFF !important;
     border-radius: 3px 0 0 3px;
+    padding-left: 5px;
 }
 
 .bg-confirm {
-    border-left: 4px solid #67D5B1 !important;
+    border-left: 8px solid #67D5B1 !important;
     border-radius: 3px 0 0 3px;
+    padding-left: 5px;
 }
 
 .bg-checkin {
-    border-left: 4px solid #7B61FF !important;
+    border-left: 8px solid #7B61FF !important;
     border-radius: 3px 0 0 3px;
+    padding-left: 5px;
 }
 
 .bg-examination {
-    border-left: 4px solid #E36828 !important;
+    border-left: 8px solid #E36828 !important;
     border-radius: 3px 0 0 3px;
+    padding-left: 5px;
 }
 
 

@@ -799,7 +799,7 @@
 .fc-daygrid-dot-event {
     display: flex;
     align-items: center;
-    padding: 2px 0;
+    padding: 0px 2px 0px 2px;
     background: #E0F1FF;
 }
 
