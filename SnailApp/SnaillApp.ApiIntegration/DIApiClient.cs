@@ -28,7 +28,8 @@ namespace SnailApp.ApiIntegration
             services.AddTransient<IAppointmentApiClient, AppointmentApiClient>();
             services.AddTransient<IAppointmentPaymentApiClient, AppointmentPaymentApiClient>();
             services.AddTransient<IExaminationsResultApiClient, ExaminationsResultApiClient>();
-            return services;
+            services.AddTransient<IAppointment_ServiceApiClient, Appointment_ServiceApiClient>();
+            return services; 
         }
     }
     

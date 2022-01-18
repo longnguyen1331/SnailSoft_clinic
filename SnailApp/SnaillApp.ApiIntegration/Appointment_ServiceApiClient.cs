@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using SnailApp.ViewModels.Catalog.ExaminationsResults;
 using SnailApp.ViewModels.Catalog.Appointments;
 using SnailApp.Utilities.Constants;
 using System.IO;
@@ -13,22 +12,21 @@ using System.Net.Http.Headers;
 
 namespace SnailApp.ApiIntegration
 {
-    public interface IExaminationsResultApiClient
+    public interface IAppointment_ServiceApiClient
     {
-        Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageExaminationsResulttPagingRequest request);
-        Task<ApiResult<int>> AddOrUpdateAsync(ExaminationsResultRequest request);
-        Task<ApiResult<ExaminationsResultDto>> GetById(ExaminationsResultRequest request);
-        Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request);
+        Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request);
+        Task<ApiResult<int>> AddOrUpdateAsync(Appointment_ServiceRequest request);
+        Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
-    public class ExaminationsResultApiClient : BaseApiClient, IExaminationsResultApiClient
+    public class Appointment_ServiceApiClient : BaseApiClient, IAppointment_ServiceApiClient
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
 
-        public ExaminationsResultApiClient(IHttpClientFactory httpClientFactory,
+        public Appointment_ServiceApiClient(IHttpClientFactory httpClientFactory,
                    IHttpContextAccessor httpContextAccessor,
                     IConfiguration configuration)
             : base(httpClientFactory, httpContextAccessor, configuration)
@@ -66,7 +64,7 @@ namespace SnailApp.ApiIntegration
                     requestContent.Add(bytes, "uploadFile", uploadFile.FileName);
                 }
 
-                var response = await client.PostAsync($"/api/examinationsResults/ckeditoruploadfile", requestContent);
+                var response = await client.PostAsync($"/api/appointment_Services/ckeditoruploadfile", requestContent);
 
                 return JsonConvert.DeserializeObject<ApiResult<string>>(await response.Content.ReadAsStringAsync());
             }
@@ -76,7 +74,7 @@ namespace SnailApp.ApiIntegration
             }
         }
 
-        public async Task<ApiResult<int>> AddOrUpdateAsync(ExaminationsResultRequest request)
+        public async Task<ApiResult<int>> AddOrUpdateAsync(Appointment_ServiceRequest request)
         {
             try
             {
@@ -92,27 +90,24 @@ namespace SnailApp.ApiIntegration
                 var requestContent = new MultipartFormDataContent();
                 requestContent.Add(new StringContent(request.Id.ToString()), "Id");
                 requestContent.Add(new StringContent(request.AppointmentId.ToString()), "AppointmentId");
-                requestContent.Add(new StringContent(request.ClinicId.ToString()), "ClinicId");
-                if (request.DoctorAdvice != null) requestContent.Add(new StringContent(request.DoctorAdvice), "DoctorAdvice");
-                if (request.Results != null) requestContent.Add(new StringContent(request.Results), "Results");
-                if (request.Re_Examination != null) requestContent.Add(new StringContent(request.Re_Examination), "Re_Examination");
-                if (request.ExaminationDate != null) requestContent.Add(new StringContent(request.ExaminationDate), "ExaminationDate");
+                if (request.ServiceResult != null) requestContent.Add(new StringContent(request.ServiceResult), "ServiceResult");
+                if (request.Date != null) requestContent.Add(new StringContent(request.Date), "Date");
                 requestContent.Add(new StringContent(request.CreatedUserId.ToString()), "CreatedUserId");
                 requestContent.Add(new StringContent(request.ModifiedUserId.ToString()), "ModifiedUserId");
-
-                if (request.Examination_File != null)
+                requestContent.Add(new StringContent(request.IsDefault.ToString()), "IsDefault");
+                
+                if (request.ServiceFile != null)
                 {
                     byte[] data;
-                    using (var br = new BinaryReader(request.Examination_File.OpenReadStream()))
+                    using (var br = new BinaryReader(request.ServiceFile.OpenReadStream()))
                     {
-                        data = br.ReadBytes((int)request.Examination_File.OpenReadStream().Length);
+                        data = br.ReadBytes((int)request.ServiceFile.OpenReadStream().Length);
                     }
                     ByteArrayContent bytes = new ByteArrayContent(data);
-                    requestContent.Add(bytes, "Examination_File", request.Examination_File.FileName);
+                    requestContent.Add(bytes, "ServiceFile", request.ServiceFile.FileName);
                 }
 
-
-                var response = await client.PostAsync($"api/examinationsResults/addorupdate", requestContent);
+                var response = await client.PostAsync($"api/appointment_Services/addorupdate", requestContent);
 
                 return JsonConvert.DeserializeObject<ApiResult<int>>(await response.Content.ReadAsStringAsync());
             }
@@ -122,12 +117,11 @@ namespace SnailApp.ApiIntegration
             }
         }
 
-        public async Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageExaminationsResulttPagingRequest request)
+        public async Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request)
         {
-            var data = await GetAsync<PagedResult<AppointmentDto>>(
-                $"/api/examinationsResults/GetManageListPaging?pageIndex={request.PageIndex}" +
+            var data = await GetAsync<PagedResult<Appointment_ServiceDto>>(
+                $"/api/appointment_Services/GetManageListPaging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}" + 
-                $"&DoctorId={request.DoctorId}" +
                 $"&ClinicId={request.ClinicId}" +
                 $"&ToDate={request.ToDate}" +
                 $"&FromDate={request.FromDate}" +
@@ -136,19 +130,15 @@ namespace SnailApp.ApiIntegration
                 (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
             return data;
         }
-        public async Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request)
+   
+        public async Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request)
         {
-            var data = await GetAsync<ApiResult<ExaminationsResultDto>>($"/api/examinationsResults/AppointmentId?AppointmentId={request.AppointmentId}");
-            return data;
-        }
-        public async Task<ApiResult<ExaminationsResultDto>> GetById(ExaminationsResultRequest request)
-        {
-            var data = await GetAsync<ApiResult<ExaminationsResultDto>>($"/api/examinationsResults/examinationsResultId?Id={request.Id}");
+            var data = await GetAsync<ApiResult<Appointment_ServiceDto>>($"/api/appointment_Services/GetById?Id={request.Id}");
             return data;
         }
         public async Task<ApiResult<int>> DeleteByIds(DeleteRequest request)
         {
-            return await BaseDeleteByIds($"/api/examinationsResults/{string.Join("|", request.Ids)}");
+            return await BaseDeleteByIds($"/api/appointment_Services/{string.Join("|", request.Ids)}");
         }
 
     

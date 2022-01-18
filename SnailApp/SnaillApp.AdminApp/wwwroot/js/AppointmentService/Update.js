@@ -1,6 +1,6 @@
 ﻿//== Class definition
 
-var ExaminationsResult = function () {
+var AppointmentService = function () {
     let edit_form = $("#edit_form");
     let initialComponents = () => {
       
@@ -13,11 +13,15 @@ var ExaminationsResult = function () {
                     if (fieldName) {
                         
                         switch (fieldName) {
-                            case "Examination_File":
+                            case "ServiceFile":
                                 let files = $(el).prop('files');
                                 if (files.length > 0) {
-                                    formData.append("Examination_File", files[0]);
+                                    formData.append("ServiceFile", files[0]);
                                 }
+                                break;
+
+                            case "IsDefault":
+                                formData.append($(el).data("field"), $(el).is(':checked'));
                                 break;
 
 
@@ -26,10 +30,9 @@ var ExaminationsResult = function () {
                         }
                     }
                 }),
-                formData.append("Results", editorValue.getData());
-                formData.append("DoctorAdvice", editorDoctorValue.getData());
+                formData.append("ServiceResult", editorValue.getData());
 
-                App.sendDataFileToURL("/ExaminationsResult/Save", formData, "POST")
+                App.sendDataFileToURL("/AppointmentService/Save", formData, "POST")
                 .then(function (res) {
                     if (!res.isSuccessed) {
                         App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
@@ -43,7 +46,7 @@ var ExaminationsResult = function () {
         )
         $('[name="btnBack"]').click(function (e) {
             e.preventDefault();
-            window.location.href = "/ExaminationsResult/Index";
+            window.location.href = "/AppointmentService/Index";
         })
 
         $('[name="btnDelete"]').click(function (e) {
@@ -64,8 +67,7 @@ var ExaminationsResult = function () {
     }
 
     function deleteDataRows(dataRows) {
-        console.log(dataRows);
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", null, window.location.href)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/AppointmentService/DeleteByIds", null, window.location.href)
             .then(function () {
                 App.showHideButtonDelete(false);
             });

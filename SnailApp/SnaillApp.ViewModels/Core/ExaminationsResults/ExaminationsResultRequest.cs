@@ -14,6 +14,7 @@ namespace SnailApp.ViewModels.Catalog.ExaminationsResults
         public string Re_Examination { set; get; }
         public string Results { set; get; }
         public string DoctorAdvice { set; get; }
+        public IFormFile Examination_File { set; get; }
         public int ClinicId { set; get; }
     }
 }

@@ -18,26 +18,26 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using SnailApp.ViewModels.Enums;
 
-namespace SnailApp.Application.Catalog.Appointments
+namespace SnailApp.Application.Catalog.Appointment_Services
 {
-    public interface IAppointmentService
+    public interface IAppointment_ServiceService
     {
-        Task<ApiResult<int>> CreateAsync(AppointmentRequest request);
-        Task<ApiResult<int>> ChangeStatus(AppointmentRequest request);
-        Task<ApiResult<int>> UpdateAsync(AppointmentRequest request);
+        Task<ApiResult<int>> CreateAsync(Appointment_ServiceRequest request);
+        Task<ApiResult<int>> UpdateAsync(Appointment_ServiceRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
-        Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request);
-        Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request);
+        Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request);
+        Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request);
+        Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
 
-    public class AppointmentService : IAppointmentService
+    public class Appointment_ServiceService : IAppointment_ServiceService
     {
         private readonly ClinicDbContext _context;
         private readonly IMapper _mapper;
         private readonly IFileStorageService _storageService;
         private readonly IConfiguration _configuration;
 
-        public AppointmentService(ClinicDbContext context,
+        public Appointment_ServiceService(ClinicDbContext context,
             IFileStorageService storageService,
             IConfiguration configuration,
             IMapper mapper
@@ -49,69 +49,23 @@ namespace SnailApp.Application.Catalog.Appointments
             _context = context;
         }
 
-        public async Task<ApiResult<int>> CreateAsync(AppointmentRequest request)
+        public async Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile)
         {
             try
             {
-                var appointment = _mapper.Map<Appointment>(request);
-
-                DateTime datetim1;
-                if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd HH:mm", null, DateTimeStyles.None, out datetim1))
-                {
-                    appointment.Date = datetim1;
-                }
-                else
-                {
-                    appointment.Date = DateTime.Now;
-                }
-
-                appointment.CreatedDate = DateTime.Now;
-                appointment.ModifiedDate = DateTime.Now;
-                _context.Appointments.Add(appointment);
-                await _context.SaveChangesAsync();
-                if(request.Appointment_ServiceRequests.Count > 0)
-                {
-                    var appointment_services = _mapper.Map<List<Appointment_Service>>(request.Appointment_ServiceRequests);
-
-                    for(int i=0; i< appointment_services.Count; i++)
-                    {
-                        DateTime date;
-                        if (DateTime.TryParseExact(request.Appointment_ServiceRequests[i].Date, "yyyy-MM-dd HH:mm", null, DateTimeStyles.None, out date))
-                        {
-                            appointment_services[i].Date = date;
-                        }
-                        else
-                        {
-                            appointment_services[i].Date = DateTime.Now;
-                        }
-
-                        appointment_services[i].AppointmentId = appointment.Id;
-                    }
-
-                    _context.Appointment_Services.AddRange(appointment_services);
-                    await _context.SaveChangesAsync();
-                }
-                return new ApiSuccessResult<int>(appointment.Id);
+                return new ApiSuccessResult<string>(_configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + (await this.SaveFile(uploadFile)));
             }
             catch (Exception ex)
             {
-                return new ApiResult<int>()
-                {
-                    IsSuccessed = false,
-                    Message = ex.Message
-                };
+                return new ApiErrorResult<string>(ex.Message);
             }
         }
 
-        public async Task<ApiResult<int>> UpdateAsync(AppointmentRequest request)
+        public async Task<ApiResult<int>> CreateAsync(Appointment_ServiceRequest request)
         {
             try
             {
-                var check = await _context.Appointments.Where(x=>x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
-
-                if (check == null ) throw new EShopException($"Cannot find a appointment with id: {request.Id}");
-
-                var appointment = _mapper.Map<Appointment>(request);
+                var appointment = _mapper.Map<Appointment_Service>(request);
 
                 DateTime datetim1;
                 if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
@@ -123,12 +77,17 @@ namespace SnailApp.Application.Catalog.Appointments
                     appointment.Date = DateTime.Now;
                 }
 
-                appointment.ModifiedDate = DateTime.Now;
 
-                _context.Appointments.Update(appointment);
+                if (request.ServiceFile != null)
+                {
+                    appointment.ServiceFile = await this.SaveFile(request.ServiceFile);
+                }
+
+                appointment.CreatedDate = DateTime.Now;
+                appointment.ModifiedDate = DateTime.Now;
+                _context.Appointment_Services.Add(appointment);
                 await _context.SaveChangesAsync();
                 return new ApiSuccessResult<int>(appointment.Id);
-
             }
             catch (Exception ex)
             {
@@ -140,16 +99,45 @@ namespace SnailApp.Application.Catalog.Appointments
             }
         }
 
-        public async Task<ApiResult<int>> ChangeStatus(AppointmentRequest request)
+        public async Task<ApiResult<int>> UpdateAsync(Appointment_ServiceRequest request)
         {
             try
             {
-                var appointment = await _context.Appointments.Where(x => x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
-                if (appointment == null) throw new EShopException($"Cannot find a appointment with id: {request.Id}");
-                appointment.Status = (AppointmentStatus)request.Status;
-                _context.Appointments.Update(appointment);
+                var check = await _context.Appointment_Services.Where(x=>x.Id == request.Id).AsNoTracking().FirstOrDefaultAsync();
+
+                if (check == null ) throw new EShopException($"Cannot find a appointmentservice with id: {request.Id}");
+
+                check.IsDefault = request.IsDefault;
+                check.ServiceResult = request.ServiceResult;
+                //DateTime datetim1;
+                //if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
+                //{
+                //    check.Date = datetim1;
+                //}
+                //else
+                //{
+                //    check.Date = DateTime.Now;
+                //}
+
+                if (request.ServiceFile != null)
+                {
+                    if (!string.IsNullOrEmpty(check.ServiceFile))
+                    {
+                        await DeleteFile(check.ServiceFile);
+                    }
+
+                    check.ServiceFile = await this.SaveFile(request.ServiceFile);
+                }
+                else
+                {
+                    check.ServiceFile = check.ServiceFile;
+                }
+
+                check.ModifiedDate = DateTime.Now;
+                _context.Appointment_Services.Update(check);
                 await _context.SaveChangesAsync();
-                return new ApiSuccessResult<int>(appointment.Id);
+                return new ApiSuccessResult<int>(check.Id);
+
             }
             catch (Exception ex)
             {
@@ -165,15 +153,11 @@ namespace SnailApp.Application.Catalog.Appointments
         {
             try
             {
-                var appointments = await _context.Appointments.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
+                var appointments = await _context.Appointment_Services.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
 
                 if (appointments == null) throw new EShopException($"Cannot find Id: {string.Join(";", request.Ids)}");
 
-                foreach(var item in appointments)
-                {
-                    _context.Appointment_Services.RemoveRange(item.Appointment_Services);
-                }
-                _context.Appointments.RemoveRange(appointments);
+                _context.Appointment_Services.RemoveRange(appointments);
 
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
 
@@ -186,7 +170,7 @@ namespace SnailApp.Application.Catalog.Appointments
                 };
             }
         }
-        public async Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request)
+        public async Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request)
         {
             try
             {
@@ -202,16 +186,24 @@ namespace SnailApp.Application.Catalog.Appointments
 
                 //1. Select join
 
-                var query = (from a in _context.Appointments
-                         where fDate <= a.Date && a.Date <= tDate
-                         && (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status  : a.Status >= 0)
-                         && request.ClinicId == a.ClinicId
-                         select new { a }
+                var query = (
+                                from a_s in _context.Appointment_Services
+                                join a in _context.Appointments on a_s.AppointmentId equals a.Id
+                                join s in _context.Services on a_s.ServiceId equals s.Id
+                                join u in _context.AppUsers on a_s.DoctorId equals u.Id
+                                join p in _context.AppUsers on a.PatientId equals p.Id
+                                 where fDate <= a_s.Date && a_s.Date <= tDate
+                                 && request.ClinicId == a.ClinicId
+                                 && (request.Status.HasValue ? a.IsDefault == request.Status.Value : (a.IsDefault == true || a.IsDefault == false))
+                                select new { a, a_s,u, s,p }
                             ).AsNoTracking();
 
                 //2. filter
                 if (!string.IsNullOrEmpty(request.TextSearch))
                     query = query.Where(x => x.a.Name.Contains(request.TextSearch)
+                    || (x.p.FirstName + " " + x.p.LastName).Contains(request.TextSearch)
+                    || (x.u.FirstName + " " + x.u.LastName).Contains(request.TextSearch)
+                    || (x.s.Name).Contains(request.TextSearch)
                     || x.a.Code.Contains(request.TextSearch));
 
                 //3.Sort
@@ -234,12 +226,24 @@ namespace SnailApp.Application.Catalog.Appointments
 
                             break;
 
-                        case "name":
+                        case "serviceName":
                             query = (request.OrderDir == "asc") ? query.OrderBy(x => x.a.Name) :
-                                query.OrderByDescending(x => x.a.Name);
+                                query.OrderByDescending(x => x.s.Name);
 
                             break;
 
+
+                        case "doctorFullName":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.u.FirstName + " " + x.u.LastName) :
+                                query.OrderByDescending(x => x.u.FirstName + " " + x.u.LastName);
+
+                            break;
+
+                        case "patientFullName":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.p.FirstName + " " + x.p.LastName) :
+                                query.OrderByDescending(x => x.p.FirstName + " " + x.p.LastName);
+
+                            break;
 
                         default: break;
                     }
@@ -254,15 +258,18 @@ namespace SnailApp.Application.Catalog.Appointments
                                     .Take(request.PageSize);
                 }
 
-                var data = await query.Select(x=> new AppointmentDto() {
-                    Id = x.a.Id,
+                var data = await query.Select(x=> new Appointment_ServiceDto() {
+                    Id = x.a_s.Id,
                     Name =  x.a.Name,
-                    Status =  x.a.Status,
-                    Date =  x.a.Date.ToString("yyyy-MM-ddTHH:mm:ss.sssZ"),
+                    IsDefault =  x.a_s.IsDefault,
+                    ServiceName =  x.s.Name,
+                    DoctorFullName =  x.u.FirstName + " " + x.u.LastName,
+                    PatientFullName =  x.p.FirstName + " " + x.p.LastName,
+                    Date = x.a_s.Date.ToString("yyyy-MM-dd HH:mm"),
                 }).AsNoTracking().ToListAsync();
 
                 //5. Select and projection
-                var pagedResult = new PagedResult<AppointmentDto>()
+                var pagedResult = new PagedResult<Appointment_ServiceDto>()
                 {
                     TotalRecords = totalRow,
                     PageSize = request.PageSize,
@@ -273,7 +280,7 @@ namespace SnailApp.Application.Catalog.Appointments
             }
             catch(Exception ex)
             {
-                return  new PagedResult<AppointmentDto>()
+                return  new PagedResult<Appointment_ServiceDto>()
                 {
                     TotalRecords = 0,
                     PageSize = request.PageSize,
@@ -283,15 +290,17 @@ namespace SnailApp.Application.Catalog.Appointments
                 };
             }
         }
-        public async Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request)
+        public async Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request)
         {
-            var appointment = await (from a in _context.Appointments
+            var appointment = await (from a_s in _context.Appointment_Services
+                                     join s in _context.Services on a_s.ServiceId equals s.Id
+                                     join a in _context.Appointments on a_s.AppointmentId equals a.Id
                                      join doctor in _context.AppUsers on a.DoctorId equals doctor.Id
                                      join patient in _context.AppUsers on a.PatientId equals patient.Id
-                                     where a.Id == request.Id select new { a , doctor, patient}
+                                     where a_s.Id == request.Id select new { a_s, a ,s, doctor, patient}
                                      ).AsNoTracking().FirstOrDefaultAsync();
 
-            var appointmentDto = _mapper.Map<AppointmentDto>(appointment.a);
+            var appointmentDto = _mapper.Map<Appointment_ServiceDto>(appointment.a_s);
             appointmentDto.DoctorFullName = appointment.doctor.FirstName + " " + appointment.doctor.LastName;   
             appointmentDto.PatientFullName = appointment.patient.FirstName + " " + appointment.patient.LastName;
             appointmentDto.PatientAvatar = (!string.IsNullOrEmpty(appointment.patient.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + appointment.patient.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]);
@@ -299,32 +308,10 @@ namespace SnailApp.Application.Catalog.Appointments
             appointmentDto.PatientEmail = appointment.patient.Email;
             appointmentDto.PatientPhone = appointment.patient.PhoneNumber;
             appointmentDto.PatientCode = appointment.patient.Code;
+            appointmentDto.ServiceName = appointment.s.Name;
+            appointmentDto.ServiceFile = !string.IsNullOrEmpty(appointmentDto.ServiceFile) ?  _configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + appointmentDto.ServiceFile : "";
 
-            var appointmentService = await _context.Appointment_Services.Where(x => x.AppointmentId == request.Id).AsNoTracking().ToListAsync();
-            if (appointmentService != null && appointmentService.Count > 0)
-            {
-                appointmentDto.Appointment_Services = new List<Appointment_ServiceDto>();
-                foreach(var item in appointmentService)
-                {
-                    var serviceDto = _mapper.Map<Appointment_ServiceDto>(item);
-                    var service = await _context.Services.FindAsync(item.ServiceId);
-                    var doctor = await _context.AppUsers.FindAsync(item.DoctorId);
-                    serviceDto.DoctorFullName = doctor.FirstName + " " + doctor.LastName;
-                    serviceDto.ServiceName = service.Name;
-                    appointmentDto.Appointment_Services.Add(serviceDto);
-                }
-            }
-
-            var appointmentPayment = await _context.AppointmentPayments.Where(x => x.AppointmentId == request.Id).AsNoTracking().FirstOrDefaultAsync();
-
-            if (appointmentPayment != null)
-            {
-                var payment = _mapper.Map<AppointmentPaymentDto>(appointmentPayment);
-
-                appointmentDto.AppointmentPayments = payment;
-            }
-
-            return new ApiSuccessResult<AppointmentDto>(appointmentDto);
+            return new ApiSuccessResult<Appointment_ServiceDto>(appointmentDto);
         }
 
         private async Task<string> SaveFile(IFormFile file)
@@ -333,19 +320,18 @@ namespace SnailApp.Application.Catalog.Appointments
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             try
             {
-                await _storageService.SaveFileAsync(file.OpenReadStream(), _configuration[SystemConstants.UserConstants.ImageImagePath] + "/" + fileName);
+                await _storageService.SaveFileAsync(file.OpenReadStream(), _configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + fileName);
                 return fileName;
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
-
         }
 
         private async Task DeleteFile(string fileName)
         {
-            await _storageService.DeleteFileAsync(_configuration[SystemConstants.UserConstants.ImageImagePath] + "/" + fileName);
+            await _storageService.DeleteFileAsync(_configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + fileName);
         }
     }
 }

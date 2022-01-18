@@ -17,6 +17,7 @@ using SnailApp.Application.Catalog.Doctor_Services;
 using SnailApp.Application.Catalog.Appointments;
 using SnailApp.Application.Catalog.AppointmentPayments;
 using SnailApp.Application.Catalog.ExaminationsResults;
+using SnailApp.Application.Catalog.Appointment_Services;
 
 namespace SnailApp.Application
 {
@@ -45,6 +46,7 @@ namespace SnailApp.Application
             services.AddTransient<IServiceService, ServiceService>();
             services.AddTransient<IDoctor_ServiceService, Doctor_ServiceService>();
             services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IAppointment_ServiceService, Appointment_ServiceService>();
             services.AddTransient<IAppointmentPaymentService, AppointmentPaymentService>();
             services.AddTransient<IExaminationsResultService, ExaminationsResultService>();
             return services;

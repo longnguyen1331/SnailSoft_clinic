@@ -1,0 +1,67 @@
+﻿@model AppointmentServiceViewModel
+@using SnailApp.ViewModels.Enums;
+
+@section Vendors_CSS{
+	<link rel="stylesheet" href="@Url.Content("~/plugins/DataTables/css/jquery.dataTables.css")" type="text/css">
+	<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datatable/css/dataTables.bootstrap5.min.css")" type="text/css">
+}
+
+@section Custom_CSS{
+<link href="@Url.Content("~/css/customiseDatatable.css")" rel="stylesheet" />
+}
+
+@section Vendors_Scripts{
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datatable/js/dataTables.bootstrap5.min.js")"></script>
+}
+
+@section Custom_Scripts{
+<script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/AppointmentService/Index.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true) {<text>true</text>} else {<text>false</text>},
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true) {<text>true</text>} else {<text>false</text>}
+        }
+    };
+
+
+    $(document).ready(function () {
+        AppointmentService.init();
+    });
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+<div class="card">
+	<div class="card-body">
+		<div class="d-lg-flex align-items-center mb-4 gap-3">
+			<div class="position-relative">
+				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+			</div>
+			<div class="ms-auto">
+				 <div class="row row-cols-md-auto g-lg-3">
+                    <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">From</label>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="inputFromDate">
+                    </div>
+                    <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">To</label>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="inputToDate">
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="table-responsive">
+            <table class="table table-striped table-bordered dataTables_wrapper dt-bootstrap5" id="dtTable" role="grid"></table>
+		</div>
+	</div>
+</div>
+
+
+

@@ -4,57 +4,42 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SnailApp.ViewModels.Common;
-using SnailApp.Application.Catalog.Clinics;
-using SnailApp.Application.Catalog.ExaminationsResults;
-using SnailApp.ViewModels.Catalog.ExaminationsResults;
+using SnailApp.Application.Catalog.Appointment_Services;
 using Microsoft.AspNetCore.Http;
+using SnailApp.ViewModels.Catalog.Appointments;
 
 namespace SnailApp.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ExaminationsResultsController : ControllerBase
+    public class Appointment_ServicesController : ControllerBase
     {
-        private readonly IExaminationsResultService _examinationsResultService;
+        private readonly IAppointment_ServiceService _examinationsResultService;
 
-        public ExaminationsResultsController(IExaminationsResultService examinationsResultService
+        public Appointment_ServicesController(IAppointment_ServiceService examinationsResultService
             )
         {
             _examinationsResultService = examinationsResultService;
         }
 
         [HttpGet("GetManageListPaging")]
-        public async Task<IActionResult> GetManageListPaging([FromQuery] ManageExaminationsResulttPagingRequest request)
+        public async Task<IActionResult> GetManageListPaging([FromQuery] ManageAppointment_ServicePagingRequest request)
         {
             var examinationsResults = await _examinationsResultService.GetManageListPaging(request);
             return Ok(examinationsResults);
         }
         
-        [HttpGet("AppointmentId")]
-        public async Task<IActionResult> GetByAppointmentId([FromQuery] ExaminationsResultRequest request)
-        {
-            var examinationsResult = await _examinationsResultService.GetByAppointmentId(request);
-            if (examinationsResult.IsSuccessed)
-            {
-                if (examinationsResult.ResultObj == null)
-                {
-                    return BadRequest("Cannot find examinationsResult");
-                }
-            }
 
-            return Ok(examinationsResult);
-        }
-
-        [HttpGet("examinationsResultId")]
-        public async Task<IActionResult> GetById([FromQuery] ExaminationsResultRequest request)
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById([FromQuery] Appointment_ServiceRequest request)
         {
             var examinationsResult = await _examinationsResultService.GetById(request);
             if (examinationsResult.IsSuccessed)
             {
                 if (examinationsResult.ResultObj == null)
                 {
-                    return BadRequest("Cannot find examinationsResult");
+                    return BadRequest("Cannot find appointmentservice");
                 }
             }
             
@@ -62,7 +47,7 @@ namespace SnailApp.BackendApi.Controllers
         }
 
         [HttpPost("addorupdate")]
-        public async Task<IActionResult> AddOrUpdate([FromForm] ExaminationsResultRequest request)
+        public async Task<IActionResult> AddOrUpdate([FromForm] Appointment_ServiceRequest request)
         {
             if (!ModelState.IsValid)
             {
