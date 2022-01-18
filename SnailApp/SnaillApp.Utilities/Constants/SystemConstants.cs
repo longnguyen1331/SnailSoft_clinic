@@ -61,6 +61,10 @@ namespace SnailApp.Utilities.Constants
         {
             public const string ExaminationImagePath = "ExaminationImagePath";
         }
+        public class AppointmentServiceConstants
+        {
+            public const string AppointmentServicePath = "AppointmentServicePath";
+        }
         public class TestimonialConstants
         {
             public const string ImagePath = "TestimonialImagePath";

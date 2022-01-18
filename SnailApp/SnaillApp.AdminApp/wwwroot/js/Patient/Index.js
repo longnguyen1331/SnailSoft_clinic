@@ -219,14 +219,14 @@ var Patient = function () {
             { "data": "email", "name": "email", "autoWidth": true, "title": "Email" },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
-                    let html = '<div class="d-flex order-actions">';
+                    let html = '<div class="d-flex order-actions"><a href="#" class="edit btn btn-outline-orange"><i class="fadeIn animated bx bx-history"></i></a>';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="#" class="edit btn btn-outline-primary">\
+                        html += '<a href="#" class="edit ms-2  btn btn-outline-orange">\
 					                <i class="bx bxs-edit"></i>\
 				                </a>';
                     }
                     if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-2 delete btn btn-outline-danger">\
+                        html += '<a href="#" class="ms-2 delete btn btn-outline-orange">\
 					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }

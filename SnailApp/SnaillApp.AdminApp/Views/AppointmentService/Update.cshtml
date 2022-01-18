@@ -1,5 +1,5 @@
 ﻿@using SnailApp.ViewModels.Enums;
-@model ExaminationViewModel
+@model AppointmentServiceViewModel
 
 @section Vendors_CSS{
 <link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
@@ -16,7 +16,7 @@
 }
 
 @section Custom_Scripts{
-<script type="text/javascript" src="@Url.Content("~/js/ExaminationsResult/Update.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/AppointmentService/Update.js")"></script>
 }
 
 <script>
@@ -46,8 +46,8 @@
 
 
     $(document).ready(function () {
-        ExaminationsResult.init();
-        var promises = [init_editor(), init_editorDoctorAdvice()];
+        AppointmentService.init();
+        var promises = [init_editor()];
         Promise.all(promises).then(function(results) {
         });
     });
@@ -61,35 +61,20 @@
             .then(editor => {
                 editor.ui.view.editable.element.style.height = '300px';
                 editorValue = editor;
-                 editor.setData('@Html.Raw(Model.ExaminationsResult != null ? Model.ExaminationsResult.Results : "")');
+                 editor.setData('@Html.Raw(Model.Appointment_Service != null ? Model.Appointment_Service.ServiceResult : "")');
             })
             .catch(error => {
                 console.error(error);
             });
     }
 
-
-    function init_editorDoctorAdvice() {
-        return ClassicEditor
-            .create(document.querySelector('#editorDoctorAdvice'), {
-                extraPlugins: [MyCustomUploadAdapterPlugin]
-            })
-            .then(editor => {
-                editor.ui.view.editable.element.style.height = '300px';
-                editorDoctorValue = editor;
-                editor.setData('@Html.Raw(Model.ExaminationsResult != null ? Model.ExaminationsResult.DoctorAdvice : "")');
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
 
 
     class MyUploadAdapter {
         constructor(loader) {
             // The file loader instance to use during the upload.
             this.loader = loader;
-            this.url = '/ExaminationsResult/CKEditorUploadImage';
+            this.url = '/AppointmentService/CKEditorUploadImage';
         }
 
         // Starts the upload process.
@@ -184,134 +169,6 @@
 
 @await Html.PartialAsync("_PartialToolbar")
 <div class="card">
-@*<<<<<<< HEAD
-	<div class="card-body">
-            <div class="row">
-				<div class="col-md-4">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex flex-column">
-								@if(Model.Appointment != null)
-								{
-										<img src="@Model.Appointment.PatientAvatar" alt="@Model.Appointment.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
-										<div class="mt-3">
-											<h4>@Model.Appointment.PatientFullName</h4>
-											<p class="text-secondary mb-1">Code : @Model.Appointment.PatientCode</p>
-											<p class="text-muted font-size-sm">Phone : @Model.Appointment.PatientPhone</p>
-											<p class="text-muted font-size-sm">Email : @Model.Appointment.PatientEmail</p>
-											<p class="text-muted font-size-sm">Address : @Model.Appointment.PatientAddress</p>
-										</div>
-										<hr class="my-4">
-										<div class="invoice" style="min-height:auto !important;">
-											<table>
-												<tbody>
-													@for(int i = 1; i <=  Model.Appointment.Appointment_Services.Count(); i++)
-													{
-														<tr>
-															<td class="no">@i</td>
-															<td class="text-left">
-																<a target="_blank" href="javascript:;">
-																	@Html.Raw(Model.Appointment.Appointment_Services[i-1].ServiceName)
-																</a>
-																<br/>
-																<a target="_blank" href="javascript:;">
-																	Doctor : @Html.Raw(Model.Appointment.Appointment_Services[i-1].DoctorFullName)
-																</a>
-															</td>
-														</tr>
-													}
-												</tbody>
-										
-											</table>
-										</div>
-									}
-							</div>
-						
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<form id="edit_form">
-						<input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Id : 0)">
-						<input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.Appointment != null ? Model.Appointment.Id : 0)">
-
-						<div class="row">
-							<div class="col-md-6" >
-								<div class="mb-3 px-1">
-									<label class="form-label">Date</label>
-									<input class="result form-control radius-15" type="date" data-field="ExaminationDate" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.ExaminationDate : "")" placeholder="Enter Date">
-								</div>
-							</div>
-
-							<div class="col-md-6" >
-								<div class="mb-3 px-1">
-									<label class="form-label">Re examination date</label>
-									<input class="result form-control radius-15" type="date" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Re_Examination : "")" data-field="Re_Examination">
-								</div>
-							</div>
-
-							<div class="col-sm-12">
-								<div class="mb-3">
-									<label class="form-label">Results</label>
-									<div id="editor" data-field="Results"></div>
-								</div>
-							</div>
-
-							<div class="col-sm-12">
-								<div class="mb-3">
-									<label class="form-label">Doctor advice</label>
-									<div id="editorDoctorAdvice" data-field="Results"></div>
-								</div>
-							</div>
-
-                            <div class="col-sm-12">
-								 <div class="mb-3">
-								    <label class="form-label">Attach file</label>
-								    <input class="form-control" data-field="Examination_File" type="file">
-                                    
-							    </div>
-							</div>
-
-                            @if (Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
-                            {
-                                  <div class="col-md-12">	<a target="_blank" href="@Model.ExaminationsResult.Examination_File">
-                                      <i class="bx bxs-file me-2 font-24 text-primary"></i> 
-                                      @Model.ExaminationsResult.Examination_File</a>
-									</div>
-                            }
-
-                          
-
-
-                           
-							<div class="col-sm-12">
-								<div class="mb-3 text-center">
-									@if (Model.CurrentUserRole.IsAllowEdit)
-									{
-										<text>
-											<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
-                                  
-										</text>
-									}
-									@if (Model.CurrentUserRole.IsAllowDelete && Model.ExaminationsResult != null)
-									{
-										<text>
-											<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
-										</text>
-									}
-										<button type="button"class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>
-								</div>
-								
-							</div>
-						</div>
-					</form>
-
-				</div>
-                
-		    </div>
-		
-	</div>
-=======*@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
@@ -342,38 +199,15 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="primary-pills-info" role="tabpanel">
                                 <div class="d-flex flex-column">
-                                    @if (Model.Appointment != null)
+                                    @if (Model.Appointment_Service != null)
                                     {
-                                        <img src="@Model.Appointment.PatientAvatar" alt="@Model.Appointment.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
+                                        <img src="@Model.Appointment_Service.PatientAvatar" alt="@Model.Appointment_Service.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
                                         <div class="mt-3">
-                                            <h4>@Model.Appointment.PatientFullName</h4>
-                                            <p class="text-secondary mb-1">Code : @Model.Appointment.PatientCode</p>
-                                            <p class="text-muted font-size-sm">Phone : @Model.Appointment.PatientPhone</p>
-                                            <p class="text-muted font-size-sm">Email : @Model.Appointment.PatientEmail</p>
-                                            <p class="text-muted font-size-sm">Address : @Model.Appointment.PatientAddress</p>
-                                        </div>
-                                        <hr class="my-4">
-                                        <div class="invoice" style="min-height:auto !important;">
-                                            <table>
-                                                <tbody>
-                                                    @for (int i = 1; i <= Model.Appointment.Appointment_Services.Count(); i++)
-                                                    {
-                                                        <tr>
-                                                            <td class="no">@i</td>
-                                                            <td class="text-left">
-                                                                <a target="_blank" href="/AppointmentService/Update?id=@Model.Appointment.Appointment_Services[i-1].Id">
-                                                                    @Html.Raw(Model.Appointment.Appointment_Services[i-1].ServiceName)
-                                                                </a>
-                                                                <br />
-                                                                <a target="_blank" href="/AppointmentService/Update?id=@Model.Appointment.Appointment_Services[i-1].Id">
-                                                                    Doctor : @Html.Raw(Model.Appointment.Appointment_Services[i-1].DoctorFullName)
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-
-                                            </table>
+                                            <h4>@Model.Appointment_Service.PatientFullName</h4>
+                                            <p class="text-secondary mb-1">Code : @Model.Appointment_Service.PatientCode</p>
+                                            <p class="text-muted font-size-sm">Phone : @Model.Appointment_Service.PatientPhone</p>
+                                            <p class="text-muted font-size-sm">Email : @Model.Appointment_Service.PatientEmail</p>
+                                            <p class="text-muted font-size-sm">Address : @Model.Appointment_Service.PatientAddress</p>
                                         </div>
                                     }
                                 </div>
@@ -409,6 +243,9 @@
                                 </div>
                                 <!--/row-->
                             </div>
+                            @*<div class="tab-pane fade" id="primary-pills-point" role="tabpanel">
+
+                                </div>*@
                         </div>
 
 
@@ -418,21 +255,21 @@
             </div>
             <div class="col-md-8">
                 <form id="edit_form">
-                    <input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Id : 0)">
-                    <input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.Appointment != null ? Model.Appointment.Id : 0)">
+                    <input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.Appointment_Service != null ? Model.Appointment_Service.Id : 0)">
+                    <input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.Appointment_Service != null ? Model.Appointment_Service.AppointmentId : 0)">
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3 px-1">
-                                <label class="form-label">Date</label>
-                                <input class="result form-control radius-15" type="date" data-field="ExaminationDate" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.ExaminationDate : "")" placeholder="Enter Date">
+                                <label class="form-label">Service</label>
+                                <input class="result form-control radius-15" type="text" value="@(Model.Appointment_Service != null ? Model.Appointment_Service.ServiceName : "")" disabled>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3 px-1">
-                                <label class="form-label">Re examination date</label>
-                                <input class="result form-control radius-15" type="date" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Re_Examination : "")" data-field="Re_Examination">
+                                <label class="form-label">Date</label>
+                                <input class="result form-control radius-15" type="text" value="@(Model.Appointment_Service != null ? Model.Appointment_Service.Date : "")" disabled>
                             </div>
                         </div>
 
@@ -443,29 +280,27 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
-                            <div class="mb-3">
-                                <label class="form-label">Doctor advice</label>
-                                <div id="editorDoctorAdvice" data-field="Results"></div>
-                            </div>
-                        </div>
+                        <div class="col-md-12" >
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" data-field="IsDefault" @(Model.Appointment_Service != null ? (Model.Appointment_Service.IsDefault ? "checked" : "") : "") >
+								<label class="form-check-label" for="IsDefault">Status</label>
+							</div>
+						</div>
 
                         <div class="col-sm-12">
 								<div class="mb-3">
 								<label class="form-label">Attach file</label>
-								<input class="form-control" data-field="Examination_File" type="file">
+								<input class="form-control" data-field="ServiceFile" type="file">
 							</div>
 						</div>
 
-                        @if (Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
+                        @if (Model.Appointment_Service != null && !string.IsNullOrEmpty(Model.Appointment_Service.ServiceFile))
                         {
-                            <div class="col-md-12">	<a target="_blank" href="@Model.ExaminationsResult.Examination_File">
+                            <div class="col-md-12">	<a target="_blank" href="@Model.Appointment_Service.ServiceFile">
                                 <i class="bx bxs-file me-2 font-24 text-primary"></i> 
-                                @Model.ExaminationsResult.Examination_File</a>
+                                @Model.Appointment_Service.ServiceFile</a>
 							</div>
                         }
-
-                          
 
                         <div class="col-sm-12">
                             <div class="mb-3 text-center">
@@ -476,7 +311,7 @@
 
                                     </text>
                                 }
-                                @if (Model.CurrentUserRole.IsAllowDelete && Model.ExaminationsResult != null)
+                                @if (Model.CurrentUserRole.IsAllowDelete && Model.Appointment_Service != null)
                                 {
                                     <text>
                                         <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>

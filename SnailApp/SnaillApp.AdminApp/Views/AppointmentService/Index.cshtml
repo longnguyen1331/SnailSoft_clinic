@@ -1,4 +1,4 @@
-﻿@model ExaminationViewModel
+﻿@model AppointmentServiceViewModel
 @using SnailApp.ViewModels.Enums;
 
 @section Vendors_CSS{
@@ -17,7 +17,7 @@
 
 @section Custom_Scripts{
 <script type="text/javascript" src="@Url.Content("~/js/customiseDatatable.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/ExaminationsResult/Index.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/AppointmentService/Index.js")"></script>
 }
 
 <script>
@@ -32,7 +32,7 @@
 
 
     $(document).ready(function () {
-        ExaminationsResult.init();
+        AppointmentService.init();
     });
 
 </script>
@@ -43,28 +43,14 @@
 		<div class="d-lg-flex align-items-center mb-4 gap-3">
 			<div class="position-relative">
 				<input type="text" class="form-control ps-5 radius-30" placeholder="Search" id="dtTableSearch"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-                
-
 			</div>
 			<div class="ms-auto">
 				 <div class="row row-cols-md-auto g-lg-3">
-                    <div class="col-md-2">
-                         <select data-control="select2" id="FilterStatus" class="form-select form-select-solid  radius-10 single-select">
-                            <option value="-1" selected>All</option>
-                            <option value="@((int)AppointmentStatus.Cancel)">Cancel</option>
-                            <option value="@((int)AppointmentStatus.Booking)">Booking</option>
-                            <option value="@((int)AppointmentStatus.Approve)">Approve</option>
-                            <option value="@((int)AppointmentStatus.Checkin)">Checkin</option>
-                            <option value="@((int)AppointmentStatus.Examined)">Examined</option>
-                            <option value="@((int)AppointmentStatus.Checkout)">Checkout</option>
-                        </select>
-                    </div>
-
-                    <label for="inputFromDate" class="col-md-1 col-form-label text-md-end">From</label>
+                    <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">From</label>
                     <div class="col-md-4">
                         <input type="date" class="form-control" id="inputFromDate">
                     </div>
-                    <label for="inputFromDate" class="col-md-1 col-form-label text-md-end">To</label>
+                    <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">To</label>
                     <div class="col-md-4">
                         <input type="date" class="form-control" id="inputToDate">
                     </div>
@@ -77,6 +63,5 @@
 	</div>
 </div>
 
-@await Html.PartialAsync("_PartialConfirmDeleteModal")
 
 

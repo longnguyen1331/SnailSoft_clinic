@@ -10,79 +10,73 @@ using SnailApp.Utilities.Constants;
 using SnailApp.Utilities.Session;
 using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
-using SnailApp.ViewModels.Catalog.ExaminationsResults;
 using Microsoft.Extensions.Configuration;
+using SnailApp.ViewModels.Catalog.Appointments;
 
 namespace SnailApp.AdminApp.Controllers
 {
-    public class ExaminationsResultController : BaseController
+    public class AppointmentServiceController : BaseController
     {
-        private readonly IAppointmentApiClient _appointmentApiClient;
-        private readonly IExaminationsResultApiClient _examinationsResultApiClient;
+        private readonly IAppointment_ServiceApiClient _appointment_ServiceApiClient;
         private readonly IMenuApiClient _menuApiClient;
         private readonly IConfiguration _configuration;
-        public ExaminationsResultController(IAppointmentApiClient appointmentApiClient, IExaminationsResultApiClient examinationsResultApiClient,
+        public AppointmentServiceController(IAppointment_ServiceApiClient appointment_ServiceApiClient, 
             IMenuApiClient menuApiClient,
                                     IConfiguration configuration)
         {
-            _appointmentApiClient = appointmentApiClient;
-            _examinationsResultApiClient = examinationsResultApiClient;
+            _appointment_ServiceApiClient = appointment_ServiceApiClient;
             _menuApiClient = menuApiClient;
             _configuration = configuration;
         }
 
         public IActionResult Index()
         {
-            ExaminationViewModel model = new ExaminationViewModel();
+            AppointmentServiceViewModel model = new AppointmentServiceViewModel();
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Tiltle = "Examination Result";
-            model.Breadcrumbs = new List<string>() {  "Examinations", "Examination Result" };
+            ViewBag.Tiltle = "Examination Service";
+            model.Breadcrumbs = new List<string>() {  "Examinations", "Examination Service" };
             return View(model);
         }
 
-        public async Task<IActionResult> Update(int appointmentId)
+        public async Task<IActionResult> Update(int id)
         {
-            ExaminationViewModel model = new ExaminationViewModel();
+            AppointmentServiceViewModel model = new AppointmentServiceViewModel();
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
-            ViewBag.Tiltle = "Examination Result";
-            model.Breadcrumbs = new List<string>() { "Examinations", "Examination Result" };
-            var result = await _examinationsResultApiClient.GetByAppointmentId(new ExaminationsResultRequest() { AppointmentId = appointmentId });
-            if (result.IsSuccessed)
-            {
-                model.ExaminationsResult = result.ResultObj;
-                model.ExaminationsResult.Examination_File = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + model.ExaminationsResult.Examination_File;
-            }
-
-            var appointment = await _appointmentApiClient.GetById(new ViewModels.Catalog.Appointments.AppointmentRequest() { Id = appointmentId });
+            model.Breadcrumbs = new List<string>() { "Examinations", "Examination Service" };
+         
+            var appointment = await _appointment_ServiceApiClient.GetById(new ViewModels.Catalog.Appointments.Appointment_ServiceRequest() { Id = id });
             if (appointment.IsSuccessed)
             {
-                model.Appointment = appointment.ResultObj;
-                model.Appointment.PatientAvatar = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + appointment.ResultObj.PatientAvatar;
+                model.Appointment_Service = appointment.ResultObj;
+                model.Appointment_Service.ServiceFile = !string.IsNullOrEmpty(model.Appointment_Service.ServiceFile) ?_configuration[SystemConstants.AppConstants.BaseAddress] + "/" + appointment.ResultObj.ServiceFile : ""; 
+                model.Appointment_Service.PatientAvatar = _configuration[SystemConstants.AppConstants.BaseAddress] + _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + appointment.ResultObj.PatientAvatar; 
 
             }
 
+            ViewBag.Tiltle = "Examination Service";
 
             return View(model);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> DataTableGetList(int? draw, int? start, int? length, int status, string fDate, string tDate, string doctorId)
+        public async Task<IActionResult> DataTableGetList(int? draw, int? start, int? length, string textSearch,  bool? status, string fDate, string tDate, string doctorId)
         {
             var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
             var sortColumnDir = Request.Form["order[0][dir]"].FirstOrDefault();
             int skip = start != null ? Convert.ToInt32((start / length) + 1) : 1;
             int pageSize = length != null ? Convert.ToInt32(length) : 10;
 
-            var request = new ManageExaminationsResulttPagingRequest()
+            var request = new ManageAppointment_ServicePagingRequest()
             {
                 Status = status,
+                TextSearch = textSearch,
                 FromDate = fDate,
-                DoctorId = doctorId,
+                //DoctorId = doctorId,
                 ToDate = tDate,  
                 ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId)),
                 PageIndex = skip,
@@ -91,15 +85,15 @@ namespace SnailApp.AdminApp.Controllers
                 OrderDir = !string.IsNullOrEmpty(sortColumnDir) ? sortColumnDir : "desc"
             };
 
-            var examinationsResultApiClient = await _examinationsResultApiClient.GetManageListPaging(request);
+            var AppointmentServiceApiClient = await _appointment_ServiceApiClient.GetManageListPaging(request);
 
 
             return Json(new
             {
                 draw = draw,
-                recordsFiltered = examinationsResultApiClient.TotalRecords,
-                recordsTotal = examinationsResultApiClient.TotalRecords,
-                data = examinationsResultApiClient.Items
+                recordsFiltered = AppointmentServiceApiClient.TotalRecords,
+                recordsTotal = AppointmentServiceApiClient.TotalRecords,
+                data = AppointmentServiceApiClient.Items
             });
         }
 
@@ -107,7 +101,7 @@ namespace SnailApp.AdminApp.Controllers
         public async Task<IActionResult> DeleteByIds([FromBody] DeleteRequest request)
         {
             string resultMessage = string.Empty;
-            var result = await _examinationsResultApiClient.DeleteByIds(request);
+            var result = await _appointment_ServiceApiClient.DeleteByIds(request);
 
             if (!result.IsSuccessed)
             {
@@ -122,7 +116,7 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromForm] ExaminationsResultRequest rq)
+        public async Task<IActionResult> Save([FromForm] Appointment_ServiceRequest rq)
         {
             ApiResult<int> result = null;
 
@@ -130,10 +124,9 @@ namespace SnailApp.AdminApp.Controllers
 
             if (rq != null)
             {
-                rq.ClinicId = System.Convert.ToInt32(HttpContext.Session.GetString(SystemConstants.AppConstants.DefaultClinicId));
                 rq.CreatedUserId = userGuid;
                 rq.ModifiedUserId = userGuid;
-                result = await _examinationsResultApiClient.AddOrUpdateAsync(rq);
+                result = await _appointment_ServiceApiClient.AddOrUpdateAsync(rq);
             }
             else
             {
@@ -154,7 +147,7 @@ namespace SnailApp.AdminApp.Controllers
             var urls = new List<string>();
             if (Request.Form.Files != null && Request.Form.Files.Count > 0)
             {
-                var postApiClient = await _examinationsResultApiClient.CKEditorUploadFile(Request.Form.Files[0]);
+                var postApiClient = await _appointment_ServiceApiClient.CKEditorUploadFile(Request.Form.Files[0]);
 
                 if (postApiClient.IsSuccessed)
                 {

@@ -1,13 +1,11 @@
 ﻿//== Class definition
 
-var ExaminationsResult = function () {
+var AppointmentService = function () {
     let dtTable = null,editingData = null;
 
     let initialComponents = () => {
         $('#inputFromDate').val(new Date().toISOString().slice(0, 8) + '01');
         $('#inputToDate').val(new Date().toISOString().slice(0, 10));
-
-
 
         $('#dtTableSearch').on('keyup', function (e) {
             e.preventDefault();
@@ -47,7 +45,7 @@ var ExaminationsResult = function () {
     let initialDatatable = function () {
         var datatableOption = initialDatatableOption();
         datatableOption.buttons = ['excel', 'pdf', 'print'];
-        datatableOption.ajax.url = "/ExaminationsResult/DataTableGetList";
+        datatableOption.ajax.url = "/AppointmentService/DataTableGetList";
         datatableOption.ajax.data = {
             textSearch: function () {
                 return $('#dtTableSearch').val();
@@ -59,7 +57,7 @@ var ExaminationsResult = function () {
                 return $('#inputToDate').val();
             },
             status: function () {
-                return $('#FilterStatus').val();
+                return null;
             },
             doctorId: function () {
                 return '';
@@ -73,7 +71,7 @@ var ExaminationsResult = function () {
                 "visible": false
             },
             {
-                "targets": [0, 4,5, 6],
+                "targets": [0, 5, 6,7],
                 className: 'dt-body-center',
                 "orderable": false
             }
@@ -121,32 +119,15 @@ var ExaminationsResult = function () {
                 }
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
+            { "data": "serviceName", "name": "serviceName", "autoWidth": true, "title": "Service" },
             { "data": "doctorFullName", "name": "doctorFullName", "autoWidth": true, "title": "Doctor Name" },
             { "data": "patientFullName", "name": "patientFullName", "autoWidth": true, "title": "Patient Name" },
             { "data": "date", "name": "date", "autoWidth": true, "title": "Date" },
             {
-                "data": "status", "name": "status", "autoWidth": true, "title": "Status", "render": function (data, type, full, meta) {
-                    let html = '';
-                    switch (data) {
-                        case 0:
-                            html = '<div class="d-flex align-items-center border-left border-4  text-cancel"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0l"> Cancel </span></div>';
-                            break;
-                        case 1:
-                            html = '<div class="d-flex align-items-center border-left border-4 text-booking"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Booking</span></div>';
-                            break;
-                        case 2:
-                            html = '<div class="d-flex align-items-center border-left border-4  text-confirm"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0">Approve</span></div>';
-                            break;
-                        case 3:
-                            html = '<div class="d-flex align-items-center border-left border-4  text-checkin"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Checkin</span></div>';
-                            break;
-                        case 4:
-                            html = '<div class="d-flex align-items-center border-left border-4  text-examination"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Examined</span></div>';
-                            break;
-                        case 5:
-                            html = '<div class="d-flex align-items-center border-left border-4   text-checkout"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Checkout</span></div>';
-                            break;
-                    }
+                "data": "isDefault", "name": "isDefault", "autoWidth": true, "title": "Status", "render": function (data, type, full, meta) {
+                    if (data) {
+                        html = '<div class="d-flex align-items-center border-left border-4  text-examination"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Examined</span></div>';
+                    }else html = '<div class="d-flex align-items-center border-left border-4  text-checkin"><i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i><span class="mb-0"> Checkin</span></div>';
 
                     return html;
                 }
@@ -156,13 +137,8 @@ var ExaminationsResult = function () {
                     
                     let html = '<div class="d-flex order-actions"><a href="#" class="edit btn btn-outline-orange"><i class="fadeIn animated bx bx-mail-send"></i></a>';
                     if (user.roles.isAllowEdit == true) {
-                        html += '<a href="/ExaminationsResult/Update?appointmentId=' + full.id +'"  class="edit btn btn-outline-orange ms-2">\
+                        html += '<a href="/AppointmentService/Update?id=' + full.id +'"  class="edit btn btn-outline-orange ms-2">\
 					                <i class="fadeIn animated bx bx-first-aid"></i>\
-				                </a>';
-                    }
-                    if (user.roles.isAllowDelete == true) {
-                        html += '<a href="#" class="ms-2 delete btn btn-outline-orange">\
-					                <i class="bx bxs-trash"></i>\
 				                </a>';
                     }
                     html += '</div> ';
@@ -179,8 +155,6 @@ var ExaminationsResult = function () {
         //    editingData = dtTable.row($(this).parents('tr')).data();
         //});
 
-     
-
         $('#dtTable tbody').on('click', 'a.delete', function (e) {
             e.preventDefault();
             let selectedDataRow = dtTable.row($(this).parents('tr')).data();
@@ -192,7 +166,7 @@ var ExaminationsResult = function () {
     };
 
     function deleteDataRows(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", dtTable, null)
+        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/AppointmentService/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
             App.showHideButtonDelete(false);

@@ -30,7 +30,6 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageExaminationsResulttPagingRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
-    
 
     public class ExaminationsResultService : IExaminationsResultService
     {

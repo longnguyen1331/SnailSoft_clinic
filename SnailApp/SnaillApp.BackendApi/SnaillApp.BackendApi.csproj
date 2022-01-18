@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\download\DocTemplateFiles\" />
+    <Folder Include="wwwroot\download\Appointments\Files\" />
     <Folder Include="wwwroot\download\Examinations\Images\" />
     <Folder Include="wwwroot\download\Posts\Images\" />
     <Folder Include="wwwroot\download\Products\Images\" />
