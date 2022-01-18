@@ -83,6 +83,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                              join patient in _context.AppUsers on a.PatientId equals patient.Id
                              join doctor in _context.AppUsers on a.DoctorId equals doctor.Id
                              where fDate <= a.Date && a.Date <= tDate
+                             && request.ClinicId == a.ClinicId
                              && (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status : a.Status >= 0)
                                  select new { a, patient, doctor }
                             ).AsNoTracking();
@@ -195,6 +196,12 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                 }
 
 
+
+                if (request.Examination_File != null)
+                {
+                    appointment.Examination_File = await this.SaveFile(request.Examination_File);
+                }
+
                 appointment.CreatedDate = DateTime.Now;
                 appointment.ModifiedDate = DateTime.Now;
                 _context.ExaminationsResults.Add(appointment);
@@ -242,6 +249,20 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                     appointment.Re_Examination = new Nullable<DateTime>();
                 }
 
+                if (request.Examination_File != null)
+                {
+                    if (!string.IsNullOrEmpty(appointment.Examination_File))
+                    {
+                        await DeleteFile(appointment.Examination_File);
+                    }
+
+                    appointment.Examination_File = await this.SaveFile(request.Examination_File);
+                }
+                else
+                {
+                    appointment.Examination_File = check.Examination_File;
+                }
+
                 appointment.ModifiedDate = DateTime.Now;
 
                 _context.ExaminationsResults.Update(appointment);
@@ -267,6 +288,14 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
 
                 if (appointments == null) throw new EShopException($"Cannot find Id: {string.Join(";", request.Ids)}");
 
+                foreach (var item in appointments)
+                {
+                    if (!string.IsNullOrEmpty(item.Examination_File))
+                    {
+                        await this.DeleteFile(item.Examination_File);
+                    }
+                }
+
                 _context.ExaminationsResults.RemoveRange(appointments);
 
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
@@ -287,6 +316,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                                      ).AsNoTracking().FirstOrDefaultAsync();
 
             var appointmentDto = _mapper.Map<ExaminationsResultDto>(appointment.a);
+            appointmentDto.Examination_File = _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointmentDto.Examination_File;
             return new ApiSuccessResult<ExaminationsResultDto>(appointmentDto);
         }
         public async Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request)
@@ -297,6 +327,8 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                                      ).AsNoTracking().FirstOrDefaultAsync();
             if(appointment != null && appointment.a != null)
             {
+                appointment.a.Examination_File = _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointment.a.Examination_File;
+
                 return new ApiSuccessResult<ExaminationsResultDto>(_mapper.Map<ExaminationsResultDto>(appointment.a));
 
             }

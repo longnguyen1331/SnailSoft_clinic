@@ -62,7 +62,7 @@ namespace SnailApp.BackendApi.Controllers
         }
 
         [HttpPost("addorupdate")]
-        public async Task<IActionResult> AddOrUpdate([FromBody] ExaminationsResultRequest request)
+        public async Task<IActionResult> AddOrUpdate([FromForm] ExaminationsResultRequest request)
         {
             if (!ModelState.IsValid)
             {

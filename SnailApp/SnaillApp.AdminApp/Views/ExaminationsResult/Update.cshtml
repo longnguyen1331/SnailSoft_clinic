@@ -12,8 +12,7 @@
 @section Vendors_Scripts{
 	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.js")"></script>
 	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js")"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-
+	<script src="@Url.Content("~/plugins/ckeditor/ckeditor.js")"></script>
 }
 
 @section Custom_Scripts{
@@ -250,6 +249,26 @@
 								</div>
 							</div>
 
+                            <div class="col-sm-12">
+								 <div class="mb-3">
+								    <label class="form-label">Attach file</label>
+								    <input class="form-control" data-field="Examination_File" type="file">
+                                    
+							    </div>
+							</div>
+
+                            @if (Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
+                            {
+                                  <div class="col-md-12">	<a target="_blank" href="@Model.ExaminationsResult.Examination_File">
+                                      <i class="bx bxs-file me-2 font-24 text-primary"></i> 
+                                      @Model.ExaminationsResult.Examination_File</a>
+									</div>
+                            }
+
+                          
+
+
+                           
 							<div class="col-sm-12">
 								<div class="mb-3 text-center">
 									@if (Model.CurrentUserRole.IsAllowEdit)

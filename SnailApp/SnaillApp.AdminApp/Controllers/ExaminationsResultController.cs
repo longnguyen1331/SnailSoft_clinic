@@ -52,7 +52,9 @@ namespace SnailApp.AdminApp.Controllers
             if (result.IsSuccessed)
             {
                 model.ExaminationsResult = result.ResultObj;
+                model.ExaminationsResult.Examination_File = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + model.ExaminationsResult.Examination_File;
             }
+
             var appointment = await _appointmentApiClient.GetById(new ViewModels.Catalog.Appointments.AppointmentRequest() { Id = appointmentId });
             if (appointment.IsSuccessed)
             {
@@ -89,6 +91,7 @@ namespace SnailApp.AdminApp.Controllers
 
             var examinationsResultApiClient = await _examinationsResultApiClient.GetManageListPaging(request);
 
+
             return Json(new
             {
                 draw = draw,
@@ -117,7 +120,7 @@ namespace SnailApp.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] ExaminationsResultRequest rq)
+        public async Task<IActionResult> Save([FromForm] ExaminationsResultRequest rq)
         {
             ApiResult<int> result = null;
 

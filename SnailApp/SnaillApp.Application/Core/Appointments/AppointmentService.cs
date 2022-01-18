@@ -205,6 +205,7 @@ namespace SnailApp.Application.Catalog.Appointments
                 var query = (from a in _context.Appointments
                          where fDate <= a.Date && a.Date <= tDate
                          && (request.Status >= 0 ? a.Status == (AppointmentStatus)request.Status  : a.Status >= 0)
+                         && request.ClinicId == a.ClinicId
                          select new { a }
                             ).AsNoTracking();
 

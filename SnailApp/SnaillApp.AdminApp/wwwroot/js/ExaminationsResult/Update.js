@@ -6,28 +6,38 @@ var ExaminationsResult = function () {
       
         $('[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
-            let result = {};
+            let formData = new FormData();
             if (checkDataUpdate()) {
                 edit_form.find("select, textarea, input").each((index, el) => {
                     let fieldName = $(el).data("field");
                     if (fieldName) {
+                        
                         switch (fieldName) {
+                            case "Examination_File":
+                                let files = $(el).prop('files');
+                                if (files.length > 0) {
+                                    formData.append("Examination_File", files[0]);
+                                }
+                                break;
+
+
                             default:
-                                result[$(el).data("field")] = $(el).val();
+                                formData.append($(el).data("field"), $(el).val());
                         }
                     }
                 }),
-                    result["Results"] = editorValue.getData(),
-                    result["DoctorAdvice"] = editorDoctorValue.getData(),
-                    App.sendDataToURL("/ExaminationsResult/Save", result, "POST")
-                    .then(function (res) {
-                        if (!res.isSuccessed) {
-                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
-                        }
-                        else {
-                            window.location.reload();
-                        }
-                    })
+                formData.append("Results", editorValue.getData());
+                formData.append("DoctorAdvice", editorDoctorValue.getData());
+
+                App.sendDataFileToURL("/ExaminationsResult/Save", formData, "POST")
+                .then(function (res) {
+                    if (!res.isSuccessed) {
+                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                })
                 }
             }
         )
