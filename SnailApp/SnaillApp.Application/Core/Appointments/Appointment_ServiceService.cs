@@ -26,6 +26,7 @@ namespace SnailApp.Application.Catalog.Appointment_Services
         Task<ApiResult<int>> UpdateAsync(Appointment_ServiceRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
         Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request);
+        Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request);
         Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
     }
@@ -312,6 +313,39 @@ namespace SnailApp.Application.Catalog.Appointment_Services
             appointmentDto.ServiceFile = !string.IsNullOrEmpty(appointmentDto.ServiceFile) ?  _configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + appointmentDto.ServiceFile : "";
 
             return new ApiSuccessResult<Appointment_ServiceDto>(appointmentDto);
+        }
+
+        public async Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request)
+        {
+            var appointment = await (from a_s in _context.Appointment_Services
+                                     join s in _context.Services on a_s.ServiceId equals s.Id
+                                     join a in _context.Appointments on a_s.AppointmentId equals a.Id
+                                     join doctor in _context.AppUsers on a.DoctorId equals doctor.Id
+                                     join patient in _context.AppUsers on a.PatientId equals patient.Id
+                                     where a_s.AppointmentId == request.AppointmentId
+                                     select new { a_s, a, s, doctor, patient }
+                                     ).AsNoTracking().ToListAsync();
+
+            List<Appointment_ServiceDto> appointments = new List<Appointment_ServiceDto>();
+
+
+            foreach(var item in appointment)
+            {
+                var dto = _mapper.Map<Appointment_ServiceDto>(item.a_s);
+
+                dto.DoctorFullName = item.doctor.FirstName + " " + item.doctor.LastName;
+                dto.PatientFullName = item.patient.FirstName + " " + item.patient.LastName;
+                dto.PatientAvatar = (!string.IsNullOrEmpty(item.patient.Avatar) ? _configuration[SystemConstants.UserConstants.UserImagePath] + "/" + item.patient.Avatar : _configuration[SystemConstants.AppConstants.FileNoImagePerson]);
+                dto.PatientAddress = item.patient.Address;
+                dto.PatientEmail = item.patient.Email;
+                dto.PatientPhone = item.patient.PhoneNumber;
+                dto.PatientCode = item.patient.Code;
+                dto.ServiceName = item.s.Name;
+                dto.ServiceFile = !string.IsNullOrEmpty(dto.ServiceFile) ? _configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + dto.ServiceFile : "";
+                appointments.Add(dto);
+            }
+
+            return new List<Appointment_ServiceDto>(appointments);
         }
 
         private async Task<string> SaveFile(IFormFile file)

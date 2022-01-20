@@ -193,6 +193,56 @@
         return defered.promise();
     };
 
+    let cancelDataConfirm = (data, url, table, urlTroVe) => {
+        var defered = $.Deferred();
+
+        Swal.fire({
+            title: 'Are you sure to cancel?',
+            icon: "warning",
+            customClass: { cancelButton: "btn btn-light", confirmButton: "btn btn-primary" },
+            showCancelButton: true,
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                sendDataToURL(url, data, "DELETE")
+                    .then(function (res) {
+                        if (!res.isSuccessed) {
+                            Swal.fire({
+                                title: 'Notification',
+                                text: res.message,
+                                type: 'warning',
+                                confirmButtonText: 'Close!',
+                                customClass: { confirmButton: "btn btn-primary" }
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                title: 'Notification',
+                                text: 'Cancel Success.',
+                                type: 'success',
+                                confirmButtonText: 'Close!',
+                                customClass: { confirmButton: "btn btn-primary" }
+                            })
+
+                            if (table != null) {
+                                table.draw();
+
+                            }
+                            if (!isNullOrEmpty(urlTroVe)) {
+                                window.location.href = urlTroVe;
+                            }
+                        }
+
+                        defered.resolve(res);
+                    });
+            }
+        });
+        return defered.promise();
+    };
+
+
     let scroll = () => {
         if (window.pageYOffset > 40) {
             if (body.hasAttribute('data-kt-sticky') === false) {
@@ -343,7 +393,8 @@
         notification: notification,
         sendDataToURL: sendDataToURL,
         sendDataFileToURL: sendDataFileToURL,
-        deleteDataConfirm: deleteDataConfirm,
+        deleteDataConfirm: deleteDataConfirm, 
+        cancelDataConfirm: cancelDataConfirm,
         scroll: scroll,
         initevencheckbox: initevencheckbox,
         showHideButtonDelete: showHideButtonDelete,

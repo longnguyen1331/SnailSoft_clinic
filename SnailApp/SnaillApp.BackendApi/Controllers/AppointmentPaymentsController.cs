@@ -21,8 +21,13 @@ namespace SnailApp.BackendApi.Controllers
         {
             _appointmentPaymentService = appointmentPaymentService;
         }
+        [HttpGet("GetManageListPaging")]
+        public async Task<IActionResult> GetManageListPaging([FromQuery] ManageAppointmentPagingRequest request)
+        {
+            var examinationsResults = await _appointmentPaymentService.GetManageListPaging(request);
+            return Ok(examinationsResults);
+        }
 
-      
         [HttpPost("addorupdate")]
         public async Task<IActionResult> AddOrUpdate([FromBody] AppointmentPaymentRequest request)
         {
@@ -34,7 +39,7 @@ namespace SnailApp.BackendApi.Controllers
             ApiResult<int> res = null;
             if (request.Id > 0)
             {
-                //res = await _appointmentPaymentService.UpdateAsync(request);
+                res = await _appointmentPaymentService.UpdateAsync(request);
             }
             else
             {
@@ -58,6 +63,22 @@ namespace SnailApp.BackendApi.Controllers
             });
 
             return Ok(result);
+        }
+
+
+        [HttpGet("getbyid")]
+        public async Task<IActionResult> GetById([FromQuery] AppointmentPaymentRequest request)
+        {
+            var examinationsResult = await _appointmentPaymentService.GetById(request);
+            if (examinationsResult.IsSuccessed)
+            {
+                if (examinationsResult.ResultObj == null)
+                {
+                    return BadRequest("Cannot find examinationsResult");
+                }
+            }
+
+            return Ok(examinationsResult);
         }
     }
 }

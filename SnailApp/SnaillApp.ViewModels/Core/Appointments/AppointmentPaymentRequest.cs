@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Http;
-using SnailApp.ViewModels.Common;
-using SnailApp.ViewModels.Enums;
+﻿using SnailApp.ViewModels.Common;
 
 namespace SnailApp.ViewModels.Catalog.Appointments
 {
@@ -15,6 +10,7 @@ namespace SnailApp.ViewModels.Catalog.Appointments
         public decimal Discount { get; set; }
         public decimal AmountDue { get; set; }
         public int PaymentMethod { get; set; }
+        public string PaymentMethodNote { get; set; }
         public int Status { get; set; }
     }
 }

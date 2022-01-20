@@ -9,6 +9,7 @@ using SnailApp.Utilities.Constants;
 using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Collections.Generic;
 
 namespace SnailApp.ApiIntegration
 {
@@ -19,6 +20,7 @@ namespace SnailApp.ApiIntegration
         Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
+        Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request);
     }
     public class Appointment_ServiceApiClient : BaseApiClient, IAppointment_ServiceApiClient
     {
@@ -130,7 +132,12 @@ namespace SnailApp.ApiIntegration
                 (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
             return data;
         }
-   
+        public async Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request)
+        {
+            var data = await GetAsync<List<Appointment_ServiceDto>>($"/api/appointment_Services/GetByAppointmentId?AppointmentId={request.AppointmentId}");
+            return data;
+        }
+
         public async Task<ApiResult<Appointment_ServiceDto>> GetById(Appointment_ServiceRequest request)
         {
             var data = await GetAsync<ApiResult<Appointment_ServiceDto>>($"/api/appointment_Services/GetById?Id={request.Id}");

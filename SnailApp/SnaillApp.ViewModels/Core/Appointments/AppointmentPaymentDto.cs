@@ -16,7 +16,15 @@ namespace SnailApp.ViewModels.Catalog.Appointments
         public string Date { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
         public string PaymentMethodNote { set; get; }
+        public string DoctorFullName { set; get; }
+        public string PatientFullName { set; get; }
+        public string PatientCode { set; get; }
+        public string PatientEmail { set; get; }
+        public string PatientPhoneNumber { set; get; }
+        public string PatientAddress { set; get; }
+        public string PatientAvatar { set; get; }
         public int Status { set; get; }
+        public AppointmentStatus AppointmentStatus { set; get; }
     }
-    
+
 }

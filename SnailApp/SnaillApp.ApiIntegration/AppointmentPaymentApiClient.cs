@@ -12,6 +12,8 @@ namespace SnailApp.ApiIntegration
     {
         Task<ApiResult<int>> AddOrUpdateAsync(AppointmentPaymentRequest request);
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
+        Task<PagedResult<AppointmentPaymentDto>> GetManageListPaging(ManageAppointmentPagingRequest request);
+        Task<ApiResult<AppointmentPaymentDto>> GetById(AppointmentPaymentRequest request);
     }
     public class AppointmentPaymentApiClient : BaseApiClient, IAppointmentPaymentApiClient
     {
@@ -47,6 +49,25 @@ namespace SnailApp.ApiIntegration
             return await BaseDeleteByIds($"/api/appointmentPayments/{string.Join("|", request.Ids)}");
         }
 
-    
+        public async Task<PagedResult<AppointmentPaymentDto>> GetManageListPaging(ManageAppointmentPagingRequest request)
+        {
+            var data = await GetAsync<PagedResult<AppointmentPaymentDto>>(
+                $"/api/appointmentPayments/GetManageListPaging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}" +
+                $"&ClinicId={request.ClinicId}" +
+                $"&ToDate={request.ToDate}" +
+                $"&FromDate={request.FromDate}" +
+                $"&Status={request.Status}" +
+                (!string.IsNullOrEmpty(request.OrderCol) ? ($"&OrderCol={request.OrderCol}" + $"&OrderDir={request.OrderDir}") : "") +
+                (!string.IsNullOrEmpty(request.TextSearch) ? $"&TextSearch={request.TextSearch}" : ""));
+            return data;
+        }
+
+        public async Task<ApiResult<AppointmentPaymentDto>> GetById(AppointmentPaymentRequest request)
+        {
+            var data = await GetAsync<ApiResult<AppointmentPaymentDto>>($"/api/appointmentPayments/getbyid?Id={request.Id}");
+            return data;
+        }
+
     }
 }

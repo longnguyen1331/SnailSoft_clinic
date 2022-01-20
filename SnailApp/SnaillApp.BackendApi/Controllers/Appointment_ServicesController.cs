@@ -15,18 +15,18 @@ namespace SnailApp.BackendApi.Controllers
     [Authorize]
     public class Appointment_ServicesController : ControllerBase
     {
-        private readonly IAppointment_ServiceService _examinationsResultService;
+        private readonly IAppointment_ServiceService _appointment_ServiceService;
 
-        public Appointment_ServicesController(IAppointment_ServiceService examinationsResultService
+        public Appointment_ServicesController(IAppointment_ServiceService appointment_ServiceService
             )
         {
-            _examinationsResultService = examinationsResultService;
+            _appointment_ServiceService = appointment_ServiceService;
         }
 
         [HttpGet("GetManageListPaging")]
         public async Task<IActionResult> GetManageListPaging([FromQuery] ManageAppointment_ServicePagingRequest request)
         {
-            var examinationsResults = await _examinationsResultService.GetManageListPaging(request);
+            var examinationsResults = await _appointment_ServiceService.GetManageListPaging(request);
             return Ok(examinationsResults);
         }
         
@@ -34,7 +34,7 @@ namespace SnailApp.BackendApi.Controllers
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById([FromQuery] Appointment_ServiceRequest request)
         {
-            var examinationsResult = await _examinationsResultService.GetById(request);
+            var examinationsResult = await _appointment_ServiceService.GetById(request);
             if (examinationsResult.IsSuccessed)
             {
                 if (examinationsResult.ResultObj == null)
@@ -43,6 +43,14 @@ namespace SnailApp.BackendApi.Controllers
                 }
             }
             
+            return Ok(examinationsResult);
+        }
+
+        [HttpGet("GetByAppointmentId")]
+        public async Task<IActionResult> GetByAppointmentId([FromQuery] Appointment_ServiceRequest request)
+        {
+            var examinationsResult = await _appointment_ServiceService.GetByAppointmentId(request);
+
             return Ok(examinationsResult);
         }
 
@@ -57,11 +65,11 @@ namespace SnailApp.BackendApi.Controllers
             ApiResult<int> res = null;
             if (request.Id > 0)
             {
-                res = await _examinationsResultService.UpdateAsync(request);
+                res = await _appointment_ServiceService.UpdateAsync(request);
             }
             else
             {
-                res = await _examinationsResultService.CreateAsync(request);
+                res = await _appointment_ServiceService.CreateAsync(request);
             }
 
             if (res.IsSuccessed)
@@ -76,7 +84,7 @@ namespace SnailApp.BackendApi.Controllers
         [HttpDelete("{ids}")]
         public async Task<IActionResult> DeleteByIds(string ids)
         {
-            var result = await _examinationsResultService.DeleteByIds(new DeleteRequest() { 
+            var result = await _appointment_ServiceService.DeleteByIds(new DeleteRequest() { 
                 Ids = ids.Split("|").Select(x => Convert.ToInt32(x)).ToList()
             });
 
@@ -86,7 +94,7 @@ namespace SnailApp.BackendApi.Controllers
         [HttpPost("ckeditoruploadfile")]
         public async Task<IActionResult> CKEditorUploadFile([FromForm] IFormFile uploadFile)
         {
-            var result = await _examinationsResultService.CKEditorUploadFile(uploadFile);
+            var result = await _appointment_ServiceService.CKEditorUploadFile(uploadFile);
 
             return Ok(result);
         }

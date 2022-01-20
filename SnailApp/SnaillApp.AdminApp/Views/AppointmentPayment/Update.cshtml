@@ -1,0 +1,257 @@
+﻿@using SnailApp.ViewModels.Enums;
+@model AppointmentPaymentViewModel
+
+@section Vendors_CSS{
+<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
+<link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css")" type="text/css">
+
+}
+@section Custom_CSS{
+}
+
+@section Vendors_Scripts{
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.js")"></script>
+	<script src="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/js/picker.time.js")"></script>
+<script src="@Url.Content("~/plugins/autoNumeric/autoNumeric.js")"></script>
+}
+
+@section Custom_Scripts{
+<script type="text/javascript" src="@Url.Content("~/js/customiseAutoNumeric.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/AppointmentPayment/Update.js")"></script>
+}
+
+<script>
+    var user = {
+        userId: '@Model.CurrentUserRole.Id',
+        userName: '@User.Identity.Name',
+        roles: {
+            isAllowEdit: @if (Model.CurrentUserRole.IsAllowEdit == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    },
+            isAllowDelete: @if (Model.CurrentUserRole.IsAllowDelete == true)
+    {
+        <text>true</text>
+    }
+    else
+    {
+        <text>false</text>
+    }
+        }
+    };
+    let editorValue, editorDoctorValue;
+
+
+    $(document).ready(function () {
+        AppointmentPayment.init();
+    });
+
+
+
+</script>
+
+@await Html.PartialAsync("_PartialToolbar")
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-info" role="tab" aria-selected="true">
+                                    <div class="d-flex align-items-center">
+                                        <div class="tab-icon">
+                                            <i class='bx bx-user-pin font-18 me-1'></i>
+                                        </div>
+                                        <div class="tab-title">INFORMATION</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-history" role="tab" aria-selected="false">
+                                    <div class="d-flex align-items-center">
+                                        <div class="tab-icon">
+                                            <i class='bx bx-user-pin font-18 me-1'></i>
+                                        </div>
+                                        <div class="tab-title">MEDICAL HISTORY</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="primary-pills-info" role="tabpanel">
+                                <div class="d-flex flex-column">
+                                    @if (Model.AppointmentPayment != null)
+                                    {
+                                        <img src="@Model.AppointmentPayment.PatientAvatar" alt="@Model.AppointmentPayment.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
+                                        <div class="mt-3">
+                                            <h4>@Model.AppointmentPayment.PatientFullName</h4>
+                                            <p class="text-secondary mb-1">Code : @Model.AppointmentPayment.PatientCode</p>
+                                            <p class="text-muted font-size-sm">Phone : @Model.AppointmentPayment.PatientPhoneNumber</p>
+                                            <p class="text-muted font-size-sm">Email : @Model.AppointmentPayment.PatientEmail</p>
+                                            <p class="text-muted font-size-sm">Address : @Model.AppointmentPayment.PatientAddress</p>
+                                        </div>
+                                        <hr class="my-4">
+                                        <div class="invoice" style="min-height:auto !important;">
+                                            <table>
+                                                <tbody>
+                                                    @for (int i = 1; i <= Model.Appointment_Services.Count(); i++)
+                                                    {
+                                                        <tr>
+                                                            <td class="no">@i</td>
+                                                            <td class="text-left">
+                                                                <a target="_blank" href="/AppointmentPaymentService/Update?id=@Model.Appointment_Services[i-1].Id">
+                                                                    @Html.Raw(Model.Appointment_Services[i-1].ServiceName)
+                                                                </a>
+                                                                <br />
+                                                                <a target="_blank" href="/AppointmentPaymentService/Update?id=@Model.Appointment_Services[i-1].Id">
+                                                                    Doctor : @Html.Raw(Model.Appointment_Services[i-1].DoctorFullName)
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="primary-pills-history" role="tabpanel">
+                                <!-- timeline item 1 -->
+                                <div class="row">
+                                    <!-- timeline item 1 left dot -->
+                                    <div class="col-auto text-center flex-column d-none d-sm-flex">
+                                        <div class="row h-50">
+                                            <div class="col">&nbsp;</div>
+                                            <div class="col">&nbsp;</div>
+                                        </div>
+                                        <h5 class="m-2">
+                                            <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                                        </h5>
+                                        <div class="row h-50">
+                                            <div class="col border-end">&nbsp;</div>
+                                            <div class="col">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                    <!-- timeline item 1 event content -->
+                                    <div class="col py-2">
+                                        <div class="card radius-15">
+                                            <div class="card-body">
+                                                <div class="float-end text-muted">Mon, Jan 9th 2020 7:00 AM</div>
+                                                <h4 class="card-title text-muted">Day 1 Orientation</h4>
+                                                <p class="card-text">Welcome to the campus, introduction and get started with the tour.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <form id="edit_form">
+                    <input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.Id : 0)">
+                    <input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.AppointmentId : 0)">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Date</label>
+                                <input class="result form-control radius-15" type="date" data-field="Date" value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.Date : "")" placeholder="Enter Date">
+                            </div>
+                        </div>
+                      
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Payment Method</label>
+                                <select asp-for="PaymentMethod" asp-items="Model.PaymentMethods" data-control="select2" data-field="PaymentMethod" class="form-select form-select-solid  radius-15 single-select"></select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label class="form-label">Payment Method Note</label>
+                               <textarea class="form-control radius-15" data-field="PaymentMethodNote" rows="3">@(Model.AppointmentPayment != null ? Model.AppointmentPayment.PaymentMethodNote : "")</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Status</label>
+                                <select asp-for="Status" asp-items="Model.ListStatus" data-field="Status" data-control="select2" data-field="PaymentMethod" class="form-select form-select-solid  radius-15 single-select"></select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Total</label>
+                                <input disabled class="result vnd form-control form-control-sm" type="text" data-field="Total" value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.Total : "")">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Discount</label>
+                                <input class="result form-control form-control-sm" type="number" data-field="Discount" value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.Discount : "")">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3 px-1">
+                                <label class="form-label">Amount Due</label>
+                                <input disabled class="result vnd form-control form-control-sm" type="text" data-field="AmountDue" value="@(Model.AppointmentPayment != null ? Model.AppointmentPayment.AmountDue : "")">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                               <textarea class="form-control radius-15" data-field="Description" rows="3">@(Model.AppointmentPayment != null ? Model.AppointmentPayment.Description : "")</textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="mb-3 text-center">
+                                @if (Model.CurrentUserRole.IsAllowEdit  && Model.AppointmentPayment.AppointmentStatus != AppointmentStatus.Checkout)
+                                {
+                                    <text>
+                                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save and Checkout</button>
+
+                                    </text>
+                                }
+                                @if (Model.CurrentUserRole.IsAllowEdit && Model.AppointmentPayment != null && Model.AppointmentPayment.AppointmentStatus == AppointmentStatus.Checkout)
+                                {
+                                    <text>
+                                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Cancel Checkout</button>
+                                    </text>
+                                }
+                                <button type="button" class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("_PartialConfirmDeleteModal")
+
+
