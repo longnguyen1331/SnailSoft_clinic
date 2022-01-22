@@ -71,7 +71,7 @@ var AppointmentService = function () {
                 "visible": false
             },
             {
-                "targets": [0, 5, 6,7],
+                "targets": [0, 8,9,10,11],
                 className: 'dt-body-center',
                 "orderable": false
             }
@@ -121,7 +121,11 @@ var AppointmentService = function () {
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
             { "data": "serviceName", "name": "serviceName", "autoWidth": true, "title": "Service" },
             { "data": "doctorFullName", "name": "doctorFullName", "autoWidth": true, "title": "Doctor Name" },
+            { "data": "patientCode", "name": "patientCode", "autoWidth": true, "title": "Patient Code" },
             { "data": "patientFullName", "name": "patientFullName", "autoWidth": true, "title": "Patient Name" },
+            { "data": "patientEmail", "name": "patientEmail", "autoWidth": true, "title": "Patient Email" },
+            { "data": "patientPhone", "name": "patientPhone", "autoWidth": true, "title": "Patient Phone" },
+            { "data": "patientDob", "name": "patientDob", "autoWidth": true, "title": "Patient Dob" },
             { "data": "date", "name": "date", "autoWidth": true, "title": "Date" },
             {
                 "data": "isDefault", "name": "isDefault", "autoWidth": true, "title": "Status", "render": function (data, type, full, meta) {

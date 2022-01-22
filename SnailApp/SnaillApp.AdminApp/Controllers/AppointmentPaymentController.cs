@@ -95,7 +95,6 @@ namespace SnailApp.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> DataTableGetList(int? draw, int? start, int? length, string textSearch, int status, string fDate, string tDate)
         {
-
             var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
             var sortColumnDir = Request.Form["order[0][dir]"].FirstOrDefault();
             int skip = start != null ? Convert.ToInt32((start / length) + 1) : 1;
@@ -118,6 +117,9 @@ namespace SnailApp.AdminApp.Controllers
 
             return Json(new
             {
+                draw = draw,
+                recordsFiltered = appointmentApiClient.TotalRecords,
+                recordsTotal = appointmentApiClient.TotalRecords,
                 data = appointmentApiClient.Items
             });
         }

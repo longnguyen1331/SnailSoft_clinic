@@ -288,9 +288,16 @@ namespace SnailApp.Application.SystemApplication.Users
                     {
                         return new ApiErrorResult<string>("Email account is exits.");
                     }
+
+                    user = await _userManager.FindByNameAsync(request.PhoneNumber);
+                    if (user != null)
+                    {
+                        return new ApiErrorResult<string>("Phone account is exits.");
+                    }
+
                     user = new AppUser() { 
                         Code = request.ClinicId.HasValue ? request.ClinicId.Value + "_"  + DateTime.Now.ToString("yyyyMMDDHHmmssfff")  : DateTime.Now.ToString("yyyyMMDDHHmmssfff"),
-                        UserName = request.Email,
+                        UserName = !string.IsNullOrEmpty(request.Email) ?  request.Email : request.PhoneNumber,
                         Email = request.Email,
                         CreatedDate = DateTime.Now,
                         CreatedUserId =Guid.Parse(request.CreatedUserId),
@@ -326,9 +333,9 @@ namespace SnailApp.Application.SystemApplication.Users
                 else
                 {
                     user = await _userManager.FindByIdAsync(request.Id.ToString());
-                    if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != Guid.Parse(request.Id)))
+                    if (await _userManager.Users.AnyAsync(x => (x.Email == request.Email && x.Id != Guid.Parse(request.Id)) || (x.PhoneNumber == request.PhoneNumber && x.Id != Guid.Parse(request.Id))))
                     {
-                        return new ApiErrorResult<string>("Emai account is exits.");
+                        return new ApiErrorResult<string>("Emai or phone number account is exits.");
                     }
                     else
                     {
@@ -364,6 +371,10 @@ namespace SnailApp.Application.SystemApplication.Users
 
                 if (isNew == true)
                 {
+                    if(string.IsNullOrEmpty(request.Password)){
+                        request.Password = request.PhoneNumber + request.ClinicId;
+                    }
+
                     var result = await _userManager.CreateAsync(user, request.Password);
                     if (!result.Succeeded)
                     {

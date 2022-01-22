@@ -135,6 +135,9 @@ namespace SnailApp.Application.Catalog.Appointment_Services
                 }
 
                 check.ModifiedDate = DateTime.Now;
+
+                var appointment = await _context.Appointments.FindAsync(check.AppointmentId);
+                appointment.Status = AppointmentStatus.Examined;
                 _context.Appointment_Services.Update(check);
                 await _context.SaveChangesAsync();
                 return new ApiSuccessResult<int>(check.Id);
@@ -205,6 +208,9 @@ namespace SnailApp.Application.Catalog.Appointment_Services
                     || (x.p.FirstName + " " + x.p.LastName).Contains(request.TextSearch)
                     || (x.u.FirstName + " " + x.u.LastName).Contains(request.TextSearch)
                     || (x.s.Name).Contains(request.TextSearch)
+                    || (x.p.PhoneNumber).Contains(request.TextSearch)
+                    || (x.p.Email).Contains(request.TextSearch)
+                    || (x.p.Code).Contains(request.TextSearch)
                     || x.a.Code.Contains(request.TextSearch));
 
                 //3.Sort
@@ -246,6 +252,23 @@ namespace SnailApp.Application.Catalog.Appointment_Services
 
                             break;
 
+                        case "patientPhone":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.p.PhoneNumber) :
+                                query.OrderByDescending(x => x.p.PhoneNumber);
+
+                            break;
+                        case "patientCode":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.p.Code) :
+                                query.OrderByDescending(x => x.p.Code);
+
+                            break;
+                        case "patientEmail":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.p.Email) :
+                                query.OrderByDescending(x => x.p.Email);
+
+                            break;
+
+
                         default: break;
                     }
                 }
@@ -266,6 +289,10 @@ namespace SnailApp.Application.Catalog.Appointment_Services
                     ServiceName =  x.s.Name,
                     DoctorFullName =  x.u.FirstName + " " + x.u.LastName,
                     PatientFullName =  x.p.FirstName + " " + x.p.LastName,
+                    PatientPhone = x.p.PhoneNumber,
+                    PatientEmail = x.p.Email,
+                    PatientCode = x.p.Code,
+                    PatientDob = x.p.Dob.HasValue ? x.p.Dob.Value.ToString("yyyy-MM-dd") : string.Empty,
                     Date = x.a_s.Date.ToString("yyyy-MM-dd HH:mm"),
                 }).AsNoTracking().ToListAsync();
 

@@ -2,6 +2,7 @@
 
 var Appointment = function () {
     let editingData = null, edit_form = $("#edit-form"),
+        patient_edit_form = $("#createPatient"),
         payment_form = $("#payment_form"),
         listService = [], listDoctor_Service = [], calendar = null;
 
@@ -39,6 +40,57 @@ var Appointment = function () {
             $('#smartwizard').smartWizard("reset");
             $('.switcher-btn').trigger('click');
         });
+        
+        $('button[name="btnCreatePatient"]').click(function (e) {
+            e.preventDefault();
+            $('#createPatient')[0].reset();
+            $('#createPatientModal').modal('show');
+        });
+
+        $('button[name="btnSavePatient"]').click(function (e) {
+            e.preventDefault();
+            let formData = new FormData();
+            if (checkDataUpdatePatient()) {
+                patient_edit_form.find("select, textarea, input").each((index, el) => {
+                    let fieldName = $(el).data("field");
+                    if (fieldName) {
+                        switch (fieldName) {
+                          
+                            default:
+                                if ($(el).data("field")) {
+                                    formData.append($(el).data("field"), $(el).val());
+                                }
+                        }
+                    }
+                });
+
+                var radios = document.getElementsByName('Gender');
+                var sexValue = true;
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        sexValue = radios[i].value
+                        break;
+                    }
+                }
+
+                formData.append("GenderId", sexValue);
+                formData.append("IsActive", true);
+
+                App.sendDataFileToURL("/Patient/SaveProfileDetail", formData, "POST", true, 'body')
+                    .then(function (res) {
+                        if (!res.isSuccessed) {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                        }
+                        else {
+                            App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Create Patient success.");
+                            $('#createPatientModal').modal('hide');
+                        }
+                    }
+                )
+            }
+        });
+
+        
 
         $('button[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
@@ -480,6 +532,33 @@ var Appointment = function () {
         return check;
     }
 
+
+    function checkDataUpdatePatient() {
+        let check = true;
+        edit_form.find("select, input").each((index, el) => {
+            let fieldName = $(el).data("field");
+            if (fieldName) {
+                switch (fieldName) {
+                    case "FirstName":
+                    case "LastName":
+                    case "PhoneNumber":
+                    case "Email":
+                        if ($(el).val() == '' || $(el).val() == '-1') {
+                            App.notification("top right", "error", "fadeIn animated bx bx-error", "", "Enter " + fieldName);
+                            check = false;
+                        }
+                        break;
+
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+        return check;
+    }
+
     function checkDataServiceUpdate() {
 
         if (listDoctor_Service.length == 0) {
@@ -694,27 +773,15 @@ var Appointment = function () {
 
     let showHIdeButton = (status) => {
         if (status == parseInt(checkinStaus)) {
-            $('.tableCheckout').show();
-            $('button[name="btnCheckout"]').show();
-            $('button[name="btnCheckin"]').hide();
-            $('button[name="btnUpdate"]').hide();
-        } else if (status == parseInt(checkoutStaus)) {
-            $('.tableCheckout').hide();
-            $('button[name="btnCheckout"]').hide();
-            $('button[name="btnCheckin"]').hide();
-            $('button[name="btnUpdate"]').hide();
-        } else if (status == parseInt(bookingStaus)){
-            $('.tableCheckout').hide();
-            $('button[name="btnCheckout"]').hide();
-            $('button[name="btnCheckin"]').show();
-            $('button[name="btnUpdate"]').hide();
-        } else  {
-            $('.tableCheckout').hide();
-            $('button[name="btnCheckout"]').hide();
             $('button[name="btnCheckin"]').hide();
             $('button[name="btnUpdate"]').show();
+        } else if (status == -1)  {
+            $('button[name="btnCheckin"]').hide();
+            $('button[name="btnUpdate"]').show();
+        } else {
+            $('button[name="btnCheckin"]').show();
+            $('button[name="btnUpdate"]').hide();
         }
-
 
         if (editingData == null) {
             $('button[name="btnCheckin"]').prop('disabled', true);

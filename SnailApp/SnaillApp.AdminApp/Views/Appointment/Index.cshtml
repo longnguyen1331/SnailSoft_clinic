@@ -145,12 +145,17 @@
                     <div id="step-1" class="tab-pane" role="tabpanel">
                         <form id="edit-form">
                             <div class="row g-1">
-                                <div class="col-sm-12">
+                                <div class="col-sm-9">
                                     <div class="mb-3 px-1 select2-sm">
                                         <label class="form-label">Patient(*)</label>
                                         <select id="edit_form_patient" data-control="select2" data-field="PatientId"
                                                 class="form-select form-select-solid form-select-md radius-15 single-select">
                                         </select>
+                                    </div>
+                                </div>
+                                  <div class="col-sm-3">
+                                    <div class="mb-3 px-1" style="margin-top:29px !important;"> 
+                                        <button type="button" class="btn btn-primary w-100  font-14" name="btnCreatePatient"><i class="fadeIn animated bx bx-add-to-queue"></i> Create </button>
                                     </div>
                                 </div>
                                 <div id="PatientInfomation">
@@ -189,8 +194,8 @@
                                             <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
                                             <select disabled data-control="select2" data-field="Status" class="form-select form-select-solid  radius-15 single-select">
                                                 <option value="@((int)AppointmentStatus.Cancel)">Cancel</option>
-                                                <option value="@((int)AppointmentStatus.Booking)" selected>Booking</option>
-                                                <option value="@((int)AppointmentStatus.Approve)">Approve</option>
+                                                <option value="@((int)AppointmentStatus.Booking)">Booking</option>
+                                                <option value="@((int)AppointmentStatus.Approve)" selected>Approve</option>
                                                 <option value="@((int)AppointmentStatus.Checkin)">Checkin</option>
                                                 <option value="@((int)AppointmentStatus.Examined)">Examined</option>
                                                 <option value="@((int)AppointmentStatus.Checkout)">Checkout</option>
@@ -257,99 +262,11 @@
                             </div>
                         </div>
 
-                        <form id="payment_form" class="tableCheckout">
-                            <div class="row g-1">
-                                <div class="table-responsive col-md-12">
-                                    <table class="table mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th style="width: 40%; white-space: normal;"></th>
-                                                <th style="width: 20%;"></th>
-                                                <th style="width: 20%;"></th>
-                                                <th style="width: 20%;"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2">Total</td>
-                                                <td colspan="2">
-                                                    <input disabled class="result vnd form-control form-control-sm" type="text" data-field="Total">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">Discount</td>
-                                                <td colspan="2">
-                                                    <input class="result form-control vnd form-control-sm" type="number" data-field="Discount" value="0" min="0">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">AmountDue</td>
-                                                <td colspan="2">
-                                                    <input disabled class="result vnd form-control form-control-sm" type="text" data-field="AmountDue">
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card-body mx-0 px-0 px-0 py-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
-                                            <select data-control="select2" data-field="PaymentMethod" class="form-select form-select-solid  radius-15 single-select">
-                                                <option value="@((int)PaymentMethod.Cash)">Cash</option>
-                                                <option value="@((int)PaymentMethod.Bank)">Bank</option>
-                                                <option value="@((int)PaymentMethod.Transfer)">Transfer</option>
-                                                <option value="@((int)PaymentMethod.Debit)">Debit</option>
-                                                <option value="@((int)PaymentMethod.MembershipCard)">MembershipCard</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card-body mx-0 px-0 px-0 py-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-pin"></i></span>
-                                            <select data-control="select2" data-field="Status" class="form-select form-select-solid  radius-15 single-select">
-                                                <option value="@((int)PaymentStatus.Unpaid)">Unpaid</option>
-                                                <option value="@((int)PaymentStatus.Paid)">Paid</option>
-                                                <option value="@((int)PaymentStatus.Debit)">Debit</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card-body mx-0 px-0 px-0 py-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-calendar-check"></i></span>
-                                            <input class="result form-control form-control-sm" type="date" data-field="Date" placeholder="Enter date" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="card-body mx-0 px-0 px-0 py-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text form-control-sm"><i class="fadeIn animated bx bx-book"></i></span>
-                                            <textarea class="form-control form-control-sm" data-field="Description" rows="3" placeholder="Enter Note..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
+                      
                         <div class="row row-cols-auto g-3 px-1">
                             <div class="col-md-12">
                                 <div class="mb-3 px-1">
                                     <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Save</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="mb-3 px-1">
-                                    <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnCheckout">Checkout</button>
                                 </div>
                             </div>
 
@@ -369,3 +286,66 @@
 @await Html.PartialAsync("_PartialConfirmDeleteModal")
 
 
+
+
+
+
+<div class="modal fade" id="createPatientModal" tabindex="-1" aria-labelledby="createPatientModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="createPatientModalLabel">Create Patient</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                <form id="createPatient" class="row g-3">
+					<div class="col-md-6">
+						<label for="inputLastName1" class="form-label">First Name</label>
+						<div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
+							<input type="text" class="form-control border-start-0" id="inputLastName1" data-field="FirstName" placeholder="First Name">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="inputLastName2" class="form-label">Last Name</label>
+						<div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
+							<input type="text" class="form-control border-start-0" id="inputLastName2" data-field="LastName"  placeholder="Last Name">
+						</div>
+					</div>
+					<div class="col-12">
+						<label for="inputPhoneNo" class="form-label">Phone No</label>
+						<div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-microphone"></i></span>
+							<input type="text" class="form-control border-start-0" id="inputPhoneNo" data-field="PhoneNumber" placeholder="Phone No">
+						</div>
+					</div>
+					<div class="col-12">
+						<label for="inputEmailAddress" class="form-label">Email Address</label>
+						<div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-message"></i></span>
+							<input type="text" class="form-control border-start-0" id="inputEmailAddress" data-field="Email" placeholder="Email Address">
+						</div>
+					</div>
+					<div class="col-12">
+						<label for="inputAddress3" class="form-label">Address</label>
+						<textarea class="form-control" id="inputAddress3" placeholder="Enter Address" rows="3" data-field="Address"></textarea>
+					</div>
+
+                    <div class="col-md-12 align-items-center">
+                        <div class="row px-2">
+                            <div class="form-check col-md-6 py-3">
+                                <input class="form-check-input py-2 px-2" type="radio" value="1" name="Gender" id="Male">
+                                <label class="form-check-label" for="Male"><i class="fadeIn animated bx bx-male text-primary display-7"></i>Male</label>
+                            </div>
+                            <div class="form-check col-md-6  py-3">
+                                <input class="form-check-input py-2 px-2" type="radio" value="2" name="Gender" id="Female">
+                                <label class="form-check-label" for="Female"><i class="fadeIn animated bx bx-female text-primary display-7"></i>Female</label>
+                            </div>
+                        </div>
+                    </div>
+				</form>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" name="btnSavePatient">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -92,6 +92,9 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                     query = query.Where(x => x.a.Name.Contains(request.TextSearch)
                     || (x.patient.FirstName + " " + x.patient.LastName).Contains(request.TextSearch)
                     || (x.doctor.FirstName + " " + x.doctor.LastName).Contains(request.TextSearch)
+                    || (x.patient.Code).Contains(request.TextSearch)
+                    || (x.patient.Email).Contains(request.TextSearch)
+                    || (x.patient.PhoneNumber).Contains(request.TextSearch)
                     || x.a.Code.Contains(request.TextSearch));
 
                 //3.Sort
@@ -114,12 +117,33 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
 
                             break;
 
-                        case "name":
-                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.a.Name) :
-                                query.OrderByDescending(x => x.a.Name);
+                        case "doctorFullName":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.doctor.FirstName + " " + x.doctor.LastName) :
+                                query.OrderByDescending(x => x.doctor.FirstName + " " + x.doctor.LastName);
 
                             break;
 
+                        case "patientFullName":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.patient.FirstName + " " + x.patient.LastName) :
+                                query.OrderByDescending(x => x.patient.FirstName + " " + x.patient.LastName);
+
+                            break;
+
+                        case "patientPhone":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.patient.PhoneNumber) :
+                                query.OrderByDescending(x => x.patient.PhoneNumber);
+
+                            break;
+                        case "patientCode":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.patient.Code) :
+                                query.OrderByDescending(x => x.patient.Code);
+
+                            break; 
+                        case "patientEmail":
+                            query = (request.OrderDir == "asc") ? query.OrderBy(x => x.patient.Email) :
+                                query.OrderByDescending(x => x.patient.Email);
+
+                            break;
 
                         default: break;
                     }
@@ -139,6 +163,10 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                 {
                     Id = x.a.Id,
                     DoctorFullName = x.doctor.FirstName + " " + x.doctor.LastName,
+                    PatientPhone = x.patient.PhoneNumber,
+                    PatientEmail = x.patient.Email,
+                    PatientCode = x.patient.Code,
+                    PatientDob = x.patient.Dob.HasValue ? x.patient.Dob.Value.ToString("yyyy-MM-dd") : string.Empty,
                     PatientFullName = x.patient.FirstName + " " + x.patient.LastName,
                     Name = x.a.Name,
                     Status = x.a.Status,
@@ -283,19 +311,20 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         {
             try
             {
-                var appointments = await _context.ExaminationsResults.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
+                var appointments = await _context.Appointments.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
 
                 if (appointments == null) throw new EShopException($"Cannot find Id: {string.Join(";", request.Ids)}");
 
                 foreach (var item in appointments)
                 {
-                    if (!string.IsNullOrEmpty(item.Examination_File))
-                    {
-                        await this.DeleteFile(item.Examination_File);
-                    }
+                    item.Status = AppointmentStatus.Cancel;
+                    //if (!string.IsNullOrEmpty(item.Examination_File))
+                    //{
+                    //    await this.DeleteFile(item.Examination_File);
+                    //}
                 }
 
-                _context.ExaminationsResults.RemoveRange(appointments);
+                //_context.ExaminationsResults.RemoveRange(appointments);
 
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
 

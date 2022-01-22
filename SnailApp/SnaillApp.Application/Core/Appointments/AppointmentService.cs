@@ -29,7 +29,6 @@ namespace SnailApp.Application.Catalog.Appointments
         Task<ApiResult<AppointmentDto>> GetById(AppointmentRequest request);
         Task<PagedResult<AppointmentDto>> GetManageListPaging(ManageAppointmentPagingRequest request);
     }
-
     public class AppointmentService : IAppointmentService
     {
         private readonly ClinicDbContext _context;
@@ -90,7 +89,23 @@ namespace SnailApp.Application.Catalog.Appointments
 
                     _context.Appointment_Services.AddRange(appointment_services);
                     await _context.SaveChangesAsync();
+
+                    var payment = new AppointmentPayment()
+                    {
+                        AppointmentId = appointment.Id,
+                        Appointment = appointment,
+                        Total = appointment_services.Sum(x => x.Quantity * x.Charges),
+                        Discount = 0,
+                        AmountDue = appointment_services.Sum(x => x.Quantity * x.Charges),
+                        Date = DateTime.Now,
+                        Status = 0,
+                        PaymentMethod = PaymentMethod.Debit
+                    };
+
+                    _context.AppointmentPayments.Add(payment);
+                    await _context.SaveChangesAsync();
                 }
+
                 return new ApiSuccessResult<int>(appointment.Id);
             }
             catch (Exception ex)
@@ -172,11 +187,10 @@ namespace SnailApp.Application.Catalog.Appointments
                 foreach(var item in appointments)
                 {
                     _context.Appointment_Services.RemoveRange(item.Appointment_Services);
+                    _context.AppointmentPayments.RemoveRange(item.AppointmentPayments);
                 }
                 _context.Appointments.RemoveRange(appointments);
-
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
-
             }
             catch(Exception ex)
             {

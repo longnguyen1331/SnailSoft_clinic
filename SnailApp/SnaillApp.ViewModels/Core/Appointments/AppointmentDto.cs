@@ -15,6 +15,7 @@ namespace SnailApp.ViewModels.Catalog.Appointments
         public string PatientPhone { get; set; }
         public string PatientCode { get; set; }
         public string PatientFullName { get; set; }
+        public string PatientDob { get; set; }
         public Guid PatientId { get; set; }
         public string DoctorFullName { get; set; }
         public Guid DoctorId { get; set; }

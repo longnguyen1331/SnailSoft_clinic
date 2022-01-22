@@ -73,7 +73,7 @@ var ExaminationsResult = function () {
                 "visible": false
             },
             {
-                "targets": [0, 4,5, 6],
+                "targets": [0, 7,8,9,10],
                 className: 'dt-body-center',
                 "orderable": false
             }
@@ -122,7 +122,11 @@ var ExaminationsResult = function () {
             },
             { "data": "id", "name": "id", "autoWidth": true, "title": "Id" },
             { "data": "doctorFullName", "name": "doctorFullName", "autoWidth": true, "title": "Doctor Name" },
+            { "data": "patientCode", "name": "patientCode", "autoWidth": true, "title": "Patient Code" },
             { "data": "patientFullName", "name": "patientFullName", "autoWidth": true, "title": "Patient Name" },
+            { "data": "patientEmail", "name": "patientEmail", "autoWidth": true, "title": "Patient Email" },
+            { "data": "patientPhone", "name": "patientPhone", "autoWidth": true, "title": "Patient Phone" },
+            { "data": "patientDob", "name": "patientDob", "autoWidth": true, "title": "Patient Dob" },
             { "data": "date", "name": "date", "autoWidth": true, "title": "Date" },
             {
                 "data": "status", "name": "status", "autoWidth": true, "title": "Status", "render": function (data, type, full, meta) {
@@ -162,7 +166,7 @@ var ExaminationsResult = function () {
                     }
                     if (user.roles.isAllowDelete == true) {
                         html += '<a href="#" class="ms-2 delete btn btn-outline-orange">\
-					                <i class="bx bxs-trash"></i>\
+					                <i class="bx bx-x"></i>\
 				                </a>';
                     }
                     html += '</div> ';
@@ -192,7 +196,7 @@ var ExaminationsResult = function () {
     };
 
     function deleteDataRows(dataRows) {
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", dtTable, null)
+        App.cancelDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", dtTable, null)
         .then(function () {
             dtTable.draw();
             App.showHideButtonDelete(false);

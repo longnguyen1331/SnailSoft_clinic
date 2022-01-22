@@ -25,5 +25,6 @@ namespace SnailApp.ViewModels.Catalog.Appointments
         public string ServiceFile { get; set; }
         public bool ServiceStatus { set; get; }
         public string ServiceResult { set; get; }
+        public string PatientDob { set; get; }
     }
 }
