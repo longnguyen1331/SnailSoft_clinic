@@ -70,7 +70,7 @@ var AppointmentPayment = function () {
                 "visible": false
             },
             {
-                "targets": [0, 4,5, 6],
+                "targets": [0, 4,5, 6,7,8,9],
                 className: 'dt-body-center',
                 "orderable": false
             }
@@ -121,6 +121,21 @@ var AppointmentPayment = function () {
             { "data": "doctorFullName", "name": "doctorFullName", "autoWidth": true, "title": "Doctor Name" },
             { "data": "patientFullName", "name": "patientFullName", "autoWidth": true, "title": "Patient Name" },
             { "data": "date", "name": "date", "autoWidth": true, "title": "Date" },
+            {
+                "data": "total", "name": "total", "autoWidth": true, "title": "Total", "render": function (data, type, full, meta) {
+                    return '<span>' + App.dinhDangTien(data) + '</span>';
+                }
+            },
+            {
+                "data": "discount", "name": "discount", "autoWidth": true, "title": "Discount", "render": function (data, type, full, meta) {
+                    return '<span>' + App.dinhDangTien(data) + '</span>';
+                }
+            },
+            {
+                "data": "amountDue", "name": "total", "amountDue": true, "title": "Amount Due", "render": function (data, type, full, meta) {
+                    return '<span>' + App.dinhDangTien(data) + '</span>';
+                }
+            },
             {
                 "data": "status", "name": "status", "autoWidth": true, "title": "Status", "render": function (data, type, full, meta) {
                     let html = '';

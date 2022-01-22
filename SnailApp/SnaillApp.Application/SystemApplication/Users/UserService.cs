@@ -165,6 +165,7 @@ namespace SnailApp.Application.SystemApplication.Users
                             select new UserDto()
                             {
                                 Id = u.Id.ToString(),
+                                Code = u.Code,
                                 Avatar = _configuration[SystemConstants.AppConstants.BaseAddress] + (!string.IsNullOrEmpty(u.Avatar) ? (_configuration[SystemConstants.UserConstants.UserImagePath] + "/" + u.Avatar) : _configuration[SystemConstants.AppConstants.FileNoImagePerson]),
                                 LastName = u.LastName,
                                 FirstName = u.FirstName,
@@ -295,8 +296,14 @@ namespace SnailApp.Application.SystemApplication.Users
                         return new ApiErrorResult<string>("Phone account is exits.");
                     }
 
+
+                    if (!string.IsNullOrEmpty(request.Code) && await _userManager.Users.AnyAsync(x => x.Code == request.Code))
+                    {
+                        return new ApiErrorResult<string>("Code is exits.");
+                    }
+
                     user = new AppUser() { 
-                        Code = request.ClinicId.HasValue ? request.ClinicId.Value + "_"  + DateTime.Now.ToString("yyyyMMDDHHmmssfff")  : DateTime.Now.ToString("yyyyMMDDHHmmssfff"),
+                        Code = !string.IsNullOrEmpty(request.Code) ? request.Code : (request.ClinicId.HasValue ? request.ClinicId.Value + "_"  + DateTime.Now.ToString("yyyyMMDDHHmmssfff")  : DateTime.Now.ToString("yyyyMMDDHHmmssfff")),
                         UserName = !string.IsNullOrEmpty(request.Email) ?  request.Email : request.PhoneNumber,
                         Email = request.Email,
                         CreatedDate = DateTime.Now,
@@ -327,18 +334,26 @@ namespace SnailApp.Application.SystemApplication.Users
                         }
 
                     }
-
-
                 }
                 else
                 {
                     user = await _userManager.FindByIdAsync(request.Id.ToString());
+
+                    if(user.Code != request.Code)
+                    {
+                        if (!string.IsNullOrEmpty(request.Code) && await _userManager.Users.AnyAsync(x => x.Code == request.Code && x.Id != Guid.Parse(request.Id)))
+                        {
+                            return new ApiErrorResult<string>("Code is exits.");
+                        }
+                    }
+
                     if (await _userManager.Users.AnyAsync(x => (x.Email == request.Email && x.Id != Guid.Parse(request.Id)) || (x.PhoneNumber == request.PhoneNumber && x.Id != Guid.Parse(request.Id))))
                     {
                         return new ApiErrorResult<string>("Emai or phone number account is exits.");
                     }
                     else
                     {
+                        user.Code = request.Code;
                         user.ModifiedUserId = Guid.Parse(request.ModifiedUserId);
                         user.PhoneNumber = request.PhoneNumber;
                         user.FirstName = request.FirstName;

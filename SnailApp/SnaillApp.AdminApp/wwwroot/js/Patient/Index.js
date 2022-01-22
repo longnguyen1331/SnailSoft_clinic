@@ -210,13 +210,15 @@ var Patient = function () {
 							<img src="' + full.avatar + '" class="user-img" alt="user avatar">\
 							<div class="user-info ps-3">\
 								<p class="user-name mb-0">' + full.firstName + ' ' + full.lastName + '</p>\
-								<p class="designattion mb-0">' + full.email + '</p>\
+								<p class="designattion mb-0">Code : ' + full.code + '</p>\
+								<p class="designattion mb-0">Email : ' + full.email + '</p>\
+								<p class="designattion mb-0">Address : ' + full.address + '</p>\
 							</div>\
 						</a>';
                 }
             },
             { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": true, "title": "Phone" },
-            { "data": "email", "name": "email", "autoWidth": true, "title": "Email" },
+            { "data": "dob", "name": "dob", "autoWidth": true, "title": "Dob" },
             {
                 width: "120px", "title": "Hành động", "render": function (data, type, full, meta) {
                     let html = '<div class="d-flex order-actions"><a href="#" class="edit btn btn-outline-orange"><i class="fadeIn animated bx bx-history"></i></a>';
