@@ -12,6 +12,7 @@ using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
 using Microsoft.Extensions.Configuration;
 using SnailApp.ViewModels.Catalog.Appointments;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SnailApp.AdminApp.Controllers
 {
@@ -46,6 +47,7 @@ namespace SnailApp.AdminApp.Controllers
             model.CurrentUserRole = InternalService.FixedUserRole(HttpContext.Session.GetObject<UserDto>(SystemConstants.AppConstants.CurrentUserRoleSession),
                                                                                                             (ControllerContext.ActionDescriptor).ControllerName,
                                                                                                             (ControllerContext.ActionDescriptor).ActionName);
+            ViewBag.Tiltle = "Examination Service";
             model.Breadcrumbs = new List<string>() { "Examinations", "Examination Service" };
          
             var appointment = await _appointment_ServiceApiClient.GetById(new ViewModels.Catalog.Appointments.Appointment_ServiceRequest() { Id = id });
@@ -170,7 +172,41 @@ namespace SnailApp.AdminApp.Controllers
             });
         }
 
-       
+
+        [HttpPost]
+        public async Task<IActionResult> CancelDefault([FromBody] Appointment_ServiceRequest rq)
+        {
+            ApiResult<int> result = null;
+            Guid userGuid = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
+
+            if (rq != null)
+            {
+                result = await _appointment_ServiceApiClient.CancelDefault(rq);
+            }
+            else
+            {
+                result = new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = "Not found"
+                };
+            }
+
+            return Ok(result);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var data = await _appointment_ServiceApiClient.GetById(new ViewModels.Catalog.Appointments.Appointment_ServiceRequest() { Id = id });
+
+            return Json(new
+            {
+                data = data
+            });
+        }
 
     }
 }

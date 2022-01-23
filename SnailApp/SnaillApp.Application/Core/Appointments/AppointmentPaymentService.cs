@@ -85,7 +85,7 @@ namespace SnailApp.Application.Catalog.AppointmentPayments
                 foreach(var item in appointmentPayments)
                 {
                     var appointment = await _context.Appointments.FindAsync(item.AppointmentId);
-                    appointment.Status = AppointmentStatus.Booking;
+                    appointment.Status = AppointmentStatus.Examined;
                 }
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
 
@@ -239,7 +239,6 @@ namespace SnailApp.Application.Catalog.AppointmentPayments
         {
             try
             {
-                var appointment = await _context.Appointments.FindAsync(request.AppointmentId);
                 var appointmentPayment = _mapper.Map<AppointmentPayment>(request);
 
                 DateTime datetim1;
@@ -253,7 +252,6 @@ namespace SnailApp.Application.Catalog.AppointmentPayments
                 }
 
                 appointmentPayment.ModifiedDate = DateTime.Now;
-                appointment.Status = AppointmentStatus.Checkout;
                 _context.AppointmentPayments.Update(appointmentPayment);
                 await _context.SaveChangesAsync();
                 return new ApiSuccessResult<int>(appointmentPayment.Id);

@@ -197,8 +197,8 @@
                                                 <option value="@((int)AppointmentStatus.Booking)">Booking</option>
                                                 <option value="@((int)AppointmentStatus.Approve)" selected>Approve</option>
                                                 <option value="@((int)AppointmentStatus.Checkin)">Checkin</option>
-                                                <option value="@((int)AppointmentStatus.Examined)">Examined</option>
-                                                <option value="@((int)AppointmentStatus.Checkout)">Checkout</option>
+                                                <option value="@((int)AppointmentStatus.Examined)"  disabled="disabled">Examined</option>
+                                                <option value="@((int)AppointmentStatus.Checkout)"  disabled="disabled">Checkout</option>
                                             </select>
                                         </div>
                                     </div>
@@ -267,12 +267,6 @@
                             <div class="col-md-12">
                                 <div class="mb-3 px-1">
                                     <button type="button" class="btn btn-primary px-5 radius-15 w-100" name="btnUpdate">Save</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="mb-3 px-1">
-                                    <button type="button" class="btn btn-danger px-5 radius-15 w-100" name="btnCheckin">Checkin</button>
                                 </div>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ using SnailApp.ViewModels.System.Users;
 using SnailApp.AdminApp.Models;
 using SnailApp.ViewModels.Catalog.Appointments;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SnailApp.AdminApp.Controllers
 {
@@ -111,7 +112,8 @@ namespace SnailApp.AdminApp.Controllers
             return Ok(result);
         }
 
-        public async Task<IActionResult> UpdateStatusCheckin([FromBody] AppointmentRequest rq)
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateStatusCheckout([FromBody] AppointmentRequest rq)
         {
             ApiResult<int> result = null;
             Guid userGuid = Guid.Parse(HttpContext.Session.GetString(SystemConstants.AppConstants.UserId));
@@ -120,7 +122,7 @@ namespace SnailApp.AdminApp.Controllers
             {
                 rq.ModifiedDate = DateTime.Now;
                 rq.ModifiedUserId = userGuid;
-                rq.Status = (int)ViewModels.Enums.AppointmentStatus.Checkin;
+                rq.Status = (int)ViewModels.Enums.AppointmentStatus.Checkout;
                 result = await _appointmentApiClient.ChangeStatus(rq);
             }
             else

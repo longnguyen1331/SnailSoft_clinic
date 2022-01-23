@@ -4,7 +4,6 @@
 @section Vendors_CSS{
 <link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.css")" type="text/css">
 <link rel="stylesheet" href="@Url.Content("~/snailsoft/assets/plugins/datetimepicker/css/classic.time.css")" type="text/css">
-
 }
 @section Custom_CSS{
 }
@@ -18,7 +17,6 @@
 @section Custom_Scripts{
 <script type="text/javascript" src="@Url.Content("~/js/AppointmentService/Update.js")"></script>
 }
-
 <script>
     var user = {
         userId: '@Model.CurrentUserRole.Id',
@@ -43,13 +41,27 @@
         }
     };
     let editorValue, editorDoctorValue;
-
+    let urlFile =  null;
+    @if(Model.Appointment_Service != null && !string.IsNullOrEmpty(Model.Appointment_Service.ServiceFile))
+    {
+        <text>
+            urlFile = '@Model.Appointment_Service.ServiceFile';
+        </text>
+    }
 
     $(document).ready(function () {
         AppointmentService.init();
         var promises = [init_editor()];
         Promise.all(promises).then(function(results) {
         });
+
+        if(urlFile != null){
+            $('.image-upload-wrap').hide();
+            $('.file-upload-image').attr('src', urlFile);
+            $('.file-upload-content').show();
+            $('.image-title').html(urlFile);
+        }
+        
     });
 
 
@@ -67,6 +79,34 @@
                 console.error(error);
             });
     }
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+                $('.image-title').html(input.files[0].name);
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
 
 
 
@@ -280,7 +320,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12" >
+                        <div class="col-md-12" hidden>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" data-field="IsDefault" @(Model.Appointment_Service != null ? (Model.Appointment_Service.IsDefault ? "checked" : "") : "") >
 								<label class="form-check-label" for="IsDefault">Status</label>
@@ -290,31 +330,38 @@
                         <div class="col-sm-12">
 								<div class="mb-3">
 								<label class="form-label">Attach file</label>
-								<input class="form-control" data-field="ServiceFile" type="file">
+
+
+                                <div class="file-upload">
+                                  <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type='file'  data-field="ServiceFile" onchange="readURL(this);" />
+                                    <div class="drag-text">
+                                      <h3>Drag and drop a file or select add file</h3>
+                                    </div>
+                                  </div>
+                                  <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <div class="image-title-wrap">
+                                      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                  </div>
+                                </div>
 							</div>
 						</div>
 
-                        @if (Model.Appointment_Service != null && !string.IsNullOrEmpty(Model.Appointment_Service.ServiceFile))
-                        {
-                            <div class="col-md-12">	<a target="_blank" href="@Model.Appointment_Service.ServiceFile">
-                                <i class="bx bxs-file me-2 font-24 text-primary"></i> 
-                                @Model.Appointment_Service.ServiceFile</a>
-							</div>
-                        }
-
                         <div class="col-sm-12">
                             <div class="mb-3 text-center">
-                                @if (Model.CurrentUserRole.IsAllowEdit)
+                                @if (Model.CurrentUserRole.IsAllowEdit && (Model.Appointment_Service == null || Model.Appointment_Service.IsDefault == false))
                                 {
                                     <text>
                                         <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
 
                                     </text>
                                 }
-                                @if (Model.CurrentUserRole.IsAllowDelete && Model.Appointment_Service != null)
+                                @if (Model.CurrentUserRole.IsAllowEdit && Model.Appointment_Service != null && Model.Appointment_Service.IsDefault == true)
                                 {
                                     <text>
-                                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+                                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Cancel </button>
                                     </text>
                                 }
                                 <button type="button" class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>

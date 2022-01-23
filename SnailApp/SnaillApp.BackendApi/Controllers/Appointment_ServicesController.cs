@@ -99,5 +99,29 @@ namespace SnailApp.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("cancelDefault")]
+        public async Task<IActionResult> CancelDefault([FromBody] Appointment_ServiceRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApiResult<int> res = null;
+            if (request.Id > 0 && request.AppointmentId > 0)
+            {
+                res = await _appointment_ServiceService.CancelDefault(request);
+            }
+
+            if (res.IsSuccessed)
+            {
+                if (res.ResultObj == 0)
+                    return BadRequest();
+            }
+
+            return Ok(res);
+
+        }
+
     }
 }
