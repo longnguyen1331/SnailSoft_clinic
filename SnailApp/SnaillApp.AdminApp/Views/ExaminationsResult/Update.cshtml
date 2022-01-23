@@ -44,13 +44,56 @@
     };
     let editorValue, editorDoctorValue;
 
+    let urlFile =  null;
+    @if(Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
+    {
+        <text>
+            urlFile = '@Model.ExaminationsResult.Examination_File';
+        </text>
+    }
 
     $(document).ready(function () {
         ExaminationsResult.init();
         var promises = [init_editor(), init_editorDoctorAdvice()];
         Promise.all(promises).then(function(results) {
         });
+
+        if(urlFile != null){
+            $('.image-upload-wrap').hide();
+            $('.file-upload-image').attr('src', urlFile);
+            $('.file-upload-content').show();
+            $('.image-title').html(urlFile);
+        }
     });
+
+
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+                $('.image-title').html(input.files[0].name);
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+
 
 
     function init_editor() {
@@ -184,134 +227,6 @@
 
 @await Html.PartialAsync("_PartialToolbar")
 <div class="card">
-@*<<<<<<< HEAD
-	<div class="card-body">
-            <div class="row">
-				<div class="col-md-4">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex flex-column">
-								@if(Model.Appointment != null)
-								{
-										<img src="@Model.Appointment.PatientAvatar" alt="@Model.Appointment.PatientFullName" class="rounded-circle p-1 bg-primary" width="110">
-										<div class="mt-3">
-											<h4>@Model.Appointment.PatientFullName</h4>
-											<p class="text-secondary mb-1">Code : @Model.Appointment.PatientCode</p>
-											<p class="text-muted font-size-sm">Phone : @Model.Appointment.PatientPhone</p>
-											<p class="text-muted font-size-sm">Email : @Model.Appointment.PatientEmail</p>
-											<p class="text-muted font-size-sm">Address : @Model.Appointment.PatientAddress</p>
-										</div>
-										<hr class="my-4">
-										<div class="invoice" style="min-height:auto !important;">
-											<table>
-												<tbody>
-													@for(int i = 1; i <=  Model.Appointment.Appointment_Services.Count(); i++)
-													{
-														<tr>
-															<td class="no">@i</td>
-															<td class="text-left">
-																<a target="_blank" href="javascript:;">
-																	@Html.Raw(Model.Appointment.Appointment_Services[i-1].ServiceName)
-																</a>
-																<br/>
-																<a target="_blank" href="javascript:;">
-																	Doctor : @Html.Raw(Model.Appointment.Appointment_Services[i-1].DoctorFullName)
-																</a>
-															</td>
-														</tr>
-													}
-												</tbody>
-										
-											</table>
-										</div>
-									}
-							</div>
-						
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<form id="edit_form">
-						<input class="result form-control radius-15" type="number" data-field="Id" hidden value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Id : 0)">
-						<input class="result form-control radius-15" type="number" data-field="AppointmentId" hidden value="@(Model.Appointment != null ? Model.Appointment.Id : 0)">
-
-						<div class="row">
-							<div class="col-md-6" >
-								<div class="mb-3 px-1">
-									<label class="form-label">Date</label>
-									<input class="result form-control radius-15" type="date" data-field="ExaminationDate" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.ExaminationDate : "")" placeholder="Enter Date">
-								</div>
-							</div>
-
-							<div class="col-md-6" >
-								<div class="mb-3 px-1">
-									<label class="form-label">Re examination date</label>
-									<input class="result form-control radius-15" type="date" value="@(Model.ExaminationsResult != null ? Model.ExaminationsResult.Re_Examination : "")" data-field="Re_Examination">
-								</div>
-							</div>
-
-							<div class="col-sm-12">
-								<div class="mb-3">
-									<label class="form-label">Results</label>
-									<div id="editor" data-field="Results"></div>
-								</div>
-							</div>
-
-							<div class="col-sm-12">
-								<div class="mb-3">
-									<label class="form-label">Doctor advice</label>
-									<div id="editorDoctorAdvice" data-field="Results"></div>
-								</div>
-							</div>
-
-                            <div class="col-sm-12">
-								 <div class="mb-3">
-								    <label class="form-label">Attach file</label>
-								    <input class="form-control" data-field="Examination_File" type="file">
-                                    
-							    </div>
-							</div>
-
-                            @if (Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
-                            {
-                                  <div class="col-md-12">	<a target="_blank" href="@Model.ExaminationsResult.Examination_File">
-                                      <i class="bx bxs-file me-2 font-24 text-primary"></i> 
-                                      @Model.ExaminationsResult.Examination_File</a>
-									</div>
-                            }
-
-                          
-
-
-                           
-							<div class="col-sm-12">
-								<div class="mb-3 text-center">
-									@if (Model.CurrentUserRole.IsAllowEdit)
-									{
-										<text>
-											<button type="button"class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
-                                  
-										</text>
-									}
-									@if (Model.CurrentUserRole.IsAllowDelete && Model.ExaminationsResult != null)
-									{
-										<text>
-											<button type="button"class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
-										</text>
-									}
-										<button type="button"class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>
-								</div>
-								
-							</div>
-						</div>
-					</form>
-
-				</div>
-                
-		    </div>
-		
-	</div>
-=======*@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
@@ -361,18 +276,17 @@
                                                         <tr>
                                                             <td class="no">@i</td>
                                                             <td class="text-left">
-                                                                <a target="_blank" href="/AppointmentService/Update?id=@Model.Appointment.Appointment_Services[i-1].Id">
+                                                                <a href="#!" class="showPopupResultService" data-id="@Model.Appointment.Appointment_Services[i-1].Id">
                                                                     @Html.Raw(Model.Appointment.Appointment_Services[i-1].ServiceName)
                                                                 </a>
                                                                 <br />
-                                                                <a target="_blank" href="/AppointmentService/Update?id=@Model.Appointment.Appointment_Services[i-1].Id">
+                                                                <a href="#!">
                                                                     Doctor : @Html.Raw(Model.Appointment.Appointment_Services[i-1].DoctorFullName)
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                     }
                                                 </tbody>
-
                                             </table>
                                         </div>
                                     }
@@ -453,33 +367,40 @@
                         <div class="col-sm-12">
 								<div class="mb-3">
 								<label class="form-label">Attach file</label>
-								<input class="form-control" data-field="Examination_File" type="file">
+                                <div class="file-upload">
+                                  <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type='file'  data-field="Examination_File" onchange="readURL(this);" />
+                                    <div class="drag-text">
+                                      <h3>Drag and drop a file or select add file</h3>
+                                    </div>
+                                  </div>
+                                  <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <div class="image-title-wrap">
+                                      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                  </div>
+                                </div>
 							</div>
 						</div>
 
-                        @if (Model.ExaminationsResult != null && !string.IsNullOrEmpty(Model.ExaminationsResult.Examination_File))
-                        {
-                            <div class="col-md-12">	<a target="_blank" href="@Model.ExaminationsResult.Examination_File">
-                                <i class="bx bxs-file me-2 font-24 text-primary"></i> 
-                                @Model.ExaminationsResult.Examination_File</a>
-							</div>
-                        }
+                    
 
                           
 
                         <div class="col-sm-12">
                             <div class="mb-3 text-center">
-                                @if (Model.CurrentUserRole.IsAllowEdit)
+                                @if (Model.CurrentUserRole.IsAllowEdit  && (Model.ExaminationsResult == null || Model.ExaminationsResult.IsDeleted == true))
                                 {
                                     <text>
                                         <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
 
                                     </text>
                                 }
-                                @if (Model.CurrentUserRole.IsAllowDelete && Model.ExaminationsResult != null)
+                                @if (Model.CurrentUserRole.IsAllowEdit && (Model.ExaminationsResult != null &&  Model.ExaminationsResult.IsDeleted == false))
                                 {
                                     <text>
-                                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Delete</button>
+                                        <button type="button" class="btn btn-danger mt-2 mt-lg-0" name="btnDelete">Cancel</button>
                                     </text>
                                 }
                                 <button type="button" class="btn btn-info mt-2 mt-lg-0" name="btnBack">Back to list</button>
@@ -499,3 +420,37 @@
 @await Html.PartialAsync("_PartialConfirmDeleteModal")
 
 
+
+
+
+
+
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="serviceModalLabel">Service</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                <dl class="row">
+				    <dt class="col-sm-3">Service</dt>
+				    <dd class="col-sm-9" id="serviceName"></dd>
+						  
+				    <dt class="col-sm-3">Charges</dt>
+				    <dd class="col-sm-9" id="serviceCharges"></dd>
+						  
+                     <dt class="col-sm-3">Date</dt>
+				    <dd class="col-sm-9" id="serviceDate"></dd>
+						  
+
+				    <dt class="col-sm-3">Result</dt>
+				    <dd class="col-sm-9" id="serviceResult"></dd>
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

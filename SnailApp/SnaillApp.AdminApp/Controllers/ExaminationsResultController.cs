@@ -54,7 +54,7 @@ namespace SnailApp.AdminApp.Controllers
             if (result.IsSuccessed)
             {
                 model.ExaminationsResult = result.ResultObj;
-                model.ExaminationsResult.Examination_File = _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + model.ExaminationsResult.Examination_File;
+                model.ExaminationsResult.Examination_File = !string.IsNullOrEmpty(model.ExaminationsResult.Examination_File) ?  _configuration[SystemConstants.AppConstants.BaseAddress] + "/" + model.ExaminationsResult.Examination_File : string.Empty;
             }
 
             var appointment = await _appointmentApiClient.GetById(new ViewModels.Catalog.Appointments.AppointmentRequest() { Id = appointmentId });

@@ -45,13 +45,24 @@ var ExaminationsResult = function () {
             e.preventDefault();
             window.location.href = "/ExaminationsResult/Index";
         })
-
         $('[name="btnDelete"]').click(function (e) {
             e.preventDefault();
             let data = { id: $('input[data-field="Id"]').val()};
             deleteDataRows([data]);
         })
 
+        $('.showPopupResultService').click(function (e) {
+            e.preventDefault();
+            App.sendDataToURL("/AppointmentService/GetById?id=" + $(this).data('id') , null, "GET")
+            .then(function (res) {
+                console.log(res);
+                $('#serviceName').text(res.data.resultObj.serviceName);
+                $('#serviceCharges').text(App.dinhDangTien(res.data.resultObj.charges));
+                $('#serviceResult').html(res.data.resultObj.serviceResult);
+                $('#serviceDate').text(res.data.resultObj.date);
+                $('#serviceModal').modal('show'); 
+            })
+        })
     };
 
     function checkDataUpdate() {
@@ -65,7 +76,7 @@ var ExaminationsResult = function () {
 
     function deleteDataRows(dataRows) {
         console.log(dataRows);
-        App.deleteDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", null, window.location.href)
+        App.cancelDataConfirm({ ids: dataRows.map((item) => item.id) }, "/ExaminationsResult/DeleteByIds", null, window.location.href)
             .then(function () {
                 App.showHideButtonDelete(false);
             });

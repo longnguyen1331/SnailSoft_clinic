@@ -90,8 +90,6 @@ var Appointment = function () {
             }
         });
 
-        
-
         $('button[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
             let result = {};
@@ -131,22 +129,6 @@ var Appointment = function () {
                 )
             }
         });
-
-        $('button[name="btnCheckin"]').click(function (e) {
-            e.preventDefault();
-            App.sendDataToURL("/Appointment/UpdateStatusCheckin", { id: editingData.id }, "POST", true, 'body')
-                .then(function (res) {
-                    if (!res.isSuccessed) {
-                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
-                    }
-                    else {
-                        editingData = null;
-                        App.notification("top right", "success", "fadeIn animated bx bx-check-circle", "", "Update checkin success.");
-                        calendar.refetchEvents();
-                        $('.switcher-btn').trigger('click');
-                    }
-                })
-        })
 
         $('select[data-field="PatientId"]').select2(
             {
@@ -772,20 +754,11 @@ var Appointment = function () {
     }
 
     let showHIdeButton = (status) => {
-        if (status == parseInt(checkinStaus)) {
-            $('button[name="btnCheckin"]').hide();
-            $('button[name="btnUpdate"]').show();
-        } else if (status == -1)  {
-            $('button[name="btnCheckin"]').hide();
-            $('button[name="btnUpdate"]').show();
-        } else {
-            $('button[name="btnCheckin"]').show();
+        if (status > 3) {
             $('button[name="btnUpdate"]').hide();
-        }
-
-        if (editingData == null) {
-            $('button[name="btnCheckin"]').prop('disabled', true);
-        } else $('button[name="btnCheckin"]').prop('disabled', false);
+        } else  {
+            $('button[name="btnUpdate"]').show();
+        } 
     }
 
     function initAllEvent(id) {

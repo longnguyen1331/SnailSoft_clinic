@@ -311,20 +311,15 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
         {
             try
             {
-                var appointments = await _context.Appointments.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
+                var appointments = await _context.ExaminationsResults.Where(m => request.Ids.Contains(m.Id)).ToListAsync();
 
                 if (appointments == null) throw new EShopException($"Cannot find Id: {string.Join(";", request.Ids)}");
 
                 foreach (var item in appointments)
                 {
-                    item.Status = AppointmentStatus.Cancel;
-                    //if (!string.IsNullOrEmpty(item.Examination_File))
-                    //{
-                    //    await this.DeleteFile(item.Examination_File);
-                    //}
+                    item.IsDeleted = true;
                 }
 
-                //_context.ExaminationsResults.RemoveRange(appointments);
 
                 return new ApiSuccessResult<int>(await _context.SaveChangesAsync());
 
@@ -344,7 +339,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                                      ).AsNoTracking().FirstOrDefaultAsync();
 
             var appointmentDto = _mapper.Map<ExaminationsResultDto>(appointment.a);
-            appointmentDto.Examination_File = _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointmentDto.Examination_File;
+            appointmentDto.Examination_File = !string.IsNullOrEmpty(appointmentDto.Examination_File) ?  _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointmentDto.Examination_File : string.Empty;
             return new ApiSuccessResult<ExaminationsResultDto>(appointmentDto);
         }
         public async Task<ApiResult<ExaminationsResultDto>> GetByAppointmentId(ExaminationsResultRequest request)
@@ -355,7 +350,7 @@ namespace SnailApp.Application.Catalog.ExaminationsResults
                                      ).AsNoTracking().FirstOrDefaultAsync();
             if(appointment != null && appointment.a != null)
             {
-                appointment.a.Examination_File = _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointment.a.Examination_File;
+                appointment.a.Examination_File = !string.IsNullOrEmpty(appointment.a.Examination_File) ?  _configuration[SystemConstants.ExaminationConstants.ExaminationImagePath] + "/" + appointment.a.Examination_File : string.Empty;
 
                 return new ApiSuccessResult<ExaminationsResultDto>(_mapper.Map<ExaminationsResultDto>(appointment.a));
 

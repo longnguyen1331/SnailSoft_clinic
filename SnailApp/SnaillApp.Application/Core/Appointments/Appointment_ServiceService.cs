@@ -29,6 +29,7 @@ namespace SnailApp.Application.Catalog.Appointment_Services
         Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request);
         Task<PagedResult<Appointment_ServiceDto>> GetManageListPaging(ManageAppointment_ServicePagingRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
+        Task<ApiResult<int>> CancelDefault(Appointment_ServiceRequest request);
     }
 
     public class Appointment_ServiceService : IAppointment_ServiceService
@@ -108,18 +109,8 @@ namespace SnailApp.Application.Catalog.Appointment_Services
 
                 if (check == null ) throw new EShopException($"Cannot find a appointmentservice with id: {request.Id}");
 
-                check.IsDefault = request.IsDefault;
+                check.IsDefault = true;
                 check.ServiceResult = request.ServiceResult;
-                //DateTime datetim1;
-                //if (DateTime.TryParseExact(request.Date, "yyyy-MM-dd", null, DateTimeStyles.None, out datetim1))
-                //{
-                //    check.Date = datetim1;
-                //}
-                //else
-                //{
-                //    check.Date = DateTime.Now;
-                //}
-
                 if (request.ServiceFile != null)
                 {
                     if (!string.IsNullOrEmpty(check.ServiceFile))
@@ -152,7 +143,6 @@ namespace SnailApp.Application.Catalog.Appointment_Services
                 };
             }
         }
-
         public async Task<ApiResult<int>> DeleteByIds(DeleteRequest request)
         {
             try
@@ -393,6 +383,45 @@ namespace SnailApp.Application.Catalog.Appointment_Services
         private async Task DeleteFile(string fileName)
         {
             await _storageService.DeleteFileAsync(_configuration[SystemConstants.AppointmentServiceConstants.AppointmentServicePath] + "/" + fileName);
+        }
+        public async Task<ApiResult<int>> CancelDefault(Appointment_ServiceRequest request)
+        {
+            try
+            {
+                var checks = await _context.Appointment_Services.Where(x =>x.AppointmentId == request.AppointmentId).ToListAsync();
+
+                if (checks == null) throw new EShopException($"Cannot find a appointment_service with id: {request.Id}");
+                bool checkAllDefault = false;
+                foreach(var item in checks)
+                {
+                    if (item.Id == request.Id)
+                    {
+                        item.IsDefault = false;
+                        _context.Appointment_Services.Update(item);
+                    }
+                    else if(item.IsDefault)
+                    {
+                        checkAllDefault = true;
+                    }
+                }
+
+                if (!checkAllDefault)
+                {
+                    var appointment = await _context.Appointments.FindAsync(request.AppointmentId);
+                    appointment.Status = AppointmentStatus.Checkin;
+                }
+
+                await _context.SaveChangesAsync();
+                return new ApiSuccessResult<int>(request.Id);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult<int>()
+                {
+                    IsSuccessed = false,
+                    Message = ex.Message
+                };
+            }
         }
     }
 }

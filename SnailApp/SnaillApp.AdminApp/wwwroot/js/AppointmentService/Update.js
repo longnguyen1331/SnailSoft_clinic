@@ -3,7 +3,17 @@
 var AppointmentService = function () {
     let edit_form = $("#edit_form");
     let initialComponents = () => {
-      
+
+
+        //$('#fancy-file-upload').FancyFileUpload({
+        //    params: {
+        //        fileuploader: '1'
+
+        //    },
+        //    maxfilesize: 1000000
+        //});
+
+
         $('[name="btnUpdate"]').click(function (e) {
             e.preventDefault();
             let formData = new FormData();
@@ -49,12 +59,19 @@ var AppointmentService = function () {
             window.location.href = "/AppointmentService/Index";
         })
 
-        $('[name="btnDelete"]').click(function (e) {
-            e.preventDefault();
-            let data = { id: $('input[data-field="Id"]').val()};
-            deleteDataRows([data]);
-        })
 
+        $('button[name="btnDelete"]').click(function (e) {
+            e.preventDefault();
+            App.sendDataToURL("/AppointmentService/CancelDefault", { id: $('input[data-field="Id"]').val(), appointmentId: $('input[data-field="AppointmentId"]').val() }, "POST", true, 'body')
+                .then(function (res) {
+                    if (!res.isSuccessed) {
+                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                })
+        })
     };
 
     function checkDataUpdate() {
@@ -72,6 +89,7 @@ var AppointmentService = function () {
                 App.showHideButtonDelete(false);
             });
     }
+
 
 
     return {

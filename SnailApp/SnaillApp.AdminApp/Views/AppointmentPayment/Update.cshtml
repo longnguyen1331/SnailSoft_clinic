@@ -104,12 +104,12 @@
                                                     {
                                                         <tr>
                                                             <td class="no">@i</td>
-                                                            <td class="text-left">
-                                                                <a target="_blank" href="/AppointmentPaymentService/Update?id=@Model.Appointment_Services[i-1].Id">
+                                                           <td class="text-left">
+                                                                <a href="#!" class="showPopupResultService" data-id="@Model.Appointment_Services[i-1].Id">
                                                                     @Html.Raw(Model.Appointment_Services[i-1].ServiceName)
                                                                 </a>
                                                                 <br />
-                                                                <a target="_blank" href="/AppointmentPaymentService/Update?id=@Model.Appointment_Services[i-1].Id">
+                                                                <a href="#!">
                                                                     Doctor : @Html.Raw(Model.Appointment_Services[i-1].DoctorFullName)
                                                                 </a>
                                                             </td>
@@ -228,10 +228,17 @@
                                 @if (Model.CurrentUserRole.IsAllowEdit  && Model.AppointmentPayment.AppointmentStatus != AppointmentStatus.Checkout)
                                 {
                                     <text>
-                                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save and Checkout</button>
-
+                                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnUpdate">Save</button>
                                     </text>
                                 }
+
+                                @if (Model.CurrentUserRole.IsAllowEdit  && Model.AppointmentPayment.AppointmentStatus != AppointmentStatus.Checkout)
+                                {
+                                    <text>
+                                        <button type="button" class="btn btn-primary mt-2 mt-lg-0" name="btnCheckOut">Checkout</button>
+                                    </text>
+                                }
+
                                 @if (Model.CurrentUserRole.IsAllowEdit && Model.AppointmentPayment != null && Model.AppointmentPayment.AppointmentStatus == AppointmentStatus.Checkout)
                                 {
                                     <text>
@@ -255,3 +262,35 @@
 @await Html.PartialAsync("_PartialConfirmDeleteModal")
 
 
+
+
+
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="serviceModalLabel">Service</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                <dl class="row">
+				    <dt class="col-sm-3">Service</dt>
+				    <dd class="col-sm-9" id="serviceName"></dd>
+						  
+				    <dt class="col-sm-3">Charges</dt>
+				    <dd class="col-sm-9" id="serviceCharges"></dd>
+						  
+                     <dt class="col-sm-3">Date</dt>
+				    <dd class="col-sm-9" id="serviceDate"></dd>
+						  
+
+				    <dt class="col-sm-3">Result</dt>
+				    <dd class="col-sm-9" id="serviceResult"></dd>
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

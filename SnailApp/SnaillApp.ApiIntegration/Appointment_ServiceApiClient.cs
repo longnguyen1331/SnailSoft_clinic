@@ -21,6 +21,7 @@ namespace SnailApp.ApiIntegration
         Task<ApiResult<int>> DeleteByIds(DeleteRequest request);
         Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile);
         Task<List<Appointment_ServiceDto>> GetByAppointmentId(Appointment_ServiceRequest request);
+        Task<ApiResult<int>> CancelDefault(Appointment_ServiceRequest request);
     }
     public class Appointment_ServiceApiClient : BaseApiClient, IAppointment_ServiceApiClient
     {
@@ -38,6 +39,17 @@ namespace SnailApp.ApiIntegration
             _httpClientFactory = httpClientFactory;
         }
 
+        public async Task<ApiResult<int>> CancelDefault(Appointment_ServiceRequest request)
+        {
+            try
+            {
+                return await BaseAddOrUpdateAsync($"/api/appointment_Services/cancelDefault", request);
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<int>() { IsSuccessed = false, Message = ex.Message };
+            }
+        }
         public async Task<ApiResult<string>> CKEditorUploadFile(IFormFile uploadFile)
         {
             try

@@ -22,7 +22,6 @@ var AppointmentPayment = function () {
                         }
                     }
                 }),
-console.log(result),
                  App.sendDataToURL("/AppointmentPayment/Save", result, "POST")
                 .then(function (res) {
                     if (!res.isSuccessed) {
@@ -53,6 +52,35 @@ console.log(result),
             amountDue = total - (total * (discount / 100));
             edit_form.find('input[data-field="AmountDue"]').autoNumeric('set', amountDue);
         });
+
+        $('.showPopupResultService').click(function (e) {
+            e.preventDefault();
+            App.sendDataToURL("/AppointmentService/GetById?id=" + $(this).data('id'), null, "GET")
+                .then(function (res) {
+                    console.log(res);
+                    $('#serviceName').text(res.data.resultObj.serviceName);
+                    $('#serviceCharges').text(App.dinhDangTien(res.data.resultObj.charges));
+                    $('#serviceResult').html(res.data.resultObj.serviceResult);
+                    $('#serviceDate').text(res.data.resultObj.date);
+                    $('#serviceModal').modal('show');
+                })
+        })
+
+
+
+        $('button[name="btnCheckOut"]').click(function (e) {
+            e.preventDefault();
+            App.sendDataToURL("/Appointment/UpdateStatusCheckout", { id: $('input[data-field="AppointmentId"]').val() }, "POST", true, 'body')
+                .then(function (res) {
+                    if (!res.isSuccessed) {
+                        App.notification("top right", "error", "fadeIn animated bx bx-error", "", res.message);
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                })
+        })
+
     };
 
     function checkDataUpdate() {
